@@ -21,9 +21,9 @@ file = fields.Many2one('muk_dms.file', string='Document')
 ```
 
 ```xml
-<field name="dmsfile" widget="dms_file" string="Datei filename="field_filename" directory="ref_directory_id" />
+<field name="dmsfile" widget="dms_file" string="Datei" filename="field_filename" directory="ref_directory_id" />
 ```
 
 ```xml
-<field name="dmsfile" widget="dms_file" string="Datei"downloadonly="downloadonly" />
+<field name="dmsfile" widget="dms_file" string="Datei" downloadonly="downloadonly" />
 ```
