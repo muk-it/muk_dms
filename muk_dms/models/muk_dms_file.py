@@ -201,7 +201,11 @@ class File(base.DMSModel):
             path.append({'id':-1, 'name': self.filename or "New"})
         if self.directory.check_existence():
             for i, dir in enumerate(self.directory.get_parent_list()):
-                path.append({'id': int(dir.id), 'name': dir.name or "New", 'model':'muk_dms.directory'})
+                try:
+                    path.append({'id': int(dir.id), 'name': dir.name or "New", 'model':'muk_dms.directory'})
+                except TypeError:
+                    # NewId can't be cast to integer
+                    path.append({'id': -1, 'name': dir.name or "New", 'model':'muk_dms.directory'})
         self.path_object = json.dumps(path[::-1])
     
     @api.one

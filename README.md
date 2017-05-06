@@ -4,7 +4,7 @@ MuK Documents is a module to create, manage and view files within Odoo.
 
 ---
 
-<img align="center" src="muk_dms/static/description/demo.gif"/>
+<img align="center" src="static/description/demo.gif"/>
 
 ## Place Documents into other models
 
@@ -26,4 +26,12 @@ file = fields.Many2one('muk_dms.file', string='Document')
 
 ```xml
 <field name="dmsfile" widget="dms_file" string="Datei" downloadonly="downloadonly" />
+```
+
+## Requirements
+
+* mammoth
+
+```bash
+$ sudo pip install mammoth
 ```

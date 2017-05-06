@@ -27,3 +27,11 @@ file = fields.Many2one('muk_dms.file', string='Document')
 ```xml
 <field name="dmsfile" widget="dms_file" string="Datei" downloadonly="downloadonly" />
 ```
+
+## Requirements
+
+* mammoth
+
+```bash
+$ sudo pip install mammoth
+```
