@@ -4,7 +4,7 @@ MuK Documents is a module to create, manage and view files within Odoo.
 
 ---
 
-<img align="center" src="static/description/demo.gif"/>
+<img align="center" src="muk_dms/static/description/demo.gif"/>
 
 ## Place Documents into other models
 
