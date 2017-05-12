@@ -58,6 +58,9 @@
         'demo/muk_dms_demo_root.xml',
         'demo/muk_dms_demo_file.xml',
     ],
+    'images': [
+        'static/description/banner.png'
+    ],
     'installable': True,
     'application': True,
 }
