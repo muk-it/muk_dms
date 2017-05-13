@@ -91,22 +91,29 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	var PreviewFieldBinaryFile = core.form_widget_registry.get("binary").extend({
 		template: 'PreviewFieldBinaryFile',
 		initialize_content: function() {
-			var self = this;
-	        this.$('input.o_form_input_file').change(this.on_file_change);
-	        this.$('.oe_form_binary_file_clear').click(this.on_clear);
-	        this.$('.oe_form_binary_file_edit').click(function() {
-	            self.$('input.o_form_input_file').click();
+	        var self = this;
+	        this.$inputFile = this.$('.o_form_input_file');
+	        this.$inputFile.change(this.on_file_change);
+	        var self = this;
+	        this.$('.o_select_file_button').click(function() {
+	            self.$inputFile.click();
 	        });
+	        this.$('.o_clear_file_button').click(this.on_clear);
+	        if (!this.get("effective_readonly")) {
+	        	this.$input = this.$('.o_form_input').eq(0);
+	            this.$input.on('click', function() {
+	                self.$inputFile.click();
+	            });
+	        }
 	    },
 	    render_value: function() {
 	    	var self = this;
-	    	
 	        if (!this.get("effective_readonly")) {
 	        	self._super();
 	        } else {
 	        	self.$el.find('#link').text(_t("Download"));
 	        	self.$el.find('#link').attr("href", self.view.datarecord.link_download);
-	        	self.$el.find('.oe-binary-preview').click(function() {
+	        	self.$el.find('.o_binary_preview').click(function() {
 	        		Preview.PreviewViewer.handleClick(self, self.view.datarecord.id, self.view.datarecord.file_size,
 	        				self.view.datarecord.filename, self.view.datarecord.file_extension,
 	        				self.view.datarecord.mime_type, self.view.datarecord.link_preview, '.oe-binary-preview');

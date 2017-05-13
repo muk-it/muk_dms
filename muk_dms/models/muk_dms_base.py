@@ -27,9 +27,9 @@ import unicodedata
 import hashlib
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.exceptions import ValidationError, AccessError
+from odoo import _
+from odoo import models, api, fields
+from odoo.exceptions import ValidationError, AccessError
 
 _logger = logging.getLogger(__name__)
 

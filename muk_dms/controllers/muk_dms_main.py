@@ -30,10 +30,10 @@ import mimetypes
 import mammoth
 import werkzeug.exceptions
 
-from openerp import _
-from openerp import tools
-from openerp import http
-from openerp.http import *
+from odoo import _
+from odoo import tools
+from odoo import http
+from odoo.http import *
 
 class Main(http.Controller):
     

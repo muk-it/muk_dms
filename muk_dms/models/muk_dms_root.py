@@ -23,9 +23,9 @@
 
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.exceptions import ValidationError
+from odoo import _
+from odoo import models, api, fields
+from odoo.exceptions import ValidationError
 
 from . import muk_dms_base as base
 

@@ -28,9 +28,9 @@ import urllib
 import mimetypes
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.exceptions import ValidationError, AccessError
+from odoo import _
+from odoo import models, api, fields
+from odoo.exceptions import ValidationError, AccessError
 
 from . import muk_dms_base as base
 from . import muk_dms_data as data
@@ -307,17 +307,15 @@ class File(base.DMSModel):
         values['file_size'] = len(decode_file)
         return values
 
+    @api.multi
     @api.returns('self', lambda value: value.id)
-    def copy(self, cr, uid, id, default=None, context=None):
-        if context is None:
-            context = {}
-        context = context.copy()
-        data = self.copy_data(cr, uid, id, default, context)
-        record = self.browse(cr, uid, id, context)
+    def copy(self, default=None):
+        self.ensure_one()
+        data = self.copy_data(default)[0]
         data['filename'] = _("Copy of ") + str(data['filename'])
-        data['file'] = record._get_file()
-        new_id = self.create(cr, uid, data, context)
-        self.copy_translations(cr, uid, id, new_id, context)
+        data['file'] = self._get_file()
+        new_id =  new = self.with_context(lang=None).create(data)
+        self.copy_translations(new_id)
         return new_id
 
     #----------------------------------------------------------

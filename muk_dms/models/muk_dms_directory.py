@@ -24,10 +24,10 @@
 import json
 import logging
 
-from openerp import _
-from openerp import models, api, fields
-from openerp.osv import osv
-from openerp.exceptions import ValidationError, AccessError
+from odoo import _
+from odoo import models, api, fields
+from odoo.osv import osv
+from odoo.exceptions import ValidationError, AccessError
 
 from . import muk_dms_base as base
 
@@ -50,11 +50,11 @@ class Directory(base.DMSModel):
     
     name = fields.Char(string="Name", required=True)
 
-    parent_id = fields.Many2one('muk_dms.directory', string="Parent", select=True,
+    parent_id = fields.Many2one('muk_dms.directory', string="Parent", index=True,
                              help="Every directory has a parent accept the root.")
     child_id = fields.One2many('muk_dms.directory', 'parent_id', string="Subdirectories")
-    parent_left = fields.Integer(string='Left Parent', select=1)
-    parent_right = fields.Integer(string='Right Parent', select=1)
+    parent_left = fields.Integer(string='Left Parent', index=True)
+    parent_right = fields.Integer(string='Right Parent', index=True)
         
     files = fields.One2many('muk_dms.file', 'directory', string="Files")
     
@@ -253,7 +253,7 @@ class Directory(base.DMSModel):
         self.unlock_tree()
         
     @api.returns('self', lambda value: value.id)
-    def copy(self, cr, uid, id, default=None, context=None):
+    def copy(self):
         raise AccessError(_('It is not possible to duplicate a directory, please create a new one.'))
     
     #----------------------------------------------------------

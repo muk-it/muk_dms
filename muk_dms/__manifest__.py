@@ -24,7 +24,7 @@
 {
     'name': "MuK Documents",
     'summary': """Document Management System""",
-    'version': '1.0.0',   
+    'version': '10.0.1.0.0',   
     'category': 'Documents',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
@@ -52,6 +52,9 @@
     ],
     'qweb': [
         'static/src/xml/*.xml'
+    ],
+    'test': [
+        'static/test/test_muk_dms_widgets.js'
     ],
     'demo': [
         'demo/muk_dms_demo_directory.xml',
