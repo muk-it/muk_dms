@@ -36,7 +36,7 @@
             - Odoo has writing rights to the given directory path
     """,
     'version': '1.0.0',   
-    'category': 'Documents',   
+    'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
     'website': "http://www.mukit.at",
