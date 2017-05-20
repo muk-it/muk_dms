@@ -42,7 +42,7 @@ class Directory(base.DMSModel):
     _parent_order = 'parent_left'
     _order = 'parent_left'
 
-    _inherit = ['mail.thread']
+    _inherit = ['muk_dms.access', 'mail.thread']
     
     #----------------------------------------------------------
     # Database
@@ -69,11 +69,6 @@ class Directory(base.DMSModel):
     
     size = fields.Integer(compute='_compute_size', string="Size")
     
-    perm_create = fields.Boolean(compute='_compute_perm_create', string="Create")
-    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
-    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
-    perm_unlink = fields.Boolean(compute='_compute_perm_unlink', string="Delete")
-    
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
@@ -92,6 +87,18 @@ class Directory(base.DMSModel):
         if not self.is_root_direcotry():
             parents.extend(self.parent_id.get_parent_list())
         return parents
+    
+    def get_child_list(self):
+        childs = self.child_id
+        for child in self.child_id:
+            childs |= child.get_child_list()
+        return childs
+    
+    def get_recursive_file_list(self):
+        files = self.files
+        for child in self.child_id:
+            files |= child.get_recursive_file_list()
+        return files
     
     def get_size(self):
         size = 0
@@ -194,22 +201,6 @@ class Directory(base.DMSModel):
         self.count_files = len(self.files)
     
     @api.one
-    def _compute_perm_create(self):
-        self.perm_create = self.check_access_rights('create', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_read(self):
-        self.perm_read = self.check_access_rights('read', raise_exception=False) and self.check_access_rule(operation='read') == None
-    
-    @api.one
-    def _compute_perm_write(self):
-        self.perm_write = self.check_access_rights('write', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_unlink(self):
-        self.perm_unlink = self.check_access_rights('unlink', raise_exception=False) and self.check_access_rule(operation='unlink') == None
-    
-    @api.one
     @api.depends('child_id', 'files')
     def _compute_size(self):
         self.path_text = self.get_path()
@@ -247,9 +238,11 @@ class Directory(base.DMSModel):
               raise ValidationError(_("Some characters in the name attribute are invalid."))
           
     def _onchange_values(self, values):
+        super(Directory, self)._onchange_values(values)
         self.lock_tree()
         
     def _follow_operation(self, values):
+        super(Directory, self)._follow_operation(values)
         self.unlock_tree()
         
     @api.returns('self', lambda value: value.id)

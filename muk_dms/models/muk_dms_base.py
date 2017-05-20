@@ -29,7 +29,8 @@ import logging
 
 from odoo import _
 from odoo import models, api, fields
-from odoo.exceptions import ValidationError, AccessError
+from odoo.exceptions import ValidationError, AccessError, UserError
+from statsmodels.sandbox.distributions.sppatch import expect
 
 _logger = logging.getLogger(__name__)
 
@@ -59,7 +60,10 @@ class DMSBaseModel(models.BaseModel):
         return not (len(self) == 0 or self.id == False)
     
     def notify_change(self, change, values):
-         _logger.debug("Change: " + str(change))
+         _logger.debug("Notify Change: " + str(change))
+    
+    def notify_computation(self):
+         _logger.debug("Notify Computation")
          
     def __print_values(self, values):
         print_vals = {}
@@ -95,6 +99,37 @@ class DMSBaseModel(models.BaseModel):
         return result
 
     def _after_read(self, result):
+        return result
+    
+    @api.model
+    @api.returns('self',
+        upgrade=lambda self, value, args, offset=0, limit=None, order=None, count=False: value if count else self.browse(value),
+        downgrade=lambda self, value, args, offset=0, limit=None, order=None, count=False: value if count else value.ids)
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        self._before_search(args, offset, limit, order, count)
+        result = super(DMSBaseModel, self).search(args, offset, limit, order, count)
+        _logger.debug("Searching for records  with ([" + str(args) + "])")
+        result = self._after_search(result)
+        return result
+    
+    def _before_search(self, args, offset, limit, order, count):
+        pass
+
+    def _after_search(self, result):
+        return result
+    
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        self._before_name_search(name, args, operator, limit)
+        result = super(DMSBaseModel, self).name_search(name, args, operator, limit)
+        _logger.debug("Searching for records  with ([" + str(args) + "])")
+        result = self._after_name_search(result)
+        return result
+    
+    def _before_name_search(self, name, args, operator, limit):
+        pass
+
+    def _after_name_search(self, result):
         return result
     
     #----------------------------------------------------------
@@ -234,28 +269,81 @@ class DMSModel(DMSBaseModel):
 
         class class_name(DMSModel):
 
-    The DMSBaseModel itself inherits the BaseModel class from OpenERP
+    The DMSBaseModel itself inherits the BaseModel class from Odoo
     so every model which inherits it can be used as a normal
-    OpenERP model.
+    Odoo model.
     """
-        
+      
     _auto = True
     _register = False
     _transient = False
-
-class DMSAbstractModel(DMSBaseModel):
-    """Main super-class for file models.
-
-    DMS file models are created by inheriting from this class:
-
-        class class_name(DMSFileModel):
-
-    The DMSFileModel itself inherits the BaseModel class from OpenERP
-    so every model which inherits it can be used as a normal
-    OpenERP model.
-    """
     
-    _auto = False 
-    _register = False 
-    _transient = False
     
+class DMSAccessModel(DMSModel):
+    _name = 'muk_dms.access'
+            
+    perm_create = fields.Boolean(compute='_compute_perm_create', string="Create")
+    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
+    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
+    perm_unlink = fields.Boolean(compute='_compute_perm_unlink', string="Delete")
+    
+    @api.model
+    def check_access_rights(self, operation, raise_exception=True):
+        """ Generic method giving the help message displayed when having
+            no result to display in a list or kanban view. By default it returns
+            the help given in parameter that is generally the help message
+            defined in the action.
+        """
+        return super(DMSAccessModel, self).check_access_rights(operation, raise_exception)
+    
+    @api.multi
+    def check_access_rule(self, operation):
+        """ Verifies that the operation given by ``operation`` is allowed for
+            the current user according to ir.rules.
+
+           :param operation: one of ``write``, ``unlink``
+           :raise UserError: * if current ir.rules do not permit this operation.
+           :return: None if the operation is allowed
+        """
+        return super(DMSAccessModel, self).check_access_rule(operation)
+    
+    @api.model
+    def _apply_ir_rules(self, query, mode='read'):
+        super(DMSAccessModel, self)._apply_ir_rules(query, mode)
+    
+    @api.model
+    def check_field_access_rights(self, operation, fields):
+        """ Check the user access rights on the given fields. This raises Access
+            Denied if the user does not have the rights. Otherwise it returns the
+            fields (as is if the fields is not false, or the readable/writable
+            fields if fields is false).
+        """
+        return super(DMSAccessModel, self).check_field_access_rights(operation, fields)
+        
+    @api.one
+    def _compute_perm_create(self):
+        try:
+            self.perm_create = self.check_access_rights('create', raise_exception=False) and self.check_access_rule(operation='create') == None
+        except AccessError:
+             self.perm_create = False
+            
+    @api.one
+    def _compute_perm_read(self):
+        try:
+            self.perm_read = self.check_access_rights('read', raise_exception=False) and self.check_access_rule(operation='read') == None
+        except AccessError:
+             self.perm_create = False
+    
+    @api.one
+    def _compute_perm_write(self):
+        try:
+            self.perm_write = self.check_access_rights('write', raise_exception=False) and self.check_access_rule(operation='write') == None
+        except AccessError:
+             self.perm_create = False
+        
+    @api.one
+    def _compute_perm_unlink(self):
+        try:
+            self.perm_unlink = self.check_access_rights('unlink', raise_exception=False) and self.check_access_rule(operation='unlink') == None
+        except AccessError:
+             self.perm_create = False

@@ -25,15 +25,22 @@ import os
 import base64
 import email
 import urllib
+import logging
 import cStringIO
 import mimetypes
-import mammoth
 import werkzeug.exceptions
 
 from odoo import _
 from odoo import tools
 from odoo import http
 from odoo.http import *
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import mammoth
+except ImportError:
+    _logger.warn('Can not `import mammoth`.')
 
 class Main(http.Controller):
     

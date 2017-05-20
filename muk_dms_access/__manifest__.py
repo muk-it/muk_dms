@@ -22,18 +22,10 @@
 ###################################################################################
 
 {
-    'name': "MuK Documents File",
+    'name': "MuK Documents Access Control",
     'summary': """Document Management System""",
     'description': """ 
-        This module extends MuK Documents to use the local file system to store and load files.
-        
-        I case you want to change the save type of an existing Root Setting be aware that this
-        can trigger a heavy migration process, depending on how many files are currently stored.
-        
-        Before you start the migration process make sure the following conditions are met:
-            - no one else is using the system at the time of migration
-            - no files are locked either by the system or users
-            - Odoo has writing rights to the given directory path
+        Access Control Extension
     """,
     'version': '10.0.1.0.0',   
     'category': 'Document Management',   
@@ -46,11 +38,13 @@
     ],
     'depends': [
         'muk_dms',
+        'hr',
     ],
     "data": [
         'security/ir.model.access.csv',
-        'views/muk_dms_view_root.xml',
-        'views/muk_dms_view_data.xml',
+        'views/muk_dms_view_groups.xml',
+        'views/muk_dms_view_directory.xml',
+        'views/muk_dms_view_file.xml',
     ],
     'images': [
         'static/description/banner.png'

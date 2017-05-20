@@ -42,7 +42,7 @@ class File(base.DMSModel):
     _name = 'muk_dms.file'
     _description = "File"
     
-    _inherit = ['mail.thread']
+    _inherit = ['muk_dms.access', 'mail.thread']
     
     #----------------------------------------------------------
     # Database
@@ -73,11 +73,6 @@ class File(base.DMSModel):
     
     is_locked_flag = fields.Boolean(compute='_compute_is_locked', string="Locked")
     is_editor = fields.Boolean(compute='_compute_is_editor', string="Editor")
-    
-    perm_create = fields.Boolean(compute='_compute_perm_create', string="Create")
-    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
-    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
-    perm_unlink = fields.Boolean(compute='_compute_perm_unlink', string="Delete")
     
     #----------------------------------------------------------
     # Local
@@ -216,22 +211,6 @@ class File(base.DMSModel):
     def _compute_is_editor(self):
         self.is_editor = self.is_locked_by() == self.env.user
     
-    @api.one
-    def _compute_perm_create(self):
-        self.perm_create = self.check_access_rights('create', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_read(self):
-        self.perm_read = self.check_access_rights('read', raise_exception=False) and self.check_access_rule(operation='read') == None
-    
-    @api.one
-    def _compute_perm_write(self):
-        self.perm_write = self.check_access_rights('write', raise_exception=False) and self.check_access_rule(operation='write') == None
-    
-    @api.one
-    def _compute_perm_unlink(self):
-        self.perm_unlink = self.check_access_rights('unlink', raise_exception=False) and self.check_access_rule(operation='unlink') == None
-    
     def _append_field_values(self, index, result):
         result = super(File, self)._append_field_values(index, result)
         result[index]['file'] = "0 KB"
@@ -280,6 +259,7 @@ class File(base.DMSModel):
         return values
 
     def _onchange_values(self, values):
+        super(File, self)._onchange_values(values)
         self.lock()
         
     def _append_values_wirte(self, values):
@@ -293,6 +273,7 @@ class File(base.DMSModel):
         return values
     
     def _follow_operation(self, values):
+        super(File, self)._follow_operation(values)
         self.unlock()
     
     def _set_filename_values(self, values, filename):

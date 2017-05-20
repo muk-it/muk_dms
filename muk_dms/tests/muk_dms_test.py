@@ -32,8 +32,8 @@ _path = os.path.dirname(os.path.dirname(__file__))
 
 class DMSTestCase(common.TransactionCase):
     
-    at_install = False
-    post_install = True
+    at_install = True
+    post_install = False
     
     def setUp(self):
         super(DMSTestCase, self).setUp()

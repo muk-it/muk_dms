@@ -21,10 +21,4 @@
 #
 ###################################################################################
 
-from . import muk_dms_base
-from . import muk_dms_root
-from . import muk_dms_directory
-from . import muk_dms_file
-from . import muk_dms_data
-from . import muk_dms_lock
-from . import muk_dms_config
+import models

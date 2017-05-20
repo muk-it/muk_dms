@@ -24,7 +24,6 @@
 from odoo import models, fields
 
 class DMSConfigSettings(models.TransientModel):
-
     _name = 'muk_dms.config.settings'
     _inherit = 'res.config.settings'
 
