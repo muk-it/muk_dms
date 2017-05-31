@@ -561,80 +561,85 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    },
 	    commit_value: function() {
 	    	var self = this;
+	    	var invalid = false;
 	    	var value = this.get('value');
 	    	var commited_value = $.Deferred();
 	    	_.each(self.field_manager.fields, function (f) {
-                if (!f.is_valid()) {
-                	return $.when();
+	    		if (!f.is_valid()) {
+	    			invalid = true;
                 }
             });
-	    	if (value && value instanceof Array && this.delete_file) {
-	    		Files.call("check_lock", [value[0]]).then(function (lock) {
-	    	    	var unlocked = $.Deferred();
-	    			if(lock && lock[1] == session.uid) {
-	    				Files.call("user_unlock", [self.get('value')[0]]).then(function (lock) {
-	    					unlocked.resolve();
-	    				});
-	    			} else {
-	    				unlocked.resolve();
-	    			}
-	    			$.when(unlocked).done(function ( ) {
-	    				Files.call("unlink", [value[0]])
-	    		    	.done(function () {
-	    		    		self.set({'value': false});
-	    				})
-	    				.fail(function(xhr, status, text) {
-	    					self.do_warn(_t("Delete..."), _t("An error occurred during delete!"));
-	    				})
-	    				.always(function() {
-	    					commited_value.resolve();
-	    				});
-	    			});
-	    			
-	    		});
+	    	if(invalid) {
+	    		commited_value.resolve();
 	    	} else {
-    			var directory_id = self.$el.find('.oe_dms_form_input_many2one').data("id");
-    			var file_base64 = self.file_base64;
-    			var filename = self.$el.find('.oe_dms_binary_input').val();
-    			if(self.view && self.node.attrs.filename && self.view.fields[self.node.attrs.filename]) {	    				
-    				var filename_field_value = self.view.fields[self.node.attrs.filename].get('value');
-    				if(filename_field_value) {
-    					filename = filename_field_value;
-    				}
-    			}
-	    		if (value && value instanceof Array) {
-	    			var values = {};
-	    			if(directory_id) values.directory = directory_id;
-	    			if(filename) values.filename = filename;
-	    			if(file_base64) values.file = file_base64;
-	    			Files.call("write", [value[0], values])
-    				.fail(function(xhr, status, text) {
-    					self.do_warn(_t("Write..."), _t("An error occurred during write!"));
-    				})
-    				.always(function() {
-    					commited_value.resolve();
-    				});
-	    		} else if(!value) {
-	    			if(directory_id && filename && file_base64) {
-	    				Files.call("create", [{directory: directory_id, filename: filename, file: file_base64}])
-	    				.done(function (result) {
-	    					self.internal_set_value(result);
-	    				})
+		    	if (value && value instanceof Array && this.delete_file) {
+		    		Files.call("check_lock", [value[0]]).then(function (lock) {
+		    	    	var unlocked = $.Deferred();
+		    			if(lock && lock[1] == session.uid) {
+		    				Files.call("user_unlock", [self.get('value')[0]]).then(function (lock) {
+		    					unlocked.resolve();
+		    				});
+		    			} else {
+		    				unlocked.resolve();
+		    			}
+		    			$.when(unlocked).done(function ( ) {
+		    				Files.call("unlink", [value[0]])
+		    		    	.done(function () {
+		    		    		self.set({'value': false});
+		    				})
+		    				.fail(function(xhr, status, text) {
+		    					self.do_warn(_t("Delete..."), _t("An error occurred during delete!"));
+		    				})
+		    				.always(function() {
+		    					commited_value.resolve();
+		    				});
+		    			});
+		    			
+		    		});
+		    	} else {
+	    			var directory_id = self.$el.find('.oe_dms_form_input_many2one').data("id");
+	    			var file_base64 = self.file_base64;
+	    			var filename = self.$el.find('.oe_dms_binary_input').val();
+	    			if(self.view && self.node.attrs.filename && self.view.fields[self.node.attrs.filename]) {	    				
+	    				var filename_field_value = self.view.fields[self.node.attrs.filename].get('value');
+	    				if(filename_field_value) {
+	    					filename = filename_field_value;
+	    				}
+	    			}
+		    		if (value && value instanceof Array) {
+		    			var values = {};
+		    			if(directory_id) values.directory = directory_id;
+		    			if(filename) values.filename = filename;
+		    			if(file_base64) values.file = file_base64;
+		    			Files.call("write", [value[0], values])
 	    				.fail(function(xhr, status, text) {
-	    					self.do_warn(_t("Create..."), _t("An error occurred during create!"));
+	    					self.do_warn(_t("Write..."), _t("An error occurred during write!"));
 	    				})
 	    				.always(function() {
 	    					commited_value.resolve();
 	    				});
-	    			} else if(!file_base64) {
-	    				commited_value.resolve();
-	    			} else {
-	    				self.do_warn(_t("Save/Create..."), _t("Some fields are empty!"));
-	    				commited_value.resolve();
-	    			}
-	    		} else {
-	    			commited_value.resolve();
-	    		}
+		    		} else if(!value) {
+		    			if(directory_id && filename && file_base64) {
+		    				Files.call("create", [{directory: directory_id, filename: filename, file: file_base64}])
+		    				.done(function (result) {
+		    					self.internal_set_value(result);
+		    				})
+		    				.fail(function(xhr, status, text) {
+		    					self.do_warn(_t("Create..."), _t("An error occurred during create!"));
+		    				})
+		    				.always(function() {
+		    					commited_value.resolve();
+		    				});
+		    			} else if(!file_base64) {
+		    				commited_value.resolve();
+		    			} else {
+		    				self.do_warn(_t("Save/Create..."), _t("Some fields are empty!"));
+		    				commited_value.resolve();
+		    			}
+		    		} else {
+		    			commited_value.resolve();
+		    		}
+		    	}
 	    	}
 	        return $.when(commited_value);
 	    },

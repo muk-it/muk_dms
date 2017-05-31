@@ -177,10 +177,12 @@ odoo.define('muk_dms.tree_view', function(require) {
         },
         refresh: function() {
         	var self = this;
-        	$.when(self.load_directories(self), self.load_files(self)).done(function (directories, files) {
-        		var data = directories.concat(files);
-            	self.$el.find('.oe_document_tree').jstree(true).settings.core.data = data;
-            	self.$el.find('.oe_document_tree').jstree(true).refresh();
+        	$.when(self.load_directories(self)).done(function (directories, directory_ids) {
+        		$.when(self.load_files(self, directory_ids)).done(function (files) {
+	        		var data = directories.concat(files);
+	            	self.$el.find('.oe_document_tree').jstree(true).settings.core.data = data;
+	            	self.$el.find('.oe_document_tree').jstree(true).refresh();
+        		});
         	});
         },
         show_preview: function(ev) {
@@ -302,7 +304,6 @@ odoo.define('muk_dms.tree_view', function(require) {
         	$.when(self.load_directories(self)).done(function (directories, directory_ids) {
         		$.when(self.load_files(self, directory_ids)).done(function (files) {
 	        		var data = directories.concat(files);
-	        		console.log(data);
 	        		self.$el.find('.oe_document_tree').jstree({
 	        			'widget': self,
 			        	'core': {
