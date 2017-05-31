@@ -220,7 +220,7 @@ odoo.define('muk_dms.tree_view', function(require) {
         		_.each(directories, function(value, key, list) {
 	        		data.push({
 	        			id: "directory_" + value.id,
-	        			parent: (value.parent_id && $.inArray(value.parent_id, directory_ids) !== -1 ? "directory_" + value.parent_id[0] : "#"),
+	        			parent: (value.parent_id && $.inArray(value.parent_id[0], directory_ids) !== -1 ? "directory_" + value.parent_id[0] : "#"),
 	        			text: value.name,
 	        			icon: "fa fa-folder-o",
 	        			type: "directory",
@@ -302,6 +302,7 @@ odoo.define('muk_dms.tree_view', function(require) {
         	$.when(self.load_directories(self)).done(function (directories, directory_ids) {
         		$.when(self.load_files(self, directory_ids)).done(function (files) {
 	        		var data = directories.concat(files);
+	        		console.log(data);
 	        		self.$el.find('.oe_document_tree').jstree({
 	        			'widget': self,
 			        	'core': {

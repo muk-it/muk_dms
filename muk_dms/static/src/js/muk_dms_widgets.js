@@ -343,9 +343,12 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 		        		Directories.query(["name"]).filter([['id', '=', directory_ref[1]]]).first().then(function(directory) {
 		        			self.$el.find('.oe_dms_form_input_many2one').val(directory.name);
 		        			self.$el.find('.oe_dms_form_input_many2one').data("id", directory.id);
+		        			self.$el.find('.oe_dir_cm_button').hide();
 			    		});
 		        	});
-	        	} 
+	        	} else {
+	        		self.$el.find('.oe_dir_cm_button').show();
+	        	}
 	        	if (value) {
 	        		Files.call("check_lock", [value[0]]).then(function (lock) {
 		    			if(!lock || lock && lock[1] == session.uid) {
@@ -560,6 +563,11 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    	var self = this;
 	    	var value = this.get('value');
 	    	var commited_value = $.Deferred();
+	    	_.each(self.field_manager.fields, function (f) {
+                if (!f.is_valid()) {
+                	return $.when();
+                }
+            });
 	    	if (value && value instanceof Array && this.delete_file) {
 	    		Files.call("check_lock", [value[0]]).then(function (lock) {
 	    	    	var unlocked = $.Deferred();
