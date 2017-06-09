@@ -30,7 +30,6 @@ import logging
 from odoo import _
 from odoo import models, api, fields
 from odoo.exceptions import ValidationError, AccessError, UserError
-from statsmodels.sandbox.distributions.sppatch import expect
 
 _logger = logging.getLogger(__name__)
 
