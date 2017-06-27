@@ -30,7 +30,6 @@ import logging
 from odoo import _
 from odoo import models, api, fields
 from odoo.exceptions import ValidationError, AccessError, UserError
-from statsmodels.sandbox.distributions.sppatch import expect
 
 _logger = logging.getLogger(__name__)
 
@@ -65,12 +64,15 @@ class DMSBaseModel(models.BaseModel):
     def notify_computation(self):
          _logger.debug("Notify Computation")
          
+    def check_name(self, name):
+        return set(VALID_NAME_CHARS).issuperset(name)
+         
     def __print_values(self, values):
         print_vals = {}
         for key, value in values.iteritems():
             print_vals[key] = str(value)[:75] + (str(value)[75:] and '..')
         return str(print_vals)
-
+    
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
@@ -190,7 +192,7 @@ class DMSBaseModel(models.BaseModel):
     @api.model
     def create(self, vals):
         vals = self._before_create(vals)
-        _logger.info("Creating record ([" + self._name + "]) with values: " + self.__print_values(vals))
+        _logger.debug("Creating record ([" + self._name + "]) with values: " + self.__print_values(vals))
         self._validate_values(vals)
         vals = self._append_values_create(vals)
         result = super(DMSBaseModel, self).create(vals)
@@ -210,7 +212,7 @@ class DMSBaseModel(models.BaseModel):
     def write(self, vals):
         vals = self._before_write(vals)
         for record in self:
-            _logger.info("Writing record ([" + record._name + "] - id: " + 
+            _logger.debug("Writing record ([" + record._name + "] - id: " + 
                           str(record.id) + ") with values: " + self.__print_values(vals))
             record._checking_lock()
             record._validate_values(vals)

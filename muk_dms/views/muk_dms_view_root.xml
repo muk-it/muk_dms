@@ -17,6 +17,7 @@
 		<field name="arch" type="xml">
 			<form string="Root">
 				<sheet>
+					<field name="is_created" invisible="1" />
 					<label for="name" class="oe_edit_only" />
 					<h1>
 						<field name="name" />

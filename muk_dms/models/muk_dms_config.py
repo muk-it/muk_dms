@@ -32,6 +32,11 @@ class DMSConfigSettings(models.TransientModel):
         '- This installs the module muk_dms_file.'
     )
     
+    module_muk_dms_attachment = fields.Boolean('Attachment Support',
+        help='Adds support for Odoo attachments.\n'
+        '- This installs the module muk_dms_attachment.'
+    )
+    
     module_muk_dms_finder = fields.Boolean('Document Finder',
         help='Provides a Web Finder to manage the Documents.\n'
         '- This installs the module muk_dms_finder.'

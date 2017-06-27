@@ -234,7 +234,7 @@ class Directory(base.DMSModel):
         super(Directory, self)._validate_values(values)
         _logger.debug("Checking the name attribute...")
         if 'name' in values:
-          if not set(base.VALID_NAME_CHARS).issuperset(values['name']):
+          if not self.check_name(values['name']):
               raise ValidationError(_("Some characters in the name attribute are invalid."))
           
     def _onchange_values(self, values):
@@ -247,8 +247,25 @@ class Directory(base.DMSModel):
         
     @api.returns('self', lambda value: value.id)
     def copy(self):
-        raise AccessError(_('It is not possible to duplicate a directory, please create a new one.'))
+        self.ensure_one()
+        newparent = self.parent_id
+        i = 1
+        dirname = self.name + " " + str(i)
+        while len(self.parent_id.child_id.filtered(lambda r: r.name == dirname)) > 0:
+            i = i + 1
+            dirname = self.name + " " + str(i)
+        return self.copy_to(newparent,dirname)
     
+    def copy_to(self, newparent,dirname=False):
+        if not dirname:
+            dirname = self.name
+        new_id = self.with_context(lang=None).create({'name': dirname,'parent_id': newparent.id})
+        for file in self.files:
+            file.copy_to(new_id)
+        for dir in self.child_id:
+            dir.copy_to(new_id)
+        return new_id
+        
     #----------------------------------------------------------
     # Delete
     #----------------------------------------------------------

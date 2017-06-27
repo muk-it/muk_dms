@@ -257,6 +257,10 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 			var self = this;
 			this._super(field_manager, node);
 			this.downloadOnly = !!this.node.attrs.downloadonly;
+			this.hideinfo = !!this.node.attrs.hideinfo;
+			this.hidepreview = !!this.node.attrs.hidepreview;
+			this.hidecheckout = !!this.node.attrs.hidecheckout;
+			this.hidelink = !!this.node.attrs.hidelink;
 			this.max_upload_size = 50 * 1024 * 1024;
 			this.file_base64 = false;
 			this.delete_file = false;
@@ -269,6 +273,18 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    		if(this.downloadOnly) {
 	    			this.$el.find('.oe_info_button').hide();
 	    			this.$el.find('.oe_checkout_button').hide();
+	    			this.$el.find('.oe_link_button').hide();
+	    		}
+	    		if(this.hideinfo) {
+	    			this.$el.find('.oe_info_button').hide();
+	    		}
+	    		if(this.hidepreview) {
+	    			this.$el.find('.oe_preview_button').hide();
+	    		}
+	    		if(this.hidecheckout) {
+	    			this.$el.find('.oe_checkout_button').hide();
+	    		}
+	    		if(this.hidelink) {
 	    			this.$el.find('.oe_link_button').hide();
 	    		}
 	    	} else {
@@ -545,7 +561,7 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 		    }
 	    	if(input.get(0).files[0]) {
 	    		if(self.max_upload_size < input.get(0).files[0].size) {
-	    			self.do_warn(_t("Upload..."), _t("The file is to big!"));
+	    			self.do_warn(_t("Upload..."), _t("The file is too big!"));
 	    		} else {
 	    			reader.readAsDataURL(input.get(0).files[0]);
 	    		}
@@ -569,7 +585,7 @@ odoo.define('muk_dms_widgets.form_widgets', function(require) {
 	    			invalid = true;
                 }
             });
-	    	if(invalid) {
+	    	if(self.commited || invalid) {
 	    		commited_value.resolve();
 	    	} else {
 		    	if (value && value instanceof Array && this.delete_file) {

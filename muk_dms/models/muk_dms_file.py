@@ -25,6 +25,8 @@ import os
 import base64
 import json
 import urllib
+import StringIO
+import cStringIO
 import mimetypes
 import logging
 
@@ -240,7 +242,7 @@ class File(base.DMSModel):
         super(File, self)._validate_values(values)
         _logger.debug("Checking the filename attribute...")
         if 'filename' in values:
-          if not set(base.VALID_NAME_CHARS).issuperset(values['filename']):
+          if not self.check_name(values['filename']):
               raise ValidationError(_("Some characters in the filename attribute are invalid."))
            
     def _append_values_create(self, values):
@@ -250,6 +252,12 @@ class File(base.DMSModel):
         
         if not rec_root.check_existence():
             raise ValidationError(_("The file structure needs to have a root node to create files."))
+        
+        if not 'file' in values:
+            empty_file = StringIO.StringIO()
+            empty_file.write(' ')
+            values['file'] = base64.b64encode(empty_file.getvalue())
+            empty_file.close()
         
         rec_file = self._create_file(values, rec_dir, rec_root)
         values['file_ref'] = rec_file._name + ',' + str(rec_file.id)
@@ -292,10 +300,21 @@ class File(base.DMSModel):
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
+        i = 1
+        filename = self.name + " " + str(i) + self.file_extension
+        while len(self.directory.files.filtered(lambda r: r.filename == filename)) > 0:
+            i = i + 1
+            filename = self.name + " " + str(i) + self.file_extension
+        return self.copy_to(self.directory, default, filename)
+    
+    def copy_to(self, newparent, default=None, filename=False):
+        if not filename:
+            filename = self.filename
         data = self.copy_data(default)[0]
-        data['filename'] = _("Copy of ") + str(data['filename'])
+        data['filename'] = filename
         data['file'] = self._get_file()
-        new_id =  new = self.with_context(lang=None).create(data)
+        data['directory'] = newparent.id
+        new_id = self.with_context(lang=None).create(data)
         self.copy_translations(new_id)
         return new_id
 

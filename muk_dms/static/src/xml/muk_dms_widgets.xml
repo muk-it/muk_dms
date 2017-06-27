@@ -57,18 +57,17 @@
 			                <table cellspacing="0" cellpadding="0" border="0">
 			                <tr>
 			                    <td>
-									<button class="oe_button oe_field_button fa fa-pencil" type="button">
-		                                <label>
-		                                    <span>Select</span>
-		                                	<input type="file" style="display: none;" class="field_binary_hidden"/>
-										</label>
-		                            </button>
+									<div class="oe_dms_binary_button btn btn-primary oe_button oe_field_button">
+										<label>
+											<span><i class="fa fa-pencil" aria-hidden="true"></i> Select</span>
+			                                <input type="file" style="display: none;" class="btn btn-primary field_binary_hidden"/>
+		                                </label>
+		                            </div>
 			                    </td>
 			                    <td>
-			                        <button class="oe_button oe_form_binary_file_clear fa fa-trash-o" type="button" title="Clear">
-			                        	<label>
-			                        		<span>Delete</span>
-			                        	</label>
+			                        <button class="oe_dms_binary_button btn btn-danger oe_button oe_form_binary_file_clear fa fa-trash-o" 
+			                        	type="button" title="Delete">
+			                        	Delete
 			                        </button>
 			                    </td>
 			                </tr>

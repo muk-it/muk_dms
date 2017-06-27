@@ -12,11 +12,15 @@
                 </header>
                 <separator string="MuK Documents Management System"/>
                 <group>
-                    <label for="id" string="Documents Extensions"/>
+                    <label for="id" string="Data Extensions"/>
                     <div>
                         <div>
                             <field name="module_muk_dms_file" class="oe_inline"/>
                             <label for="module_muk_dms_file"/>
+                        </div>
+                        <div>
+                            <field name="module_muk_dms_attachment" class="oe_inline"/>
+                            <label for="module_muk_dms_attachment"/>
                         </div>
                     </div>
                     <label for="id" string="User Extensions"/>
