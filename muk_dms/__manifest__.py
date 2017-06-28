@@ -24,7 +24,7 @@
 {
     'name': "MuK Documents",
     'summary': """Document Management System""",
-    'version': '10.0.1.1.0',   
+    'version': '10.0.1.1.1',   
     'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
