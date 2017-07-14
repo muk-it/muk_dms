@@ -258,4 +258,85 @@ class DMSAbstractModel(DMSBaseModel):
     _auto = False 
     _register = False 
     _transient = False
-    
+
+
+class DMSAccessModel(DMSModel):
+    _name = 'muk_dms.access'
+
+    perm_create = fields.Boolean(compute='_compute_perm_create',
+                                 string="Create")
+    perm_read = fields.Boolean(compute='_compute_perm_read', string="Read")
+    perm_write = fields.Boolean(compute='_compute_perm_write', string="Write")
+    perm_unlink = fields.Boolean(compute='_compute_perm_unlink',
+                                 string="Delete")
+
+    @api.model
+    def check_access_rights(self, operation, raise_exception=True):
+        """ Generic method giving the help message displayed when having
+            no result to display in a list or kanban view. By default it returns
+            the help given in parameter that is generally the help message
+            defined in the action.
+        """
+        return super(DMSAccessModel, self).check_access_rights(operation,
+                                                               raise_exception)
+
+    @api.multi
+    def check_access_rule(self, operation):
+        """ Verifies that the operation given by ``operation`` is allowed for
+            the current user according to ir.rules.
+
+           :param operation: one of ``write``, ``unlink``
+           :raise UserError: * if current ir.rules do not permit this operation.
+           :return: None if the operation is allowed
+        """
+        return super(DMSAccessModel, self).check_access_rule(operation)
+
+    @api.model
+    def _apply_ir_rules(self, query, mode='read'):
+        super(DMSAccessModel, self)._apply_ir_rules(query, mode)
+
+    @api.model
+    def check_field_access_rights(self, operation, fields):
+        """ Check the user access rights on the given fields. This raises Access
+            Denied if the user does not have the rights. Otherwise it returns the
+            fields (as is if the fields is not false, or the readable/writable
+            fields if fields is false).
+        """
+        return super(DMSAccessModel, self).check_field_access_rights(operation,
+                                                                     fields)
+
+    @api.one
+    def _compute_perm_create(self):
+        try:
+            self.perm_create = self.check_access_rights('create',
+                                                        raise_exception=False) and self.check_access_rule(
+                operation='create') == None
+        except AccessError:
+            self.perm_create = False
+
+    @api.one
+    def _compute_perm_read(self):
+        try:
+            self.perm_read = self.check_access_rights('read',
+                                                      raise_exception=False) and self.check_access_rule(
+                operation='read') == None
+        except AccessError:
+            self.perm_create = False
+
+    @api.one
+    def _compute_perm_write(self):
+        try:
+            self.perm_write = self.check_access_rights('write',
+                                                       raise_exception=False) and self.check_access_rule(
+                operation='write') == None
+        except AccessError:
+            self.perm_create = False
+
+    @api.one
+    def _compute_perm_unlink(self):
+        try:
+            self.perm_unlink = self.check_access_rights('unlink',
+                                                        raise_exception=False) and self.check_access_rule(
+                operation='unlink') == None
+        except AccessError:
+            self.perm_create = False
