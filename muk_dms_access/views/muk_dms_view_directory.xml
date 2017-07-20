@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="directory_form" model="ir.ui.view">
+			<field name="name">muk_dms_directory.form</field>
+			<field name="model">muk_dms.directory</field>
+			<field name="inherit_id" ref="muk_dms.muk_dms_directory_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[last()]" position="after">
+					<page string="Groups">
+						<field name="groups">
+							<tree string="Groups">
+								<field name="name" />
+								<field name="perm_read" />
+								<field name="perm_create" />
+								<field name="perm_write" />
+								<field name="perm_unlink" />
+							</tree>
+						</field>
+						<field name="complete_groups">
+							<tree string="Groups">
+								<field name="name" />
+								<field name="perm_read" />
+								<field name="perm_create" />
+								<field name="perm_write" />
+								<field name="perm_unlink" />
+							</tree>
+						</field>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>
