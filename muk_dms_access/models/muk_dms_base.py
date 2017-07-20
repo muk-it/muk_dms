@@ -107,7 +107,6 @@ class DMSAdvancedAccessModel(base.DMSModel):
         ''' % (model, self.env.user.id)
         self.env.cr.execute(sql)
         fetch = self.env.cr.fetchall()
-        print fetch
         if len(fetch) > 0:
             access_result = self.env[self._name]
             access_ids = list(map(lambda x: x[0], fetch)) 
