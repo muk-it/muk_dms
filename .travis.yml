@@ -14,7 +14,7 @@ addons:
     packages:
       - expect-dev
       - python-lxml
-
+      
 env:
   global:
   - VERSION="10.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
@@ -25,12 +25,8 @@ env:
 virtualenv:
   system_site_packages: true
 
-
-
 install:
-  - pip install requests
-  - pip install cachetools
-  - pip install pdfconv
+  - pip install mammoth
   - pip install anybox.testing.openerp
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
