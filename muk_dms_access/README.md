@@ -1,1 +1,0 @@
-# MuK Document Management System - Access Control Extension
