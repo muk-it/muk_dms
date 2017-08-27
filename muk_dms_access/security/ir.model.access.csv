@@ -1,2 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-muk_dms_access_manager,muk_dms_access.manager,model_muk_dms_access_groups,muk_dms.group_muk_dms_manager,1,1,1,1
