@@ -1,0 +1,1 @@
+UPDATE muk_dms_file SET reference = REPLACE(reference, 'muk_dms.system_data', 'muk_dms.data_system');

@@ -1,0 +1,109 @@
+/**********************************************************************************
+* 
+*    Copyright (C) 2017 MuK IT GmbH
+*
+*    This program is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU Affero General Public License as
+*    published by the Free Software Foundation, either version 3 of the
+*    License, or (at your option) any later version.
+*
+*    This program is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU Affero General Public License for more details.
+*
+*    You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+**********************************************************************************/
+
+.muk_form_document_btn {
+	width: 28px;
+	padding: 3px 7px;
+	line-height: 1;
+	margin-bottom: 2px;
+}
+
+.muk_form_document_read {
+	.muk_form_document_folder {
+		.fa-folder {
+			padding-right: 3px;
+		}
+	}
+
+	.muk_form_document_download {
+		.fa-download {
+			padding-right: 3px;
+		}
+	}
+}
+
+.muk_form_document_edit {
+	.muk_form_document_btn {
+		height: 24px;
+		margin-bottom: 0;
+	}
+
+	.muk_form_document_folder_search {
+		z-index: 1;
+	}
+		
+	.muk_form_document_locked {
+		padding-left: 5px;
+    	padding-top: 4px;
+	}
+	
+	.muk_form_document_binary_file {
+		padding-left: 30px;
+		
+		.muk_form_document_file_select {
+			padding: 2px 10px;
+    		height: 24px;
+		}
+		
+		.muk_form_document_file_filename {
+			height: 24px;
+		}
+	}
+}
+
+.muk_document_table_file_information > tbody {
+	> tr {
+		border-top: 1px solid @odoo-list-grey;
+		
+		&:first-child {
+			border-top: 0;
+		}
+
+		> td {
+			border-top: 0;
+		}
+	}
+}
+
+.muk_dialog_document {
+	padding: 0;
+	
+	.muk_dialog_document_search_facets {
+    	display: inline-block;
+		margin: 0 !important;
+		width: calc(~'100% - 25px');
+    	line-height: 26px;
+	}
+	
+	.muk_dialog_document_search_input {
+		border: 0;
+		width: 100%;
+		outline: 0;
+	    color: #1f1f1f;
+	}
+	
+	.muk_dialog_document_search {
+		padding-left: 5px;
+		padding-top: 8px;
+	}
+}
+
+.vakata-context {
+   z-index: 1100;
+}
