@@ -23,7 +23,7 @@ import logging
 
 from odoo import _
 from odoo import models, api, fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessError
 
 from odoo.addons.muk_dms.models import dms_base
 
