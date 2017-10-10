@@ -24,8 +24,6 @@ import base64
 from odoo import api, SUPERUSER_ID
 
 def migrate(cr, version):
-    print "post-migrate: Version: " + str(version)
-    
     if not version:
         return
     

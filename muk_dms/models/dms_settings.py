@@ -33,8 +33,6 @@ class Settings(dms_base.DMSModel):
     _name = 'muk_dms.settings'
     _description = "MuK Documents Settings"
 
-    _inherit = 'muk_dms.access'
-
     #----------------------------------------------------------
     # Database
     #----------------------------------------------------------

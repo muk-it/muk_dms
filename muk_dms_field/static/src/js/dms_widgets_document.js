@@ -150,7 +150,12 @@ var DocumentFormWidget = form_common.AbstractField.extend(
     			} 
         		Data.call('get_object_reference', [module, xmlid])
         		.then(function (directory_ref) {
-        			this.directory_selected(value.directory[0]);
+        			var dirty = self.view.$el.is('.oe_form_dirty');
+        			self.directory_selected(directory_ref[1]).then(function() {
+        				if(!dirty) {
+            				self.view.$el.removeClass('oe_form_dirty');
+            			}
+        			});
 	        	});
         	}
     		if(value.content) {
@@ -231,6 +236,7 @@ var DocumentFormWidget = form_common.AbstractField.extend(
         	new_value.name = name;
         	this.set_value(new_value);
         	this.$el.find('.muk_form_document_file_filename').val(name);
+    		this.view.do_onchange(this);
         }
     },
     on_filename_change: function(e) {
@@ -249,7 +255,7 @@ var DocumentFormWidget = form_common.AbstractField.extend(
     },
     directory_selected: function(id) {
     	var self = this;
-    	Directory.query(['name'])
+		return Directory.query(['name'])
         .filter([['id', '=', id]])
         .limit(1)
         .first().then(function (directory) {
@@ -407,5 +413,10 @@ var DocumentColumnWidget = list_widgets.Column.extend({
 core.form_widget_registry.add('document', DocumentFormWidget);
 core.list_widget_registry.add('field.document', DocumentColumnWidget);
 
+
+return {
+	DocumentFormWidget: DocumentFormWidget,
+	DocumentColumnWidget: DocumentColumnWidget,
+}
 
 });

@@ -185,9 +185,7 @@ class Directory(dms_base.DMSModel):
             values.update(self.with_context(operation=operation)._compute_size(write=False))
         if values:
             self.write(values);   
-            if "settings" in fields:
-                self.trigger_computation_down(fields, operation)
-            if "path" in fields:
+            if "settings" in fields or "path" in fields:
                 self.trigger_computation_down(fields, operation)
             if "size" in fields:
                 self.trigger_computation_up(fields, operation)

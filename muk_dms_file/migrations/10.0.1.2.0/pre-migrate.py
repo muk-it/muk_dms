@@ -24,12 +24,12 @@ import os
 _sql_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sql'))
 
 def migrate(cr, version):
-    print "pre-migrate: Version: " + str(version)
     if not version:
         return
     
     if version == "10.0.1.0.0":
         sql_pre_migration_files = [
+            os.path.join(_sql_path, "pre_delete_locks.sql"),
             os.path.join(_sql_path, "pre_muk_dms_data_system.sql"),
             os.path.join(_sql_path, "pre_muk_dms_file.sql")]
         

@@ -26,8 +26,10 @@ _sql_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sql'))
 def migrate(cr, version):
     if not version:
         return
+    
     if version == "10.0.1.1.0":
         sql_pre_migration_files = [
+            os.path.join(_sql_path, "pre_delete_locks.sql"),
             os.path.join(_sql_path, "pre_muk_dms_data_database.sql"),
             os.path.join(_sql_path, "pre_muk_dms_directory.sql"),
             os.path.join(_sql_path, "pre_muk_dms_file.sql"),
@@ -35,6 +37,7 @@ def migrate(cr, version):
             os.path.join(_sql_path, "pre_fkey_for_muk_dms_settings.sql"),
             os.path.join(_sql_path, "pre_muk_dms_lock.sql"),
             os.path.join(_sql_path, "pre_drop_old_tables.sql")]
+        
         for sql_file in sql_pre_migration_files:
             with open(sql_file,'r') as file:
                 input = file.readlines()

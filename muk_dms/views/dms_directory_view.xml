@@ -123,8 +123,6 @@
 									'required':[('is_root_directory','=',False)]}"/>
 					</group>
 				</group>
-				<group>
-				</group>
 				<notebook>
  					<page string="Files">
 						<field name="files">
@@ -146,10 +144,10 @@
 					<page string="Access Information">
 						<group>
 							<group>
-								<field name="perm_create" readonly="1" />
 								<field name="perm_read" readonly="1" />
 							</group>
 							<group>
+								<field name="perm_create" readonly="1" />
 								<field name="perm_write" readonly="1" />
 								<field name="perm_unlink" readonly="1" />
 							</group>
