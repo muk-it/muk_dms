@@ -15,3 +15,5 @@ COMMENT ON COLUMN muk_dms_data_system.base_path IS 'Base Path';
 COMMENT ON COLUMN muk_dms_data_system.write_uid IS 'Last Updated by';
 COMMENT ON COLUMN muk_dms_data_system.write_date IS 'Last Updated on';
 COMMENT ON COLUMN muk_dms_data_system.create_date IS 'Created on';
+
+ALTER SEQUENCE muk_dms_system_data_id_seq RENAME TO muk_dms_data_system_id_seq;

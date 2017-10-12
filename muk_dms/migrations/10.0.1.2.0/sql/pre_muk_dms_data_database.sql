@@ -9,3 +9,4 @@ COMMENT ON COLUMN muk_dms_data_database.write_uid IS 'Last Updated by';
 COMMENT ON COLUMN muk_dms_data_database.write_date IS 'Last Updated on';
 COMMENT ON COLUMN muk_dms_data_database.data IS 'Content';
 
+ALTER SEQUENCE muk_dms_database_data_id_seq RENAME TO muk_dms_data_database_id_seq;

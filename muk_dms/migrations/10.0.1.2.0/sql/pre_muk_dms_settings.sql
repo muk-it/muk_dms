@@ -18,3 +18,5 @@ COMMENT ON COLUMN muk_dms_settings.create_date IS 'Created on';
 COMMENT ON COLUMN muk_dms_settings.save_type IS 'Save Type';
 
 UPDATE ir_model_data SET (model) = ('muk_dms.settings') WHERE model = 'muk_dms.root';
+
+ALTER SEQUENCE muk_dms_root_id_seq RENAME TO muk_dms_settings_id_seq;

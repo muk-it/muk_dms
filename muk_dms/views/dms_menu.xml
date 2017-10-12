@@ -20,7 +20,8 @@
 <odoo>
 
 <menuitem id="main_menu_muk_dms" name="Documents"
-	web_icon="muk_dms,static/description/icon.png" />
+	web_icon="muk_dms,static/description/icon.png"
+	groups="group_dms_user" />
 
 <menuitem id="cat_menu_muk_dms_documents" 
 	name="Document Management"

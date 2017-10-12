@@ -82,11 +82,14 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
 
     @api.model
     def check_access_rights(self, operation, raise_exception=True):
+        if operation == 'access':
+            return True
         return super(DMSAdvancedAccessModel, self).check_access_rights(operation, raise_exception)
     
     @api.multi
     def check_access_rule(self, operation):
-        super(DMSAdvancedAccessModel, self).check_access_rule(operation)
+        if operation != 'access':
+            super(DMSAdvancedAccessModel, self).check_access_rule(operation)
         if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
             return
         base, model = self._name.split(".")
@@ -116,11 +119,12 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
             SELECT r.aid
             FROM muk_groups_complete_%s_rel r
             JOIN muk_dms_access_groups g ON r.gid = g.id
-            JOIN muk_dms_groups_users_rel u ON r.gid = u.uid
+            JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
             WHERE u.uid = %s AND g.perm_read = true
         ''' % (model, self.env.user.id)
         self.env.cr.execute(sql)
         fetch = self.env.cr.fetchall()
+        result = [result] if not isinstance(result, list) else result
         if len(fetch) > 0:
             access_result = []
             access_ids = list(map(lambda x: x[0], fetch))
@@ -139,7 +143,7 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
             SELECT r.aid
             FROM muk_groups_complete_%s_rel r
             JOIN muk_dms_access_groups g ON r.gid = g.id
-            JOIN muk_dms_groups_users_rel u ON r.gid = u.uid
+            JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
             WHERE u.uid = %s AND g.perm_read = true
         ''' % (model, self.env.user.id)
         self.env.cr.execute(sql)
@@ -147,10 +151,14 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
         if len(fetch) > 0:
             access_result = self.env[self._name]
             access_ids = list(map(lambda x: x[0], fetch)) 
-            for record in result:
-                if record.id in access_ids:
-                    access_result += record
-            return access_result
+            if isinstance(result, (int, long)):
+                if result in access_ids:
+                    return result
+            else:
+                for record in result:
+                    if record.id in access_ids:
+                        access_result += record
+                return access_result
         return self.env[self._name]
     
     def _after_name_search(self, result):
@@ -162,7 +170,7 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
             SELECT r.aid
             FROM muk_groups_complete_%s_rel r
             JOIN muk_dms_access_groups g ON r.gid = g.id
-            JOIN muk_dms_groups_users_rel u ON r.gid = u.uid
+            JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
             WHERE u.uid = %s AND g.perm_read = true
         ''' % (model, self.env.user.id)
         self.env.cr.execute(sql)
@@ -187,7 +195,7 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
                 SELECT r.aid
                 FROM muk_groups_complete_%s_rel r
                 JOIN muk_dms_access_groups g ON r.gid = g.id
-                JOIN muk_dms_groups_users_rel u ON r.gid = u.uid
+                JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
                 WHERE u.uid = %s AND g.perm_access = true
             ''' % (model, self.env.user.id)
             self.env.cr.execute(sql)
