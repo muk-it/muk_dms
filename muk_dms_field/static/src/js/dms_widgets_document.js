@@ -371,7 +371,6 @@ var DocumentFormWidget = form_common.AbstractField.extend(
 var DocumentColumnWidget = list_widgets.Column.extend({
     _format: function (row_data, options) {
     	var value = row_data[this.id].value;
-    	console.log(value);
         if (!value) {
             return options.value_if_empty || '';
         } else {

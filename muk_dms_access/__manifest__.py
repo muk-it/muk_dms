@@ -19,25 +19,34 @@
 #
 ###################################################################################
 
-import os
-
-_sql_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sql'))
-
-def migrate(cr, version):
-    if not version:
-        return
-    
-    if version == "10.0.1.0.0":
-        sql_pre_migration_files = [
-            os.path.join(_sql_path, "pre_delete_locks.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_data_system.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_settings.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_file.sql")]
-        
-        for sql_file in sql_pre_migration_files:
-            with open(sql_file,'r') as file:
-                input = file.readlines()
-            input = [x.strip() for x in input] 
-            for sql_query in input:
-                if sql_query and not sql_query.startswith("--"):
-                    cr.execute(sql_query)
+{
+    'name': "MuK Documents Access",
+    'summary': """Document Management System""",
+    'description': """ 
+        ABX
+    """,
+    'version': '10.0.1.0.0',   
+    'category': 'Document Management',   
+    'license': 'AGPL-3',    
+    'author': "MuK IT",
+    'website': "http://www.mukit.at",
+    'contributors': [
+        "Mathias Markl <mathias.markl@mukit.at>",
+        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
+    ],
+    'depends': [
+        'hr',
+        'muk_dms',
+    ],
+    "data": [
+        "security/dms_access_security.xml",
+        'security/ir.model.access.csv',
+        'views/dms_view_groups.xml',
+        'views/dms_view_directory.xml',
+        'views/dms_view_file.xml',
+    ],
+    'images': [
+        'static/description/banner.png'
+    ],
+    "installable": True,
+}

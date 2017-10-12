@@ -1,0 +1,7 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_dms_access_groups_user,dms_access_groups_user,model_muk_dms_access_groups,muk_dms.group_dms_user,1,0,1,0
+
+access_dms_access_groups_manager,dms_access_groups_manager,model_muk_dms_access_groups,muk_dms.group_dms_manager,1,1,1,0
+
+access_dms_access_groups_admin,dms_access_groups_admin,model_muk_dms_access_groups,muk_dms.group_dms_admin,1,1,1,1

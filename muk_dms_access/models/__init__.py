@@ -19,25 +19,9 @@
 #
 ###################################################################################
 
-import os
-
-_sql_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sql'))
-
-def migrate(cr, version):
-    if not version:
-        return
-    
-    if version == "10.0.1.0.0":
-        sql_pre_migration_files = [
-            os.path.join(_sql_path, "pre_delete_locks.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_data_system.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_settings.sql"),
-            os.path.join(_sql_path, "pre_muk_dms_file.sql")]
-        
-        for sql_file in sql_pre_migration_files:
-            with open(sql_file,'r') as file:
-                input = file.readlines()
-            input = [x.strip() for x in input] 
-            for sql_query in input:
-                if sql_query and not sql_query.startswith("--"):
-                    cr.execute(sql_query)
+from . import dms_base
+from . import dms_directory
+from . import dms_file
+from . import dms_access_groups
+from . import hr_department
+from . import hr_job

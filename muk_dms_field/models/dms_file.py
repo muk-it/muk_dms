@@ -79,6 +79,15 @@ class FieldFile(dms_base.DMSModel):
     # Create, Update
     #----------------------------------------------------------
     
+    @api.model_cr_context
+    def _auto_init(self):
+        file = super(FieldFile, self)._auto_init()
+        self._cr.execute('SELECT indexname FROM pg_indexes WHERE indexname = %s', ('muk_dms_file_idx',))
+        if not self._cr.fetchone():
+            self._cr.execute('CREATE INDEX muk_dms_file_idx ON muk_dms_file (reference_model, reference_id)')
+            self._cr.commit()
+        return file
+    
     def _check_recomputation(self, values, operation=None):
         super(FieldFile, self)._check_recomputation(values, operation)
         if 'reference_model' in values or 'reference_id' in values:

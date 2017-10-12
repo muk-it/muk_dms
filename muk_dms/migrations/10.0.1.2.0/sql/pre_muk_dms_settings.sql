@@ -16,3 +16,5 @@ COMMENT ON COLUMN muk_dms_settings.write_uid IS 'Last Updated by';
 COMMENT ON COLUMN muk_dms_settings.write_date IS 'Last Updated on';
 COMMENT ON COLUMN muk_dms_settings.create_date IS 'Created on';
 COMMENT ON COLUMN muk_dms_settings.save_type IS 'Save Type';
+
+UPDATE ir_model_data SET (model) = ('muk_dms.settings') WHERE model = 'muk_dms.root';

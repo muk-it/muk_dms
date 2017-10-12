@@ -394,10 +394,13 @@ class DMSAccessModel(DMSAbstractModel):
         """
         return super(DMSAccessModel, self).check_field_access_rights(operation, fields)
     
-    def check_access(self, operation):
+    def check_access(self, operation, raise_exception=False):
         access_right = self.check_access_rights(operation, raise_exception=False)
         access_rule = self.check_access_rule(operation=operation) == None
-        return access_right and access_rule
+        access = access_right and access_rule
+        if not access and raise_exception:
+            raise AccessError(_("This operation is forbidden!"))
+        return access
         
     #----------------------------------------------------------
     # Read, View 
@@ -438,3 +441,21 @@ class DMSAccessModel(DMSAbstractModel):
     @api.one  
     def _compute_editor(self):
         self.editor = self.is_locked_by() == self.env.user
+    
+    #----------------------------------------------------------
+    # Create, Update, Delete
+    #----------------------------------------------------------
+    
+    def _before_create(self, vals):
+        self.check_access('create', raise_exception=True)
+        return super(DMSAccessModel, self)._before_create(vals)
+        
+    def _before_write(self, vals, operation):
+        for record in self:
+            record.check_access('write', raise_exception=True)
+        return super(DMSAccessModel, self)._before_write(vals, operation)
+    
+    def _before_unlink(self):
+        for record in self:
+            record.check_access('unlink', raise_exception=True)
+        return super(DMSAccessModel, self)._before_unlink()

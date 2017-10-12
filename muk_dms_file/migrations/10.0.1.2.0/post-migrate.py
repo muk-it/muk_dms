@@ -30,6 +30,10 @@ def migrate(cr, version):
     if version == "10.0.1.0.0":
         env = api.Environment(cr, SUPERUSER_ID, {})
         
+        datasystemlist = env["muk_dms.data_system"].search([])
+        for datasystem in datasystemlist:
+            datasystem.update_checksum()
+            
         files = env["muk_dms.file"].search([("reference", "like", "data_system")])
         for file in files:
              file.trigger_computation(["extension","mimetype","index_content"])
@@ -40,6 +44,3 @@ def migrate(cr, version):
             for root_directory in settings.root_directories:
                 root_directory.trigger_computation(["path", "settings"])
                 
-        datasystemlist = env["muk_dms.data_system"].search([])
-        for datasystem in datasystemlist:
-            datasystem.update_checksum()

@@ -29,6 +29,31 @@ var KanbanView = require('web_kanban.KanbanView');
 var QWeb = core.qweb;
 var _t = core._t;
 
+FormView.include({
+	load_record: function(record) {
+		this._super.apply(this, arguments);
+		if (this.$buttons && this.model === "muk_dms.directory") {
+			if(!this.datarecord.perm_create) {
+				this.$buttons.find('.o_form_button_create').hide();
+			}
+			if(!this.datarecord.perm_write) {
+				this.$buttons.find('.o_form_button_edit').hide();
+			}
+        }
+	}
+});
+
+ListView.include({
+	compute_decoration_classnames: function (record) {
+		var classnames = this._super.apply(this, arguments);
+		if(this.model === "muk_dms.directory" && 
+				!record.attributes.perm_unlink) {
+			classnames = $.grep([classnames, "no_unlink"], Boolean).join(" ");
+		}
+		return classnames;
+	}
+});
+
 var DirectoryKanbanView = KanbanView.extend({
 	init: function() {
 		this._super.apply(this, arguments);

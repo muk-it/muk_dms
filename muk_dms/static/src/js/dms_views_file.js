@@ -35,6 +35,12 @@ FormView.include({
 	load_record: function(record) {
 		this._super.apply(this, arguments);
 		if (this.$buttons && this.model === "muk_dms.file") {
+			if(!this.datarecord.perm_create) {
+				this.$buttons.find('.o_form_button_create').hide();
+			}
+			if(!this.datarecord.perm_write) {
+				this.$buttons.find('.o_form_button_edit').hide();
+			}
 			if(!this.datarecord.editor &&
 					this.datarecord.locked &&
 					this.datarecord.locked instanceof Array) {
@@ -53,6 +59,10 @@ ListView.include({
 				record.attributes.locked && 
 				record.attributes.locked instanceof Array) {
 			classnames = $.grep([classnames, "locked"], Boolean).join(" ");
+		}
+		if(this.model === "muk_dms.file" && 
+				!record.attributes.perm_unlink) {
+			classnames = $.grep([classnames, "no_unlink"], Boolean).join(" ");
 		}
 		return classnames;
 	}

@@ -17,6 +17,28 @@
 *
 **********************************************************************************/
 
+.no_unlink {
+	.o_list_record_selector .o_checkbox {
+		position: relative;
+		    
+		&:before{
+		    top: -18px;
+		    left: 2px;
+			position: absolute;
+			content: "\f05e";
+			font-family: FontAwesome;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-size: 15px;
+		    text-decoration: inherit;
+		}
+		
+		input[type=checkbox] {
+			display: none;
+		}
+	}
+}
+
 .locked {
 	color: #a2a0a0;
 	

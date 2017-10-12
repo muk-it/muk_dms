@@ -70,6 +70,9 @@
 	<field name="model">muk_dms.directory</field>
 	<field name="arch" type="xml">
 		<tree string="Directories">
+			<field name="perm_create" invisible="1" />
+			<field name="perm_write" invisible="1" />
+			<field name="perm_unlink" invisible="1" />
 			<field name="name" />
 			<field name="size" widget="dms_size" />
 			<field name="path" widget="dms_path" />

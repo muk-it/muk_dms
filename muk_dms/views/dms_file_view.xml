@@ -48,10 +48,13 @@
 	<field name="arch" type="xml">
 		<tree string="Files">
 			<field name="locked" invisible="1" />
+			<field name="perm_create" invisible="1" />
+			<field name="perm_write" invisible="1" />
+			<field name="perm_unlink" invisible="1" />
 			<field name="name" />
 			<field name="mimetype" />
 			<field name="size" widget="dms_size" />
-			<field name="write_date" readonly="1" />
+			<field name="write_date" />
 			<field name="path" widget="dms_path" />
 		</tree>
 	</field>
@@ -67,7 +70,7 @@
 					name="user_lock" 
 					type="object"
 					string="Lock (Edit)" 
-					attrs="{'invisible':[('locked', '!=', False)]}" />
+					attrs="{'invisible':['|',('locked', '!=', False), ('perm_write', '=', False)]}" />
 				<button class="oe_highlight" 
 					name="user_unlock" 
 					type="object"

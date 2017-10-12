@@ -45,6 +45,10 @@ def opened_w_error(filename, mode="r"):
         f = open(filename, mode)
     except IOError, err:
         yield None, err
+    except UnicodeDecodeError, err:
+        yield None, err
+    except UnicodeEncodeError, err:
+        yield None, err
     else:
         try:
             yield f, None
@@ -178,8 +182,8 @@ class SystemFileDataModel(models.Model):
     def _read_file(self, file_path):
         with opened_w_error(file_path, "rb") as (file_handler, exc):
             if exc:
-                _logger.error("Failed to read the file: " + str(exc))
-                raise MissingError(_("Something went wrong! Seems that the file is missing."))
+                _logger.error("Failed to read the file (%s): %s" % (file_path, str(exc)))
+                raise MissingError(_("Something went wrong! Seems that the file is missing or is broken."))
             else:
                 file = file_handler.read()
                 encode_file = base64.b64encode(file)
