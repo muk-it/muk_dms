@@ -35,9 +35,8 @@
         "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     "depends": [
-        "muk_web_client_refresh",
-        "muk_web_view_hierarchy",
         "muk_web_preview",
+        "muk_web_client_refresh",
     ],
     "data": [
         "security/dms_security.xml",

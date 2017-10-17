@@ -29,6 +29,7 @@ from odoo.addons.muk_dms.models import dms_base
 _logger = logging.getLogger(__name__)
 
 class FieldFile(dms_base.DMSModel):
+    
     _inherit = 'muk_dms.file'
     
     #----------------------------------------------------------

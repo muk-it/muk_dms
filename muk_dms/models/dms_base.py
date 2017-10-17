@@ -54,8 +54,11 @@ class DMSBaseModel(models.BaseModel):
     #----------------------------------------------------------
 
     def check_existence(self):
-        self.ensure_one()
-        return not (len(self) == 0 or self.id == False)
+        records = self.exists()
+        if not (len(records) == 0 or (len(records) == 1 and records.id == False)):
+            return records
+        else:
+            return False
     
     def notify_change(self, values, refresh=False, operation=None):
         self.ensure_one()
@@ -395,12 +398,14 @@ class DMSAccessModel(DMSAbstractModel):
         return super(DMSAccessModel, self).check_field_access_rights(operation, fields)
     
     def check_access(self, operation, raise_exception=False):
-        access_right = self.check_access_rights(operation, raise_exception=False)
-        access_rule = self.check_access_rule(operation=operation) == None
-        access = access_right and access_rule
-        if not access and raise_exception:
-            raise AccessError(_("This operation is forbidden!"))
-        return access
+        try:
+            access_right = self.check_access_rights(operation, raise_exception)
+            access_rule = self.check_access_rule(operation) == None
+            return access_right and access_rule
+        except AccessError:
+            if not access and raise_exception:
+                raise AccessError(_("This operation is forbidden!"))
+            return False
         
     #----------------------------------------------------------
     # Read, View 

@@ -54,17 +54,6 @@
 	</field>
 </record>
 
-<record id="view_dms_directory_hierarchy" model="ir.ui.view">
-	<field name="name">muk_dms_directory.hierarchy</field>
-	<field name="model">muk_dms.directory</field>
-	<field name="arch" type="xml">
-		<hierarchy parent="parent_directory" editable="top">
-			<field name="name" />
-			<field name="parent_directory" />
-		</hierarchy>
-	</field>
-</record>
-
 <record id="view_dms_directory_tree" model="ir.ui.view">
 	<field name="name">muk_dms_directory.tree</field>
 	<field name="model">muk_dms.directory</field>
@@ -180,7 +169,7 @@
 <record id="action_dms_directory" model="ir.actions.act_window">
 	<field name="name">Document Directories</field>
 	<field name="res_model">muk_dms.directory</field>
-	<field name="view_mode">kanban,tree,hierarchy,form</field>
+	<field name="view_mode">kanban,tree,form</field>
 </record>
 
 <menuitem id="menu_dms_directory" name="Directories"

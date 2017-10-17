@@ -20,3 +20,26 @@
 ###################################################################################
 
 import models
+
+from odoo import api, SUPERUSER_ID
+
+def _auto_default_group(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    access_groups = env['muk_dms_access.groups'].search([])
+    
+    if not access_groups.check_existence():
+        settings = env['muk_dms.settings'].search([])
+        category = env['ir.module.category'].search([['name', '=', 'Documents']], limit=1)
+        group = env['res.groups'].search([['name', '=', 'User'], ['category_id', '=', category.id]], limit=1)
+        access_group = access_groups.create({
+            'name': "Default Group",
+            'perm_read': True,
+            'perm_create': True,
+            'perm_write': True,
+            'perm_unlink': True,
+            'perm_access': False,
+        })
+        access_group.additional_users = group.users
+        for setting in settings:
+            for root in setting.root_directories:
+                root.groups = access_group

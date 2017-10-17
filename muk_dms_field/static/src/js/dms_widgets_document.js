@@ -132,9 +132,8 @@ var DocumentFormWidget = form_common.AbstractField.extend(
     			if(value.locked && value.locked instanceof Array) {
     				this.$el.find('.muk_form_document_checkout').prop('disabled', true);
     			}
-    		} else {
-    			this.do_toggle(!!value);
     		}
+			this.do_toggle(!!value);
     	} else {
     		if(value.directory && value.directory[0]) {
     			this.$el.find('.muk_form_document_folder_selection').val(value.directory[0][1]);

@@ -49,4 +49,5 @@
         'static/description/banner.png'
     ],
     "installable": True,
+    "post_init_hook": '_auto_default_group',
 }
