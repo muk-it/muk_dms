@@ -25,7 +25,7 @@
     "description": """ 
         
     """,
-    "version": '10.0.1.2.0',   
+    "version": '11.0.1.2.0',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -49,6 +49,7 @@
         "views/dms_file_view.xml",
         "views/dms_data_view.xml",
         "views/dms_lock_view.xml",
+        "views/res_config_view.xml",
     ],
     "demo": [
     ],

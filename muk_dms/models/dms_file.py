@@ -258,7 +258,26 @@ class File(dms_base.DMSModel):
         childs = self.directory.files.mapped(lambda rec: [rec.id, rec.name])
         duplicates = [rec for rec in childs if rec[1] == self.name and rec[0] != self.id]
         if duplicates:
-            raise ValidationError("A file with the same name already exists.")
+            raise ValidationError(_("A file with the same name already exists."))
+        
+    @api.constrains('name')
+    def _check_extension(self):
+        config_parameter = self.env['ir.config_parameter']
+        forbidden_extensions = config_parameter.sudo().get_param('muk_dms.forbidden_extensions', default="")
+        forbidden_extensions = [x.strip() for x in forbidden_extensions.split(',')]
+        if self._compute_extension(write=False)['extension'] in forbidden_extensions:
+            raise ValidationError(_("The file has a forbidden file extension."))
+        
+    @api.constrains('content')
+    def _check_size(self):
+        config_parameter = self.env['ir.config_parameter']
+        max_upload_size = config_parameter.sudo().get_param('muk_dms.max_upload_size', default=25)
+        try:
+            max_upload_size = int(max_upload_size)
+        except ValueError:
+            max_upload_size = 25
+        if max_upload_size * 1024 * 1024 < len(base64.b64decode(self.content)):
+            raise ValidationError(_("The maximum upload size is %s MB).") % max_upload_size)
     
     def _after_create(self, vals):
         record = super(File, self)._after_create(vals)

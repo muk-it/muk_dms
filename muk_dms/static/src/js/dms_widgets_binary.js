@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_widgets.size', function(require) {
+odoo.define('muk_dms_widgets.binary', function(require) {
 "use strict";
 
 var core = require('web.core');
@@ -28,30 +28,24 @@ var field_widgets = require('web.basic_fields');
 var _t = core._t;
 var QWeb = core.qweb;
 
-function format_size(bytes, field, options) {
-    var thresh = options.si ? 1000 : 1024;
-    if(Math.abs(bytes) < thresh) {
-        return field_utils.format['float'](bytes, field, options) + ' B';
-    }
-    var units = options.si
-        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
-        : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
-    var u = -1;
-    do {
-        bytes /= thresh;
-        ++u;
-    } while(Math.abs(bytes) >= thresh && u < units.length - 1);
-    return field_utils.format['float'](bytes, field, options) + ' ' + units[u];
-}
-
-var FieldDocumentSize = field_widgets.FieldFloat.extend({
-	 _renderReadonly: function () {
-	    this.$el.text(format_size(this.value, this.field, this.nodeOptions));
+var FieldDocumentBinary = field_widgets.FieldBinaryFile.extend({
+	willStart: function () {
+		var self = this;
+		return $.when(this._super.apply(this, arguments)).then(function() {
+        	return self._rpc({
+                model: 'ir.config_parameter',
+                method: 'get_param',        	
+                args: ['muk_dms.max_upload_size'],
+            }).then(function(max_upload_size) {
+            	var max_upload = parseInt(max_upload_size) || 25;
+            	self.max_upload_size = max_upload * 1024 * 1024;
+            });
+        });
     },
 });
 
-registry.add('dms_size', FieldDocumentSize);
+registry.add('dms_binary', FieldDocumentBinary);
 
-return FieldDocumentSize;
+return FieldDocumentBinary;
 
 });

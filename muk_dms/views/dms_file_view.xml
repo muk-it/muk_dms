@@ -23,7 +23,8 @@
 	<field name="name">muk_dms_file.kanban</field>
 	<field name="model">muk_dms.file</field>
 	<field name="arch" type="xml">
-		<kanban js_class="dms_file_kanban">
+		<kanban class="dms_file_kanban">
+			<field name="id" />
 			<field name="name" />
 			<field name="thumbnail" />
 			<templates>
@@ -99,7 +100,7 @@
 				</group>
 				<group string="Data">
 					<group>
-						<field name="content" filename="name" />
+						<field name="content" filename="name" widget="dms_binary" />
 						<field name="size" widget="dms_size" />
 					</group>
 					<group>
@@ -128,7 +129,7 @@
 							</group>
 						</group>
 					</page>
-					<page string="Meta Information" groups="base.group_no_one">
+					<page string="Meta Information" groups="muk_dms.group_dms_admin,base.group_system">
 						<group>
 							<group>
 								<field name="id" />
@@ -148,7 +149,7 @@
 							</group>
 						</group>
 					</page>
-					<page string="Technical Information" groups="muk_dms.group_dms_admin,base.group_no_one">
+					<page string="Technical Information" groups="muk_dms.group_dms_admin,base.group_system">
 						<group>
 							<field name="reference" />
 						</group>

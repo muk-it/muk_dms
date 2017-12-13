@@ -27,9 +27,10 @@ var bus = require('bus.bus')
 WebClient.include({
     refresh: function(message) {
     	this._super(message);
+    	var action = this.action_manager.inner_action;
     	var widget = this.action_manager.inner_widget;
     	if((message === 'muk_dms.file' || message === 'muk_dms.directory') &&
-    			widget && widget.name === "Documents") {
+    			widget && action.action_descr.tag === "muk_dms_views.documents") {
     		widget.refresh();
     	}
     }

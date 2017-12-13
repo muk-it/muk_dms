@@ -63,7 +63,7 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Meta Information" groups="base.group_no_one">
+					<page string="Meta Information" groups="muk_dms.group_dms_admin,base.group_no_one">
 						<group>
 							<field name="id" />
 						</group>

@@ -22,72 +22,80 @@ odoo.define('muk_dms_views.file', function(require) {
 var core = require('web.core');
 var session = require('web.session');
 
-var FormView = require('web.FormView');
-var ListView = require('web.ListView');
-var KanbanView = require('web_kanban.KanbanView');
+var FormController = require('web.FormController');
+var ListRenderer = require('web.ListRenderer');
+var KanbanRecord = require('web.KanbanRecord');
 
 var PreviewHelper = require('muk_dms_preview_file.PreviewHelper');
 
 var QWeb = core.qweb;
 var _t = core._t;
 
-FormView.include({
-	load_record: function(record) {
-		this._super.apply(this, arguments);
-		if (this.$buttons && this.model === "muk_dms.file") {
-			if(!this.datarecord.perm_create) {
-				this.$buttons.find('.o_form_button_create').hide();
-			}
-			if(!this.datarecord.perm_write) {
-				this.$buttons.find('.o_form_button_edit').hide();
-			}
-			if(!this.datarecord.editor &&
-					this.datarecord.locked &&
-					this.datarecord.locked instanceof Array) {
+FormController.include({
+	_updateButtons: function() {
+        this._super.apply(this, arguments);
+        if(this.$buttons && this.modelName === 'muk_dms.file') {
+            var renderer = this.renderer;
+            var data = renderer.state.data;
+            if(!data.perm_create) {
+        		this.$buttons.find('.o_form_button_create').hide();
+        	} else {
+        		this.$buttons.find('.o_form_button_create').show();
+        	}
+        	if(!data.perm_write) {
+        		this.$buttons.find('.o_form_button_edit').hide();
+	    	} else {
+	    		this.$buttons.find('.o_form_button_edit').show();
+	    	}
+        	if(!data.editor &&
+					data.locked &&
+					data.locked instanceof Object) {
 				var $edit = this.$buttons.find('.o_form_button_edit');
 				$edit.prop("disabled", true);
 				$edit.text(_t("Locked!"));
+			} else {
+				var $edit = this.$buttons.find('.o_form_button_edit');
+				$edit.prop("disabled", false);
+				$edit.text(_t("Edit"));
 			}
         }
 	}
 });
 
-ListView.include({
-	compute_decoration_classnames: function (record) {
-		var classnames = this._super.apply(this, arguments);
-		if(this.model === "muk_dms.file" && 
-				record.attributes.locked && 
-				record.attributes.locked instanceof Array) {
-			classnames = $.grep([classnames, "locked"], Boolean).join(" ");
+ListRenderer.include({
+	_setDecorationClasses: function (record, $tr) {
+		this._super.apply(this, arguments);
+		if(record.model === 'muk_dms.file') {
+			if(record.data.locked && 
+					record.data.locked instanceof Object) {
+				$tr.addClass("locked");
+			} else {
+				$tr.removeClass("locked");
+			}
+			if(!record.data.perm_unlink) {
+				$tr.addClass("no_unlink");
+			} else {
+				$tr.removeClass("no_unlink");
+			}
 		}
-		if(this.model === "muk_dms.file" && 
-				!record.attributes.perm_unlink) {
-			classnames = $.grep([classnames, "no_unlink"], Boolean).join(" ");
+	},
+});
+
+KanbanRecord.include({
+	start: function() {
+		var self = this;
+		this._super.apply(this, arguments);
+		if (this.modelName === 'muk_dms.file') {
+			this.$(".muk_image").click(function(e) {
+				e.stopPropagation();
+		        PreviewHelper.createFilePreviewDialog($(e.currentTarget).data('id'), self);
+			});
+			this.$(".muk_filename").click(function(e) {
+				e.stopPropagation();
+				self._openRecord();
+			});
 		}
-		return classnames;
 	}
 });
-
-var FileKanbanView = KanbanView.extend({
-	init: function() {
-		this._super.apply(this, arguments);
-		this.events = _.extend(this.events, {
-            'click .muk_image': 'preview_file',
-            'click .muk_filename': 'select_file',
-        });
-	},
-	preview_file: function(e) {
-        e.stopPropagation();
-        PreviewHelper.createFilePreviewDialog($(e.currentTarget).data('id'));
-    },
-    select_file: function(e) {
-    	e.data = {id: $(e.currentTarget).data('id')};
-    	this.open_record(e, {});
-    }
-});
-
-core.view_registry.add('dms_file_kanban', FileKanbanView);
-
-return FileKanbanView;
 
 });

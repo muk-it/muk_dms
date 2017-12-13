@@ -20,7 +20,7 @@
 <odoo>
 
 <record id="action_dms_documents" model="ir.actions.client">
-	<field name="name">DocumentTreeView</field>
+	<field name="name">Documents</field>
 	<field name="tag">muk_dms_views.documents</field>
 </record>
 

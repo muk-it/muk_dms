@@ -403,7 +403,7 @@ class DMSAccessModel(DMSAbstractModel):
             access_rule = self.check_access_rule(operation) == None
             return access_right and access_rule
         except AccessError:
-            if not access and raise_exception:
+            if raise_exception:
                 raise AccessError(_("This operation is forbidden!"))
             return False
         

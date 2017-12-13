@@ -22,21 +22,25 @@ odoo.define('muk_dms_preview_file.PreviewHelper', function (require) {
 
 var core = require('web.core');
 var session = require('web.session');
-var Model = require("web.Model");
 
 var PreviewGenerator = require('muk_preview.PreviewGenerator');
 var PreviewDialog = require('muk_preview.PreviewDialog');
 
-var File = new Model('muk_dms.file', session.user_context);
 
 var QWeb = core.qweb;
 var _t = core._t;
 
 var PreviewHelper = core.Class.extend({
-	createFilePreviewDialog: function(id) {
-		File.query(['name', 'mimetype', 'extension'])
-		.filter([['id', '=', id]])
-		.first().then(function(file) {
+	createFilePreviewDialog: function(id, widget) {
+		widget._rpc({
+            fields: ['name', 'mimetype', 'extension'],
+            domain: [['id', '=', id]],
+            model: 'muk_dms.file',
+            method: 'search_read',
+            limit: 1,
+            context: session.user_context,
+        }).then(function(files) {
+        	var file = files.length > 0 ? files[0] : null;
 			var download_url = session.url(
 	    		'/web/content', {
 	    			model: 'muk_dms.file',
@@ -50,18 +54,24 @@ var PreviewHelper = core.Class.extend({
 				file.mimetype, file.extension, file.name);
 		});
 	},
-	createFilePreviewContent: function(id) {
-		return File.query(['name', 'mimetype', 'extension'])
-		.filter([['id', '=', id]])
-		.first().then(function(file) {
-			var download_url = session.url(
-	    		'/web/content', {
-	    			model: 'muk_dms.file',
-	    			filename: file.name,
-	    			filename_field: 'name',
-	    			field: 'content',
-	    			id: file.id,
-	    			download: true
+	createFilePreviewContent: function(id, widget) {
+		return widget._rpc({
+	            fields: ['name', 'mimetype', 'extension'],
+	            domain: [['id', '=', id]],
+	            model: 'muk_dms.file',
+	            method: 'search_read',
+	            limit: 1,
+	            context: session.user_context,
+	        }).then(function(files) {
+	        	var file = files.length > 0 ? files[0] : null;
+	        	var download_url = session.url(
+		    		'/web/content', {
+		    			model: 'muk_dms.file',
+		    			filename: file.name,
+		    			filename_field: 'name',
+		    			field: 'content',
+		    			id: file.id,
+		    			download: true
 	    	});
 			return PreviewGenerator.createPreview(self, download_url,
 				file.mimetype, file.extension, file.name);
@@ -69,12 +79,12 @@ var PreviewHelper = core.Class.extend({
 	}
 });
 
-PreviewHelper.createFilePreviewDialog = function(id) {
-    return new PreviewHelper().createFilePreviewDialog(id);
+PreviewHelper.createFilePreviewDialog = function(id, widget) {
+    return new PreviewHelper().createFilePreviewDialog(id, widget);
 };
 
-PreviewHelper.createFilePreviewContent = function(id) {
-    return new PreviewHelper().createFilePreviewContent(id);
+PreviewHelper.createFilePreviewContent = function(id, widget) {
+    return new PreviewHelper().createFilePreviewContent(id, widget);
 };
 
 return PreviewHelper;

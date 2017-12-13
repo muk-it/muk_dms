@@ -19,11 +19,49 @@
 
 <odoo>
 
+<record id="action_dms_directory_files" model="ir.actions.act_window">
+    <field name="name">Document Files</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="domain">[("directory", "=",  active_id)]</field>
+	<field name="context">{'default_directory': active_id,}
+    </field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to add a new file.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<record id="action_dms_directory_subdirectories" model="ir.actions.act_window">
+    <field name="name">Document Subdirectories</field>
+    <field name="view_type">form</field>
+	<field name="res_model">muk_dms.directory</field>
+	<field name="view_mode">kanban,tree,form</field>
+	<field name="domain">[("parent_directory", "=",  active_id)]</field>
+	<field name="context">{'default_parent_directory': active_id,}
+    </field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to add a new directory.
+	    </p>
+	    <p>
+			Directories can be used to structure and organize
+			files directly in Odoo.
+	    </p>
+    </field>
+</record>
+
 <record id="view_dms_directory_kanban" model="ir.ui.view">
 	<field name="name">muk_dms_directory.kanban</field>
 	<field name="model">muk_dms.directory</field>
 	<field name="arch" type="xml">
-		<kanban js_class="dms_directory_kanban">
+		<kanban class="dms_directory_kanban">
+			<field name="id" />
 			<field name="name" />
 			<field name="thumbnail" />
 			<field name="count_files" />
@@ -37,14 +75,18 @@
 								<t name="name" t-esc="record.name.value" />
 							</div>
 							<div class="muk_info">
-								<div class="muk_info_files" t-attf-data-id="#{record.id.value}">
+								<a class="muk_info_files" 
+									name="%(muk_dms.action_dms_directory_files)d" 
+									type="action">
 									<i class="fa fa-file" aria-hidden="true"></i>
 									<span><t name="count_files" t-esc="record.count_files.value" /></span>
-								</div>
-								<div class="muk_info_directories" t-attf-data-id="#{record.id.value}">
+								</a>
+								<a class="muk_info_directories" 
+									name="%(muk_dms.action_dms_directory_subdirectories)d" 
+									type="action">
 									<i class="fa fa-folder" aria-hidden="true"></i>
 									<span><t name="count_directories" t-esc="record.count_directories.value" /></span>
-								</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -145,7 +187,7 @@
 							</group>
 						</group>
 					</page>
-					<page string="Meta Information" groups="base.group_no_one">
+					<page string="Meta Information" groups="muk_dms.group_dms_admin,base.group_system">
 						<group>
 							<field name="id" />
 						</group>
@@ -164,12 +206,22 @@
 			</sheet>
 		</form>
 	</field>
-</record>
+</record> 
 
 <record id="action_dms_directory" model="ir.actions.act_window">
 	<field name="name">Document Directories</field>
 	<field name="res_model">muk_dms.directory</field>
+    <field name="view_type">form</field>
 	<field name="view_mode">kanban,tree,form</field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to add a new directory.
+	    </p>
+	    <p>
+			Directories can be used to structure and organize
+			files directly in Odoo.
+	    </p>
+    </field>
 </record>
 
 <menuitem id="menu_dms_directory" name="Directories"

@@ -25,7 +25,8 @@
 
 <menuitem id="cat_menu_muk_dms_documents" 
 	name="Document Management"
-	parent="main_menu_muk_dms" />
+	parent="main_menu_muk_dms"
+	sequence="1" />
 <menuitem id="cat_menu_muk_dms_config" 
 	name="Configuration"
 	parent="main_menu_muk_dms" />
@@ -34,11 +35,16 @@
 	parent="main_menu_muk_dms" />
 <menuitem id="cat_menu_muk_dms_files" 
 	name="System Data" 
-	groups="base.group_no_one"
+	groups="muk_dms.group_dms_admin,base.group_system"
 	parent="main_menu_muk_dms" />
 <menuitem id="cat_menu_muk_dms_locks" 
 	name="Locks" 
-	groups="base.group_no_one"
+	groups="muk_dms.group_dms_admin,base.group_system"
 	parent="main_menu_muk_dms" />
+<menuitem id="cat_menu_muk_dms_settings" 
+	name="Settings" 
+	groups="muk_dms.group_dms_admin,base.group_system"
+	parent="main_menu_muk_dms"
+	sequence="100" />
 	
 </odoo>

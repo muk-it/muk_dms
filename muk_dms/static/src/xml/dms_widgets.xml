@@ -19,13 +19,6 @@
 
 <templates id="template" xml:space="preserve">
 
-<t t-name="FieldRelationalPath" t-extend="FieldText">
-	<t t-jquery="span" t-operation="replace">
-        <div t-if="widget.get('effective_readonly')" class="muk_form_relpath" />
-    </t>
-</t>
-
-
 <t t-name="FieldDocumentMany2One" t-extend="FieldMany2One">
 	<t t-jquery="a" t-operation="replace">
         <div t-if="!widget.options.no_open" class="muk_form_document_many2one">

@@ -356,7 +356,5 @@ class Directory(dms_base.DMSModel):
             
     def _before_unlink_record(self):
         super(Directory, self)._before_unlink_record()
-        for directory in self.child_directories:
-            directory.unlink()
-        for file in self.files:
-            file.unlink()
+        self.files.unlink()
+        self.child_directories.unlink()
