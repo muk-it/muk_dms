@@ -167,6 +167,14 @@
 	<field name="name">Document Files</field>
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,form</field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to add a new file.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
 </record>
 
 <menuitem id="menu_dms_file" name="Files"

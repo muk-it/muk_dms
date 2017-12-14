@@ -88,6 +88,14 @@
 	<field name="name">Document Settings</field>
 	<field name="res_model">muk_dms.settings</field>
 	<field name="view_mode">tree,form</field>
+	<field name="help" type="html">
+	    <p class="oe_view_nocontent_create">
+	      	Click to create a new Settings object.
+	    </p>
+	    <p>
+			Settings are used to configure the Documents. 
+	    </p>
+    </field>
 </record>
 
 <menuitem id="menu_dms_settings" name="Document Settings"

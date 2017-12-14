@@ -38,7 +38,7 @@ class DocumentSettings(models.TransientModel):
     
     max_upload_size = fields.Char(
         string="Size",
-        help="Defines the maximum upload size in MB.")
+        help="Defines the maximum upload size in MB. Default (25MB)")
     
     forbidden_extensions = fields.Char(
         string="Extensions",
@@ -49,7 +49,7 @@ class DocumentSettings(models.TransientModel):
         res = super(DocumentSettings, self).get_values()
         get_param = self.env['ir.config_parameter'].sudo().get_param
         res.update(
-            max_upload_size=get_param('muk_dms.max_upload_size', default=25),
+            max_upload_size=get_param('muk_dms.max_upload_size', default="25"),
             forbidden_extensions=get_param('muk_dms.forbidden_extensions', default=""),
         )
         return res
@@ -59,5 +59,5 @@ class DocumentSettings(models.TransientModel):
             raise AccessDenied()
         super(DocumentSettings, self).set_values()
         set_param = self.env['ir.config_parameter'].sudo().set_param
-        set_param('muk_dms.max_upload_size', self.max_upload_size or 25)
+        set_param('muk_dms.max_upload_size', self.max_upload_size or "25")
         set_param('muk_dms.forbidden_extensions', self.forbidden_extensions or "")
