@@ -1,0 +1,5 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_dms_data_system_manager,dms_data_system_manager,model_muk_dms_data_system,muk_dms.group_dms_manager,1,0,0,0
+
+access_dms_data_system_admin,dms_data_system_admin,model_muk_dms_data_system,muk_dms.group_dms_admin,1,1,1,1
