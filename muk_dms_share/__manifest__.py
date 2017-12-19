@@ -23,7 +23,7 @@
     "name": "MuK Documents Share",
     "summary": """Share Documents""",
     "description": """ 
-        
+        Customizes the Web Share Module for MuK Documents.
     """,
     "version": '11.0.1.0.0',   
     "category": 'Document Management',   
