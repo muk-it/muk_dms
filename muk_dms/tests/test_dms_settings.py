@@ -49,5 +49,5 @@ class SettingsTestCase(dms_case.DMSTestCase):
         settings = self.browse_ref("muk_dms.settings_demo").sudo()
         root_top_directories = settings.root_directories.filtered(
                 lambda r: r.is_root_directory == True)
-        self.assertTrue(compare(root_top_directories, settings.root_top_directories))
+        self.assertTrue(_compare(root_top_directories, settings.root_top_directories))
     
