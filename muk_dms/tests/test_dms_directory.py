@@ -23,7 +23,6 @@ import os
 import base64
 import logging
 import unittest
-import collections
 
 from odoo import _
 from odoo.tests import common

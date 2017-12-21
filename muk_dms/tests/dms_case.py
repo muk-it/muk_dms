@@ -40,3 +40,6 @@ class DMSTestCase(common.TransactionCase):
         
     def tearDown(self):
         super(DMSTestCase, self).tearDown()
+        
+    def file_base64(self):
+        return "SGVsbG8gV29ybGQh"
