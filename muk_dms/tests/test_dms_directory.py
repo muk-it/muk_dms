@@ -74,3 +74,16 @@ class DirectoryTestCase(dms_case.DMSTestCase):
     def test_compute_thumbnail(self):
         directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
         self.assertTrue(directory._compute_thumbnail())
+        
+    def test_unlink_directory(self):
+        settings = self.browse_ref("muk_dms.settings_demo").sudo()
+        root_directory = self.env['muk_dms.directory'].sudo().create({
+            'name': "RootTestDir",
+            'is_root_directory': True,
+            'settings': settings.id})
+        sub_directory = self.env['muk_dms.directory'].sudo().create({
+            'name': "SubTestDir",
+            'is_root_directory': False,
+            'parent_directory': root_directory.id})
+        root_directory.unlink()
+        self.assertFalse(sub_directory.exists())
