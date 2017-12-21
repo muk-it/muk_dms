@@ -42,4 +42,4 @@ class DMSTestCase(common.TransactionCase):
         super(DMSTestCase, self).tearDown()
         
     def file_base64(self):
-        return base64.b64encode("Hello World!")
+        return base64.b64encode(b"Hello World!")

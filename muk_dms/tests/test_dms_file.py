@@ -54,7 +54,7 @@ class FileTestCase(dms_case.DMSTestCase):
         file = self.browse_ref("muk_dms.file_14_demo").sudo()
         self.assertTrue(file.thumbnail)
         
-    def test_unlink_directory(self):
+    def test_unlink_file(self):
         directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
