@@ -63,11 +63,11 @@ class FileTestCase(dms_case.DMSTestCase):
         
     def test_access_file(self):
         admin_file = self.browse_ref("muk_dms.file_14_demo").sudo()
+        nouser_file = self.browse_ref("muk_dms.file_14_demo").sudo(self.demouser.id)
         self.assertTrue(admin_file.perm_read)
         self.assertTrue(admin_file.perm_create)
         self.assertTrue(admin_file.perm_write) 
         self.assertTrue(admin_file.perm_unlink)
-        nouser_file = self.browse_ref("muk_dms.file_14_demo").sudo(self.demouser.id)
         self.assertFalse(nouser_file.perm_read)
         self.assertFalse(nouser_file.perm_create)
         self.assertFalse(nouser_file.perm_write) 
