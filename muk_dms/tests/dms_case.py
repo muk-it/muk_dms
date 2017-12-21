@@ -21,17 +21,19 @@
 
 import os
 import base64
+import logging
 import unittest
 
 from odoo import _
 from odoo.tests import common
 
 _path = os.path.dirname(os.path.dirname(__file__))
+_logger = logging.getLogger(__name__)
 
 class DMSTestCase(common.TransactionCase):
     
     at_install = True
-    post_install = False
+    post_install = True
     
     def setUp(self):
         super(DMSTestCase, self).setUp()
