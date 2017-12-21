@@ -62,11 +62,15 @@ class DirectoryTestCase(dms_case.DMSTestCase):
         copy_root_directory = root_directory.copy()
         self.assertTrue(root_directory.settings.id == copy_root_directory.settings.id)
         self.assertTrue(root_directory.count_directories == copy_root_directory.count_directories)
-        self.assertTrue(root_directory.count_files  == copy_root_directory.count_files )
+        self.assertTrue(root_directory.count_files  == copy_root_directory.count_files)
         
     def test_copy_sub_directory(self):
         sub_directory = self.browse_ref("muk_dms.directory_03_demo").sudo()
         copy_root_directory = sub_directory.copy()
         self.assertTrue(sub_directory.settings.id == copy_root_directory.settings.id)
         self.assertTrue(sub_directory.count_directories == copy_root_directory.count_directories)
-        self.assertTrue(sub_directory.count_files  == copy_root_directory.count_files )
+        self.assertTrue(sub_directory.count_files  == copy_root_directory.count_files)
+        
+    def test_compute_thumbnail(self):
+        directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
+        self.assertTrue(directory._compute_thumbnail())
