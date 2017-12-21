@@ -41,13 +41,13 @@ class SettingsTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
         super(SettingsTestCase, self).setUp()
+        self.settings = self.browse_ref("muk_dms.settings_demo").sudo()
         
     def tearDown(self):
         super(SettingsTestCase, self).tearDown()
     
     def test_compute_root_top_directories(self):
-        settings = self.browse_ref("muk_dms.settings_demo").sudo()
-        root_top_directories = settings.root_directories.filtered(
+        root_top_directories = self.settings.root_directories.filtered(
                 lambda r: r.is_root_directory == True)
-        self.assertTrue(_compare(root_top_directories, settings.root_top_directories))
+        self.assertTrue(_compare(root_top_directories, self.settings.root_top_directories))
     
