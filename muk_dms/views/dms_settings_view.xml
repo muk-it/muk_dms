@@ -52,14 +52,37 @@
 						<field name="index_files" />
 						<field name="system_locks" />
 					</group>
+					<group>
+						<field name="show_tree" />
+					</group>
 				</group>
 				<notebook>
-					<page string="Directories">
+					<page string="Top Directories">
+						<field name="root_top_directories">
+							<tree string="Directories">
+								<field name="name" />
+								<field name="size" widget="dms_size" />
+								<field name="count_directories" />
+								<field name="count_files" />
+							</tree>
+						</field>
+					</page>
+					<page string="All Directories">
 						<field name="root_directories">
 							<tree string="Directories">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
 								<field name="path" widget="dms_path" />
+							</tree>
+						</field>
+					</page>
+					<page string="Files">
+						<field name="root_files">
+							<tree string="Files">
+								<field name="name" />
+								<field name="size" widget="dms_size" />
+								<field name="path" widget="dms_path" />
+								<field name="write_date" readonly="1" />
 							</tree>
 						</field>
 					</page>

@@ -21,54 +21,35 @@ odoo.define('muk_dms_widgets.many2one', function(require) {
 "use strict";
 
 var core = require('web.core');
-var session = require('web.session');
-var form_relational = require('web.form_relational');
-var list_widgets = require('web.ListView');
+var registry = require('web.field_registry');
+var field_utils = require('web.field_utils');
+var field_widgets = require('web.relational_fields');
 
 var PreviewHelper = require('muk_dms_preview_file.PreviewHelper');
 
 var _t = core._t;
 var QWeb = core.qweb;
 
-var DocumentMany2OneFormWidget = core.form_widget_registry.get("many2one").extend({
-	template: "FieldDocumentMany2One",
-	display_string: function (str) {
-        var self = this;
-        if (!this.get("effective_readonly")) {
-            this._super(str);
+var FieldDocumentMany2One = field_widgets.FieldMany2One.extend({
+    template: 'FieldDocumentMany2One',
+    _renderReadonly: function () {
+    	var self = this;
+        var value = _.escape((this.m2o_value || "").trim()).split("\n").join("<br/>");
+        if (!this.nodeOptions.no_open) {
+            this.$el.find('.o_form_uri').html(value);
+    		this.$el.find('.muk_form_document_preview').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                PreviewHelper.createFilePreviewDialog(self.value.data.id, self);
+            });
         } else {
-        	if (this.options.no_open) {
-				this._super(str);
-        	} else {
-        		var display = (str === null) ? 
-        				"" : (_.escape(str.trim()).split("\n").join("<br/>") || data.noDisplayContent);
-        		var $link = this.$el.find('.o_form_uri');
-        		$link.html(display);
-        		$link.off('click');
-                $link.click(function (e) {
-                    e.preventDefault();
-                    _.once(self.execute_formview_action.bind(self))();
-                });
-                this.$el.find('.muk_form_document_preview').click(function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    PreviewHelper.createFilePreviewDialog(self.get('value'));
-                });
-        	}
-
+        	this._super.apply(this, arguments);
         }
     },
 });
 
-var DocumentMany2OneColumnWidget = list_widgets.Column.extend({
-    _format: function (row_data, options) {
-        var value = row_data[this.id].value;
-        return value ? value[1] : "";
-    }
-});
+registry.add('dms_many2one', FieldDocumentMany2One);
 
-core.form_widget_registry.add('dms_many2one', DocumentMany2OneFormWidget);
-core.list_widget_registry.add('field.dms_many2one', DocumentMany2OneColumnWidget);
-
+return FieldDocumentMany2One;
 
 });

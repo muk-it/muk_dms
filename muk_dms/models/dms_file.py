@@ -219,8 +219,8 @@ class File(dms_base.DMSModel):
             type = record.mimetype.split('/')[0] if record.mimetype else record._compute_mimetype(write=False)['mimetype']  
             index_files = record.settings.index_files if record.settings else record.directory.settings.index_files
             if type and type.split('/')[0] == 'text' and record.content and index_files:
-                words = re.findall("[^\x00-\x1F\x7F-\xFF]{4,}", base64.b64decode(record.content))
-                return ustr("\n".join(words))
+                words = re.findall(b"[\x20-\x7E]{4,}", base64.b64decode(record.content) if record.content else b'')
+                return b"\n".join(words).decode('ascii')
             else:
                 return None   
         if write:
@@ -265,7 +265,8 @@ class File(dms_base.DMSModel):
         config_parameter = self.env['ir.config_parameter']
         forbidden_extensions = config_parameter.sudo().get_param('muk_dms.forbidden_extensions', default="")
         forbidden_extensions = [x.strip() for x in forbidden_extensions.split(',')]
-        if self._compute_extension(write=False)['extension'] in forbidden_extensions:
+        file_extension = self._compute_extension(write=False)['extension']
+        if file_extension and file_extension in forbidden_extensions:
             raise ValidationError(_("The file has a forbidden file extension."))
         
     @api.constrains('content')

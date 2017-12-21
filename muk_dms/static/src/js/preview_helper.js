@@ -41,15 +41,14 @@ var PreviewHelper = core.Class.extend({
             context: session.user_context,
         }).then(function(files) {
         	var file = files.length > 0 ? files[0] : null;
-			var download_url = session.url(
-	    		'/web/content', {
-	    			model: 'muk_dms.file',
-	    			filename: file.name,
-	    			filename_field: 'name',
-	    			field: 'content',
-	    			id: file.id,
-	    			download: true
-	    	});
+        	var download_url = '/web/content?' + $.param({
+        		model: 'muk_dms.file',
+    			filename: file.name,
+    			filename_field: 'name',
+    			field: 'content',
+    			id: file.id,
+    			download: true
+            });
 			PreviewDialog.createPreviewDialog(self, download_url,
 				file.mimetype, file.extension, file.name);
 		});
@@ -64,18 +63,17 @@ var PreviewHelper = core.Class.extend({
 	            context: session.user_context,
 	        }).then(function(files) {
 	        	var file = files.length > 0 ? files[0] : null;
-	        	var download_url = session.url(
-		    		'/web/content', {
-		    			model: 'muk_dms.file',
-		    			filename: file.name,
-		    			filename_field: 'name',
-		    			field: 'content',
-		    			id: file.id,
-		    			download: true
-	    	});
-			return PreviewGenerator.createPreview(self, download_url,
-				file.mimetype, file.extension, file.name);
-		});
+	        	var download_url = '/web/content?' + $.param({
+	        		model: 'muk_dms.file',
+	    			filename: file.name,
+	    			filename_field: 'name',
+	    			field: 'content',
+	    			id: file.id,
+	    			download: true
+	            });
+				return PreviewGenerator.createPreview(self, download_url,
+					file.mimetype, file.extension, file.name);
+			});
 	}
 });
 

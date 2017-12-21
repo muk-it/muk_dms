@@ -58,12 +58,29 @@ class Settings(dms_base.DMSModel):
         default=True,
         help="Indicates if files and directories should be automatically locked while system operations take place.")
     
+    show_tree = fields.Boolean(
+        string="Show Structure", 
+        default=True,
+        help="Indicates if directories inside of this settings object should be visible on document tree views.")
+    
     root_directories = fields.One2many(
         'muk_dms.directory', 
         'settings',
          string="Directories",
          copy=False, 
          readonly=True)
+    
+    root_files = fields.One2many(
+        'muk_dms.file', 
+        'settings',
+         string="Files",
+         copy=False, 
+         readonly=True)
+    
+    root_top_directories = fields.One2many(
+        'muk_dms.directory',
+         string="Top Directories",
+         compute='_compute_root_top_directories')
         
     #----------------------------------------------------------
     # Functions
@@ -76,6 +93,15 @@ class Settings(dms_base.DMSModel):
         for directory in self.root_directories:
             directory.notify_change(values)
         self.root_directories.lock_tree(operation=operation)
+    
+    #----------------------------------------------------------
+    # Read, View 
+    #----------------------------------------------------------
+        
+    def _compute_root_top_directories(self):
+        for record in self: 
+            record.root_top_directories = record.root_directories.filtered(
+                lambda r: r.is_root_directory == True)
         
     #----------------------------------------------------------
     # Create, Update

@@ -25,7 +25,7 @@
     "description": """ 
         
     """,
-    "version": '11.0.1.2.0',   
+    "version": '11.0.1.2.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -52,6 +52,10 @@
         "views/res_config_view.xml",
     ],
     "demo": [
+        "demo/dms_user_demo.xml",
+        "demo/dms_settings_demo.xml",
+        "demo/dms_directory_demo.xml",
+        "demo/dms_file_demo.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
