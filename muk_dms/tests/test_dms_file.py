@@ -62,11 +62,16 @@ class FileTestCase(dms_case.DMSTestCase):
         self.assertFalse(file.is_locked_by())
         
     def test_access_file(self):
-        file = self.browse_ref("muk_dms.file_14_demo").sudo()
-        self.assertTrue(file.perm_read)
-        self.assertTrue(file.perm_create)
-        self.assertTrue(file.perm_write)
-        self.assertTrue(file.perm_unlink)
+        admin_file = self.browse_ref("muk_dms.file_14_demo").sudo()
+        self.assertTrue(admin_file.perm_read)
+        self.assertTrue(admin_file.perm_create)
+        self.assertTrue(admin_file.perm_write) 
+        self.assertTrue(admin_file.perm_unlink)
+        nouser_file = self.browse_ref("muk_dms.file_14_demo").sudo('base.user_demo')
+        self.assertFalse(nouser_file.perm_read)
+        self.assertFalse(nouser_file.perm_create)
+        self.assertFalse(nouser_file.perm_write) 
+        self.assertFalse(nouser_file.perm_unlink)
         
     def test_unlink_file(self):
         directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
