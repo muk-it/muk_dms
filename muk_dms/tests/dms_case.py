@@ -39,7 +39,7 @@ class DMSTestCase(common.TransactionCase):
         super(DMSTestCase, self).setUp()
         self.demouser = self.browse_ref("base.user_demo")
         self.dmsuser = self.browse_ref("muk_dms.user_dmsuser_demo")
-        self.dmsmangerr = self.browse_ref("muk_dms.user_dmsmnager_demo")
+        self.dmsmangerr = self.browse_ref("muk_dms.user_dmsmanager_demo")
         
     def tearDown(self):
         super(DMSTestCase, self).tearDown()
