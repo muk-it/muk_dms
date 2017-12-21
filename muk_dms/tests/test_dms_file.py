@@ -61,6 +61,13 @@ class FileTestCase(dms_case.DMSTestCase):
         file.user_unlock()
         self.assertFalse(file.is_locked_by())
         
+    def test_access_file(self):
+        file = self.browse_ref("muk_dms.file_14_demo").sudo()
+        self.assertTrue(file.perm_read)
+        self.assertTrue(file.perm_create)
+        self.assertTrue(file.perm_write)
+        self.assertTrue(file.perm_unlink)
+        
     def test_unlink_file(self):
         directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
         file = self.env['muk_dms.file'].sudo().create({

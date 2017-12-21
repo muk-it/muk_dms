@@ -68,13 +68,31 @@ class DirectoryTestCase(dms_case.DMSTestCase):
         copy_root_directory = sub_directory.copy()
         self.assertTrue(sub_directory.settings.id == copy_root_directory.settings.id)
         self.assertTrue(sub_directory.count_directories == copy_root_directory.count_directories)
-        self.assertTrue(sub_directory.count_files  == copy_root_directory.count_files)
+        self.assertTrue(sub_directory.count_files == copy_root_directory.count_files)
         copy_root_directory.unlink()
         
     def test_compute_thumbnail(self):
         directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
         self.assertTrue(directory.thumbnail)
-        
+    
+    def test_rename_directory(self):
+        settings = self.browse_ref("muk_dms.settings_demo").sudo()
+        root_directory = self.env['muk_dms.directory'].sudo().create({
+            'name': "RootTestDir",
+            'is_root_directory': True,
+            'settings': settings.id})
+        sub_directory01 = self.env['muk_dms.directory'].sudo().create({
+            'name': "SubTestDir01",
+            'is_root_directory': False,
+            'parent_directory': root_directory.id})
+        sub_directory02 = self.env['muk_dms.directory'].sudo().create({
+            'name': "SubTestDir02",
+            'is_root_directory': False,
+            'parent_directory': sub_directory01.id})
+        sub_directory02_path = sub_directory02.path
+        root_directory.write({'name': "RootTestDirNew"})
+        self.assertFalse(sub_directory02_path  == sub_directory02.path)
+    
     def test_unlink_directory(self):
         settings = self.browse_ref("muk_dms.settings_demo").sudo()
         root_directory = self.env['muk_dms.directory'].sudo().create({
