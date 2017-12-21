@@ -33,7 +33,7 @@ _logger = logging.getLogger(__name__)
 class DMSTestCase(common.TransactionCase):
     
     at_install = True
-    post_install = True
+    post_install = False
     
     def setUp(self):
         super(DMSTestCase, self).setUp()
