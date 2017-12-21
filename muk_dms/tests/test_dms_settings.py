@@ -42,8 +42,8 @@ class SettingsTestCase(dms_case.DMSTestCase):
     def tearDown(self):
         super(SettingsTestCase, self).tearDown()
     
-    @unittest.expectedFailure  
     def test_compute_root_top_directories(self):
+        _logger.info(self.user)
         _logger.info(self.browse_ref("muk_dms.settings_demo"))
         
     
