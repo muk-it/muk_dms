@@ -69,6 +69,7 @@ class DirectoryTestCase(dms_case.DMSTestCase):
         self.assertTrue(sub_directory.settings.id == copy_root_directory.settings.id)
         self.assertTrue(sub_directory.count_directories == copy_root_directory.count_directories)
         self.assertTrue(sub_directory.count_files  == copy_root_directory.count_files)
+        copy_root_directory.unlink()
         
     def test_compute_thumbnail(self):
         directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
