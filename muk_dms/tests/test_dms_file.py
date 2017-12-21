@@ -47,7 +47,7 @@ class FileTestCase(dms_case.DMSTestCase):
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
             'directory': directory.id,
-            'content': self.file_base64})
+            'content': self.file_base64()})
         self.assertTrue(file.extension == '.txt')
         
     def test_compute_thumbnail(self):
@@ -59,6 +59,6 @@ class FileTestCase(dms_case.DMSTestCase):
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
             'directory': directory.id,
-            'content': self.file_base64})
+            'content': self.file_base64()})
         file.unlink()
         self.assertFalse(file.exists())
