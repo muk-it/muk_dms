@@ -73,7 +73,7 @@ class DirectoryTestCase(dms_case.DMSTestCase):
         
     def test_compute_thumbnail(self):
         directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
-        self.assertTrue(directory._compute_thumbnail())
+        self.assertTrue(directory.thumbnail)
         
     def test_unlink_directory(self):
         settings = self.browse_ref("muk_dms.settings_demo").sudo()
