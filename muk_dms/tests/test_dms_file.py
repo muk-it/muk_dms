@@ -43,7 +43,7 @@ class FileTestCase(dms_case.DMSTestCase):
         super(FileTestCase, self).tearDown()
     
     def test_create_file(self):
-        directory = self.browse_ref("directory_12_demo").sudo()
+        directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
             'directory': directory.id,
@@ -55,7 +55,7 @@ class FileTestCase(dms_case.DMSTestCase):
         self.assertTrue(file.thumbnail)
         
     def test_unlink_directory(self):
-        directory = self.browse_ref("directory_12_demo").sudo()
+        directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
             'directory': directory.id,
