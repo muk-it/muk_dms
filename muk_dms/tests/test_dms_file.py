@@ -67,7 +67,7 @@ class FileTestCase(dms_case.DMSTestCase):
         self.assertTrue(admin_file.perm_create)
         self.assertTrue(admin_file.perm_write) 
         self.assertTrue(admin_file.perm_unlink)
-        nouser_file = self.browse_ref("muk_dms.file_14_demo").sudo('base.user_demo')
+        nouser_file = self.browse_ref("muk_dms.file_14_demo").sudo(self.demouser.id)
         self.assertFalse(nouser_file.perm_read)
         self.assertFalse(nouser_file.perm_create)
         self.assertFalse(nouser_file.perm_write) 
