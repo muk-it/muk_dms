@@ -54,6 +54,13 @@ class FileTestCase(dms_case.DMSTestCase):
         file = self.browse_ref("muk_dms.file_14_demo").sudo()
         self.assertTrue(file.thumbnail)
         
+    def test_lock_file(self):
+        file = self.browse_ref("muk_dms.file_14_demo").sudo()
+        file.user_lock()
+        self.assertTrue(file.is_locked_by())
+        file.user_unlock()
+        self.assertFalse(file.is_locked_by())
+        
     def test_unlink_file(self):
         directory = self.browse_ref("muk_dms.directory_12_demo").sudo()
         file = self.env['muk_dms.file'].sudo().create({
