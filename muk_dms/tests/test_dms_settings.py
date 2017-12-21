@@ -23,6 +23,7 @@ import os
 import base64
 import logging
 import unittest
+import collections
 
 from odoo import _
 from odoo.tests import common
@@ -34,6 +35,8 @@ from odoo.addons.muk_dms.tests import dms_case
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
+_compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
+
 class SettingsTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
@@ -43,7 +46,8 @@ class SettingsTestCase(dms_case.DMSTestCase):
         super(SettingsTestCase, self).tearDown()
     
     def test_compute_root_top_directories(self):
-        _logger.info(self.user)
-        _logger.info(self.browse_ref("muk_dms.settings_demo"))
-        
+        settings = self.browse_ref("muk_dms.settings_demo").sudo()
+        root_top_directories = settings.root_directories.filtered(
+                lambda r: r.is_root_directory == True)
+        self.assertTrue(compare(root_top_directories, settings.root_top_directories))
     
