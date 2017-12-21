@@ -38,10 +38,10 @@ _logger = logging.getLogger(__name__)
 class DirectoryTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
-        super(SettingsTestCase, self).setUp()
+        super(DirectoryTestCase, self).setUp()
         
     def tearDown(self):
-        super(SettingsTestCase, self).tearDown()
+        super(DirectoryTestCase, self).tearDown()
     
     def test_create_directory(self):
         settings = self.browse_ref("muk_dms.settings_demo").sudo()
