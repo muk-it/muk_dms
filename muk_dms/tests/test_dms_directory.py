@@ -56,3 +56,15 @@ class DirectoryTestCase(dms_case.DMSTestCase):
             'parent_directory': root_directory.id})
         self.assertTrue(sub_directory.settings.id == settings.id)
         self.assertTrue(root_directory.count_directories == 1)
+        
+    def test_copy_root_directory(self):
+        root_directory = self.browse_ref("muk_dms.directory_01_demo").sudo()
+        copy_root_directory = root_directory.copy()
+        self.assertTrue(root_directory.settings.id == copy_root_directory.settings.id)
+        self.assertTrue(root_directory.count_directories == copy_root_directory.count_directories)
+        self.assertTrue(root_directory.count_files  == copy_root_directory.count_files )
+        sub_directory = self.browse_ref("muk_dms.directory_03_demo").sudo()
+        copy_root_directory = sub_directory.copy()
+        self.assertTrue(sub_directory.settings.id == copy_root_directory.settings.id)
+        self.assertTrue(sub_directory.count_directories == copy_root_directory.count_directories)
+        self.assertTrue(sub_directory.count_files  == copy_root_directory.count_files )
