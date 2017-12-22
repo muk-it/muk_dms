@@ -111,31 +111,31 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
     def _apply_ir_rules(self, query, mode='read'):
         super(DMSAdvancedAccessModel, self)._apply_ir_rules(query, mode)
     
-    def _before_browse(self, arg):
-        arg = super(DMSAdvancedAccessModel, self)._before_browse(arg)
-        if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
-           return arg
-        base, model = self._name.split(".")
-        sql = '''
-            SELECT r.aid
-            FROM muk_groups_complete_%s_rel r
-            JOIN muk_dms_access_groups g ON r.gid = g.id
-            JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
-            WHERE u.uid = %s AND g.perm_read = true
-        ''' % (model, self.env.user.id)
-        self.env.cr.execute(sql)
-        fetch = self.env.cr.fetchall()
-        if len(fetch) > 0 and arg:
-            access_ids = list(map(lambda x: x[0], fetch)) 
-            if isinstance(arg, int):
-                arg = [arg]
-            elif isinstance(arg, (set, OrderedSet, LastOrderedSet)):
-                _logger.info(arg, "Set")
-            access_arg = (set(arg) & set(access_ids))
-            _logger.info(arg, access_arg)
-            return list(access_arg)
-        _logger.info(arg, "NIX")
-        return []
+#     def _before_browse(self, arg):
+#         arg = super(DMSAdvancedAccessModel, self)._before_browse(arg)
+#         if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
+#            return arg
+#         base, model = self._name.split(".")
+#         sql = '''
+#             SELECT r.aid
+#             FROM muk_groups_complete_%s_rel r
+#             JOIN muk_dms_access_groups g ON r.gid = g.id
+#             JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
+#             WHERE u.uid = %s AND g.perm_read = true
+#         ''' % (model, self.env.user.id)
+#         self.env.cr.execute(sql)
+#         fetch = self.env.cr.fetchall()
+#         if len(fetch) > 0 and arg:
+#             access_ids = list(map(lambda x: x[0], fetch)) 
+#             if isinstance(arg, int):
+#                 arg = [arg]
+#             elif isinstance(arg, (set, OrderedSet, LastOrderedSet)):
+#                 _logger.info(arg, "Set")
+#             access_arg = (set(arg) & set(access_ids))
+#             _logger.info(arg, access_arg)
+#             return list(access_arg)
+#         _logger.info(arg, "NIX")
+#         return []
         
     def _after_read(self, result):
         result = super(DMSAdvancedAccessModel, self)._after_read(result)
