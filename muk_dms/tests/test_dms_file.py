@@ -27,8 +27,6 @@ import unittest
 from odoo import _
 from odoo.tests import common
 
-from odoo.tests import common
-
 from odoo.addons.muk_dms.tests import dms_case
 
 _path = os.path.dirname(os.path.dirname(__file__))
