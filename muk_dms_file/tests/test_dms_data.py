@@ -67,7 +67,7 @@ class DataTestCase(dms_case.DMSTestCase):
             'directory': self.root_directory.id,
             'content': self.file_base64()})
         path = file.path
-        path.directory = self.sub_directory
+        file.directory = self.sub_directory
         self.assertFalse(file.path == path)
         
     def test_update_checksum(self):
