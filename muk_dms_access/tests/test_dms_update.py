@@ -55,4 +55,8 @@ class DataTestCase(dms_case.DMSTestCase):
             'user_id': self.dmsuser.id})
         self.group.departments |= department
         self.group.jobs |= job
+        self.assertTrue(self.group.count_users >= 1)
+        employee.unlink()
+        job.unlink()
+        department.unlink()
     
