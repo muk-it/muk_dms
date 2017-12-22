@@ -128,3 +128,13 @@ class DataTestCase(dms_case.DMSTestCase):
         self.assertTrue(directory05.perm_write) 
         self.assertTrue(directory05.perm_unlink)
         self.assertFalse(directory05.perm_access)
+        
+    def test_access_search(self):
+        user_files = self.env['muk_dms.file'].sudo(self.dmsuser.id)
+        user_directory = self.env['muk_dms.directory'].sudo(self.dmsuser.id)
+        manager_directory = self.env['muk_dms.directory'].sudo(self.dmsmanager.id)
+        self.assertTrue(user_directory.search([]))
+        self.assertTrue(manager_directory.search([]))
+        self.assertTrue(manager_directory.search([['name', '=', 'Media']]))
+        for file in user_files.search([]):
+            self.assertTrue(file.perm_read)
