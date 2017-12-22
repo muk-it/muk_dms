@@ -36,6 +36,11 @@ class DataTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
         super(DataTestCase, self).setUp()
+        self.directory01 = self.browse_ref("muk_dms_access.directory_access_01_demo")
+        self.directory02 = self.browse_ref("muk_dms_access.directory_access_02_demo")
+        self.directory03 = self.browse_ref("muk_dms_access.directory_access_03_demo")
+        self.directory04 = self.browse_ref("muk_dms_access.directory_access_04_demo")
+        self.directory05 = self.browse_ref("muk_dms_access.directory_access_05_demo")
         
     def tearDown(self):
         super(DataTestCase, self).tearDown()
@@ -50,3 +55,39 @@ class DataTestCase(dms_case.DMSTestCase):
         self.assertTrue(group03.count_users == 2)
         self.assertTrue(group04.count_users == 2)
     
+    def test_access_rights_user(self):
+        directory01 = self.directory01.sudo(self.demouser.id)
+        directory02 = self.directory02.sudo(self.demouser.id)
+        directory03 = self.directory03.sudo(self.demouser.id)
+        directory04 = self.directory04.sudo(self.demouser.id)
+        directory05 = self.directory05.sudo(self.demouser.id)
+        # directory01
+        self.assertFalse(directory01.perm_read)
+        self.assertFalse(directory01.perm_create)
+        self.assertFalse(directory01.perm_write) 
+        self.assertFalse(directory01.perm_unlink)
+        self.assertFalse(directory01.perm_access)
+        # directory02
+        self.assertFalse(directory02.perm_read)
+        self.assertFalse(directory02.perm_create)
+        self.assertFalse(directory02.perm_write) 
+        self.assertFalse(directory02.perm_unlink)
+        self.assertFalse(directory02.perm_access)
+        # directory03
+        self.assertTrue(directory03.perm_read)
+        self.assertFalse(directory03.perm_create)
+        self.assertFalse(directory03.perm_write) 
+        self.assertFalse(directory03.perm_unlink)
+        self.assertFalse(directory03.perm_access)
+        # directory04
+        self.assertTrue(directory03.perm_read)
+        self.assertFalse(directory03.perm_create)
+        self.assertTrue(directory03.perm_write) 
+        self.assertFalse(directory03.perm_unlink)
+        self.assertFalse(directory03.perm_access)
+        # directory05
+        self.assertTrue(directory03.perm_read)
+        self.assertTrue(directory03.perm_create)
+        self.assertTrue(directory03.perm_write) 
+        self.assertTrue(directory03.perm_unlink)
+        self.assertFalse(directory03.perm_access)
