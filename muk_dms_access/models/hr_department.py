@@ -57,7 +57,7 @@ class DocumentDepartment(models.Model):
     
     @api.multi
     def unlink(self):
-        groups = record.env['muk_dms_access.groups']
+        groups = self.env['muk_dms_access.groups']
         for record in self:
             groups |= record.groups
         result = super(DocumentDepartment, self).unlink()
