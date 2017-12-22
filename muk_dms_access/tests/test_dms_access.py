@@ -35,7 +35,7 @@ _logger = logging.getLogger(__name__)
 class AccessTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
-        super(DataTestCase, self).setUp()
+        super(AccessTestCase, self).setUp()
         self.directory01 = self.browse_ref("muk_dms_access.directory_access_01_demo")
         self.directory02 = self.browse_ref("muk_dms_access.directory_access_02_demo")
         self.directory03 = self.browse_ref("muk_dms_access.directory_access_03_demo")
@@ -43,7 +43,7 @@ class AccessTestCase(dms_case.DMSTestCase):
         self.directory05 = self.browse_ref("muk_dms_access.directory_access_05_demo")
         
     def tearDown(self):
-        super(DataTestCase, self).tearDown()
+        super(AccessTestCase, self).tearDown()
     
     def test_access_groups(self):
         group01 = self.browse_ref("muk_dms_access.access_group_01_demo").sudo()
