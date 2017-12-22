@@ -61,4 +61,12 @@ class DataTestCase(dms_case.DMSTestCase):
         employee.unlink()
         job.unlink()
         department.unlink()
+        
+    def test_group_update(self):
+        group = self.env['res.groups'].sudo().create({
+            'name': "TestGroup"})
+        self.group.groups |= group
+        group.users |= self.dmsuser
+        self.assertTrue(self.group.count_users >= 1)
+        group.unlink()
     

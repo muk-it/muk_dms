@@ -180,7 +180,7 @@ class DocumentGroups(dms_base.DMSModel):
             employees |= record.jobs.mapped('employee_ids')
             for employee in employees:
                 users += employee.user_id
-            users |= record.groups.users
+            users |= record.groups.mapped('users')
             users |= record.additional_users
             return users
         if write:
