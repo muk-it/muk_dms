@@ -62,8 +62,4 @@ class SettingsTestCase(dms_case.DMSTestCase):
             'save_type': "database",
             'base_path': None})
         self.assertTrue(self.file.content)
-        self.settings.write({
-            'save_type': "file",
-            'base_path': os.path.join(_path, 'tests')})
-        self.assertTrue(self.file.content)
         
