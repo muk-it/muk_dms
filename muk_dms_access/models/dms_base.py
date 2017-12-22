@@ -151,7 +151,7 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
         if len(fetch) > 0:
             access_result = self.env[self._name]
             access_ids = list(map(lambda x: x[0], fetch)) 
-            if isinstance(result, (int, long)):
+            if isinstance(result, int):
                 if result in access_ids:
                     return result
             else:

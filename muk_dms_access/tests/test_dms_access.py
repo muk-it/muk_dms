@@ -74,7 +74,7 @@ class DataTestCase(dms_case.DMSTestCase):
         self.assertFalse(directory02.perm_unlink)
         self.assertFalse(directory02.perm_access)
         # directory03
-        self.assertTrue(directory03.perm_read)
+        self.assertFalse(directory03.perm_read)
         self.assertFalse(directory03.perm_create)
         self.assertFalse(directory03.perm_write) 
         self.assertFalse(directory03.perm_unlink)
