@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+	
+	<record id="department_dmshr_demo" model="hr.department">
+    	<field name="name">Documents Management</field>
+    </record>
+        
+    <record id="job_dmshr_demo" model="hr.job">
+        <field name="name">Documents Officer</field>
+        <field name="department_id" ref="muk_dms_access.department_dmshr_demo"/>
+        <field name="description">Documents Job</field>
+    </record>
+    
+    <record id="employee_dmshr_demo" model="hr.employee">
+        <field name="name">Documents Manager</field>
+        <field name="user_id" ref="muk_dms.user_dmsmanager_demo"/>
+        <field name="department_id" ref="muk_dms_access.department_dmshr_demo"/>
+        <field name="job_id" ref="muk_dms_access.job_dmshr_demo"/>
+        <field name="work_location">Building 1, Second Floor</field>
+        <field name="work_phone">+3281813700</field>
+    </record>
+       
+	</data>
+</odoo>

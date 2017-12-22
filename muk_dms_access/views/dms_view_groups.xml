@@ -134,6 +134,19 @@
 							</tree>
 						</field>
 					</page>
+					<page string="Child Groups">
+						<field name="child_groups">
+							<tree string="Groups"> 
+								<field name="name" />
+								<field name="perm_read" />
+								<field name="perm_create" />
+								<field name="perm_write" />
+								<field name="perm_unlink" />
+								<field name="perm_access" />
+								<field name="count_users" />
+							</tree>
+						</field>
+					</page>
 				</notebook>
 			</sheet>
 		</form>

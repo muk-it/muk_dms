@@ -47,9 +47,19 @@
         'views/dms_view_directory.xml',
         'views/dms_view_file.xml',
     ],
+    "demo": [
+        "demo/dms_hr_demo.xml",
+        "demo/dms_access_groups_demo.xml",
+        "demo/dms_settings_demo.xml",
+        "demo/dms_directory_demo.xml",
+        "demo/dms_file_demo.xml",
+    ],
+    "qweb": [
+        "static/src/xml/*.xml",
+    ],
     'images': [
         'static/description/banner.png'
     ],
-    "installable": True,
     "post_init_hook": '_auto_default_group',
+    "installable": True,
 }

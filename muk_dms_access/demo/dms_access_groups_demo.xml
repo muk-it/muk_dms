@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+	
+	<record id="access_group_01_demo" model="muk_dms_access.groups">
+	    <field name="name">Base Manager Group (Read)</field>
+	    <field name="perm_read" eval="True" />
+	    <field name="departments" eval="[(6, 0, [ref('muk_dms_access.department_dmshr_demo')])]" />
+	</record>
+	
+	<record id="access_group_02_demo" model="muk_dms_access.groups">
+	    <field name="name">Manager Group (All Rights)</field>
+	    <field name="perm_read" eval="True" />
+	    <field name="perm_create" eval="True" />
+	    <field name="perm_write" eval="True" />
+	    <field name="perm_unlink" eval="True" />
+	    <field name="perm_access" eval="True" />
+	    <field name="parent_group" ref="muk_dms_access.access_group_01_demo" />
+	</record>
+	
+	<record id="access_group_03_demo" model="muk_dms_access.groups">
+	    <field name="name">User Group (Read/Write)</field>
+	    <field name="perm_read" eval="True" />
+	    <field name="perm_write" eval="True" />
+	    <field name="parent_group" ref="muk_dms_access.access_group_01_demo" />
+	    <field name="additional_users" eval="[(6, 0, [ref('muk_dms.user_dmsuser_demo')])]" />
+	</record>
+	
+	<record id="access_group_04_demo" model="muk_dms_access.groups">
+	    <field name="name">User Group (R/C/W/U Rights)</field>
+	    <field name="perm_read" eval="True" />
+	    <field name="perm_create" eval="True" />
+	    <field name="perm_write" eval="True" />
+	    <field name="perm_unlink" eval="True" />
+	    <field name="parent_group" ref="muk_dms_access.access_group_03_demo" />
+	</record>
+        
+	</data>
+</odoo>

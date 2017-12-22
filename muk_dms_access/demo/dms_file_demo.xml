@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+	
+	<record id="file_access_01_demo" model="muk_dms.file">	    
+		<field name="name">Sample.pdf</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_02_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/sample.pdf"/>
+	</record>
+	
+	<record id="file_access_02_demo" model="muk_dms.file">	    
+		<field name="name">Logo.png</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_04_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image01.png"/>
+	</record>
+	
+	<record id="file_access_03_demo" model="muk_dms.file">	    
+		<field name="name">Effect_01.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_05_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image02.jpg"/>
+	</record>
+	
+	<record id="file_access_04_demo" model="muk_dms.file">	    
+		<field name="name">Effect_02.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_05_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image03.jpg"/>
+	</record>
+	
+	<record id="file_access_05_demo" model="muk_dms.file">	    
+		<field name="name">Effect_03.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_05_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image04.jpg"/>
+	</record>
+
+	</data>
+</odoo>
