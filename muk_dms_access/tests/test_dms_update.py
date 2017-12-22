@@ -53,6 +53,6 @@ class DataTestCase(dms_case.DMSTestCase):
             'department_id': department.id,
             'job_id': job.id,
             'user_id': self.dmsuser.id})
-        self.group.departmentss |= department
+        self.group.departments |= department
         self.group.jobs |= job
     
