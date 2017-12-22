@@ -28,6 +28,7 @@ import logging
 from odoo import _
 from odoo import SUPERUSER_ID
 from odoo import models, api, fields
+from odoo.tools.misc import OrderedSet, LastOrderedSet
 from odoo.exceptions import ValidationError, AccessError, UserError
 
 from odoo.addons.muk_dms.models import dms_base
@@ -111,7 +112,6 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
         super(DMSAdvancedAccessModel, self)._apply_ir_rules(query, mode)
     
     def _before_browse(self, arg):
-        _logger.info(arg)
         arg = super(DMSAdvancedAccessModel, self)._before_browse(arg)
         if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
            return arg
@@ -128,9 +128,13 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
         if len(fetch) > 0 and arg:
             access_ids = list(map(lambda x: x[0], fetch)) 
             if isinstance(arg, int):
-                arg = [arg] 
+                arg = [arg]
+            elif isinstance(arg, (set, OrderedSet, LastOrderedSet)):
+                _logger.info(arg, "Set")
             access_arg = (set(arg) & set(access_ids))
+            _logger.info(arg, access_arg)
             return list(access_arg)
+        _logger.info(arg, "NIX")
         return []
         
     def _after_read(self, result):
