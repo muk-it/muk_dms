@@ -159,7 +159,7 @@
 				</group>
 				<notebook>
  					<page string="Files">
-						<field name="files">
+						<field name="files" context="{'default_directory': active_id}" >
 							<tree string="Files">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
@@ -168,7 +168,7 @@
 						</field>
 					</page>
 					<page string="Subdirectories">
-						<field name="child_directories">
+						<field name="child_directories" context="{'default_parent_directory': active_id}" >
 							<tree string="Subdirectories">
 								<field name="name" />
 								<field name="size" widget="dms_size" />

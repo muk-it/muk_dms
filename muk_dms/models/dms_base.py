@@ -107,6 +107,18 @@ class DMSBaseModel(models.BaseModel):
     # Read
     #----------------------------------------------------------
     
+    def browse(self, arg=None, prefetch=None):
+        arg = self._before_browse(arg)
+        result = super(DMSBaseModel, self).browse(arg, prefetch)
+        result = self._after_browse(result)
+        return result
+    
+    def _before_browse(self, arg):
+        return arg
+
+    def _after_browse(self, result):
+        return result
+    
     @api.multi
     def read(self, fields=None, load='_classic_read'):
         fields = self._before_read(fields)
