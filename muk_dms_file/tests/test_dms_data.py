@@ -36,11 +36,11 @@ class DataTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
         super(DataTestCase, self).setUp()
-        _logger.info(os.path.join(_path, 'test'))
+        _logger.info(os.path.join(_path, 'tests'))
         self.settings = self.env['muk_dms.settings'].sudo().create({
             'name': "SystemDataTestSettings",
             'save_type': "file",
-            'base_path': os.path.join(_path, 'test')})
+            'base_path': os.path.join(_path, 'tests')})
         self.root_directory = self.env['muk_dms.directory'].sudo().create({
             'name': "RootTestDir",
             'is_root_directory': True,
