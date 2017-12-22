@@ -32,10 +32,10 @@ from odoo.addons.muk_dms.tests import dms_case
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-class DataTestCase(dms_case.DMSTestCase):
+class SettingsTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
-        super(DataTestCase, self).setUp()
+        super(SettingsTestCase, self).setUp()
         self.settings = self.env['muk_dms.settings'].sudo().create({
             'name': "SystemDataTestSettings",
             'save_type': "file",
@@ -50,10 +50,10 @@ class DataTestCase(dms_case.DMSTestCase):
             'parent_directory': self.root_directory.id})
         
     def tearDown(self):
-        super(DataTestCase, self).tearDown()
+        super(SettingsTestCase, self).tearDown()
         self.root_directory.unlink()
     
-    def test_create_data(self):
+    def test_change_save_type(self):
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
             'directory': self.root_directory.id,
@@ -61,27 +61,3 @@ class DataTestCase(dms_case.DMSTestCase):
         self.assertTrue(file.extension == '.txt')
         self.assertTrue(file.content)
         
-    def test_move_data(self):
-        file = self.env['muk_dms.file'].sudo().create({
-            'name': "file.txt",
-            'directory': self.root_directory.id,
-            'content': self.file_base64()})
-        path = file.path
-        path.directory = self.sub_directory
-        self.assertFalse(file.path == path)
-        
-    def test_update_checksum(self):
-        file = self.env['muk_dms.file'].sudo().create({
-            'name': "file.txt",
-            'directory': self.root_directory.id,
-            'content': self.file_base64()})
-        file.reference.update_checksum()
-        self.assertTrue(file.reference.checksum)
-        
-    def test_unlink_data(self):
-        file = self.env['muk_dms.file'].sudo().create({
-            'name': "file.txt",
-            'directory': self.root_directory.id,
-            'content': self.file_base64()})
-        file.unlink()
-        self.assertFalse(file.exists())
