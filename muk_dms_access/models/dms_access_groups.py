@@ -175,7 +175,7 @@ class DocumentGroups(dms_base.DMSModel):
             if record.parent_group:
                 users |= record.parent_group.users
             employees = record.env['hr.employee']
-            employees += record.departments.manager_id
+            employees |= record.departments.manager_id
             employees |= record.departments.member_ids
             employees |= record.jobs.employee_ids
             for employee in employees:
