@@ -48,6 +48,7 @@ class DataTestCase(dms_case.DMSTestCase):
             'name': "SubTestDir",
             'is_root_directory': False,
             'parent_directory': self.root_directory.id})
+        _logger.info(os.path.join(_path, 'static/demo/Sample.pdf'))
         
     def tearDown(self):
         super(DataTestCase, self).tearDown()
