@@ -48,16 +48,22 @@ class SettingsTestCase(dms_case.DMSTestCase):
             'name': "SubTestDir",
             'is_root_directory': False,
             'parent_directory': self.root_directory.id})
+        self.file = self.env['muk_dms.file'].sudo().create({
+            'name': "file.txt",
+            'directory': self.root_directory.id,
+            'content': self.file_base64()})
         
     def tearDown(self):
         super(SettingsTestCase, self).tearDown()
         self.root_directory.unlink()
     
     def test_change_save_type(self):
-        file = self.env['muk_dms.file'].sudo().create({
-            'name': "file.txt",
-            'directory': self.root_directory.id,
-            'content': self.file_base64()})
-        self.assertTrue(file.extension == '.txt')
-        self.assertTrue(file.content)
+        self.settings.write({
+            'save_type': "database",
+            'base_path': None})
+        self.assertTrue(self.settings == "database")
+        self.settings.write({
+            'save_type': "file",
+            'base_path': os.path.join(_path, 'tests')})
+        self.assertTrue(self.settings == "file")
         
