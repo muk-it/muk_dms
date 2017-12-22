@@ -20,3 +20,4 @@
 ###################################################################################
 
 from . import test_dms_access
+from . import test_dms_update
