@@ -135,6 +135,6 @@ class DataTestCase(dms_case.DMSTestCase):
         manager_directory = self.env['muk_dms.directory'].sudo(self.dmsmanager.id)
         self.assertTrue(user_directory.search([]))
         self.assertTrue(manager_directory.search([]))
-        self.assertTrue(manager_directory.search([['name', '=', 'Media']]))
+        self.assertTrue(manager_directory.name_search(name='Media'))
         for file in user_files.search([]):
             self.assertTrue(file.perm_read)
