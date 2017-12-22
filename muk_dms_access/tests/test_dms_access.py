@@ -45,8 +45,8 @@ class DataTestCase(dms_case.DMSTestCase):
         group02 = self.browse_ref("muk_dms_access.access_group_02_demo").sudo()
         group03 = self.browse_ref("muk_dms_access.access_group_03_demo").sudo()
         group04 = self.browse_ref("muk_dms_access.access_group_04_demo").sudo()
-        self.assertTrue(len(group01) == 1)
-        self.assertTrue(len(group02) == 1)
-        self.assertTrue(len(group03) == 2)
-        self.assertTrue(len(group04) == 2)
+        self.assertTrue(group01.count_users == 1)
+        self.assertTrue(group02.count_users == 1)
+        self.assertTrue(group03.count_users == 2)
+        self.assertTrue(group04.count_users == 2)
     
