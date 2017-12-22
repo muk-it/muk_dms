@@ -32,7 +32,7 @@ from odoo.addons.muk_dms.tests import dms_case
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-class DataTestCase(dms_case.DMSTestCase):
+class AccessTestCase(dms_case.DMSTestCase):
     
     def setUp(self):
         super(DataTestCase, self).setUp()

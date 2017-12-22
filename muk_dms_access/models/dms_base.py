@@ -111,6 +111,7 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
         super(DMSAdvancedAccessModel, self)._apply_ir_rules(query, mode)
     
     def _before_browse(self, arg):
+        _logger(arg)
         arg = super(DMSAdvancedAccessModel, self)._before_browse(arg)
         if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
            return arg
