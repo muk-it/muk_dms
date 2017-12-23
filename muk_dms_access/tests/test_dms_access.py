@@ -55,42 +55,43 @@ class AccessTestCase(dms_case.DMSTestCase):
         self.assertTrue(group03.count_users == 2)
         self.assertTrue(group04.count_users == 2)
     
-#     def test_access_rights_user(self):
-#         directory01 = self.directory01.sudo(self.dmsuser.id)
-#         directory02 = self.directory02.sudo(self.dmsuser.id)
-#         directory03 = self.directory03.sudo(self.dmsuser.id)
-#         directory04 = self.directory04.sudo(self.dmsuser.id)
-#         directory05 = self.directory05.sudo(self.dmsuser.id)
-#         # directory01
-#         self.assertFalse(directory01.perm_read)
-#         self.assertFalse(directory01.perm_create)
-#         self.assertFalse(directory01.perm_write) 
-#         self.assertFalse(directory01.perm_unlink)
-#         self.assertFalse(directory01.perm_access)
-#         # directory02
-#         self.assertFalse(directory02.perm_read)
-#         self.assertFalse(directory02.perm_create)
-#         self.assertFalse(directory02.perm_write) 
-#         self.assertFalse(directory02.perm_unlink)
-#         self.assertFalse(directory02.perm_access)
-#         # directory03
-#         self.assertFalse(directory03.perm_read)
-#         self.assertFalse(directory03.perm_create)
-#         self.assertFalse(directory03.perm_write) 
-#         self.assertFalse(directory03.perm_unlink)
-#         self.assertFalse(directory03.perm_access)
-#         # directory04
-#         self.assertTrue(directory04.perm_read)
-#         self.assertFalse(directory04.perm_create)
-#         self.assertTrue(directory04.perm_write) 
-#         self.assertFalse(directory04.perm_unlink)
-#         self.assertFalse(directory04.perm_access)
-#         # directory05
-#         self.assertTrue(directory05.perm_read)
-#         self.assertTrue(directory05.perm_create)
-#         self.assertTrue(directory05.perm_write) 
-#         self.assertTrue(directory05.perm_unlink)
-#         self.assertFalse(directory05.perm_access)
+    def test_access_rights_user(self):
+        directory01 = self.directory01.sudo(self.dmsuser.id)
+        directory02 = self.directory02.sudo(self.dmsuser.id)
+        directory03 = self.directory03.sudo(self.dmsuser.id)
+        directory04 = self.directory04.sudo(self.dmsuser.id)
+        directory05 = self.directory05.sudo(self.dmsuser.id)
+        # directory01
+        _logger.info(directory01)
+        self.assertFalse(directory01.perm_read)
+        self.assertFalse(directory01.perm_create)
+        self.assertFalse(directory01.perm_write) 
+        self.assertFalse(directory01.perm_unlink)
+        self.assertFalse(directory01.perm_access)
+        # directory02
+        self.assertFalse(directory02.perm_read)
+        self.assertFalse(directory02.perm_create)
+        self.assertFalse(directory02.perm_write) 
+        self.assertFalse(directory02.perm_unlink)
+        self.assertFalse(directory02.perm_access)
+        # directory03
+        self.assertFalse(directory03.perm_read)
+        self.assertFalse(directory03.perm_create)
+        self.assertFalse(directory03.perm_write) 
+        self.assertFalse(directory03.perm_unlink)
+        self.assertFalse(directory03.perm_access)
+        # directory04
+        self.assertTrue(directory04.perm_read)
+        self.assertFalse(directory04.perm_create)
+        self.assertTrue(directory04.perm_write) 
+        self.assertFalse(directory04.perm_unlink)
+        self.assertFalse(directory04.perm_access)
+        # directory05
+        self.assertTrue(directory05.perm_read)
+        self.assertTrue(directory05.perm_create)
+        self.assertTrue(directory05.perm_write) 
+        self.assertTrue(directory05.perm_unlink)
+        self.assertFalse(directory05.perm_access)
         
     def test_access_rights_manger(self):
         directory01 = self.directory01.sudo(self.dmsmanager.id)
