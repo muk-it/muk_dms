@@ -62,7 +62,7 @@ class AccessTestCase(dms_case.DMSTestCase):
         directory04 = self.directory04.sudo(self.dmsuser.id)
         directory05 = self.directory05.sudo(self.dmsuser.id)
         # directory01
-        _logger.info(directory01)
+        _logger.info(directory01.check_access('read'))
         self.assertFalse(directory01.perm_read)
         self.assertFalse(directory01.perm_create)
         self.assertFalse(directory01.perm_write) 
