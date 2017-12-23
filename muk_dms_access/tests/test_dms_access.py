@@ -62,24 +62,11 @@ class AccessTestCase(dms_case.DMSTestCase):
         directory04 = self.directory04.sudo(self.dmsuser.id)
         directory05 = self.directory05.sudo(self.dmsuser.id)
         # directory01
-        _logger.info(directory01.check_access('read'))
-        self.assertFalse(directory01.perm_read)
-        self.assertFalse(directory01.perm_create)
-        self.assertFalse(directory01.perm_write) 
-        self.assertFalse(directory01.perm_unlink)
-        self.assertFalse(directory01.perm_access)
+        self.assertFalse(directory01.check_access('read'))
         # directory02
-        self.assertFalse(directory02.perm_read)
-        self.assertFalse(directory02.perm_create)
-        self.assertFalse(directory02.perm_write) 
-        self.assertFalse(directory02.perm_unlink)
-        self.assertFalse(directory02.perm_access)
+        self.assertFalse(directory02.check_access('read'))
         # directory03
-        self.assertFalse(directory03.perm_read)
-        self.assertFalse(directory03.perm_create)
-        self.assertFalse(directory03.perm_write) 
-        self.assertFalse(directory03.perm_unlink)
-        self.assertFalse(directory03.perm_access)
+        self.assertFalse(directory03.check_access('read'))
         # directory04
         self.assertTrue(directory04.perm_read)
         self.assertFalse(directory04.perm_create)
