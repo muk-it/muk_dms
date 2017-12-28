@@ -344,7 +344,7 @@ class File(dms_base.DMSModel):
         default = dict(default or [])
         names = []
         if 'directory' in default:
-            directory = self.env['muk_dms.directory'].sudo().browse(default['parent_directory'])
+            directory = self.env['muk_dms.directory'].sudo().browse(default['directory'])
             names = directory.child_directories.mapped('name')
         else:
             names = self.sudo().directory.files.mapped('name')
