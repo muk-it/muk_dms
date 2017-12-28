@@ -28,6 +28,7 @@
 			<field name="save_type" />
 			<field name="index_files" />
 			<field name="system_locks" />
+			<field name="show_tree" />
 		</tree>
 	</field>
 </record>
@@ -58,7 +59,7 @@
 				</group>
 				<notebook>
 					<page string="Top Directories">
-						<field name="root_top_directories">
+						<field name="top_directories">
 							<tree string="Directories">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
@@ -67,8 +68,18 @@
 							</tree>
 						</field>
 					</page>
+					<page string="Top Files">
+						<field name="top_files">
+							<tree string="Files">
+								<field name="name" />
+								<field name="size" widget="dms_size" />
+								<field name="path" widget="dms_path" />
+								<field name="write_date" readonly="1" />
+							</tree>
+						</field>
+					</page>
 					<page string="All Directories">
-						<field name="root_directories">
+						<field name="settings_directories">
 							<tree string="Directories">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
@@ -76,13 +87,23 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Files">
-						<field name="root_files">
+					<page string="All Files">
+						<field name="settings_files">
 							<tree string="Files">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
 								<field name="path" widget="dms_path" />
 								<field name="write_date" readonly="1" />
+							</tree>
+						</field>
+					</page>
+					<page string="Root Directories" groups="muk_dms.group_dms_admin">
+						<field name="root_directories">
+							<tree string="Root Directories">
+								<field name="name" />
+								<field name="size" widget="dms_size" />
+								<field name="count_directories" />
+								<field name="count_files" />
 							</tree>
 						</field>
 					</page>

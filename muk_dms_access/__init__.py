@@ -41,5 +41,5 @@ def _auto_default_group(cr, registry):
         })
         access_group.additional_users = group.users
         for setting in settings:
-            for root in setting.root_directories.filtered(lambda r: r.is_root_directory == True):
+            for root in setting.sudo().root_directories:
                 root.groups = access_group

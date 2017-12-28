@@ -157,6 +157,11 @@ class File(dms_base.DMSModel):
             self.write(values);     
             if "settings" in fields:
                 self.notify_change({'save_type': self.settings.save_type})
+    
+    @api.model
+    def max_upload_size(self):
+        config_parameter = self.env['ir.config_parameter'].sudo()
+        return config_parameter.get_param('muk_dms.max_upload_size', default=25)
             
     #----------------------------------------------------------
     # Read, View 
@@ -246,7 +251,18 @@ class File(dms_base.DMSModel):
                     path = os.path.join(_img_path, "file_unkown.png")
                 with open(path, "rb") as image_file:
                     record.thumbnail = base64.b64encode(image_file.read())
-            
+    
+    @api.one
+    def _compute_perm_create(self):
+        try:
+            result = super(File, self)._compute_perm_create()
+            if self.directory:
+                self.perm_create = result and self.directory.check_access('create')
+            else:
+                self.perm_create = result
+        except AccessError:
+             self.perm_create = False    
+        
     #----------------------------------------------------------
     # Create, Update, Delete
     #----------------------------------------------------------
@@ -255,15 +271,15 @@ class File(dms_base.DMSModel):
     def _check_name(self):
         if not self.check_name(self.name):
             raise ValidationError("The file name is invalid.")
-        childs = self.directory.files.mapped(lambda rec: [rec.id, rec.name])
+        childs = self.sudo().directory.files.mapped(lambda rec: [rec.id, rec.name])
         duplicates = [rec for rec in childs if rec[1] == self.name and rec[0] != self.id]
         if duplicates:
             raise ValidationError(_("A file with the same name already exists."))
         
     @api.constrains('name')
     def _check_extension(self):
-        config_parameter = self.env['ir.config_parameter']
-        forbidden_extensions = config_parameter.sudo().get_param('muk_dms.forbidden_extensions', default="")
+        config_parameter = self.env['ir.config_parameter'].sudo()
+        forbidden_extensions = config_parameter.get_param('muk_dms.forbidden_extensions', default="")
         forbidden_extensions = [x.strip() for x in forbidden_extensions.split(',')]
         file_extension = self._compute_extension(write=False)['extension']
         if file_extension and file_extension in forbidden_extensions:
@@ -271,8 +287,8 @@ class File(dms_base.DMSModel):
         
     @api.constrains('content')
     def _check_size(self):
-        config_parameter = self.env['ir.config_parameter']
-        max_upload_size = config_parameter.sudo().get_param('muk_dms.max_upload_size', default=25)
+        config_parameter = self.env['ir.config_parameter'].sudo()
+        max_upload_size = config_parameter.get_param('muk_dms.max_upload_size', default=25)
         try:
             max_upload_size = int(max_upload_size)
         except ValueError:
@@ -326,7 +342,12 @@ class File(dms_base.DMSModel):
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
-        names = self.directory.files.mapped('name')
+        names = []
+        if 'directory' in default:
+            directory = self.env['muk_dms.directory'].sudo().browse(default['parent_directory'])
+            names = directory.child_directories.mapped('name')
+        else:
+            names = self.sudo().directory.files.mapped('name')
         default.update({'name': self.unique_name(self.name, names, self.extension)})
         vals = self.copy_data(default)[0]
         if 'reference' in vals:

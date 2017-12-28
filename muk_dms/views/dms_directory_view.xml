@@ -19,6 +19,18 @@
 
 <odoo>
 
+<record id="search_dms_directory" model="ir.ui.view">
+	<field name="name">muk_dms_directory.search</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="name" />
+			<field name="path" />
+			<filter string="Root Directories" domain="[('is_root_directory', '=', True)]"/>
+		</search>
+	</field>
+</record>
+
 <record id="action_dms_directory_files" model="ir.actions.act_window">
     <field name="name">Document Files</field>
     <field name="view_type">form</field>
@@ -149,17 +161,19 @@
 						<field name="is_root_directory" />
 					</group>
 					<group>
-						<field name="settings" 
+						<field name="settings" options="{'quick_create': False}"
 							attrs="{'readonly':[('is_root_directory','=',False)],
 									'required':[('is_root_directory','=',True)]}"/>
-						<field name="parent_directory"
+						<field name="parent_directory" widget="dms_directory"
+							options="{'quick_create': False}"
 							attrs="{'invisible':[('is_root_directory','=',True)],
 									'required':[('is_root_directory','=',False)]}"/>
 					</group>
 				</group>
 				<notebook>
  					<page string="Files">
-						<field name="files" context="{'default_directory': active_id}" >
+						<field name="files" context="{'default_directory': active_id}"
+							attrs="{'readonly':[('perm_create','=',False)]}">
 							<tree string="Files">
 								<field name="name" />
 								<field name="size" widget="dms_size" />
@@ -168,7 +182,8 @@
 						</field>
 					</page>
 					<page string="Subdirectories">
-						<field name="child_directories" context="{'default_parent_directory': active_id}" >
+						<field name="child_directories" context="{'default_parent_directory': active_id}" 
+							attrs="{'readonly':[('perm_create','=',False)]}">
 							<tree string="Subdirectories">
 								<field name="name" />
 								<field name="size" widget="dms_size" />

@@ -63,24 +63,36 @@ class Settings(dms_base.DMSModel):
         default=True,
         help="Indicates if directories inside of this settings object should be visible on document tree views.")
     
-    root_directories = fields.One2many(
+    settings_directories = fields.One2many(
         'muk_dms.directory', 
         'settings',
          string="Directories",
          copy=False, 
          readonly=True)
     
-    root_files = fields.One2many(
+    settings_files = fields.One2many(
         'muk_dms.file', 
         'settings',
          string="Files",
          copy=False, 
          readonly=True)
     
-    root_top_directories = fields.One2many(
+    root_directories = fields.One2many(
+        'muk_dms.directory',
+         string="Root Directories",
+         compute='_compute_root_directories')
+    
+    top_directories = fields.One2many(
         'muk_dms.directory',
          string="Top Directories",
-         compute='_compute_root_top_directories')
+         compute='_compute_top_directories',
+         help="Directories which have no parent or the user has no access right to those parents.")
+    
+    top_files = fields.One2many(
+        'muk_dms.file',
+         string="Top Directories",
+         compute='_compute_top_files',
+         help="Files which parent aren't readable by the user.")
         
     #----------------------------------------------------------
     # Functions
@@ -89,19 +101,32 @@ class Settings(dms_base.DMSModel):
     def notify_change(self, values, refresh=False, operation=None):
         super(Settings, self).notify_change(values, refresh, operation)
         if self.system_locks:
-                self.root_directories.lock_tree(operation=operation)
-        for directory in self.root_directories:
+                self.settings_directories.lock_tree(operation=operation)
+        for directory in self.settings_directories:
             directory.notify_change(values)
-        self.root_directories.lock_tree(operation=operation)
+        self.settings_directories.lock_tree(operation=operation)
     
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
-        
-    def _compute_root_top_directories(self):
+    
+    @api.multi
+    def _compute_root_directories(self):
         for record in self: 
-            record.root_top_directories = record.root_directories.filtered(
+            record.root_directories = record.sudo().settings_directories.filtered(
                 lambda r: r.is_root_directory == True)
+    
+    @api.multi
+    def _compute_top_directories(self):
+        for record in self: 
+            record.top_directories = record.settings_directories.filtered(
+                lambda d: d.is_root_directory or not d.parent_directory.check_access('read'))
+    
+    @api.multi        
+    def _compute_top_files(self):
+        for record in self: 
+            record.top_files = record.settings_files.filtered(
+                lambda f: not f.directory.check_access('read'))
         
     #----------------------------------------------------------
     # Create, Update

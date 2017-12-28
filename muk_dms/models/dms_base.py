@@ -81,7 +81,7 @@ class DMSBaseModel(models.BaseModel):
         return True
     
     def refresh(self):
-        self.env['bus.bus'].sendone("%s_refresh" % self.env.cr.dbname, self._name)
+        self.env['bus.bus'].sendone("refresh", [self.env.cr.dbname, self._name, self._uid])
     
     def generate_key(self):
         return hashlib.sha1(os.urandom(128)).hexdigest()

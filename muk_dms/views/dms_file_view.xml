@@ -19,6 +19,20 @@
 
 <odoo>
 
+<record id="search_dms_file" model="ir.ui.view">
+	<field name="name">muk_dms_file.search</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="name" />
+			<field name="path" />
+			<group expand="0" string="Group By">
+				<filter string="Extension" domain="[]" context="{'group_by':'extension'}" />
+			</group>
+		</search>
+	</field>
+</record>
+
 <record id="view_dms_file_kanban" model="ir.ui.view">
 	<field name="name">muk_dms_file.kanban</field>
 	<field name="model">muk_dms.file</field>
@@ -110,10 +124,12 @@
 				</group>
 				<group string="Settings">
 					<group>
-						<field name="settings" />
+						<field name="settings" readonly="1" />
 					</group>
 					<group>
-						<field name="directory" />
+						<field name="directory" 
+							widget="dms_directory"
+							options="{'quick_create': False}" />
 					</group>
 				</group>
 				<notebook>

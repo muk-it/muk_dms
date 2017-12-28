@@ -303,9 +303,9 @@ class Directory(dms_base.DMSModel):
         if not self.check_name(self.name):
             raise ValidationError("The directory name is invalid.")
         if self.is_root_directory:
-            childs = self.settings.root_directories.mapped(lambda rec: [rec.id, rec.name])
+            childs = self.sudo().settings.root_directories.mapped(lambda rec: [rec.id, rec.name])
         else:
-            childs = self.parent_directory.child_directories.mapped(lambda rec: [rec.id, rec.name])
+            childs = self.sudo().parent_directory.child_directories.mapped(lambda rec: [rec.id, rec.name])
         duplicates = [rec for rec in childs if rec[1] == self.name and rec[0] != self.id]
         if duplicates:
             raise ValidationError("A directory with the same name already exists.")
@@ -337,13 +337,13 @@ class Directory(dms_base.DMSModel):
         default = dict(default or [])
         names = []
         if self.is_root_directory:
-            names = self.settings.root_directories.mapped('name')
+            names = self.sudo().settings.root_directories.mapped('name')
             default.update({'settings': self.settings.id})
         elif 'parent_directory' in default:
-            parent_directory = self.env['muk_dms.directory'].browse(default['parent_directory'])
+            parent_directory = self.env['muk_dms.directory'].sudo().browse(default['parent_directory'])
             names = parent_directory.child_directories.mapped('name')
         else:
-            names = self.parent_directory.child_directories.mapped('name')
+            names = self.sudo().parent_directory.child_directories.mapped('name')
         default.update({'name': self.unique_name(self.name, names)})
         vals = self.copy_data(default)[0]
         new = self.with_context(lang=None).create(vals)

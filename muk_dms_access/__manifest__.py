@@ -20,46 +20,39 @@
 ###################################################################################
 
 {
-    'name': "MuK Documents Access",
-    'summary': """Document Management System""",
-    'description': """ 
-        MuK Documents Access enables access control groups.
-        These groups can be used to customize the security
-        of your document management system.
+    "name": "MuK Documents Field",
+    "summary": """Model Document Field""",
+    "description": """ 
+        
     """,
-    'version': '11.0.1.0.3',   
-    'category': 'Document Management',   
-    'license': 'AGPL-3',    
-    'author': "MuK IT",
-    'website': "http://www.mukit.at",
-    'contributors': [
+    "version": '11.0.1.0.0',   
+    "category": 'Document Management',   
+    "license": "AGPL-3",
+    "website": "http://www.mukit.at",
+    "author": "MuK IT",
+    "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
-        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
-    'depends': [
-        'hr',
-        'muk_dms',
+    "depends": [
+        "muk_dms",
     ],
     "data": [
-        "security/dms_access_security.xml",
-        'security/ir.model.access.csv',
-        'views/dms_view_groups.xml',
-        'views/dms_view_directory.xml',
-        'views/dms_view_file.xml',
+   #     "template/assets.xml",
+        "views/dms_file_view.xml",
     ],
     "demo": [
-        "demo/dms_hr_demo.xml",
-        "demo/dms_access_groups_demo.xml",
-        "demo/dms_settings_demo.xml",
-        "demo/dms_directory_demo.xml",
-        "demo/dms_file_demo.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
     ],
-    'images': [
+    "images": [
         'static/description/banner.png'
     ],
-    "post_init_hook": '_auto_default_group',
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
+    },
+    "application": False,
     "installable": True,
+    
 }
