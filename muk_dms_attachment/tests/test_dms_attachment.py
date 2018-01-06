@@ -46,4 +46,4 @@ class AttachmentTestCase(dms_case.DMSTestCase):
         self.env['ir.attachment'].sudo().force_storage()
         self.assertTrue(self.attachment.store_document.id)
         copy = self.attachment.copy()
-        self.assertTrue(copy.unlink())
+        copy.unlink()
