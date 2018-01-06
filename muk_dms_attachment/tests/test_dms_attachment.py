@@ -37,7 +37,7 @@ class AttachmentTestCase(dms_case.DMSTestCase):
     def setUp(self):
         super(AttachmentTestCase, self).setUp()
         self.directory = self.browse_ref("muk_dms_attachment.directory_attachment_demo")
-        self.file = self.browse_ref("muk_dms_attachment.attachment_demo")
+        self.attachment = self.browse_ref("muk_dms_attachment.attachment_demo")
         
     def tearDown(self):
         super(AttachmentTestCase, self).tearDown()
