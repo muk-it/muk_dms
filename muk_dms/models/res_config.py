@@ -22,11 +22,12 @@
 from odoo import api, fields, models
 
 class DocumentSettings(models.TransientModel):
+    
     _inherit = 'res.config.settings'
     
-    module_muk_dms_connector = fields.Boolean(
-        string="Rest API",
-        help="Enables the Document Rest API.")
+    module_muk_dms_finder = fields.Boolean(
+        string="Finder",
+        help="Enables the Document Finder.")
     
     module_muk_dms_file = fields.Boolean(
         string="File Store",
@@ -35,6 +36,10 @@ class DocumentSettings(models.TransientModel):
     module_muk_dms_access = fields.Boolean(
         string="Access Control",
         help="Allows the creation of groups to define access rights.")
+    
+    module_muk_dms_attachment = fields.Boolean(
+        string="Attachment Storage Location",
+        help="Allows attachments to be stored inside of MuK Documents.")
     
     max_upload_size = fields.Char(
         string="Size",
@@ -53,11 +58,19 @@ class DocumentSettings(models.TransientModel):
             forbidden_extensions=get_param('muk_dms.forbidden_extensions', default=""),
         )
         return res
-
+        
     def set_values(self):
-        if not self.user_has_groups('muk_dms.group_dms_admin'):
-            raise AccessDenied()
+        config = self.env['ir.config_parameter']
+        get_param = config.sudo().get_param
+        set_param = config.sudo().set_param
+        max_upload_size = get_param('muk_dms.max_upload_size', default="25"),
+        forbidden_extensions = get_param('muk_dms.forbidden_extensions', default=""),
+        if self.max_upload_size and self.max_upload_size != max_upload_size:
+            if not self.user_has_groups('muk_dms.group_dms_admin'):
+                raise AccessDenied()
+            set_param('muk_dms.max_upload_size', self.max_upload_size or "25")
+        if self.forbidden_extensions and self.forbidden_extensions != forbidden_extensions:
+            if not self.user_has_groups('muk_dms.group_dms_admin'):
+                raise AccessDenied()
+            set_param('muk_dms.forbidden_extensions', self.forbidden_extensions or "")
         super(DocumentSettings, self).set_values()
-        set_param = self.env['ir.config_parameter'].sudo().set_param
-        set_param('muk_dms.max_upload_size', self.max_upload_size or "25")
-        set_param('muk_dms.forbidden_extensions', self.forbidden_extensions or "")

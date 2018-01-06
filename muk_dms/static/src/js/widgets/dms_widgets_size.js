@@ -34,7 +34,7 @@ function format_size(bytes, field, options) {
         return field_utils.format['float'](bytes, field, options) + ' B';
     }
     var units = options.si
-        ? ['kB','MB','GB','TB','PB','EB','ZB','YB']
+        ? ['KB','MB','GB','TB','PB','EB','ZB','YB']
         : ['KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
     var u = -1;
     do {

@@ -19,7 +19,6 @@
 #
 ###################################################################################
 
-
 {
     'name': "MuK Documents Access",
     'summary': """Document Management System""",
@@ -44,9 +43,9 @@
     "data": [
         "security/dms_access_security.xml",
         'security/ir.model.access.csv',
-        'views/dms_view_groups.xml',
-        'views/dms_view_directory.xml',
-        'views/dms_view_file.xml',
+        'views/dms_groups_view.xml',
+        'views/dms_directory_view.xml',
+        'views/dms_file_view.xml',
     ],
     "demo": [
         "demo/dms_hr_demo.xml",

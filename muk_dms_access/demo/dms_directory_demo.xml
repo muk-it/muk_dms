@@ -37,5 +37,25 @@
 	    <field name="groups" eval="[(6, 0, [ref('muk_dms_access.access_group_04_demo')])]" />
 	</record>
 	
+	<record id="directory_access_06_demo" model="muk_dms.directory">
+	    <field name="name">Access Images</field>
+	    <field name="is_root_directory" eval="True"/>
+	    <field name="settings" ref="muk_dms_access.settings_access_demo" />
+	    <field name="groups" eval="[(6, 0, [ref('muk_dms_access.access_group_01_demo')])]" />
+	</record>
+	
+	<record id="directory_access_07_demo" model="muk_dms.directory">
+	    <field name="name">2017</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="parent_directory" ref="muk_dms_access.directory_access_06_demo" />
+	</record>
+	
+	<record id="directory_access_08_demo" model="muk_dms.directory">
+	    <field name="name">2018</field>
+	    <field name="is_root_directory" eval="False"/>
+	    <field name="parent_directory" ref="muk_dms_access.directory_access_06_demo" />
+	    <field name="groups" eval="[(6, 0, [ref('access_group_03_demo')])]" />
+	</record>
+	
 	</data>
 </odoo>

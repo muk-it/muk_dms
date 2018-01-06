@@ -181,7 +181,8 @@ class DMSBaseModel(models.BaseModel):
                     'lock': lock, 
                     'token': lock.token})
             elif lock and ((lock.operation and lock.operation != operation) or not lock.operation):
-                raise AccessError(_("The record is locked, so it can't be locked again."))
+                raise AccessError(_("The record (%s[%s]) is locked, so it can't be locked again.") %
+                                   (self._name, self.id))
             else:
                 token = hashlib.sha1(os.urandom(128)).hexdigest()
                 lock = self.env['muk_dms.lock'].sudo().create({
@@ -229,13 +230,15 @@ class DMSBaseModel(models.BaseModel):
         for record in self:
             lock = record.is_locked()
             if lock and lock.operation and lock.operation != operation:
-                raise AccessError(_("The record is locked, so it can't be changes or deleted."))
+                raise AccessError(_("The record (%s[%s]) is locked, so it can't be changes or deleted.") %
+                                   (self._name, self.id))
             
     def _checking_lock_user(self):
         for record in self:
             lock = record.is_locked()
             if lock and lock.locked_by_ref and not lock.locked_by_ref != self.env.user:
-                raise AccessError(_("The record is locked by a user, so it can't be changes or deleted."))
+                raise AccessError(_("The record (%s[%s]) is locked by a user, so it can't be changes or deleted.") %
+                                   (self._name, self.id))
     
     def user_lock(self):
         self.ensure_one()

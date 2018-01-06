@@ -345,7 +345,7 @@ class File(dms_base.DMSModel):
         names = []
         if 'directory' in default:
             directory = self.env['muk_dms.directory'].sudo().browse(default['directory'])
-            names = directory.child_directories.mapped('name')
+            names = directory.files.mapped('name')
         else:
             names = self.sudo().directory.files.mapped('name')
         default.update({'name': self.unique_name(self.name, names, self.extension)})
@@ -357,10 +357,14 @@ class File(dms_base.DMSModel):
         new = self.with_context(lang=None).create(vals)
         self.copy_translations(new)
         return new
-    
-    def _before_unlink_record(self):
-        super(File, self)._before_unlink_record()
-        self._unlink_reference()
+        
+    @api.multi
+    def unlink(self):     
+        refernces = set(record.reference for record in self if record.reference)
+        result = super(File, self).unlink()
+        for refernce in refernces:
+            refernce.unlink()
+        return result
                         
     #----------------------------------------------------------
     # Reference

@@ -111,7 +111,7 @@ function format_size(bytes) {
     if(Math.abs(bytes) < 1000) {
         return format_number(bytes) + ' B';
     }
-    var units = ['kB','MB','GB','TB','PB','EB','ZB','YB'];
+    var units = ['KB','MB','GB','TB','PB','EB','ZB','YB'];
     var u = -1;
     do {
         bytes /= 1000;

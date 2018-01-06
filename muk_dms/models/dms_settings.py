@@ -101,10 +101,10 @@ class Settings(dms_base.DMSModel):
     def notify_change(self, values, refresh=False, operation=None):
         super(Settings, self).notify_change(values, refresh, operation)
         if self.system_locks:
-                self.settings_directories.lock_tree(operation=operation)
+                self.settings_directories.lock_tree(refresh=refresh, operation=operation)
         for directory in self.settings_directories:
             directory.notify_change(values)
-        self.settings_directories.lock_tree(operation=operation)
+        self.settings_directories.unlock_tree(refresh=refresh)
     
     #----------------------------------------------------------
     # Read, View 

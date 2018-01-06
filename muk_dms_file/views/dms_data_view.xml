@@ -38,7 +38,7 @@
 	<field name="view_mode">tree</field>
 </record>
 
-<menuitem id="menu_dms_data_system" name="System Data"
+<menuitem id="menu_dms_data_system" name="System"
 	parent="muk_dms.cat_menu_muk_dms_files" action="action_dms_data_system" />
 
 </odoo>

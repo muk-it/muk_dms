@@ -31,6 +31,25 @@
 	    <field name="directory" ref="muk_dms_access.directory_access_05_demo" />
 	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image04.jpg"/>
 	</record>
+	
+	<record id="file_access_06_demo" model="muk_dms.file">	    
+		<field name="name">Image_01.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_07_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image05.jpg"/>
+	</record>
+	
+	<record id="file_access_07_demo" model="muk_dms.file">	    
+		<field name="name">Image_02.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_07_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image06.jpg"/>
+	    <field name="groups" eval="[(6, 0, [ref('access_group_03_demo')])]" />
+	</record>
+	
+	<record id="file_access_08_demo" model="muk_dms.file">	    
+		<field name="name">Image_03.jpg</field>
+	    <field name="directory" ref="muk_dms_access.directory_access_08_demo" />
+	    <field name="content" type="base64" file="muk_dms_access/demo/data/files/image07.jpg"/>
+	</record>
 
 	</data>
 </odoo>

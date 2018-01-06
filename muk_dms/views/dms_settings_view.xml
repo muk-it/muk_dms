@@ -43,7 +43,7 @@
 				<h1>
 					<field name="name" />
 				</h1>
-				<group string="Save Settings">
+				<group name="save_settings" string="Save Settings">
 					<group>
 						<field name="save_type" />
 					</group>
@@ -58,44 +58,52 @@
 					</group>
 				</group>
 				<notebook>
-					<page string="Top Directories">
-						<field name="top_directories">
-							<tree string="Directories">
-								<field name="name" />
-								<field name="size" widget="dms_size" />
-								<field name="count_directories" />
-								<field name="count_files" />
-							</tree>
-						</field>
+					<page string="Top Directories &amp; Files">
+						<notebook>
+							<page string="Top Directories">
+								<field name="top_directories">
+									<tree string="Directories">
+										<field name="name" />
+										<field name="size" widget="dms_size" />
+										<field name="count_directories" />
+										<field name="count_files" />
+									</tree>
+								</field>
+							</page>
+							<page string="Top Files">
+								<field name="top_files">
+									<tree string="Files">
+										<field name="name" />
+										<field name="size" widget="dms_size" />
+										<field name="path" widget="dms_path" />
+										<field name="write_date" readonly="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
 					</page>
-					<page string="Top Files">
-						<field name="top_files">
-							<tree string="Files">
-								<field name="name" />
-								<field name="size" widget="dms_size" />
-								<field name="path" widget="dms_path" />
-								<field name="write_date" readonly="1" />
-							</tree>
-						</field>
-					</page>
-					<page string="All Directories">
-						<field name="settings_directories">
-							<tree string="Directories">
-								<field name="name" />
-								<field name="size" widget="dms_size" />
-								<field name="path" widget="dms_path" />
-							</tree>
-						</field>
-					</page>
-					<page string="All Files">
-						<field name="settings_files">
-							<tree string="Files">
-								<field name="name" />
-								<field name="size" widget="dms_size" />
-								<field name="path" widget="dms_path" />
-								<field name="write_date" readonly="1" />
-							</tree>
-						</field>
+					<page string="Directories &amp; Files">
+						<notebook>
+							<page string="All Directories">
+								<field name="settings_directories">
+									<tree string="Directories">
+										<field name="name" />
+										<field name="size" widget="dms_size" />
+										<field name="path" widget="dms_path" />
+									</tree>
+								</field>
+							</page>
+							<page string="All Files">
+								<field name="settings_files">
+									<tree string="Files">
+										<field name="name" />
+										<field name="size" widget="dms_size" />
+										<field name="path" widget="dms_path" />
+										<field name="write_date" readonly="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
 					</page>
 					<page string="Root Directories" groups="muk_dms.group_dms_admin">
 						<field name="root_directories">

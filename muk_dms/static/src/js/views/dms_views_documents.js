@@ -591,24 +591,26 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
     },
     _create_node: function(node, type) {
     	var context = {};
-    	if(type == "muk_dms.file") {
-    		context = $.extend(session.user_context, {
-    			default_directory: parent
-            });
-    	} else if(type == "muk_dms.directory") {
-    		context = $.extend(session.user_context, {
-    			default_parent_directory: parent
-            });
+    	if(this.$tree && node.data) {
+	    	if(type == "muk_dms.file") {
+	    		context = $.extend(session.user_context, {
+	    			default_directory: node.data.odoo_id
+	            });
+	    	} else if(type == "muk_dms.directory") {
+	    		context = $.extend(session.user_context, {
+	    			default_parent_directory: node.data.odoo_id
+	            });
+	    	}
+	    	this.do_action({
+	    		type: 'ir.actions.act_window',
+	            res_model: node.data.odoo_model,
+	            views: [[false, 'form']],
+	            target: 'current',
+	            context: context,
+	        }, {
+	            on_reverse_breadcrumb: this.on_reverse_breadcrumb
+	        });
     	}
-    	this.do_action({
-    		type: 'ir.actions.act_window',
-            res_model: model,
-            views: [[false, 'form']],
-            target: 'current',
-            context: context,
-        }, {
-            on_reverse_breadcrumb: this.on_reverse_breadcrumb
-        });
     },
     _load_contextmenu: function(node, callback) {
     	var menu = {};

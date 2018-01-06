@@ -24,10 +24,13 @@
 	<field name="model">muk_dms.settings</field>
 	<field name="inherit_id" ref="muk_dms.view_dms_settings_form" />
 	<field name="arch" type="xml">
-		<xpath expr="//field[@name='save_type']" position="after">
-			<field name="base_path" 
-				attrs="{'invisible':[('save_type', '!=', 'file')],
-					    'required':[('save_type', '==', 'file')]}"/>
+		<xpath expr="//group[@name='save_settings']" position="after">
+			<group attrs="{'invisible':[('save_type', '!=', 'file')]}">
+				<group>
+					<field name="base_path" 
+						attrs="{'required':[('save_type', '==', 'file')]}"/>
+				</group>
+			</group>
 		</xpath>
 	</field>
 </record>
