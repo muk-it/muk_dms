@@ -44,4 +44,4 @@ class AttachmentTestCase(dms_case.DMSTestCase):
         
     def test_migiration(self):
         self.env['ir.attachment'].sudo().force_storage()
-        self.assertTrue(self.file.attachment)
+        self.assertTrue(self.file.store_document.id)
