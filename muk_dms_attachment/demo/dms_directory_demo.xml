@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+	
+	<record id="directory_attachment_demo" model="muk_dms.directory">
+	    <field name="name">Attachments</field>
+	    <field name="is_root_directory" eval="True"/>
+	    <field name="settings" ref="muk_dms_attachment.settings_attachment_demo" />
+	</record>
+	
+	</data>
+</odoo>
