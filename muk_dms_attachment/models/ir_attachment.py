@@ -167,19 +167,19 @@ class DocumentIrAttachment(models.Model):
             if fname:
                 self._file_delete(fname)
     
-        @api.multi
-        def copy(self, default=None):
-            if 'store_document' in default:
-                datas = self.env['muk_dms.file'].sudo().browse(default['store_document']).content
-                default.update({'datas': datas})
-                del default['store_document']
-            return super(DocumentIrAttachment, self).copy(default)
-    
-        @api.multi
-        def unlink(self):
-            files = set(attach.store_document for attach in self if attach.store_document)
-            print("unlink", files)
-            result = super(DocumentIrAttachment, self).unlink()
-            for file in files:
-                file.sudo().unlink()
-            return result
+    @api.multi
+    def copy(self, default=None):
+        if 'store_document' in default:
+            datas = self.env['muk_dms.file'].sudo().browse(default['store_document']).content
+            default.update({'datas': datas})
+            del default['store_document']
+        return super(DocumentIrAttachment, self).copy(default)
+
+    @api.multi
+    def unlink(self):
+        files = set(attach.store_document for attach in self if attach.store_document)
+        print("unlink", files)
+        result = super(DocumentIrAttachment, self).unlink()
+        for file in files:
+            file.sudo().unlink()
+        return result
