@@ -5,6 +5,7 @@
 	<record id="settings_attachment_demo" model="muk_dms.settings">
 	    <field name="name">Attachment Settings</field>
 	    <field name="save_type">database</field>
+	    <field name="show_tree" eval="False" />
 	</record>
         
 	</data>

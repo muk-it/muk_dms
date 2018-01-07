@@ -76,7 +76,7 @@ class AttachmentFile(dms_base.DMSModel):
         for record in self:
             attachment = attachment.search([
                 '&', ['store_document', '=', record.id],
-                '|', ['res_field', '=', False], ['res_field', '=', True]])
+                '|', ['res_field', '=', False], ['res_field', '!=', False]])
             if len(attachment) > 1:
                 _logger.warn(_("Multiple Attachments link to the same file!"))
             record.attachment = attachment.search([], limit=1)

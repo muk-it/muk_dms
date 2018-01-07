@@ -19,6 +19,35 @@
 
 <odoo>
 
+<record id="view_attachment_search" model="ir.ui.view">
+   	<field name="name">Adding additional filters</field>
+	<field name="model">ir.attachment</field>
+	<field name="inherit_id" ref="base.view_attachment_search"/>
+    <field name="arch" type="xml">
+        <xpath expr="//filter[@name='url_filter']" position="before">
+        	 <filter name="set_res_field" string="Field Data" domain="[('res_field', '!=', False)]"/>
+        	 <filter name="no_res_field" string="Attachments" domain="[('res_field', '=', False)]"/>
+        	 <separator/>
+        </xpath>
+        <xpath expr="//filter[contains(@context, 'res_name')]" position="attributes">
+        	 <attribute name="name">group_res_name</attribute>
+        </xpath>
+         <xpath expr="//group//filter[last()]" position="before">
+        	 <separator/>
+        	 <filter name="group_res_model" 
+        	 	string="Attached Document Model" 
+        	 	context="{'group_by': 'res_model'}"
+        	 	domain="[]" />
+        </xpath>
+        <xpath expr="//group//filter[last()]" position="after">
+        	 <filter name="group_res_field" 
+        	 	string="Attached Document Field" 
+        	 	context="{'group_by': 'res_field'}" 
+        	 	domain="[]" />
+        </xpath>
+	</field>
+</record>
+
 <record id="view_attachment_tree" model="ir.ui.view">
     <field name="name">Adding a field storage type</field>
     <field name="model">ir.attachment</field>
@@ -53,6 +82,21 @@
 	<field name="name">Attachment</field>
 	<field name="res_model">ir.attachment</field>
 	<field name="view_mode">tree,form</field>
+	<field name="search_view_id" ref="base.view_attachment_search"/>
+	<field name="domain">['|', ['res_field', '=', False], ['res_field', '!=', False]]</field>
+	<field name="context">
+		{'search_default_group_res_model': 1,
+	 	 'search_default_group_res_name': 1, 
+	 	 'search_default_group_res_field': 1}
+	</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            Click here to create new documents.
+        </p>
+        <p>
+            Also you will find here all the related documents and download it by clicking on any individual document.
+        </p>
+    </field>
 </record>
 
 <menuitem id="menu_dms_attachment" name="Attachments"

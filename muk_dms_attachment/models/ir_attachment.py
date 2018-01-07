@@ -69,9 +69,12 @@ class DocumentIrAttachment(models.Model):
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
         domain = {
-            'db': ['|',['store_fname', '!=', False],['store_document', '!=', False]],
-            'file': ['|',['db_datas', '!=', False],['store_document', '!=', False]],
-            'documents': ['|',['store_fname', '!=', False],['db_datas', '!=', False]],
+            'db': ['&', '|', ['store_fname', '!=', False], ['store_document', '!=', False],
+                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
+            'file': ['&', '|', ['db_datas', '!=', False], ['store_document', '!=', False],
+                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
+            'documents': ['&', '|', ['store_fname', '!=', False], ['db_datas', '!=', False],
+                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
         }[self._storage()]
         for attach in self.search(domain):
             attach.write({'datas': attach.datas})
