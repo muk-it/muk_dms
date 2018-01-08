@@ -1,0 +1,1187 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* muk_dms_field
+# 	* muk_dms_access
+# 	* muk_dms_file
+# 	* muk_dms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-08 19:25+0000\n"
+"PO-Revision-Date: 2018-01-08 20:37+0100\n"
+"Last-Translator: Henning Hraban Ramm <hraban@fiee.net>\n"
+"Language-Team: fiëé visuëlle <hraban@fiee.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_directory_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_file_perm_access
+msgid "Access"
+msgstr "Zugriff"
+
+#. module: muk_dms_access
+#: model:ir.actions.act_window,name:muk_dms_access.action_dms_groups
+#: model:ir.ui.menu,name:muk_dms_access.menu_dms_group
+msgid "Access Control"
+msgstr "Zugriffskontrolle"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_access_groups
+msgid "Access Groups"
+msgstr "Berechtigungsgruppen"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "Access Information"
+msgstr "Zugriffs-Information"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_additional_users
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Additional Users"
+msgstr "Zusätzliche Benutzer"
+
+#. module: muk_dms
+#: model:res.groups,name:muk_dms.group_dms_admin
+msgid "Administrator"
+msgstr "Administrator"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:176
+#, python-format
+msgid "An error occurred during create!"
+msgstr "Beim Anlegen ist ein Fehler aufgetreten!"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:137
+#, python-format
+msgid "An error occurred during download!"
+msgstr "Beim Download ist ein Fehler aufgetreten!"
+
+#. module: muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_data
+msgid "Base Data Model"
+msgstr "Basis-Datenmodell"
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_base_path
+msgid "Base Path"
+msgstr "Basispfad"
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_settings.py:89
+#, python-format
+msgid "Changing the settings can cause a heavy migration process."
+msgstr "Eine Änderung der Einstellungen kann zu einer erschwerten Migration führen."
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:351
+#, python-format
+msgid "Checkout..."
+msgstr "Ausbuchen…"
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_checksum
+msgid "Checksum"
+msgstr "Prüfsumme"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_child_groups
+msgid "Child Groups"
+msgstr "Untergruppen"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:69
+#, python-format
+msgid "Clear"
+msgstr "Zurücksetzen"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:128
+#, python-format
+msgid "Close"
+msgstr "Schließen"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_complete_groups
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_complete_groups
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_complete_groups
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_file_form
+msgid "Complete Groups"
+msgstr "Vollständige Gruppen"
+
+#. module: muk_dms
+#: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_config
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_data
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_content
+msgid "Content"
+msgstr "Inhalt"
+
+#. modules: muk_dms_field, muk_dms_access, muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:150
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_perm_create
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_perm_create
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_perm_create
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_create
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:165
+#, python-format
+msgid "Create"
+msgstr "Anlegen"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:78
+#, python-format
+msgid "Create \"<strong>%s</strong>\""
+msgstr "\"<strong>%s</strong>\" anlegen"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:26
+#, python-format
+msgid "Create Direcotry"
+msgstr "Verzeichnis anlegen"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:29
+#, python-format
+msgid "Create File"
+msgstr "Datei anlegen"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:176
+#, python-format
+msgid "Create..."
+msgstr "Erzeuge…"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:111
+#, python-format
+msgid "Create:"
+msgstr "Erzeuge:"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:100
+#, python-format
+msgid "Create: "
+msgstr "Erzeuge: "
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_create_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_create_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_create_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_create_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_create_uid
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_create_uid
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_create_uid
+msgid "Created by"
+msgstr "Angelegt von"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_create_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_create_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_create_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_create_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_create_date
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_create_date
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_custom_thumbnail
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_custom_thumbnail
+msgid "Custom Thumbnail"
+msgstr "Eigenes Vorschaubild"
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_file.py:70
+#: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_models
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+#: selection:muk_dms.file,reference:0
+#, python-format
+msgid "Data"
+msgstr "Daten"
+
+#. module: muk_dms
+#: model:ir.actions.act_window,name:muk_dms.action_dms_data_database
+msgid "Data Database"
+msgstr "Daten-Datenbank"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_reference
+msgid "Data Reference"
+msgstr "Daten-Verweis"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_form
+msgid "Data Settings"
+msgstr "Daten-Einstellungen"
+
+#. module: muk_dms_file
+#: model:ir.actions.act_window,name:muk_dms_file.action_dms_data_system
+msgid "Data System"
+msgstr "Daten-System"
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_settings.py:45
+#: selection:muk_dms.settings,save_type:0
+#, python-format
+msgid "Database"
+msgstr "Datenbank"
+
+#. module: muk_dms
+#: model:ir.ui.menu,name:muk_dms.menu_dms_data_database
+msgid "Database Data"
+msgstr "Datenbank-Daten"
+
+#. module: muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_data_database
+msgid "Database Data Model"
+msgstr "Datenbank-Datenmodell"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_perm_unlink
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_perm_unlink
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_perm_unlink
+msgid "Delete"
+msgstr "Löschen"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_departments
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Departments"
+msgstr "Abteilungen"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_root_directories
+#: model:ir.ui.menu,name:muk_dms.menu_dms_directory
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_tree
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_form
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_directories
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_directories
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Directories"
+msgstr "Verzeichnisse"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:156
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_directory
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#, python-format
+msgid "Directory"
+msgstr "Verzeichnis"
+
+#. module: muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_lock
+msgid "Directory or File Lock"
+msgstr "Verzeichnis- oder Datei-Sperre"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_display_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_display_name
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_display_name
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: muk_dms
+#: model:ir.actions.act_window,name:muk_dms.action_dms_directory
+msgid "Document Directories"
+msgstr "Dokumenten-Verzeichnisse"
+
+#. module: muk_dms
+#: model:ir.actions.act_window,name:muk_dms.action_dms_file
+msgid "Document Files"
+msgstr "Dokumenten-Dateien"
+
+#. module: muk_dms
+#: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_documents
+msgid "Document Management"
+msgstr "Dokumentenverwaltung"
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_dms_path
+msgid "Document Path"
+msgstr "Dokumentenpfad"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_form
+msgid "Document Setting"
+msgstr "Documenten-Einstellung"
+
+#. module: muk_dms
+#: model:ir.actions.act_window,name:muk_dms.action_dms_settings
+#: model:ir.ui.menu,name:muk_dms.menu_dms_settings
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_tree
+msgid "Document Settings"
+msgstr "Dokumenten-Einstellungen"
+
+#. module: muk_dms
+#: model:ir.actions.client,name:muk_dms.action_dms_documents
+msgid "DocumentTreeView"
+msgstr "DocumentTreeView"
+
+#. module: muk_dms
+#: model:ir.module.category,name:muk_dms.category_dms_security
+#: model:ir.ui.menu,name:muk_dms.main_menu_muk_dms
+#: model:ir.ui.menu,name:muk_dms.menu_dms_tree_view
+msgid "Documents"
+msgstr "Dokumente"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:36
+#, python-format
+msgid "Donwload in Edit Mode (Checkout)"
+msgstr "Im Bearbeitungsmodus herunterladen (ausbuchen)"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:121
+#, python-format
+msgid "Download"
+msgstr "Download"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:376
+#, python-format
+msgid "Download \"%s\""
+msgstr "„%s“ herunterladen"
+
+#. modules: muk_dms_field, muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:137
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:327
+#, python-format
+msgid "Download..."
+msgstr "Download..."
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:107
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:23
+#, python-format
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_editor
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_editor
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_editor
+msgid "Editor"
+msgstr "Editor"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_extension
+msgid "Extension"
+msgstr "Erweiterung"
+
+#. modules: muk_dms_field, muk_dms_access, muk_dms_file, muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:167
+#: model:ir.model,name:muk_dms.model_muk_dms_file
+#: model:ir.model,name:muk_dms_access.model_muk_dms_file
+#: model:ir.model,name:muk_dms_field.model_muk_dms_file
+#: model:ir.model,name:muk_dms_file.model_muk_dms_file
+#, python-format
+msgid "File"
+msgstr "Datei"
+
+#. module: muk_dms
+#: selection:muk_dms.settings,save_type:0
+msgid "File System"
+msgstr "Dateisystem"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:230
+#, python-format
+msgid "File Upload"
+msgstr "Datei-Upload"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:204
+#, python-format
+msgid "File upload"
+msgstr "Datei-Upload"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_name
+msgid "Filename"
+msgstr "Dateiname"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:107
+#, python-format
+msgid "Filename:"
+msgstr "Dateiname:"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_count_files
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_files
+#: model:ir.ui.menu,name:muk_dms.menu_dms_file
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_data_database_tree
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_tree
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_files
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_files
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+#: model:ir.ui.view,arch_db:muk_dms_file.view_dms_data_system_tree
+msgid "Files"
+msgstr "Dateien"
+
+#. module: muk_dms_access
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Group"
+msgstr "Gruppe"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_name
+msgid "Group Name"
+msgstr "Gruppenname"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_groups
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_groups
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_hr_department_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_hr_job_groups
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_file_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_tree
+msgid "Groups"
+msgstr "Gruppen"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_hr_department
+msgid "Hr Department"
+msgstr "Personalabteilung"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_id
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_id
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_id
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_id
+msgid "ID"
+msgstr "ID"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_index_files
+msgid "Index Files"
+msgstr "Indizes"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_index_content
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "Indexed Content"
+msgstr "Indizierter Inhalt"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_muk_dms_settings_system_locks
+msgid "Indicates if files and directories should be automatically locked while system operations take place."
+msgstr "Sollen Dateien und Verzeichnisse während Systemvorgängen automatisch gesperrt werden?"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_muk_dms_directory_is_root_directory
+msgid "Indicates if the directory is a root directory. A root directory has a settings object, while a directory with a set parent inherits the settings form its parent."
+msgstr "Ist das Verzeichnis ein Stammverzeichnis (oberste Ebene)? Ein Stammverzeichnis hat eigene Einstellungen, während ein Verzeichnis mit angegebenen Stammverzeichnis dessen Einstellungen erbt."
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_muk_dms_settings_index_files
+msgid "Indicates if the file data should be indexed to allow faster and better search results."
+msgstr "Soll der Dateiinhalt für bessere und schnellere Suchergebnisse indiziert werden?"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:30
+#, python-format
+msgid "Info"
+msgstr "Info"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:292
+#, python-format
+msgid "Info!"
+msgstr "Info!"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:283
+#, python-format
+msgid "Info..."
+msgstr "Info..."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_settings.py:88
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#, python-format
+msgid "Information"
+msgstr "Informationen"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_inherit_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_directory_inherit_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_file_inherit_groups
+msgid "Inherit Groups"
+msgstr "Gruppen vererben"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_hr_job
+msgid "Job Position"
+msgstr "Vorgangsposition"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_jobs
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Jobs"
+msgstr "Vorgänge"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock___last_update
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings___last_update
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups___last_update
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_write_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_write_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_write_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_write_uid
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_write_uid
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_write_uid
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. modules: muk_dms_access, muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_data_database_write_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_write_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_write_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_write_date
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_write_date
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_write_date
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_parent_left
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_left
+msgid "Left Parent"
+msgstr "Linker Stamm"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:315
+#, python-format
+msgid "Link..."
+msgstr "Verknüpfung…"
+
+#. module: muk_dms
+#: model:ir.actions.act_window,name:muk_dms.action_dms_lock
+msgid "Lock"
+msgstr "Sperre"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "Lock (Edit)"
+msgstr "Sperren (Bearbeiten)"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_locked
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_locked
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_locked
+msgid "Locked"
+msgstr "Gesperrt"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_locked_by
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_locked_by
+msgid "Locked by"
+msgstr "Gesperrt von"
+
+#. modules: muk_dms_field, muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_file.js:49
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:71
+#, python-format
+msgid "Locked!"
+msgstr "Gesperrt!"
+
+#. module: muk_dms
+#: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_locks
+#: model:ir.ui.menu,name:muk_dms.menu_dms_lock
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_lock_tree
+msgid "Locks"
+msgstr "Sperren"
+
+#. module: muk_dms
+#: model:res.groups,name:muk_dms.group_dms_manager
+msgid "Manager"
+msgstr "Manager"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_form
+msgid "Meta Information"
+msgstr "Meta-Informationen"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_access
+msgid "MuK Documents Access"
+msgstr "MuK Dokumenten-Zugriff"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_directory
+#: model:ir.model,name:muk_dms_access.model_muk_dms_directory
+msgid "MuK Documents Directory"
+msgstr "MuK Dokumenten-Verzeichnis"
+
+#. modules: muk_dms_file, muk_dms
+#: model:ir.model,name:muk_dms.model_muk_dms_settings
+#: model:ir.model,name:muk_dms_file.model_muk_dms_settings
+msgid "MuK Documents Settings"
+msgstr "MuK Dokumenten-Einstellungen"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_name
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_name
+msgid "Name"
+msgstr "Name"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:170
+#, python-format
+msgid "New"
+msgstr "Neu"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_lock_ref
+msgid "Object Reference"
+msgstr "Objektreferenz"
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:59
+#, python-format
+msgid "Odoo requires to have access rights for the given path."
+msgstr "Odoo braucht Zugriffsrechte auf dieses Verzeichnis."
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/js/dms_views_documents.js:93
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:20
+#, python-format
+msgid "Open"
+msgstr "Öffnen"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:39
+#, python-format
+msgid "Open File (Link)"
+msgstr "Datei (Link) öffnen"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_operation
+msgid "Operation"
+msgstr "Vorgang"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_parent_directory
+msgid "Parent Directory"
+msgstr "Stammverzeichnis"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_group
+msgid "Parent Group"
+msgstr "Übergeordnete Gruppe"
+
+#. modules: muk_dms_file, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_path
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_relational_path
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_path
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_relational_path
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_settings_base_path
+msgid "Path"
+msgstr "Dateipfad"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:127
+#, python-format
+msgid "Path:"
+msgstr "Pfad:"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:33
+#, python-format
+msgid "Preview"
+msgstr "Vorschau"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/xml/dms_widgets.xml:32
+#, python-format
+msgid "Preview this file"
+msgstr "Vorschau für diese Datei"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:303
+#, python-format
+msgid "Preview..."
+msgstr "Vorschau…"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_perm_read
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_perm_read
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_perm_read
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_read
+msgid "Read"
+msgstr "Lesen"
+
+#. module: muk_dms_field
+#: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file_reference_field
+msgid "Reference Field"
+msgstr "Referenzfeld"
+
+#. module: muk_dms_field
+#: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file_reference_id
+msgid "Reference ID"
+msgstr "Referenz-ID"
+
+#. module: muk_dms_field
+#: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file_reference_model
+msgid "Reference Model"
+msgstr "Referenzmodell"
+
+#. module: muk_dms_field
+#: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file_reference_name
+msgid "Reference Name"
+msgstr "Referenzname"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_parent_right
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_right
+msgid "Right Parent"
+msgstr "Rechter Stamm"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_is_root_directory
+msgid "Root Directory"
+msgstr "Stammverzeichnis"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_settings_form
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_save_type
+msgid "Save Type"
+msgstr "Speicherart"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:84
+#, python-format
+msgid "Search"
+msgstr "Suche"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:63
+#, python-format
+msgid "Search More..."
+msgstr "Weitersuchen…"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:12
+#, python-format
+msgid "Search..."
+msgstr "Suchen…"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:100
+#, python-format
+msgid "Search: "
+msgstr "Suche:"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:120
+#, python-format
+msgid "Search: Directory"
+msgstr "Suche: Verzeichnis"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_common.js:125
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:61
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:66
+#, python-format
+msgid "Select"
+msgstr "Auswählen"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_settings
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_settings
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_size
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_size
+msgid "Size"
+msgstr "Größe"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:119
+#, python-format
+msgid "Size:"
+msgstr "Größe:"
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:186
+#, python-format
+msgid "Something went wrong! Seems that the file is missing or is broken."
+msgstr "Es ist ein Fehler aufgetreten. Die Datei scheint zu fehlen oder ist defekt."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:126
+#: code:addons/muk_dms_file/models/dms_data.py:177
+#, python-format
+msgid "Something went wrong! Seems that the file is missing."
+msgstr "Es ist ein Fehler aufgetreten. Die Datei scheint zu fehlen."
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_child_directories
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_count_directories
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
+msgid "Subdirectories"
+msgstr "Unterverzeichnisse"
+
+#. modules: muk_dms_file, muk_dms
+#: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_files
+#: model:ir.ui.menu,name:muk_dms_file.menu_dms_data_system
+msgid "System Data"
+msgstr "Systemdaten"
+
+#. module: muk_dms_file
+#: model:ir.model,name:muk_dms_file.model_muk_dms_data_system
+msgid "System File Data Model"
+msgstr "Systemdatei-Datenmodell"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_settings_system_locks
+msgid "System Locks"
+msgstr "System-Sperren"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "Technical Information"
+msgstr "Technische Informationen"
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:147
+#, python-format
+msgid "The System failed to create the necessary directories."
+msgstr "Das System konnte die nötigen Verzeichnisse nicht anlegen."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:169
+#, python-format
+msgid "The System failed to delete a directory."
+msgstr "Das System konnte das Verzeichnis nicht löschen."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:161
+#, python-format
+msgid "The System failed to delete the file."
+msgstr "Das System konnte die Datei nicht löschen."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:180
+#, python-format
+msgid "The System failed to rename the file."
+msgstr "Das System konnte die Datei nicht umbenennen."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:203
+#, python-format
+msgid "The System failed to write the file."
+msgstr "Das System konnte die Datei nicht schreiben."
+
+#. module: muk_dms_field
+#: model:ir.model.fields,help:muk_dms_field.field_muk_dms_file_reference_model
+msgid "The database object this record will be attached to."
+msgstr "Das Datenbank-Objekt, an das dieser Datensatz angehängt wird."
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:327
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:351
+#, python-format
+msgid "The field is empty, there's nothing to download!"
+msgstr "Das Feld ist leer, es gibt nichts herunterzuladen!"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:315
+#, python-format
+msgid "The field is empty, there's nothing to link to!"
+msgstr "Das Feld ist leer, es gibt kein Link-Ziel!"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:303
+#, python-format
+msgid "The field is empty, there's nothing to preview!"
+msgstr "Das Feld ist leer, es gibt hier nichts zu sehen!"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:283
+#, python-format
+msgid "The field is empty, there's nothing to show!"
+msgstr "Das Feld ist leer, es gibt nichts anzuzeigen!"
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:194
+#, python-format
+msgid "The file is corrupted."
+msgstr "Die Datei ist defekt."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:57
+#, python-format
+msgid "The given path does not exists."
+msgstr "Das angebenene Verzeichnis existiert nicht."
+
+#. module: muk_dms_access
+#: sql_constraint:muk_dms_access.groups:0
+msgid "The name of the group must be unique!"
+msgstr "Der Name der Gruppe muss eindeutig sein!"
+
+#. module: muk_dms_field
+#: model:ir.model.fields,help:muk_dms_field.field_muk_dms_file_reference_id
+msgid "The record id this is attached to."
+msgstr "Die Datensatz-ID, mit der dies verknüpft ist."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_base.py:233
+#: code:addons/muk_dms/models/dms_base.py:246
+#, python-format
+msgid "The record is already locked by another user. (%s)"
+msgstr "Der Datensatz ist bereits durch einen anderen Benutzer (%s) gesperrt."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_base.py:235
+#: code:addons/muk_dms/models/dms_base.py:248
+#, python-format
+msgid "The record is already locked."
+msgstr "Der Datensatz ist bereits gesperrt."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_base.py:226
+#, python-format
+msgid "The record is locked by a user, so it can't be changes or deleted."
+msgstr "Der Datensatz ist durch einen Benutzer gesperrt, daher kann er nicht verändert oder gelöscht werden."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_base.py:220
+#, python-format
+msgid "The record is locked, so it can't be changes or deleted."
+msgstr "Der Datensatz ist gesperrt, daher kann er nicht verändert oder gelöscht werden."
+
+#. module: muk_dms
+#: code:addons/muk_dms/models/dms_base.py:172
+#, python-format
+msgid "The record is locked, so it can't be locked again."
+msgstr "Der Datensatz ist gesperrt, daher kann er nicht nicht noch einmal gesperrt werden."
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:55
+#, python-format
+msgid "The save type (File System) requires a path attribute."
+msgstr "Die Speicherart (Dateisystem) benötigt einen Dateipfad."
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_muk_dms_settings_save_type
+msgid "The save type is used to determine how a file is saved to the system."
+msgstr "Die Speicherart bestimmt, wie eine Datei im System gespeichert wird."
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:203
+#, python-format
+msgid "The selected file exceed the maximum file size of %s."
+msgstr "Die ausgewählte Datei überschreitet die maximale Dateigröße von %s."
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/js/dms_widgets_document.js:230
+#, python-format
+msgid "There was a problem while uploading your file"
+msgstr "Es gab ein Problem beim Hochladen Ihrer Datei."
+
+#. modules: muk_dms_access, muk_dms
+#: code:addons/muk_dms/models/dms_base.py:407
+#: code:addons/muk_dms_access/models/dms_base.py:107
+#: code:addons/muk_dms_access/models/dms_base.py:204
+#, python-format
+msgid "This operation is forbidden!"
+msgstr "Dieser Vorgang ist nicht zulässig!"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_thumbnail
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_thumbnail
+msgid "Thumbnail"
+msgstr "Vorschaubild"
+
+#. module: muk_dms
+#. openerp-web
+#: code:addons/muk_dms/static/src/xml/dms_views.xml:14
+#, python-format
+msgid "Tip: It is also possible to serach by using regular expressions like ^[a-zA-Z]*.pdf"
+msgstr "Hinweis: Sie können auch mit regulären Ausdrücken suchen, z.B. „^[a-zA-Z]*.pdf"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_token
+msgid "Token"
+msgstr "Token"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_mimetype
+msgid "Type"
+msgstr "Typ"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:123
+#, python-format
+msgid "Type:"
+msgstr "Typ:"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_unlink
+msgid "Unlink"
+msgstr "Löschen"
+
+#. module: muk_dms
+#: model:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "Unlock (Release)"
+msgstr "Entsperren (Freigeben)"
+
+#. module: muk_dms_file
+#: model:ir.actions.server,name:muk_dms_file.action_dms_data_system_checksum
+msgid "Update Checksum"
+msgstr "Prüfsumme aktualisieren"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:61
+#, python-format
+msgid "Upload your file"
+msgstr "Laden Sie Ihre Datei hoch"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:70
+#, python-format
+msgid "Uploading..."
+msgstr "Wird hochgeladen…"
+
+#. module: muk_dms
+#: selection:muk_dms.lock,locked_by_ref:0
+#: model:res.groups,name:muk_dms.group_dms_user
+msgid "User"
+msgstr "Benutzer"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_lock_locked_by_ref
+msgid "User Reference"
+msgstr "Benutzerreferenz"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_users
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_users
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Users"
+msgstr "Benutzer"
+
+#. modules: muk_dms_access, muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_access_perm_write
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory_perm_write
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file_perm_write
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_write
+msgid "Write"
+msgstr "Schreiben"
+
+#. module: muk_dms_field
+#. openerp-web
+#: code:addons/muk_dms_field/static/src/xml/dms_widgets.xml:115
+#, python-format
+msgid "Write:"
+msgstr "Schreiben:"
