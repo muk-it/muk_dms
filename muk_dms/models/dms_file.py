@@ -367,8 +367,9 @@ class File(dms_base.DMSModel):
     def _after_unlink(self, result, info, infos, operation):
         super(File, self)._after_unlink(result, info, infos, operation)
         if 'references' in info:
-            for refernce in info['references']:
-                refernce.unlink()
+            for reference in info['references']:
+                reference.sudo().delete()
+                reference.sudo().unlink()
                         
     #----------------------------------------------------------
     # Reference
