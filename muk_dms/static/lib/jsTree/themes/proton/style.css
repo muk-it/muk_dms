@@ -101,6 +101,9 @@
   -ms-user-select: none;
   user-select: none;
 }
+.jstree-rename-input {
+	color: #000000;	
+}
 .vakata-context {
   display: none;
 }

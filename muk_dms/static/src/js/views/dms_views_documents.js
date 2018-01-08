@@ -603,7 +603,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 	    	}
 	    	this.do_action({
 	    		type: 'ir.actions.act_window',
-	            res_model: node.data.odoo_model,
+	            res_model: type,
 	            views: [[false, 'form']],
 	            target: 'current',
 	            context: context,

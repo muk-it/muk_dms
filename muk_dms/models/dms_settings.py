@@ -103,7 +103,7 @@ class Settings(dms_base.DMSModel):
         if self.system_locks:
                 self.settings_directories.lock_tree(refresh=refresh, operation=operation)
         for directory in self.settings_directories:
-            directory.notify_change(values)
+            directory.with_context(operation=operation).notify_change(values)
         self.settings_directories.unlock_tree(refresh=refresh)
     
     #----------------------------------------------------------
