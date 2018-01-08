@@ -358,13 +358,17 @@ class File(dms_base.DMSModel):
         self.copy_translations(new)
         return new
         
-    @api.multi
-    def unlink(self):     
-        refernces = set(record.reference for record in self if record.reference)
-        result = super(File, self).unlink()
-        for refernce in refernces:
-            refernce.unlink()
-        return result
+    def _before_unlink(self, operation):
+        info = super(File, self)._before_unlink(operation)
+        references = set(record.reference for record in self if record.reference)
+        info['references'] = references
+        return info
+    
+    def _after_unlink(self, result, info, infos, operation):
+        super(File, self)._after_unlink(result, info, infos, operation)
+        if 'references' in info:
+            for refernce in info['references']:
+                refernce.unlink()
                         
     #----------------------------------------------------------
     # Reference

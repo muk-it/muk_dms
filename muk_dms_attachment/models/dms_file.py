@@ -85,7 +85,14 @@ class AttachmentFile(dms_base.DMSModel):
     # Delete
     #----------------------------------------------------------
             
-    def _before_unlink_record(self):
-        super(AttachmentFile, self)._before_unlink_record()
-        if self.attachment:
-            self.attachment.unlink()
+    def _before_unlink_record(self, operation):
+        info = super(AttachmentFile, self)._before_unlink(operation)
+        attachments = set(record.attachment for record in self if record.attachment)
+        info['attachments'] = attachments
+        return info
+    
+    def _after_unlink(self, result, info, infos, operation):
+        super(AttachmentFile, self)._after_unlink(result, info, infos, operation)
+        if 'attachments' in info:
+            for attachment in info['attachments']:
+                attachment.unlink()

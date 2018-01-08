@@ -156,7 +156,7 @@ class DocumentIrAttachment(models.Model):
                 vals['store_document'] = False
                 vals['db_datas'] = False
             elif value and location == 'documents':
-                directory = self._attachment_directory(vals)
+                directory = attach._attachment_directory(vals)
                 store_document = self.env['muk_dms.file'].sudo().create({
                     'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
                     'directory': directory,
@@ -166,9 +166,12 @@ class DocumentIrAttachment(models.Model):
                 vals['store_fname'] = False
                 vals['db_datas'] = False
             fname = attach.store_fname
+            document = attach.store_document
             super(DocumentIrAttachment, attach.sudo()).write(vals)
             if fname:
                 self._file_delete(fname)
+            if document:
+                document.unlink()
     
     @api.multi
     def copy(self, default=None):

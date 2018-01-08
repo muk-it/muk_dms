@@ -161,15 +161,15 @@ class Directory(dms_base.DMSModel):
         if self.settings.system_locks:
                 self.lock_tree(operation=operation, lock_self=False)
         for child in self.child_directories:
-            child.with_context(is_subnode=True).trigger_computation(fields, False, operation)
+            child.with_context(operation=operation, is_subnode=True).trigger_computation(fields, False, operation)
         for index, file in enumerate(self.files):
             if index == len(self.files) - 1:
                 if self.env.context.get('is_subnode'):
-                    file.trigger_computation(fields, False, operation) 
+                    file.with_context(operation=operation).trigger_computation(fields, False, operation) 
                 else:
-                    file.trigger_computation(fields, True, operation) 
+                    file.with_context(operation=operation).trigger_computation(fields, True, operation) 
             else:
-                file.trigger_computation(fields, False, operation)
+                file.with_context(operation=operation).trigger_computation(fields, False, operation)
         self.unlock_tree()
             
     def trigger_computation(self, fields, refresh=True, operation=None):
@@ -354,7 +354,18 @@ class Directory(dms_base.DMSModel):
             directory.copy({'parent_directory': new.id})
         return new
             
-    def _before_unlink_record(self):
-        super(Directory, self)._before_unlink_record()
-        self.files.unlink()
-        self.child_directories.unlink()
+    def _before_unlink_record(self, operation):
+        info = super(Directory, self)._before_unlink_record(operation)
+        operation = self.env.context['operation'] if 'operation' in self.env.context else operation
+        if self.settings.system_locks and not 'operation' in self.env.context:
+            info['lock_operation'] = operation
+            self.lock_tree(operation=operation, lock_self=False)
+        self.files.with_context(operation=operation).unlink()
+        self.child_directories.with_context(operation=operation).unlink()
+        return info
+    
+    def _after_unlink(self, result, info, infos, operation):
+        super(Directory, self)._after_unlink(result, info, infos, operation)
+        for info in infos:
+            if 'lock_operation' in info:
+                self.unlock_operation(info['lock_operation'])

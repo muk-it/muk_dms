@@ -123,7 +123,7 @@ class DMSBaseModel(models.BaseModel):
     def read(self, fields=None, load='_classic_read'):
         fields = self._before_read(fields)
         result = super(DMSBaseModel, self).read(fields, load)
-        for index, record in enumerate(self):
+        for index, record in enumerate(self.exists()):
             result[index] = record._after_read_record(result[index])
         result = self._after_read(result)
         return result
@@ -182,7 +182,7 @@ class DMSBaseModel(models.BaseModel):
                     'token': lock.token})
             elif lock and ((lock.operation and lock.operation != operation) or not lock.operation):
                 raise AccessError(_("The record (%s[%s]) is locked, so it can't be locked again.") %
-                                   (self._name, self.id))
+                                   (record._name, record.id))
             else:
                 token = hashlib.sha1(os.urandom(128)).hexdigest()
                 lock = self.env['muk_dms.lock'].sudo().create({
@@ -207,6 +207,13 @@ class DMSBaseModel(models.BaseModel):
                 lock.sudo().unlink()
         if refresh:
             self.refresh()
+        return True
+    
+    @api.model
+    def unlock_operation(self, operation):
+        locks = self.env['muk_dms.lock'].sudo().search([('operation', '=', operation)])
+        for lock in locks: 
+            lock.sudo().unlink()
         return True
     
     @api.multi
@@ -292,6 +299,8 @@ class DMSBaseModel(models.BaseModel):
     def _before_write(self, vals, operation):
         if 'operation' in self.env.context:
             self._checking_lock(self.env.context['operation'])
+        elif operation:
+            self._checking_lock(operation)
         else:
             self._checking_lock_user()
         return vals
@@ -303,22 +312,29 @@ class DMSBaseModel(models.BaseModel):
         return result
 
     @api.multi
-    def unlink(self):     
-        self._before_unlink()
+    def unlink(self):  
+        operation = self.generate_key()
+        info = self._before_unlink(operation)
+        infos = []
         for record in self:
-            record._before_unlink_record()
+            infos.append(record._before_unlink_record(operation))
         result = super(DMSBaseModel, self).unlink()
-        self._after_unlink(result)
+        self._after_unlink(result, info, infos, operation)
         return result
     
-    def _before_unlink(self):
-        self._checking_lock_user()
-        pass
+    def _before_unlink(self, operation):
+        if 'operation' in self.env.context:
+            self._checking_lock(self.env.context['operation'])
+        elif operation:
+            self._checking_lock(operation)
+        else:
+            self._checking_lock_user()
+        return {}
     
-    def _before_unlink_record(self):
-        pass    
+    def _before_unlink_record(self, operation):
+        return {}    
         
-    def _after_unlink(self, result):
+    def _after_unlink(self, result, info, infos, operation):
         pass
 
 DMSAbstractModel = DMSBaseModel
@@ -475,7 +491,7 @@ class DMSAccessModel(DMSAbstractModel):
             record.check_access('write', raise_exception=True)
         return super(DMSAccessModel, self)._before_write(vals, operation)
     
-    def _before_unlink(self):
+    def _before_unlink(self, operation):
         for record in self:
             record.check_access('unlink', raise_exception=True)
-        return super(DMSAccessModel, self)._before_unlink()
+        return super(DMSAccessModel, self)._before_unlink(operation)
