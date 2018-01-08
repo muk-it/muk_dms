@@ -20,6 +20,7 @@
 ###################################################################################
 
 import os
+import time
 import string
 import shutil
 import hashlib
@@ -32,6 +33,22 @@ from odoo import models, api, fields
 from odoo.exceptions import ValidationError, AccessError, UserError
 
 _logger = logging.getLogger(__name__)
+
+# Refresh timeout, to prevent multiple refresh events triggering at once
+TIMEOUT = 30
+
+def timeout(func):
+    def wrapper(*args, **kwargs):
+        if args[0]._name in wrapper.timeouts:
+            timeout = wrapper.timeouts[args[0]._name]
+            if time.time() > timeout + TIMEOUT:
+                wrapper.timeouts[args[0]._name] = time.time()
+                return func(*args, **kwargs)
+        else:
+            wrapper.timeouts[args[0]._name] = time.time()
+            return func(*args, **kwargs)
+    wrapper.timeouts = {}
+    return wrapper
 
 class DMSBaseModel(models.BaseModel):
     """Main super-class for file models.
@@ -80,6 +97,7 @@ class DMSBaseModel(models.BaseModel):
             shutil.rmtree(tmp_dir)
         return True
     
+    @timeout
     def refresh(self):
         self.env['bus.bus'].sendone("refresh", [self.env.cr.dbname, self._name, self._uid])
     
@@ -210,10 +228,12 @@ class DMSBaseModel(models.BaseModel):
         return True
     
     @api.model
-    def unlock_operation(self, operation):
+    def unlock_operation(self, operation, refresh=False):
         locks = self.env['muk_dms.lock'].sudo().search([('operation', '=', operation)])
         for lock in locks: 
             lock.sudo().unlink()
+        if refresh:
+            self.refresh()
         return True
     
     @api.multi

@@ -368,4 +368,4 @@ class Directory(dms_base.DMSModel):
         super(Directory, self)._after_unlink(result, info, infos, operation)
         for info in infos:
             if 'lock_operation' in info:
-                self.unlock_operation(info['lock_operation'])
+                self.unlock_operation(info['lock_operation'], True)
