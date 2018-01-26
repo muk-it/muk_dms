@@ -127,11 +127,6 @@ class DocumentIrAttachment(models.Model):
             if location == 'documents':
                 value = attach.datas
                 bin_data = base64.b64decode(value) if value else b''
-                directory = attach._attachment_directory()
-                store_document = self.env['muk_dms.file'].sudo().create({
-                    'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
-                    'directory': directory,
-                    'content': value})
                 vals = {
                     'file_size': len(bin_data),
                     'checksum': self._compute_checksum(bin_data),
@@ -139,9 +134,15 @@ class DocumentIrAttachment(models.Model):
                     'store_fname': False,
                     'db_datas': False,
                     'store_lobject': False,
-                    'store_document': store_document.id,
-                    'mimetype': store_document.mimetype, 
                 }
+                if value:
+                    directory = attach._attachment_directory()
+                    store_document = self.env['muk_dms.file'].sudo().create({
+                        'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
+                        'directory': directory,
+                        'content': value})
+                    vals['store_document'] = store_document.id
+                    vals['mimetype'] = store_document.mimetype
                 document = attach.store_document
                 fname = attach.store_fname
                 super(DocumentIrAttachment, attach.sudo()).write(vals)
