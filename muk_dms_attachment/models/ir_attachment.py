@@ -62,24 +62,6 @@ class DocumentIrAttachment(models.Model):
         for attach in self:
             attach.write({'datas': attach.datas})
     
-    @api.model
-    def force_storage(self):
-        """Override force_storage without calling super,
-           cause domain need to be edited."""
-        if not self.env.user._is_admin():
-            raise AccessError(_('Only administrators can execute this action.'))
-        domain = {
-            'db': ['&', '|', ['store_fname', '!=', False], ['store_document', '!=', False],
-                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
-            'file': ['&', '|', ['db_datas', '!=', False], ['store_document', '!=', False],
-                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
-            'documents': ['&', '|', ['store_fname', '!=', False], ['db_datas', '!=', False],
-                   '|', ['res_field', '=', False], ['res_field', '!=', False]],
-        }[self._storage()]
-        for attach in self.search(domain):
-            attach.write({'datas': attach.datas})
-        return True
-    
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
@@ -89,6 +71,7 @@ class DocumentIrAttachment(models.Model):
         storage = {
             'db': 'Database',
             'file': 'File Storage',
+            'lobject': 'Large Object',
             'documents': 'MuK Documents',
         }[self._storage()]
         for attach in self:
@@ -97,6 +80,8 @@ class DocumentIrAttachment(models.Model):
                 current = 'MuK Documents'
             elif attach.db_datas:
                 current = 'Database'
+            elif attach.store_lobject:
+                current = 'Large Object'
             elif attach.store_fname:
                 current = 'File Storage'
             if storage == current:
@@ -106,9 +91,8 @@ class DocumentIrAttachment(models.Model):
             else:
                 attach.storage_type = "%s >> %s" % (current, storage)
     
-    @api.depends('store_fname', 'db_datas', 'store_document')
+    @api.depends('store_fname', 'db_datas', 'store_lobject', 'store_document')
     def _compute_datas(self):
-        bin_size = self._context.get('bin_size')
         for attach in self:
             if attach.store_document:
                 attach.datas = attach.sudo().store_document.content
@@ -138,40 +122,37 @@ class DocumentIrAttachment(models.Model):
         raise ValidationError(_('A directory has to be defined.'))
         
     def _inverse_datas(self):
-        """Override _inverse_datas without calling super,
-           cause vals need to be changed accordingly."""
         location = self._storage()
         for attach in self:
-            value = attach.datas
-            bin_data = base64.b64decode(value) if value else b''
-            vals = {
-                'file_size': len(bin_data),
-                'checksum': self._compute_checksum(bin_data),
-                'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
-                'store_fname': False,
-                'db_datas': value,
-            }
-            if value and location == 'file':
-                vals['store_fname'] = self._file_write(value, vals['checksum'])
-                vals['store_document'] = False
-                vals['db_datas'] = False
-            elif value and location == 'documents':
+            if location == 'documents':
+                value = attach.datas
                 directory = attach._attachment_directory(vals)
                 store_document = self.env['muk_dms.file'].sudo().create({
                     'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
                     'directory': directory,
                     'content': value})
-                vals['store_document'] = store_document.id
-                vals['mimetype'] = store_document.mimetype
-                vals['store_fname'] = False
-                vals['db_datas'] = False
-            fname = attach.store_fname
-            document = attach.store_document
-            super(DocumentIrAttachment, attach.sudo()).write(vals)
-            if fname:
-                self._file_delete(fname)
-            if document:
-                document.unlink()
+                vals = {
+                    'file_size': len(bin_data),
+                    'checksum': self._compute_checksum(bin_data),
+                    'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
+                    'store_fname': False,
+                    'db_datas': False,
+                    'store_lobject': False,
+                    'store_document': store_document.id,
+                    'mimetype': store_document.mimetype, 
+                }
+                document = attach.store_document
+                fname = attach.store_fname
+                super(DocumentIrAttachment, attach.sudo()).write(vals)
+                if fname:
+                    self._file_delete(fname)
+                if document:
+                    document.unlink()
+            else:
+                document = attach.store_document
+                super(LObjectIrAttachment, attach)._inverse_datas()
+                if document:
+                    document.unlink()
     
     @api.multi
     def copy(self, default=None):

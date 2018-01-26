@@ -91,10 +91,7 @@
 	</field>
     <field name="help" type="html">
         <p class="oe_view_nocontent_create">
-            Click here to create new documents.
-        </p>
-        <p>
-            Also you will find here all the related documents and download it by clicking on any individual document.
+            Click here to create new attachment.
         </p>
     </field>
 </record>

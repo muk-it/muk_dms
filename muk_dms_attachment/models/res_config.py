@@ -34,6 +34,7 @@ class DocumentAttachmentSettings(models.TransientModel):
         [
             ('db', 'Database'),
             ('file', 'File Storage'),
+            ('lobject', 'PSQL Large Object'),
             ('documents', 'MuK Documents'),
         ],
         required=True,

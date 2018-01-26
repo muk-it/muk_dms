@@ -30,7 +30,7 @@
         Attachment allows to store Odoo Attachments
         inside the Document Management System.
     """,
-    "version": '11.0.1.0.4',   
+    "version": '11.0.1.1.0',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -41,6 +41,7 @@
     ],
     'depends': [
         'muk_dms',
+        'muk_attachment_lobject',
     ],
     "data": [
         "views/dms_actions.xml",
