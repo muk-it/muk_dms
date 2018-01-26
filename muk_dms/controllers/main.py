@@ -49,8 +49,6 @@ class DocumentController(http.Controller):
             response = werkzeug.wrappers.Response(status=status, headers=headers)
         elif status == 301:
             return werkzeug.utils.redirect(content, code=301)
-        elif status == 301:
-            return werkzeug.utils.redirect(content, code=301)
         elif status != 200:
             response = request.not_found()
         else:

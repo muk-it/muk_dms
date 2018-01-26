@@ -45,7 +45,7 @@
 				<t t-name="kanban-box">
 					<div class="muk_kanban_file">
 					    <div class="muk_image text-center" t-attf-data-id="#{record.id.value}">
-							<img t-attf-src="data:image/*;base64,{{record.thumbnail.value}}" />
+							<img t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
 						</div>
 						<div class="muk_filename text-center" t-attf-data-id="#{record.id.value}">
 							<t name="name" t-esc="record.name.value" />

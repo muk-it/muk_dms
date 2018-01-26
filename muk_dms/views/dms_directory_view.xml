@@ -81,7 +81,7 @@
 			<templates>
 				<t t-name="kanban-box">
 					<div class="muk_kanban_directory oe_kanban_global_click">
-						<img class="muk_thumbnail" t-attf-src="data:image/*;base64,{{record.thumbnail.value}}" />
+						<img class="muk_thumbnail" t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
 						<div class="muk_info_panel">
 							<div class="muk_name">
 								<t name="name" t-esc="record.name.value" />

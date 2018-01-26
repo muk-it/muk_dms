@@ -23,9 +23,11 @@
     "name": "MuK Documents",
     "summary": """Document Management System""",
     "description": """ 
-        
+        MuK Documents is a module to create, manage and view files
+        directly within Odoo. By installing module extensions
+        additional features can be enabled.
     """,
-    "version": '11.0.1.2.10',   
+    "version": '11.0.1.2.11',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -69,5 +71,4 @@
     },
     "application": True,
     "installable": True,
-    
 }
