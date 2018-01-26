@@ -126,6 +126,7 @@ class DocumentIrAttachment(models.Model):
         for attach in self:
             if location == 'documents':
                 value = attach.datas
+                bin_data = base64.b64decode(value) if value else b''
                 directory = attach._attachment_directory()
                 store_document = self.env['muk_dms.file'].sudo().create({
                     'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
