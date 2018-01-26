@@ -114,7 +114,7 @@ class DocumentIrAttachment(models.Model):
                     mimetype = mimetypes.guess_type(attach.datas_fname)[0]
         return mimetype or 'application/octet-stream'
 
-    def _attachment_directory(self, vals):
+    def _attachment_directory(self):
         directory = self.env['ir.config_parameter'].sudo().get_param(
             'muk_dms_attachment.attachment_directory', None)
         if directory:
@@ -126,7 +126,7 @@ class DocumentIrAttachment(models.Model):
         for attach in self:
             if location == 'documents':
                 value = attach.datas
-                directory = attach._attachment_directory(vals)
+                directory = attach._attachment_directory()
                 store_document = self.env['muk_dms.file'].sudo().create({
                     'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
                     'directory': directory,
