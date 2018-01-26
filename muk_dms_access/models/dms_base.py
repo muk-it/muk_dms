@@ -130,8 +130,11 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
             access_ids = list(map(lambda x: x[0], fetch)) 
             if isinstance(arg, int):
                 return arg if arg in access_ids else []
+            elif isinstance(arg, models.NewId):
+                return arg
             else:
                 access_arg = (set(arg) & set(access_ids))
+                access_arg |= set(id for id in arg if isinstance(id, models.NewId))
                 return instance(access_arg)
         return instance()
         

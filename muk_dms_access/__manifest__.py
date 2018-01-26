@@ -21,13 +21,13 @@
 
 {
     'name': "MuK Documents Access",
-    'summary': """Document Management System""",
+    'summary': """Access Control""",
     'description': """ 
         MuK Documents Access enables access control groups.
         These groups can be used to customize the security
         of your document management system.
     """,
-    'version': '11.0.1.0.4',   
+    'version': '11.0.1.0.5',   
     'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
@@ -61,5 +61,6 @@
         'static/description/banner.png'
     ],
     "post_init_hook": '_auto_default_group',
+    "application": False,
     "installable": True,
 }
