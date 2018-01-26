@@ -136,14 +136,18 @@ class DocumentIrAttachment(models.Model):
                     'store_lobject': False,
                 }
                 if value:
-                    directory = attach._attachment_directory()
-                    store_document = self.env['muk_dms.file'].sudo().create({
-                        'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
-                        'directory': directory,
-                        'content': value})
-                    vals['store_document'] = store_document.id
-                    vals['mimetype'] = store_document.mimetype
-                document = attach.store_document
+                    if attach.store_document:
+                        store_document = attach.store_document
+                        store_document.sudo().write({'content': value})
+                    else: 
+                        directory = attach._attachment_directory()
+                        store_document = self.env['muk_dms.file'].sudo().create({
+                            'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
+                            'directory': directory,
+                            'content': value})
+                    vals['store_document'] = store_document and store_document.id
+                    vals['mimetype'] = store_document and store_document.mimetype
+                document = False if value else attach.store_document
                 fname = attach.store_fname
                 super(DocumentIrAttachment, attach.sudo()).write(vals)
                 if fname:
