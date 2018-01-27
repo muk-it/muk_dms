@@ -25,7 +25,7 @@
     "description": """ 
         
     """,
-    "version": '11.0.1.2.0',   
+    "version": '11.0.1.2.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
