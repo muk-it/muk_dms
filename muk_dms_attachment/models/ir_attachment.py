@@ -156,7 +156,7 @@ class DocumentIrAttachment(models.Model):
                     document.unlink()
             else:
                 document = attach.store_document
-                super(LObjectIrAttachment, attach)._inverse_datas()
+                super(DocumentIrAttachment, attach)._inverse_datas()
                 if document:
                     document.unlink()
     
