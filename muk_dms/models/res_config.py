@@ -25,6 +25,18 @@ class DocumentSettings(models.TransientModel):
     
     _inherit = 'res.config.settings'
     
+    module_muk_dms_access = fields.Boolean(
+        string="Access Control",
+        help="Allows the creation of groups to define access rights.")
+    
+    module_muk_dms_attachment = fields.Boolean(
+        string="Attachment Storage Location",
+        help="Allows attachments to be stored inside of MuK Documents.")
+    
+    module_muk_dms_attachment_rules = fields.Boolean(
+        string="Attachment Storage Rules",
+        help="Allows attachments to be automatically placed in the right directory.")
+    
     module_muk_dms_finder = fields.Boolean(
         string="Finder",
         help="Enables the Document Finder.")
@@ -33,13 +45,9 @@ class DocumentSettings(models.TransientModel):
         string="File Store",
         help="Enables a new save option to store files into a file store.")
     
-    module_muk_dms_access = fields.Boolean(
-        string="Access Control",
-        help="Allows the creation of groups to define access rights.")
-    
-    module_muk_dms_attachment = fields.Boolean(
-        string="Attachment Storage Location",
-        help="Allows attachments to be stored inside of MuK Documents.")
+    module_muk_dms_lobject = fields.Boolean(
+        string="Large Objects ",
+        help="Enables a new save option to store files into large objects.")
     
     max_upload_size = fields.Char(
         string="Size",
