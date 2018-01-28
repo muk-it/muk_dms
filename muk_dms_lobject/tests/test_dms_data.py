@@ -69,14 +69,6 @@ class DataTestCase(dms_case.DMSTestCase):
         file.directory = self.sub_directory
         self.assertFalse(file.path == path)
         
-    def test_update_checksum(self):
-        file = self.env['muk_dms.file'].sudo().create({
-            'name': "file.txt",
-            'directory': self.root_directory.id,
-            'content': self.file_base64()})
-        file.reference.update_checksum()
-        self.assertTrue(file.reference.checksum)
-        
     def test_unlink_data(self):
         file = self.env['muk_dms.file'].sudo().create({
             'name': "file.txt",
