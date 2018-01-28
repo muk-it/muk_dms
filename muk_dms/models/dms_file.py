@@ -361,7 +361,9 @@ class File(dms_base.DMSModel):
     def _before_unlink(self, operation):
         info = super(File, self)._before_unlink(operation)
         references = set(record.reference for record in self if record.reference)
+        directories = set(record.directory for record in self if record.directory)
         info['references'] = references
+        info['directories'] = directories
         return info
     
     def _after_unlink(self, result, info, infos, operation):
@@ -370,7 +372,10 @@ class File(dms_base.DMSModel):
             for reference in info['references']:
                 reference.sudo().delete()
                 reference.sudo().unlink()
-                        
+        if 'directories' in info:
+            for directory in info['directories']:
+                directory.trigger_computation(['size'])
+                
     #----------------------------------------------------------
     # Reference
     #----------------------------------------------------------

@@ -524,6 +524,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
                 context: session.user_context,
     		}).done(function() {
     			self.do_notify(node.text + _t(" has been moved!"));
+    			self.refresh();
     		}).fail(function() {
     			self.refresh();
     			self.do_warn(node.text + _t(" couldn't be moved!"));
@@ -540,6 +541,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
                 context: session.user_context,
     		}).done(function() {
     			self.do_notify(node.text + _t(" has been deleted!"));
+    			self.refresh();
     		}).fail(function() {
     			self.refresh();
     			self.do_warn(node.text + _t(" couldn't be deleted!"));
@@ -567,6 +569,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
     			node.data = original.data;
     			node.id = original.data.odoo_model.split(".") + "_" + copy_id;
     			self.do_notify(node.text + _t(" has been copied!"));
+    			self.refresh();
     		}).fail(function() {
     			self.refresh();
     			self.do_warn(node.text + _t(" couldn't be copied!"));

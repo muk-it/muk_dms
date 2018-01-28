@@ -353,6 +353,12 @@ class Directory(dms_base.DMSModel):
         for directory in self.child_directories:
             directory.copy({'parent_directory': new.id})
         return new
+    
+    def _before_unlink(self, operation):
+        info = super(Directory, self)._before_unlink(operation)
+        directories = set(record.parent_directory for record in self if record.parent_directory)
+        info['directories'] = directories
+        return info
             
     def _before_unlink_record(self, operation):
         info = super(Directory, self)._before_unlink_record(operation)
@@ -369,3 +375,6 @@ class Directory(dms_base.DMSModel):
         for info in infos:
             if 'lock_operation' in info:
                 self.unlock_operation(info['lock_operation'], True)
+            if 'directories' in info:
+                for directory in info['directories']:
+                    directory.trigger_computation(['size'])
