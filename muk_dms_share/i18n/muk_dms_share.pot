@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_share
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-29 02:08+0000\n"
+"PO-Revision-Date: 2018-01-29 02:08+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_dms_share
+#. openerp-web
+#: code:addons/muk_dms_share/static/src/xml/share_dialog.xml:40
+#, python-format
+msgid "Download"
+msgstr ""
+
+#. module: muk_dms_share
+#. openerp-web
+#: code:addons/muk_dms_share/static/src/xml/share_dialog.xml:36
+#, python-format
+msgid "Preview"
+msgstr ""
+
+#. module: muk_dms_share
+#. openerp-web
+#: code:addons/muk_dms_share/static/src/xml/share_dialog.xml:25
+#, python-format
+msgid "shared a document"
+msgstr ""
+

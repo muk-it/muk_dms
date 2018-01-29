@@ -22,6 +22,7 @@
 <template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
 	<xpath expr="//script[last()]" position="after">
 		<script type="text/javascript" src="/muk_dms_share/static/src/js/share_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_share/static/src/js/chatter_preview.js" />
 	</xpath>
 </template>
 

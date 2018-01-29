@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<templates xml:space="preserve">
+	<t t-name="muk_dms_share.FileLink">
+        <div>
+        	<span>
+        		<span><t t-esc="session.name"/></span>
+        		<span>shared a document</span>
+	        	<a t-att-href="url">
+	        		<t t-esc="name"/>
+	        	</a> 
+	        	<span>
+	        		<span>(</span>
+	        		<a href="#dms_preview" 
+	        			t-att-data-dms_id="id" 
+	        			t-att-data-dms_url="donwload" 
+	        			t-att-data-dms_name="name" 
+	        			t-att-data-dms_mimetype="mimetype" 
+	        			t-att-data-dms_extension="extension" >
+	        			Preview
+	        		</a>
+	        		<span>/</span>
+	        		<a t-att-href="donwload">
+	        			Download
+	        		</a>
+	        		<span>)</span>
+	        	</span>
+        	</span>
+    	</div>
+    </t>
+</templates>

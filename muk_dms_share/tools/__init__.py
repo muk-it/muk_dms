@@ -19,41 +19,4 @@
 #
 ###################################################################################
 
-{
-    "name": "MuK Documents Share",
-    "summary": """Share Documents""",
-    "description": """ 
-        Customizes the Web Share Module for MuK Documents.
-    """,
-    "version": '11.0.1.0.1',   
-    "category": 'Document Management',   
-    "license": "AGPL-3",
-    "website": "http://www.mukit.at",
-    "author": "MuK IT",
-    "contributors": [
-        "Mathias Markl <mathias.markl@mukit.at>",
-    ],
-    "depends": [
-        "muk_dms",
-        "muk_web_share",
-    ],
-    "data": [
-        "template/assets.xml",
-    ],
-    "demo": [
-    ],
-    "qweb": [
-        "static/src/xml/*.xml",
-    ],
-    "images": [
-        'static/description/banner.png'
-    ],
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
-    "application": False,
-    "installable": True,
-    "auto_install": True
-    
-}
+from . import mail

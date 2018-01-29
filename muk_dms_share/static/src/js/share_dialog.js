@@ -21,6 +21,7 @@ odoo.define('muk_dms_share.dialog', function(require) {
 "use strict";
 
 var core = require('web.core');
+var session = require('web.session');
 
 var ShareDialog = require('muk_web_share.dialog');
 
@@ -33,17 +34,24 @@ ShareDialog.include({
     		var model = this.__parentedParent.state.model;
     		var data = this.__parentedParent.state.data;
     		if(model === 'muk_dms.file') {
-    			return $('<div>').append($('<a>',{
-    	    	    text: data.name,
-    	    	    title: _t('File Link'),
-    	    	    href: url,
-    	    	})).html();
-    		} else if(model === 'muk_dms.file') {
-    			return $('<div>').append($('<a>',{
-    	    	    text: data.name,
-    	    	    title: _t('Directory Link'),
-    	    	    href: url,
-    	    	})).html();
+    			var download_url = '/web/content?' + $.param({
+            		model: 'muk_dms.file',
+        			filename: data.name,
+        			filename_field: 'name',
+        			field: 'content',
+        			id: data.id,
+        			download: true
+                });
+    			return $(QWeb.render('muk_dms_share.FileLink', {
+                    widget: this,
+                    session: session, 
+                    name: data.name || url,
+                    url: url,
+                    donwload: download_url,
+                    id: data.id,
+                    mimetype: data.mimetype,
+                    extension: data.extension,
+                })).html();
     		} else {
     			return this._super.apply(this, arguments);
     		}
