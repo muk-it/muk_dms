@@ -179,6 +179,15 @@ class DocumentIrAttachment(models.Model):
             return super(DocumentIrAttachment, self).copy(default)
 
     @api.multi
+    def write(self, vals):
+        result = super(DocumentIrAttachment, self).write(vals)
+        if 'datas_fname' in vals and self:
+            for attach in self:
+                if attach.store_document:
+                    attach.store_document.write({'name': "[A-%s] %s" % (attach.id, vals['datas_fname'])})
+        return result
+
+    @api.multi
     def unlink(self):
         files = set(attach.store_document for attach in self if attach.store_document)
         result = super(DocumentIrAttachment, self).unlink()
