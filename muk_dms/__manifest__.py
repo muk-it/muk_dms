@@ -27,7 +27,7 @@
         directly within Odoo. By installing module extensions
         additional features can be enabled.
     """,
-    "version": '11.0.1.2.13',   
+    "version": '11.0.1.3.0',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -37,6 +37,7 @@
         "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     "depends": [
+        "muk_web_utils",
         "muk_web_preview",
         "muk_web_client_refresh",
     ],

@@ -49,11 +49,19 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
         '/muk_dms/static/lib/jsTree/jstree.js',
     ],
 	template: 'muk_dms.DocumentTreeView',
+	events: _.extend({}, Widget.prototype.events, {
+		'dragenter .oe_document_col_tree': '_dragenter_dropzone',
+		'dragover .oe_document_col_tree': '_dragover_dropzone',
+		'dragleave .oe_document_col_tree': '_dragleave_dropzone',
+		'drop .oe_document_col_tree': '_drop_dropzone',
+	}),
 	init: function(parent, context) {
         this._super(parent, context);
         this.splitter = false;
         this.auto_refresh = true;
         this.action_open_dialog = false;
+        this.FileReaderAPI = window.File && window.FileReader &&
+        	window.FileList && window.Blob;
     },
     willStart: function() {
          return $.when(ajax.loadLibs(this), this._super());
@@ -65,6 +73,25 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
             self.render();
         	self.$('[data-toggle="tooltip"]').tooltip();
             self.$el.parent().addClass('oe_background_grey');
+            if(self.FileReaderAPI) {
+            	var dropzone = self.$el.find('.oe_document_col_tree');
+                dropzone.dndHover().on({
+                    'dndHoverStart': function(ev) {
+                    	if(self.FileReaderAPI) {
+	                    	dropzone.addClass('oe_document_dropzone');
+	                    	ev.stopPropagation();
+	                    	ev.preventDefault();
+	                        return false;
+                    	}
+                    },
+                    'dndHoverEnd': function(ev) {
+                    	dropzone.removeClass('oe_document_dropzone');
+                    	ev.stopPropagation();
+                    	ev.preventDefault();
+                        return false;
+                    }
+                });
+        	}
         });
     },
     toggle_dialog: function() {
@@ -79,6 +106,18 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 		    }, timeout || 0);
     	}
     },
+    refresh_node: function(obj, timeout) {
+    	var self = this;
+    	if(this.$tree && this.auto_refresh) {
+    		if(obj && obj.data && obj.data.odoo_model !== 'muk_dms.settings') {
+    			dms_utils.delay(function() {
+    				self.$tree.jstree(true).refresh_node(obj);
+    		    }, timeout || 0);
+    		} else {
+    			self.refresh();
+    		}
+    	}
+    },
     toggle_refresh: function() {
     	this.auto_refresh = !this.auto_refresh;
     	this.$pager.find('.auto_refresh').toggleClass("active");
@@ -87,7 +126,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
     on_reverse_breadcrumb: function() {
         web_client.do_push_state({});
         this.update_cp();
-        this.refresh(true);
+        this.refresh(true, 0, true);
     },
     render: function() {
         var self = this;
@@ -792,6 +831,103 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 			}
     	}
     	return menu;
+    },
+    _dragenter_dropzone: function(ev) {
+    	if(this.FileReaderAPI) {
+	    	ev.preventDefault();
+    	}
+    },
+    _dragover_dropzone: function(ev) {
+    	if(this.FileReaderAPI && ev.originalEvent.dataTransfer) {
+        	ev.preventDefault();
+    		ev.originalEvent.dataTransfer.dropEffect = 'copy';
+    	}
+    },
+    _dragleave_dropzone: function(ev) {
+    	if(this.FileReaderAPI) {
+	    	ev.preventDefault();
+    	}
+    },
+    _drop_dropzone: function(ev) {
+    	var self = this;
+    	function traverse_items(item, parent) {
+    		var $event = $.Deferred();
+		    if(item.isFile) {
+		    	item.file(function(file) {
+			    	var fileReader = new FileReader();
+			    	fileReader.readAsDataURL(file);
+			    	fileReader.onloadend = function (upload) {
+			    		var data = upload.target.result;
+	                    data = data.split(',')[1];
+	                    self._rpc({
+	    	                model: 'muk_dms.file',
+	    	                method: 'create',
+	    	                args: [{
+	    	                	'name': file.name,
+	    	                	'content': data,
+	    	                	'directory': parent,
+	    	                }],
+	    	                context: session.user_context,
+	    	    		}).done(function() {
+	    	    			$event.resolve();
+	    	    			self.do_notify(file.name + _t(" has been created!"));
+	    	    		}).fail(function() {
+	    	    			self.do_warn(file.name + _t(" couldn't be created!"));
+	    	    		});
+	                };
+			    });
+		    } else if(item.isDirectory) {
+			    var dirReader = item.createReader();
+			    self._rpc({
+	                model: 'muk_dms.directory',
+	                method: 'create',
+	                args: [{
+	                	'name': item.name,
+	                	'parent_directory': parent,
+	                }],
+	                context: session.user_context,
+	    		}).done(function(id) {
+	    			dirReader.readEntries(function(entries) {
+				    	var events = [];
+	    				for (var i = 0; i < entries.length; i++) {
+	    					events.push(traverse_items(entries[i], id));
+				        }
+	    				$.when.apply($, events).then(function() {
+	    					$event.resolve();
+	    	        	});
+				    });
+	    		}).fail(function() {
+	    			self.do_warn(item.name + _t(" couldn't be created!"));
+	    		});
+		    }
+            return $event;
+		}
+    	if(this.$tree && ev.originalEvent.dataTransfer) {
+    		var selected = this.$tree.jstree(true).get_selected();
+    		var node = selected.length > 0 ? 
+    				this.$tree.jstree(true).get_node(selected[0]) : false;
+    		if(node && node.data && node.data.odoo_model === "muk_dms.file") {
+    			node = this.$tree.jstree(true).get_node(node.parent) || false;
+    		}
+    		if(node && node.data && node.data.odoo_model !== 'muk_dms.settings') {
+	    		ev.stopPropagation();
+	            ev.preventDefault();
+	            var items = ev.originalEvent.dataTransfer.items;
+	            for (var i = 0; i < items.length; i++) {
+		        	var item = items[i].webkitGetAsEntry();
+		        	if (item) {
+		        		traverse_items(item, node.data.odoo_id).then(function() {
+		        			var parent = self.$tree.jstree(true).get_node(node.parent) || false
+		        			self.refresh_node(parent);
+		            	});
+		            } else {
+		            	self.do_warn(_t("Your browser doesn't support Drag and Drop!"));
+		            }
+		        }
+    		} else {
+    			self.do_warn(_t("No directory has been selected!"));
+    		}
+    	}
     },
 });
 

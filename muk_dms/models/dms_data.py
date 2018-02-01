@@ -72,5 +72,5 @@ class DatabaseDataModel(models.Model):
             self.data = values['content']
     
     def delete(self):
-        self.file = None
+        self.data = None
     
