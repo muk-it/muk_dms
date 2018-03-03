@@ -297,8 +297,8 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
         }).then(function(settings) {
         	_.each(settings, function(setting, index, settings) {
         		if(setting.top_directories.length > 0) {
-        			var data_part = $.Deferred();
-        			data_parts.push(data_part);
+        			var data_part_directory = $.Deferred();
+        			data_parts.push(data_part_directory);
 	        		self._rpc({
 	                    fields: [
 	                    	'name', 'parent_directory', 
@@ -314,12 +314,12 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 	                    context: session.user_context,
 	                }).then(function(directories) {
 	                	settings[index].top_directories = directories;
-	                	data_part.resolve(directories);
+	                	data_part_directory.resolve(directories);
 	                });
         		}
         		if(setting.top_files.length > 0) {
-        			var data_part = $.Deferred();
-        			data_parts.push(data_part);
+        			var data_part_file = $.Deferred();
+        			data_parts.push(data_part_file);
 	        		self._rpc({
 	                    fields: [
 	                    	'name', 'mimetype', 'extension', 
@@ -335,7 +335,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 	                    context: session.user_context,
 	                }).then(function(files) {
 	                	settings[index].top_files = files;
-	                	data_part.resolve(files);
+	                	data_part_file.resolve(files);
 	                });
         		}
         	});
