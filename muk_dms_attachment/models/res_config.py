@@ -37,7 +37,6 @@ class DocumentAttachmentSettings(models.TransientModel):
             ('lobject', 'PSQL Large Object'),
             ('documents', 'MuK Documents'),
         ],
-        required=True,
         string='Storage Location',
         help="Attachment storage location.")
     
