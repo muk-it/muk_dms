@@ -27,7 +27,7 @@
         These groups can be used to customize the security
         of your document management system.
     """,
-    'version': '11.0.1.0.5',   
+    'version': '11.0.1.0.6',   
     'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",

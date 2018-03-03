@@ -296,6 +296,12 @@ class File(dms_base.DMSModel):
         if max_upload_size * 1024 * 1024 < len(base64.b64decode(self.content)):
             raise ValidationError(_("The maximum upload size is %s MB).") % max_upload_size)
     
+    def _before_create(self, vals):
+        if 'directory' in vals and vals['directory']:
+            directory = self.browse(vals['directory'])
+            directory.check_access('create', raise_exception=True)
+        return super(File, self)._before_create(vals)
+    
     def _after_create(self, vals):
         record = super(File, self)._after_create(vals)
         record._check_recomputation(vals)

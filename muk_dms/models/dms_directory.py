@@ -310,6 +310,12 @@ class Directory(dms_base.DMSModel):
         if duplicates:
             raise ValidationError("A directory with the same name already exists.")
     
+    def _before_create(self, vals):
+        if 'parent_directory' in vals and vals['parent_directory']:
+            directory = self.browse(vals['parent_directory'])
+            directory.check_access('create', raise_exception=True)
+        return super(Directory, self)._before_create(vals)
+    
     def _after_create(self, vals):
         record = super(Directory, self)._after_create(vals)
         record._check_recomputation(vals)

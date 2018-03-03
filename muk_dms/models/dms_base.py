@@ -296,7 +296,8 @@ class DMSBaseModel(models.BaseModel):
     @api.model
     def create(self, vals):
         vals = self._before_create(vals)
-        result = super(DMSBaseModel, self).create(vals)
+        self.check_access_rights('create')
+        result = super(DMSBaseModel, self.sudo()).create(vals)
         result = result._after_create(vals)
         return result
     
@@ -463,16 +464,16 @@ class DMSAccessModel(DMSAbstractModel):
     #----------------------------------------------------------
         
     @api.one
-    def _compute_perm_create(self):
-        try:
-            self.perm_create = self.check_access('create')
-        except AccessError:
-             self.perm_create = False
-            
-    @api.one
     def _compute_perm_read(self):
         try:
             self.perm_read = self.check_access('read')
+        except AccessError:
+             self.perm_read = False
+        
+    @api.one
+    def _compute_perm_create(self):
+        try:
+            self.perm_create = self.check_access('create')
         except AccessError:
              self.perm_create = False
     
@@ -481,14 +482,14 @@ class DMSAccessModel(DMSAbstractModel):
         try:
             self.perm_write = self.check_access('write')
         except AccessError:
-             self.perm_create = False
+             self.perm_write = False
         
     @api.one
     def _compute_perm_unlink(self):
         try:
             self.perm_unlink = self.check_access('unlink')
         except AccessError:
-             self.perm_create = False
+             self.perm_unlink = False
              
     @api.one
     def _compute_lock(self):

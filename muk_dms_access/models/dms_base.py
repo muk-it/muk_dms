@@ -20,6 +20,7 @@
 ###################################################################################
 
 import os
+import inspect
 import string
 import unicodedata
 import hashlib
@@ -110,6 +111,30 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
     @api.model
     def _apply_ir_rules(self, query, mode='read'):
         super(DMSAdvancedAccessModel, self)._apply_ir_rules(query, mode)
+    
+    @api.model
+    def check_field_access_rights(self, operation, fields):
+        fields = super(DMSAdvancedAccessModel, self).check_field_access_rights(operation, fields)
+        if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
+            return fields
+        if operation == 'write' and 'groups' in fields:
+            base, model = self._name.split(".")
+            sql = '''
+                SELECT r.aid
+                FROM muk_groups_complete_%s_rel r
+                JOIN muk_dms_access_groups g ON r.gid = g.id
+                JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
+                WHERE u.uid = %s AND g.perm_access = true
+            ''' % (model, self.env.user.id)
+            self.env.cr.execute(sql)
+            fetch = self.env.cr.fetchall()
+            if len(fetch) == 0:
+                raise AccessError(_("This operation is forbidden!"))
+        return fields
+    
+    #----------------------------------------------------------
+    # Read
+    #----------------------------------------------------------
     
     def _before_browse(self, arg):
         arg = super(DMSAdvancedAccessModel, self)._before_browse(arg)
@@ -211,26 +236,6 @@ class DMSAdvancedAccessModel(dms_base.DMSAbstractModel):
                     access_result.append(tuple)
             return access_result
         return []
-    
-    @api.model
-    def check_field_access_rights(self, operation, fields):
-        fields = super(DMSAdvancedAccessModel, self).check_field_access_rights(operation, fields)
-        if self.env.user.id == SUPERUSER_ID or self.user_has_groups('muk_dms.group_dms_admin'):
-            return fields
-        if operation == 'write' and 'groups' in fields:
-            base, model = self._name.split(".")
-            sql = '''
-                SELECT r.aid
-                FROM muk_groups_complete_%s_rel r
-                JOIN muk_dms_access_groups g ON r.gid = g.id
-                JOIN muk_dms_groups_users_rel u ON r.gid = u.gid
-                WHERE u.uid = %s AND g.perm_access = true
-            ''' % (model, self.env.user.id)
-            self.env.cr.execute(sql)
-            fetch = self.env.cr.fetchall()
-            if len(fetch) == 0:
-                raise AccessError(_("This operation is forbidden!"))
-        return fields
         
     #----------------------------------------------------------
     # Read, View 

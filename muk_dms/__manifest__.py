@@ -27,7 +27,7 @@
         directly within Odoo. By installing module extensions
         additional features can be enabled.
     """,
-    "version": '11.0.1.3.0',   
+    "version": '11.0.1.3.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",

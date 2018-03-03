@@ -85,15 +85,17 @@ var FieldDirectoryMany2One = field_widgets.FieldMany2One.extend({
         } else {
         	domain.push(['name', 'ilike', search_val]);
         }
-        domain.push(['perm_create', '=', true]);
         this._rpc({
-            fields: ['name', 'path'],
+            fields: ['name', 'path', 'perm_create'],
             domain: domain,
             model: 'muk_dms.directory',
             method: 'search_read',
             limit: this.limit,
             context: context,
         }).then(function (directories) {
+        	directories = _.filter(directories, function(directory, index) {
+        		return directory.perm_create;
+    		})
         	var values = _.map(directories, function (directory) {
         		var path = directory.path;
         		var length = directory.path.length;
