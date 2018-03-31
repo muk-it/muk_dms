@@ -95,6 +95,8 @@
 			<sheet>
 				<field name="locked" invisible="1" />
 				<field name="editor" invisible="1" />
+				<div class="oe_button_box" name="button_box">
+                </div>
 				<field name="thumbnail" 
 					widget="image" 
 					class="oe_avatar oe_read_only" 
