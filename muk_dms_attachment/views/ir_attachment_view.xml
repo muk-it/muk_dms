@@ -72,7 +72,9 @@
                   <field name="storage_type"/>
                   <field name="db_datas" readonly="1" attrs="{'invisible':[('db_datas','=',False)]}"/>
                   <field name="store_fname" readonly="1" attrs="{'invisible':[('store_fname','=',False)]}"/>
+                  <field name="store_lobject" readonly="1" attrs="{'invisible':[('store_lobject','=',False)]}"/>
                   <field name="store_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
+                  <field name="is_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
               </group>
         </xpath>
     </field>
@@ -83,7 +85,11 @@
 	<field name="res_model">ir.attachment</field>
 	<field name="view_mode">tree,form</field>
 	<field name="search_view_id" ref="base.view_attachment_search"/>
-	<field name="domain">['|', ['res_field', '=', False], ['res_field', '!=', False]]</field>
+	<field name="domain">[
+		'&amp;', ['is_document', '=', False], 
+		'|', ['res_field', '=', False],
+		 ['res_field', '!=', False]]
+	</field>
 	<field name="context">
 		{'search_default_group_res_model': 1,
 	 	 'search_default_group_res_name': 1, 

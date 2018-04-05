@@ -24,8 +24,9 @@
 	<field name="model">muk_dms.file</field>
 	<field name="inherit_id" ref="muk_dms.view_dms_file_form" />
 	<field name="arch" type="xml">
-		<xpath expr="//field[@name='reference']" position="after">
-			<field name="attachment" attrs="{'invisible':[('attachment','=',False)]}"/>
+		<xpath expr="//group/field[@name='reference']" position="after">
+			<field name="attachment" attrs="{'invisible':[('is_attachment','=',False)]}"/>
+			<field name="is_attachment" attrs="{'invisible':[('is_attachment','=',False)]}"/>
 		</xpath>
 	</field>
 </record>

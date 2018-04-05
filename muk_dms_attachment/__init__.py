@@ -30,4 +30,5 @@ def _uninstall_force_storage(cr, registry):
     config = env['ir.config_parameter']
     config.sudo().set_param('ir_attachment.location', 'file')
     attachment = env['ir.attachment']
+    attachment.sudo().force_clean()
     attachment.sudo().force_storage()

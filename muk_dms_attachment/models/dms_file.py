@@ -47,10 +47,24 @@ class AttachmentFile(dms_base.DMSModel):
     #----------------------------------------------------------
     
     attachment = fields.Many2one(
-        'ir.attachment', 
-        string="Attachment",
+        comodel_name='ir.attachment', 
         compute='_compute_attachment',
+        string="Attachment",
         help="Reference to the attachment, if the file was created from one.")
+    
+    is_attachment = fields.Boolean(
+        compute='_compute_attachment',
+        string="Attachment")
+    
+    attachments = fields.One2many(
+        comodel_name='ir.attachment',
+        inverse_name="store_document",
+        string="Attachments",
+        domain=[
+            '&', ('is_document', '=', True),
+            '|', ('res_field', '=', False),
+            ('res_field', '!=', False)],
+        readonly=True)
     
     #----------------------------------------------------------
     # Function
@@ -67,19 +81,51 @@ class AttachmentFile(dms_base.DMSModel):
                 raise AccessError(_("This operation is forbidden!"))
             return False
     
+    @api.returns('ir.attachment')
+    def attach_file(self, model=None, field=None, id=None, copy=False, public=False):
+        attachments = self.env['ir.attachment'].sudo()
+        for record in self:
+            if copy:
+                attachments |= attachments.create({
+                'type': 'binary',
+                'name': record.name,
+                'datas_fname': record.name,
+                'datas': record.content,
+                'is_document': False,
+                'res_model': model,
+                'res_field': field,
+                'res_id': id,
+                'public': public})
+            else:
+                attachments |= attachments.create({
+                'type': 'binary',
+                'name': "[F-%s] %s" % (record.id, record.name),
+                'datas_fname': record.name,
+                'store_document': record.id,
+                'is_document': True,
+                'res_model': model,
+                'res_field': field,
+                'res_id': id,
+                'public': public})
+        return attachments
+        
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
     
+    @api.multi
     def _compute_attachment(self):
         attachment = self.env['ir.attachment'].sudo()
         for record in self:
             attachment = attachment.search([
                 '&', ['store_document', '=', record.id],
-                '|', ['res_field', '=', False], ['res_field', '!=', False]])
-            if len(attachment) > 1:
-                _logger.warn(_("Multiple Attachments link to the same file!"))
-            record.attachment = attachment.search([], limit=1)
+                '&', ('is_document', '=', False),
+                '|', ('res_field', '=', False),
+                ('res_field', '!=', False)], limit=1)
+            record.update({
+                'attachment': attachment,
+                'is_attachment': attachment.exists(),
+            })
     
     #----------------------------------------------------------
     # Delete
@@ -87,7 +133,7 @@ class AttachmentFile(dms_base.DMSModel):
             
     def _before_unlink_record(self, operation):
         info = super(AttachmentFile, self)._before_unlink(operation)
-        attachments = set(record.attachment for record in self if record.attachment)
+        attachments = self.mapped('attachment') | self.mapped('attachments')
         info['attachments'] = attachments
         return info
     

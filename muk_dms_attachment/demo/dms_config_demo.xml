@@ -6,11 +6,11 @@
 		<field name="key">muk_dms_attachment.attachment_directory</field>
 		<field name="value" ref="muk_dms_attachment.directory_attachment_demo"/>
 	</record>
+
+	<function model="ir.config_parameter" name="set_param" 
+		eval="('ir_attachment.location', 'documents')" />
 	
-	<record id="config_location_demo" model="ir.config_parameter">	      
-		<field name="key">ir_attachment.location</field>
-		<field name="value">documents</field>
-	</record>
+	<function model="ir.attachment" name="force_storage"/>
 
 	</data>
 </odoo>

@@ -51,15 +51,39 @@ class DocumentIrAttachment(models.Model):
     
     store_document = fields.Many2one(
         'muk_dms.file', 
-        string="Document File",)
+        string="Document File",
+        index=True,)
+    
+    is_document = fields.Boolean(
+        string="Document",
+        default=False)
     
     #----------------------------------------------------------
     # Function
     #----------------------------------------------------------
     
+    @api.model
+    def force_clean(self):
+        if not self.env.user._is_admin():
+            raise AccessError(_('Only administrators can execute this action.'))
+        for attach in self.search(['&',['is_document', '=', True], '|', ['res_field', '=', False], ['res_field', '!=', False]]):
+            attach.unlink()
+        return True
+     
+    @api.model
+    def force_storage(self):
+        if not self.env.user._is_admin():
+            raise AccessError(_('Only administrators can execute this action.'))
+        for attach in self.search(['&',['is_document', '=', False], '|', ['res_field', '=', False], ['res_field', '!=', False]]):
+            attach.write({'datas': attach.datas})
+        return True
+    
     @api.multi
     def migrate(self):
+        storage = self._storage()
         for attach in self:
+            if attach.is_document and storage != 'documents':
+                attach.is_document = False
             attach.write({'datas': attach.datas})
     
     #----------------------------------------------------------
@@ -103,6 +127,17 @@ class DocumentIrAttachment(models.Model):
     # Create, Write, Delete
     #----------------------------------------------------------
 
+    @api.constrains('store_document')
+    def _check_store_document(self):
+        for attach in self:
+            attachments = attach.sudo().search([
+                '&', ('store_document', '=', attach.store_document.id),
+                '&', ('is_document', '=', False),
+                '|', ('res_field', '=', False),
+                ('res_field', '!=', False)])
+            if len(attachments) >= 2:
+                raise ValidationError(_('The file is already referenced by another attachment.'))
+
     def _compute_mimetype(self, values):
         mimetype = super(DocumentIrAttachment, self)._compute_mimetype(values)
         if not mimetype or mimetype == 'application/octet-stream':
@@ -124,6 +159,8 @@ class DocumentIrAttachment(models.Model):
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
+            if attach.is_document:
+                raise ValidationError(_('The data of an attachment created by a file cannot be changed.'))
             if location == 'documents':
                 value = attach.datas
                 bin_data = base64.b64decode(value) if value else b''
@@ -147,13 +184,10 @@ class DocumentIrAttachment(models.Model):
                             'content': value})
                     vals['store_document'] = store_document and store_document.id
                     vals['mimetype'] = store_document and store_document.mimetype
-                document = False if value else attach.store_document
                 fname = attach.store_fname
                 super(DocumentIrAttachment, attach.sudo()).write(vals)
                 if fname:
                     self._file_delete(fname)
-                if document:
-                    document.unlink()
             else:
                 document = attach.store_document
                 super(DocumentIrAttachment, attach)._inverse_datas()
@@ -181,15 +215,15 @@ class DocumentIrAttachment(models.Model):
     @api.multi
     def write(self, vals):
         result = super(DocumentIrAttachment, self).write(vals)
-        if 'datas_fname' in vals and self:
+        if 'datas_fname' in vals and self.exists():
             for attach in self:
-                if attach.store_document:
+                if attach.store_document and not attach.is_document:
                     attach.store_document.write({'name': "[A-%s] %s" % (attach.id, vals['datas_fname'])})
         return result
 
     @api.multi
     def unlink(self):
-        files = set(attach.store_document for attach in self if attach.store_document)
+        files = set(attach.store_document for attach in self if attach.store_document and not attach.is_document)
         result = super(DocumentIrAttachment, self).unlink()
         for file in files:
             file.sudo().unlink()
