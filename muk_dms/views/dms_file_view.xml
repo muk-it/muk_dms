@@ -44,10 +44,10 @@
 			<templates>
 				<t t-name="kanban-box">
 					<div class="muk_kanban_file">
-					    <div class="muk_image text-center" t-attf-data-id="#{record.id.value}">
+					    <div class="muk_image text-center" t-attf-data-id="#{record.id.raw_value}">
 							<img t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
 						</div>
-						<div class="muk_filename text-center" t-attf-data-id="#{record.id.value}">
+						<div class="muk_filename text-center" t-attf-data-id="#{record.id.raw_value}">
 							<t name="name" t-esc="record.name.value" />
 						</div>
 					</div>
@@ -169,7 +169,9 @@
 					</page>
 					<page string="Technical Information" groups="muk_dms.group_dms_admin,base.group_system">
 						<group>
-							<field name="reference" />
+							<group>
+								<field name="reference" />
+							</group>
 						</group>
 						<group string="Indexed Content">
 							<field name="index_content" nolabel="1" />
