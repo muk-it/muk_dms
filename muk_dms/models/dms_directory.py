@@ -201,7 +201,10 @@ class Directory(dms_base.DMSModel):
                     record.settings = record.parent_directory.settings
         else:
             self.ensure_one()
-            return {'settings': self.parent_directory.settings.id}        
+            if self.is_root_directory:
+                return {'settings': self.settings.id} 
+            else:
+                return {'settings': self.parent_directory.settings.id}        
     
     def _compute_path(self, write=True):
         def get_path(record):

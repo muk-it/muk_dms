@@ -338,8 +338,9 @@ class File(dms_base.DMSModel):
                 else:
                     reference = record._create_reference(
                         settings, directory.path, record.name, content)
-                record.reference = "%s,%s" % (reference._name, reference.id)
-                record.size = len(base64.b64decode(content))
+                reference = "%s,%s" % (reference._name, reference.id)
+                size = len(base64.b64decode(content))
+                record.write({'reference': reference, 'size': size})
             else:
                 record._unlink_reference()
                 record.reference = None
@@ -391,7 +392,7 @@ class File(dms_base.DMSModel):
         self.check_access('create', raise_exception=True)
         if settings.save_type == 'database':
             return self.env['muk_dms.data_database'].sudo().create({'data': content})
-        return None
+        return None # TODO ERROR Change Order
     
     def _update_reference_content(self, content):
         self.ensure_one()     

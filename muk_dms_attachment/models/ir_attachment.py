@@ -74,14 +74,17 @@ class DocumentIrAttachment(models.Model):
     def force_storage(self):
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
-        for attach in self.search(['&',['is_document', '=', False], '|', ['res_field', '=', False], ['res_field', '!=', False]]):
+        attachments = self.search(['&', ['is_document', '=', False], '|', ['res_field', '=', False], ['res_field', '!=', False]])
+        for index, attach in enumerate(attachments):
+            _logger.info(_("Migrate Attachment %s of %s") % (index, len(attachments)))
             attach.write({'datas': attach.datas})
         return True
     
     @api.multi
     def migrate(self):
         storage = self._storage()
-        for attach in self:
+        for index, attach in enumerate(self):
+            _logger.info(_("Migrate Attachment %s of %s") % (index, len(self)))
             if attach.is_document and storage != 'documents':
                 attach.is_document = False
             attach.write({'datas': attach.datas})
@@ -138,22 +141,14 @@ class DocumentIrAttachment(models.Model):
             if len(attachments) >= 2:
                 raise ValidationError(_('The file is already referenced by another attachment.'))
 
-    def _compute_mimetype(self, values):
-        mimetype = super(DocumentIrAttachment, self)._compute_mimetype(values)
-        if not mimetype or mimetype == 'application/octet-stream':
-            mimetype = None
-            for attach in self:
-                if attach.mimetype:
-                    mimetype = attach.mimetype
-                if not mimetype and attach.datas_fname:
-                    mimetype = mimetypes.guess_type(attach.datas_fname)[0]
-        return mimetype or 'application/octet-stream'
-
     def _attachment_directory(self):
-        directory = self.env['ir.config_parameter'].sudo().get_param(
+        attachment_directory = self.env['ir.config_parameter'].sudo().get_param(
             'muk_dms_attachment.attachment_directory', None)
-        if directory:
-            return directory
+        if attachment_directory:
+            directory = self.env['muk_dms.directory'].sudo().browse(int(attachment_directory)) 
+            if directory.exists():
+                directory.read(['settings'])
+                return directory.id
         raise ValidationError(_('A directory has to be defined.'))
         
     def _inverse_datas(self):
