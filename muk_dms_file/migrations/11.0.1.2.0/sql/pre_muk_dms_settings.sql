@@ -1,1 +1,0 @@
-ALTER TABLE muk_dms_settings RENAME COLUMN entry_path TO base_path

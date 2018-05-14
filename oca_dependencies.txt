@@ -1,2 +1,1 @@
-muk_base https://github.com/muk-it/muk_base
 muk_web https://github.com/muk-it/muk_web
