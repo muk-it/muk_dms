@@ -1,0 +1,18 @@
+
+<cfscript>
+			var sum = 0;
+			for(j=1; j < cclen; j++) {
+				var digit = ccnumber[j];
+				if( (cclen == 16 && j % 2 != 0) || (cclen == 15 && j % 2 == 0) ){
+					digit = digit * 2;
+					if(digit > 9){
+						digit = ( left(digit,1) + right(digit,1) );
+					} else {
+						digit = digit;
+					}
+				}
+				sum += digit;
+			}
+			var check_digit = [0,9,8,7,6,5,4,3,2,1];
+			ccnumber[cclen] = check_digit[(sum % 10 + 1)];
+</cfscript>

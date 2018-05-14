@@ -2,8 +2,6 @@
 
 ###################################################################################
 # 
-#    MuK Document Management System
-#
 #    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,29 +19,59 @@
 #
 ###################################################################################
 
-from openerp import models, fields
+from openerp import models, fields, api
+from openerp.tools.safe_eval import safe_eval
 
-class DMSConfigSettings(models.TransientModel):
 
-    _name = 'muk_dms.config.settings'
+class DocumentSettings(models.TransientModel):
+    _name = 'dms.config.settings'
     _inherit = 'res.config.settings'
+    # _inherit = 'base.config.settings'
+    
+    module_muk_dms_access = fields.Boolean(
+        string="Access Control",
+        help="Allows the creation of groups to define access rights.")
+    
+    module_muk_dms_attachment = fields.Boolean(
+        string="Attachment Storage Location",
+        help="Allows attachments to be stored inside of MuK Documents.")
+    
+    module_muk_dms_attachment_rules = fields.Boolean(
+        string="Attachment Storage Rules",
+        help="Allows attachments to be automatically placed in the right directory.")
+    
+    module_muk_dms_finder = fields.Boolean(
+        string="Finder",
+        help="Enables the Document Finder.")
+    
+    module_muk_dms_file = fields.Boolean(
+        string="File Store",
+        help="Enables a new save option to store files into a file store.")
+    
+    module_muk_dms_lobject = fields.Boolean(
+        string="Large Objects ",
+        help="Enables a new save option to store files into large objects.")
+    
+    max_upload_size = fields.Char(
+        string="Size",
+        help="Defines the maximum upload size in MB. Default (25MB)")
+    
+    forbidden_extensions = fields.Char(
+        string="Extensions",
+        help="Defines a list of forbidden file extensions. (Example: '.exe,.msi')")
 
-    module_muk_dms_file = fields.Boolean('File System Support',
-        help='Save Documents to a local file system.\n'
-        '- This installs the module muk_dms_file.'
-    )
-    
-    module_muk_dms_finder = fields.Boolean('Document Finder',
-        help='Provides a Web Finder to manage the Documents.\n'
-        '- This installs the module muk_dms_finder.'
-    )
-    
-    module_muk_dms_access = fields.Boolean('Access Rights',
-        help='Adds additional access rights for Documents.\n'
-        '- This installs the module muk_dms_access.'
-    )
-    
-    module_muk_dms_search = fields.Boolean('Advanced Search',
-        help='Adds a full-text search for Documents.\n'
-        '- This installs the module muk_dms_search.'
-    )
+
+    def get_default_dms_template_user_id(self, cr, uid, fields, context=None):
+        icp = self.pool.get('ir.config_parameter')
+        # we use safe_eval on the result, since the value of the parameter is a nonempty string
+        return {
+            'max_upload_size': safe_eval(icp.get_param(cr, uid, 'muk_dms.max_upload_size', '25')),
+            'forbidden_extensions': safe_eval(icp.get_param(cr, uid, 'auth_signup.allow_uninvited', '''False''')),
+        }
+
+    def set_dms_user_id(self, cr, uid, ids, context=None):
+        config = self.browse(cr, uid, ids[0], context=context)
+        icp = self.pool.get('ir.config_parameter')
+        # we store the repr of the values, since the value of the parameter is a required string
+        icp.set_param(cr, uid, 'muk_dms.max_upload_size', repr(config.max_upload_size))
+        icp.set_param(cr, uid, 'muk_dms.forbidden_extensions', repr(config.forbidden_extensions))
