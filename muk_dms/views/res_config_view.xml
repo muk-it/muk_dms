@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<openerp>
+<data>
+
+<record id="res_config_settings_view_form" model="ir.ui.view">
+	<field name="name">res.config.settings.view.form.inherit.muk_dms</field>
+	<field name="model">dms.config.settings</field>
+	<field name="priority" eval="20"/>
+	<field name="arch" type="xml">
+
+		<form string="Configure Dms" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <separator string="Dms Config"/>
+
+                    	<group>
+	                        <label for="id" string="Base Extensions"/>
+	                        <div>
+	                            <div>
+	                            	<field name="module_muk_dms_access"/>
+	                            	 <label for="module_muk_dms_access"/>
+	                            </div>
+	                            <div>
+	                            	<field name="module_muk_dms_attachment"/>
+	                            	 <label for="module_muk_dms_attachment"/>
+	                            </div>
+	                            <div>
+	                            	<field name="module_muk_dms_attachment_rules"/>
+	                            	 <label for="module_muk_dms_attachment_rules"/>
+	                            </div>
+	                        </div>
+	                    </group>
+
+	                    <group>
+	                        <label for="id" string="Client Extensions"/>
+	                        <div>
+	                            <div>
+	                            	<field name="module_muk_dms_finder"/>
+	                            	 <label for="module_muk_dms_finder"/>
+	                            </div>
+	                        </div>
+	                    </group>
+
+	                   	<group>
+	                        <label for="id" string="Save Extensions"/>
+	                        <div>
+	                            <div>
+	                            	<field name="module_muk_dms_file"/>
+	                            	 <label for="module_muk_dms_file"/>
+	                            </div>
+	                            <div>
+	                            	<field name="module_muk_dms_lobject"/>
+	                            	 <label for="module_muk_dms_lobject"/>
+	                            </div>
+	                            <div>
+	                            	<field name="module_muk_dms_lobject"/>
+	                            	 <label for="module_muk_dms_lobject"/>
+	                            </div>
+	                        </div>
+	                    </group>
+
+	                   	<group>
+	                        <label for="id" string="File"/>
+	                        <div>
+	                            <div>
+	                            	<field name="max_upload_size"/>
+	                            	 <label for="max_upload_size"/>
+	                            </div>
+	                            <div>
+	                            	<field name="forbidden_extensions"/>
+	                            	 <label for="forbidden_extensions"/>
+	                            </div>
+	                           
+	                        </div>
+	                    </group>
+	    </form>
+    </field>
+</record>
+
+
+ 
+
+<record id="action_dms_settings_general" model="ir.actions.act_window">
+    <field name="name">General Settings</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">dms.config.settings</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module' : 'muk_dms'}</field>
+</record>
+
+<menuitem id="menu_dms_settings_general" name="dms Settings" 
+	parent="base.menu_config"
+   	sequence="50" 
+   	action="action_dms_settings_general" 
+   	groups="muk_dms.group_dms_admin,base.group_system"/>
+            
+</data>
+</openerp>
+
