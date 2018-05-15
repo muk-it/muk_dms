@@ -1,0 +1,42 @@
+.oe_document_content {
+  height: 100% !important;
+}
+.oe_document_container {
+  height: 100% !important;
+}
+.oe_document_row {
+  height: 100% !important;
+  background-color: #f0eeee;
+}
+.oe_document_col {
+  padding: 0 !important;
+}
+.oe_document_preview {
+  height: 100% !important;
+}
+.splitter_panel .vsplitter {
+  width: 3px !important;
+  height: 100%;
+}
+.oe_dms_searchview_info {
+  cursor: default;
+  position: absolute;
+  top: 6px;
+  right: 7px;
+}
+.openerp .oe_application > div{
+      background-color: whitesmoke;
+}
+.openerp .oe_application{
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+}
+
+.overme {
+    width: 500px;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+   
+}

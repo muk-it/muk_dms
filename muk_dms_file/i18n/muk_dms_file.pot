@@ -1,0 +1,174 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_file
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-27 13:27+0000\n"
+"PO-Revision-Date: 2018-01-27 13:27+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_base_path
+msgid "Base Path"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_checksum
+msgid "Checksum"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.actions.act_window,name:muk_dms_file.action_dms_data_system
+msgid "Data System"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_dms_path
+msgid "Document Path"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model,name:muk_dms_file.model_muk_dms_file
+msgid "File"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.ui.view,arch_db:muk_dms_file.view_dms_data_system_tree
+msgid "Files"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_id
+msgid "ID"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_data_system_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model,name:muk_dms_file.model_muk_dms_settings
+msgid "MuK Documents Settings"
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:59
+#, python-format
+msgid "Odoo requires to have access rights for the given path."
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_settings_base_path
+msgid "Path"
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:186
+#, python-format
+msgid "Something went wrong! Seems that the file is missing or is broken."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:126
+#: code:addons/muk_dms_file/models/dms_data.py:177
+#, python-format
+msgid "Something went wrong! Seems that the file is missing."
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.ui.menu,name:muk_dms_file.menu_dms_data_system
+msgid "System"
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.model,name:muk_dms_file.model_muk_dms_data_system
+msgid "System File Data Model"
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:147
+#, python-format
+msgid "The System failed to create the necessary directories."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:169
+#, python-format
+msgid "The System failed to delete a directory."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:161
+#, python-format
+msgid "The System failed to delete the file."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:180
+#, python-format
+msgid "The System failed to rename the file."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:203
+#, python-format
+msgid "The System failed to write the file."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_data.py:194
+#, python-format
+msgid "The file is corrupted."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:57
+#, python-format
+msgid "The given path does not exists."
+msgstr ""
+
+#. module: muk_dms_file
+#: code:addons/muk_dms_file/models/dms_settings.py:55
+#, python-format
+msgid "The save type (File System) requires a path attribute."
+msgstr ""
+
+#. module: muk_dms_file
+#: model:ir.actions.server,name:muk_dms_file.action_dms_data_system_checksum
+msgid "Update Checksum"
+msgstr ""
+
