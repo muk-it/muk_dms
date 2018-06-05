@@ -254,7 +254,8 @@ class DMSBaseModel(models.BaseModel):
     @api.model
     def create(self, vals):
         vals = self._before_create(vals)
-        result = super(DMSBaseModel, self).create(vals)
+        self.check_access_rights('create')
+        result = super(DMSBaseModel, self.sudo()).create(vals)
         result = result._after_create(vals)
         return result
     
