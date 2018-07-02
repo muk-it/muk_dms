@@ -28,7 +28,7 @@
         and to provide a collection of common service functions.
     """,
     'version': '11.0.0.0.1',   
-    'category': 'Document Management',   
+    'category': 'Hidden',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
     'website': "http://www.mukit.at",
