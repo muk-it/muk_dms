@@ -35,6 +35,9 @@
         "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
         "EL HARTI Mohamed charif <mohamed.charif.harti@gmail.com>"
     ],
+    'external_dependencies': {
+        'python': ['unidecode'],
+    },
     "depends": [
         "muk_dms",
     ],
