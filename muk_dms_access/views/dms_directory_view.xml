@@ -25,13 +25,10 @@
 	<field name="inherit_id" ref="muk_dms.view_dms_directory_form" />
 	<field name="arch" type="xml">
 		<xpath expr="//field[@name='is_root_directory']" position="after">
-			<field name="inherit_groups" attrs="{'invisible':[('perm_access','=',False)]}"/>
-		</xpath>
-		<xpath expr="//field[@name='perm_read']" position="after">
-			<field name="perm_access" readonly="1" />
+			<field name="inherit_groups" groups="muk_dms.group_dms_manager" />
 		</xpath>
 		<xpath expr="//page[last()]" position="after">
-			<page string="Groups" attrs="{'invisible':[('perm_access','=',False)]}">
+			<page string="Groups" groups="muk_dms.group_dms_manager">
 				<field name="groups">
 					<tree string="Groups">
 						<field name="name" />
@@ -39,11 +36,10 @@
 						<field name="perm_create" />
 						<field name="perm_write" />
 						<field name="perm_unlink" />
-						<field name="perm_access" />
 					</tree>
 				</field>
 			</page>
-			<page string="Complete Groups" attrs="{'invisible':[('perm_access','=',False)]}">
+			<page string="Complete Groups" groups="muk_dms.group_dms_manager">
 				<field name="complete_groups">
 					<tree string="Complete Groups">
 						<field name="name" />
@@ -51,7 +47,6 @@
 						<field name="perm_create" />
 						<field name="perm_write" />
 						<field name="perm_unlink" />
-						<field name="perm_access" />
 					</tree>
 				</field>
 			</page>

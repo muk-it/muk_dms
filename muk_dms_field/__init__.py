@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -21,3 +19,7 @@
 
 from . import fields
 from . import models
+
+def _patch_system():
+    from . import base
+    from . import fields

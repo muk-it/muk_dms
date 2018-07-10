@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -19,4 +17,13 @@
 #
 ###################################################################################
 
+from odoo import api, SUPERUSER_ID
+
 from . import models
+
+def _patch_system():
+    from . import base
+
+def _delete_file_data(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    print("HIER")

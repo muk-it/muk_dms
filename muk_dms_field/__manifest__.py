@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -22,17 +20,11 @@
 {
     "name": "MuK Documents Field",
     "summary": """Document Fields""",
-    "description": """ 
-        Adds support for document fields to Odoo. The fields can be used 
-        like any other Odoo field. The field arguments filename and
-        directory can be a function or  a value. The filename parameter
-        has to be a string and the directory an integer representing the
-        id of the directory.
-    """,
-    "version": '11.0.1.0.0',
+    "version": '11.0.2.0.0',
     "category": 'Document Management',
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
@@ -59,5 +51,6 @@
     "application": False,
     "auto_install": True,
     "installable": True,
+    "post_load": "_patch_system",
     
 }

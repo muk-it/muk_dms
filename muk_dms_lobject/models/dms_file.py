@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -32,11 +30,9 @@ from odoo import models, api, fields
 from odoo.tools import ustr
 from odoo.exceptions import ValidationError, AccessError
 
-from odoo.addons.muk_dms.models import dms_base
-
 _logger = logging.getLogger(__name__)
 
-class LargeObjectFile(dms_base.DMSModel):
+class LargeObjectFile(models.Model):
     
     _inherit = 'muk_dms.file'      
              
@@ -44,6 +40,7 @@ class LargeObjectFile(dms_base.DMSModel):
     # Reference
     #----------------------------------------------------------
     
+    @api.multi
     def _create_reference(self, settings, path, filename, content):
         result = super(LargeObjectFile, self)._create_reference(settings, path, filename, content)
         if result:

@@ -26,7 +26,11 @@
 	<field name="arch" type="xml">
 		<xpath expr="//group[@name='save_settings']" position="after">
 			<group attrs="{'invisible':[('save_type', '!=', 'file')]}">
-				<group>
+				<group class="oe_read_only" >
+					<field name="complete_base_path"
+						attrs="{'required':[('save_type', '==', 'file')]}"/>
+				</group>
+				<group class="oe_edit_only">
 					<field name="base_path" 
 						attrs="{'required':[('save_type', '==', 'file')]}"/>
 				</group>

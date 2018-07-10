@@ -231,4 +231,3 @@ msgstr "Користувачі"
 #: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_write
 msgid "Write"
 msgstr "Писати"
-

@@ -1,5 +1,3 @@
-## -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -89,6 +87,16 @@ class DocumentIrAttachment(models.Model):
                 attach.is_document = False
             attach.write({'datas': attach.datas})
     
+    @api.multi
+    def _attachment_directory(self):
+        attachment_directory = self.env['ir.config_parameter'].sudo().get_param(
+            'muk_dms_attachment.attachment_directory', None)
+        if attachment_directory:
+            directory = self.env['muk_dms.directory'].sudo().browse(int(attachment_directory)) 
+            if directory.exists() and directory.read(['settings']):
+                return directory.id
+        raise ValidationError(_('A directory has to be defined.'))
+    
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
@@ -140,17 +148,8 @@ class DocumentIrAttachment(models.Model):
                 ('res_field', '!=', False)])
             if len(attachments) >= 2:
                 raise ValidationError(_('The file is already referenced by another attachment.'))
-
-    def _attachment_directory(self):
-        attachment_directory = self.env['ir.config_parameter'].sudo().get_param(
-            'muk_dms_attachment.attachment_directory', None)
-        if attachment_directory:
-            directory = self.env['muk_dms.directory'].sudo().browse(int(attachment_directory)) 
-            if directory.exists():
-                directory.read(['settings'])
-                return directory.id
-        raise ValidationError(_('A directory has to be defined.'))
-        
+    
+    @api.multi
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -19,56 +17,31 @@
 #
 ###################################################################################
 
-from odoo import _
-from odoo import SUPERUSER_ID
-from odoo import models, api, fields
-from odoo.exceptions import ValidationError, AccessError, UserError
+import logging
 
-from odoo.addons.muk_dms.models import dms_base
+from odoo import models, api
 
-class AccessFile(dms_base.DMSModel):
+_logger = logging.getLogger(__name__)
+
+class AccessFile(models.Model):
     
     _inherit = 'muk_dms.file'
     
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
-    
-    def trigger_computation(self, fields, refresh=True, operation=None):
-        super(AccessFile, self).trigger_computation(fields, refresh, operation)
-        values = {}
-        if "complete_groups" in fields:
-            values.update(self.with_context(operation=operation)._compute_groups(write=False))
-        if values:
-            self.write(values);   
-    
-    #----------------------------------------------------------
-    # Read, View 
-    #----------------------------------------------------------
-    
-    def _compute_groups(self, write=True):
-        def get_groups(record):
-            groups = record.env['muk_dms_access.groups']
-            if record.inherit_groups:
-                groups |= record.directory.complete_groups
-            groups |= record.groups
-            return groups
-        if write:
-            for record in self:
-                record.users = get_groups(record)
-        else:
-            self.ensure_one()
-            return {'complete_groups': [(6, 0, get_groups(self).mapped('id'))]}
         
-    #----------------------------------------------------------
-    # Create, Write 
-    #----------------------------------------------------------
+    @api.model
+    def check_group_values(self, values):
+        check = any(field in values for field in ['directory', 'inherit_groups'])
+        if super(AccessFile, self).check_group_values(values) or check:
+            return True
+        return False
     
-    def _check_recomputation(self, values, operation=None):
-        super(AccessFile, self)._check_recomputation(values, operation)
-        fields = []
-        if any(field in values for field in ['groups', 'directory', 'inherit_groups']):
-            fields.extend(['complete_groups'])
-        if fields:
-            self.trigger_computation(fields, operation=operation)
-        
+    @api.multi
+    @api.returns('muk_security.groups')
+    def get_groups(self):
+        groups = super(AccessFile, self).get_groups()
+        if self.inherit_groups:
+            groups |= self.directory.complete_groups
+        return groups

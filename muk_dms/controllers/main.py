@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -25,17 +23,36 @@ import logging
 import werkzeug.utils
 import werkzeug.wrappers
 
-from odoo import _
-from odoo import tools
 from odoo import http
 from odoo.http import request
-from odoo.http import Response
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
 class DocumentController(http.Controller):
 
+    @http.route('/dms/replace/file/<int:id>', type='http', auth="user")
+    def replace(self, id, file, content_only=False, **kw):
+        record = request.env['muk_dms.file'].browse([id])
+        content = base64.b64encode(file.read())
+        if file.filename == record.name or content_only:
+            record.write({'content': content})
+        else:
+             record.write({
+                'name': file.filename,
+                'content': content})
+        return werkzeug.wrappers.Response(status=200)
+             
+    @http.route('/dms/upload/file/<int:id>', type='http', auth="user")
+    def upload(self, id, file, **kw):
+        record = request.env['muk_dms.directory'].browse([id])
+        content = base64.b64encode(file.read())
+        request.env['muk_dms.file'].create({
+            'name': file.filename,
+            'directory': record.id,
+            'content': content})
+        return werkzeug.wrappers.Response(status=200)
+             
     @http.route(['/dms/checkout/',
         '/dms/checkout/<int:id>',
         '/dms/checkout/<int:id>/<string:filename>',
@@ -58,8 +75,24 @@ class DocumentController(http.Controller):
         if token:
             response.set_cookie('fileToken', token)
         try:
-            lock = request.env['muk_dms.file'].sudo().browse(id).user_lock()[0]
+            lock = request.env['muk_dms.file'].browse(id).user_lock()[0]
             response.set_cookie('checkoutToken', lock['token'])
         except AccessError:
             response = werkzeug.exceptions.Forbidden()
         return response
+    
+    @http.route('/dms/checkin/', type='http', auth="user")
+    def checkin(self, ufile, token=None):
+        file_token = request.httprequest.headers.get('token') or token
+        if not file_token:
+            return werkzeug.exceptions.Forbidden()
+        lock = request.env['muk_security.lock'].sudo().search([('token', '=', file_token)], limit=1)
+        refrence = lock.lock_ref
+        if refrence._name == 'muk_dms.file':
+            lock.unlink()
+            data = ufile.read()
+            filename = ufile.filename
+            refrence.write({'content': base64.b64encode(data), 'name': filename})
+            return werkzeug.wrappers.Response(status=200)
+        else:
+            return werkzeug.exceptions.Forbidden()

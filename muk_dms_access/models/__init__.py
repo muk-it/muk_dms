@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -19,10 +17,7 @@
 #
 ###################################################################################
 
-from . import dms_base
-from . import dms_directory
+from . import dms_access
 from . import dms_file
-from . import dms_access_groups
-from . import hr_department
-from . import hr_job
-from . import res_groups
+from . import dms_directory
+from . import security_groups

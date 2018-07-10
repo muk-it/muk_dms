@@ -1,5 +1,3 @@
-## -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -58,21 +56,14 @@ class DocumentAttachmentSettings(models.TransientModel):
         )
         return res
 
+    @api.multi
     def set_values(self):
-        config = self.env['ir.config_parameter']
-        get_param = config.sudo().get_param
-        set_param = config.sudo().set_param
-        location = get_param('ir_attachment.location', None)
-        if self.attachment_location and self.attachment_location != location:
-            if not self.user_has_groups('muk_dms.group_dms_admin,base.group_erp_manager'):
-                raise AccessDenied()
-            set_param('ir_attachment.location', self.attachment_location or 'file')
-        attachment_directory = get_param('muk_dms_attachment.attachment_directory', None)
-        if self.attachment_directory and self.attachment_directory != attachment_directory:
-            if not self.user_has_groups('muk_dms.group_dms_admin'):
-                raise AccessDenied()
-            set_param('muk_dms_attachment.attachment_directory', repr(self.attachment_directory.id))
-        super(DocumentAttachmentSettings, self).set_values()
+        res = super(DocumentAttachmentSettings, self).set_values()
+        param = self.env['ir.config_parameter'].sudo()
+        param.set_param('ir_attachment.location', self.attachment_location or 'file')
+        param.set_param('muk_dms_attachment.attachment_directory', repr(
+            self.attachment_directory and self.attachment_directory.id or None))
+        return res
 
     def attachment_force_storage(self):
         self.env['ir.attachment'].force_storage()

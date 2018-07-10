@@ -1,5 +1,3 @@
-## -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -34,11 +32,9 @@ from odoo import models, api, fields
 from odoo.tools import ustr
 from odoo.exceptions import ValidationError, AccessError
 
-from odoo.addons.muk_dms.models import dms_base
-
 _logger = logging.getLogger(__name__)
 
-class AttachmentFile(dms_base.DMSModel):
+class AttachmentFile(models.Model):
     
     _inherit = 'muk_dms.file'
               
@@ -70,11 +66,16 @@ class AttachmentFile(dms_base.DMSModel):
     # Function
     #----------------------------------------------------------
     
+    @api.multi
     def check_access(self, operation, raise_exception=False):
         try:
-            access = super(AttachmentFile, self).check_access(operation, raise_exception)
-            if self.attachment.exists() and operation in ('read', 'create', 'write', 'unlink'):
-                return access and (self.attachment.check(operation) == None)
+            attachments = self.mapped('attachment')
+            res = super(AttachmentFile, self).check_access(operation, raise_exception)
+            access_attchment_right = attachments.check_access_rights(operation, raise_exception)
+            access_attchment_rule = attachments.check_access_rule(operation) == None
+            access = res and access_attchment_right and access_attchment_rule
+            if not access and raise_exception:
+                raise AccessError(_("This operation is forbidden!"))
             return access
         except AccessError:
             if raise_exception:
@@ -82,31 +83,34 @@ class AttachmentFile(dms_base.DMSModel):
             return False
     
     @api.returns('ir.attachment')
-    def attach_file(self, model=None, field=None, id=None, copy=False, public=False):
+    def attach_file(self, model=False, field=False, id=0, copy=False, public=False):
         attachments = self.env['ir.attachment'].sudo()
         for record in self:
+            values = {
+                'type': 'binary',
+                'datas_fname': record.name,
+                'public': public
+            }
+            if model:
+                values.update({'res_model': model})
+            if field:
+                values.update({'res_field': field})
+            if id:
+                values.update({'res_id': id})
             if copy:
-                attachments |= attachments.create({
-                'type': 'binary',
-                'name': record.name,
-                'datas_fname': record.name,
-                'datas': record.content,
-                'is_document': False,
-                'res_model': model,
-                'res_field': field,
-                'res_id': id,
-                'public': public})
+                values.update({
+                    'name': record.name,
+                    'datas': record.content,
+                    'is_document': False
+                })
+                attachments |= attachments.create(values)
             else:
-                attachments |= attachments.create({
-                'type': 'binary',
-                'name': "[F-%s] %s" % (record.id, record.name),
-                'datas_fname': record.name,
-                'store_document': record.id,
-                'is_document': True,
-                'res_model': model,
-                'res_field': field,
-                'res_id': id,
-                'public': public})
+                values.update({
+                    'name': "[F-%s] %s" % (record.id, record.name),
+                    'store_document': record.id,
+                    'is_document': True
+                })
+                attachments |= attachments.create(values)
         return attachments
         
     #----------------------------------------------------------
@@ -130,15 +134,16 @@ class AttachmentFile(dms_base.DMSModel):
     #----------------------------------------------------------
     # Delete
     #----------------------------------------------------------
-            
-    def _before_unlink_record(self, operation):
-        info = super(AttachmentFile, self)._before_unlink(operation)
-        attachments = self.mapped('attachment') | self.mapped('attachments')
-        info['attachments'] = attachments
+    
+    @api.multi
+    def _before_unlink(self, *largs, **kwargs):
+        info = super(AttachmentFile, self)._before_unlink(*largs, **kwargs)
+        info['attachments'] = attachments = self.mapped('attachment') | self.mapped('attachments')
         return info
     
-    def _after_unlink(self, result, info, infos, operation):
-        super(AttachmentFile, self)._after_unlink(result, info, infos, operation)
+    @api.multi
+    def _after_unlink(self, result, info, infos, *largs, **kwargs):
+        super(AttachmentFile, self)._after_unlink(result, info, infos, *largs, **kwargs)
         if 'attachments' in info:
-            for attachment in info['attachments']:
-                attachment.unlink()
+            info['attachments'].unlink()
+        

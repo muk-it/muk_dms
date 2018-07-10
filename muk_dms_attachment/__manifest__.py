@@ -24,16 +24,11 @@
 {
     "name": "MuK Documents Attachment",
     "summary": """Documents as Attachment Storage""",
-    "description": """ 
-        MuK Documents is a module to create, manage and
-        view files directly within Odoo. MuK Documents
-        Attachment allows to store Odoo Attachments
-        inside the Document Management System.
-    """,
-    "version": '11.0.1.2.2',   
+    "version": '11.0.2.0.0',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
@@ -44,9 +39,10 @@
         'muk_attachment_lobject',
     ],
     "data": [
+        "views/dms_menu.xml",
         "views/dms_actions.xml",
         "views/dms_file_view.xml",
-        "views/res_config_view.xml",
+        "views/res_config_settings_view.xml",
         "views/ir_attachment_view.xml",
     ],
     "demo": [

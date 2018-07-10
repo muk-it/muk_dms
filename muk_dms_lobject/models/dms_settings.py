@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -26,11 +24,9 @@ from odoo import _
 from odoo import models, api, fields
 from odoo.exceptions import ValidationError
 
-from odoo.addons.muk_dms.models import dms_base
-
 _logger = logging.getLogger(__name__)
 
-class LargeObjectSettings(dms_base.DMSModel):
+class LargeObjectSettings(models.Model):
     
     _inherit = 'muk_dms.settings'
 

@@ -19,5 +19,13 @@
 
 <templates id="template" xml:space="preserve">
 
+<t t-name="FieldDocumentMany2One" t-extend="FieldMany2One">
+	<t t-jquery="a" t-operation="replace">
+        <div t-if="!widget.nodeOptions.no_open" class="muk_form_document_many2one">
+        	<span class="fa fa-file-o muk_form_document_preview" title="Preview this file" />
+        	<a class="o_form_uri" href="#"/>
+        </div>
+    </t>
+</t>
 
 </templates>

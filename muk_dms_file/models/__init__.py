@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -21,4 +19,5 @@
 
 from . import dms_settings
 from . import dms_file
-from . import dms_data
+from . import dms_data_system
+from . import res_config_settings

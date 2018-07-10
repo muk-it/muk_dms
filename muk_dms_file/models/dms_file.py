@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -32,11 +30,9 @@ from odoo import models, api, fields
 from odoo.tools import ustr
 from odoo.exceptions import ValidationError, AccessError
 
-from odoo.addons.muk_dms.models import dms_base
-
 _logger = logging.getLogger(__name__)
 
-class SystemFile(dms_base.DMSModel):
+class SystemFile(models.Model):
     
     _inherit = 'muk_dms.file'
               
@@ -44,15 +40,17 @@ class SystemFile(dms_base.DMSModel):
     # Functions
     #----------------------------------------------------------
     
+    @api.multi
     def notify_change(self, values, refresh=False, operation=None):
         super(SystemFile, self).notify_change(values, refresh, operation)
         if "base_path" in values:
             self._check_reference_values({'base_path': values['base_path']})         
-             
+    
     #----------------------------------------------------------
     # Reference
     #----------------------------------------------------------
     
+    @api.multi
     def _create_reference(self, settings, path, filename, content):
         result = super(SystemFile, self)._create_reference(settings, path, filename, content)
         if result:
@@ -65,9 +63,10 @@ class SystemFile(dms_base.DMSModel):
             return reference
         return None
 
+    @api.multi
     def _check_reference_values(self, values):
         super(SystemFile, self)._check_reference_values(values)
         if 'path' in values:
-            self.reference.sudo().update({'dms_path': values['path']})
+            self._update_reference_values({'dms_path': values['path']})
         if "base_path" in values:
-            self.reference.sudo().update({'base_path': values['base_path']})
+            self._update_reference_values({'base_path': values['base_path']})
