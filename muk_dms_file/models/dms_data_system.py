@@ -254,6 +254,6 @@ class SystemFileDataModel(models.Model):
         try:
             os.removedirs(os.path.dirname(file_path))
         except OSError as exc:
-            if exc.errno != errno.ENOTEMPTY:
+            if not (exc.errno == errno.ENOTEMPTY or exc.errno == errno.ENOENT):
                 _logger.error("Failed to remove empty directories: " + str(exc))
                 raise AccessError(_("The System failed to delete a directory."))
