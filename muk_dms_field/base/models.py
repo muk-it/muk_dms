@@ -29,12 +29,11 @@ _logger = logging.getLogger(__name__)
 @patch.monkey_patch_model(models.BaseModel)
 def unlink(self):
     if 'muk_dms.file' in self.env:
-        files = self.env['muk_dms.file'].sudo()
-        for name in self._fields:
-            field = self._fields[name]
-            if field.type == 'document_binary' and field.store:
-                for record in self:
-                    files |= record.sudo()[name]
+        domain = [
+            ('reference_model', '=', self._name),
+            ('reference_id', 'in', self.ids),
+        ]
+        files = self.env['muk_dms.file'].sudo().search(domain)
         unlink.super(self)
         if files.exists():
             files.unlink()
