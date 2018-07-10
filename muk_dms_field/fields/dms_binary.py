@@ -54,7 +54,8 @@ class DocumentBinary(fields.Field):
             ('reference_id', 'in', records.ids),
         ]
         files = {
-            file.reference_id: file.content for file in records.env['muk_dms.file'].sudo().search(domain)
+            file.reference_id: file.content 
+            for file in records.env['muk_dms.file'].sudo().with_context({'active_test': False}).search(domain)
         }
         cache = records.env.cache
         for record in records:
@@ -64,7 +65,7 @@ class DocumentBinary(fields.Field):
         if create:
             files = records.env['muk_dms.file'].sudo()
         else:
-            files = records.env['muk_dms.file'].sudo().search([
+            files = records.env['muk_dms.file'].sudo().with_context({'active_test': False}).search([
                 ('reference_model', '=', records._name),
                 ('reference_field', '=', self.name),
                 ('reference_id', 'in', records.ids),

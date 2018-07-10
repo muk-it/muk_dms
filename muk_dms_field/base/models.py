@@ -33,7 +33,7 @@ def unlink(self):
             ('reference_model', '=', self._name),
             ('reference_id', 'in', self.ids),
         ]
-        files = self.env['muk_dms.file'].sudo().search(domain)
+        files = self.env['muk_dms.file'].sudo().with_context({'active_test': False}).search(domain)
         unlink.super(self)
         if files.exists():
             files.unlink()
