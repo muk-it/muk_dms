@@ -32,5 +32,10 @@ class SettingsTestCase(dms_case.DMSTestCase):
     
     def test_top_directories(self):
         settings = self.browse_ref("muk_dms.settings_demo")
-        directories = self.directory.search([('is_top_directory', '=', True)]) 
-        self.assertTrue(_compare(directories, settings.top_directories))
+        directories = self.sudo().directory.search([('is_top_directory', '=', True)]) 
+        self.assertTrue(_compare(directories, settings.sudo().top_directories))
+        
+    def test_top_files(self):
+        settings = self.browse_ref("muk_dms.settings_demo")
+        files = self.sudo().file.search([('is_top_file', '=', True)]) 
+        self.assertTrue(_compare(files, settings.sudo().top_files))
