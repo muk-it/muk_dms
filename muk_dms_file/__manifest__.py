@@ -34,7 +34,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/dms_actions.xml",
+        "actions/dms_actions.xml",
         "views/dms_settings_view.xml",
         "views/dms_data_view.xml",
         "views/res_config_settings_view.xml",
