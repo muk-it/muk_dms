@@ -380,9 +380,9 @@ var DocumentsModel = Class.extend(mixins.EventDispatcherMixin, ServicesMixin, {
 				extension: file.extension,
 				locked: file.locked,
 				perm_read: file.permission_read,
-				perm_create: file.permission_create,
-				perm_write: file.permission_write,
-				perm_unlink: file.permission_unlink,
+				perm_create: file.permission_create && !file.locked,
+				perm_write: file.permission_write && !file.locked,
+				perm_unlink: file.permission_unlink && !file.locked,
 				parent: "directory_" + file.directory[0],
 			},
 		};
