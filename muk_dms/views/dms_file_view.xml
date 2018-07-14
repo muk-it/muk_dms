@@ -27,13 +27,15 @@
 			<field name="name" />
 			<field name="path" />
 			<field name="tags" />
-			<filter string="All Files" 
+			<filter string="All Files" name="all"
 				domain="['|', ('show_tree', '=',  False), '|', ('show_tree', '!=',  False) ,'|', ('active', '=',  False), ('active', '!=',  False)]"/>
-			<filter string="Top Files" 
+			<filter string="Top Files" name="top"
 				domain="[('is_top_file', '=', True)]"/>
-			<filter string="Hidden Files" 
-				domain="[('show_tree', '!=',  True)]"/>
-			<filter string="Archived Files" 
+			<filter string="Visible Files" name="visible"
+				domain="[('show_tree', '!=',  False)]"/>
+			<filter string="Hidden Files" name="hidden"
+				domain="[('show_tree', '=',  False)]"/>
+			<filter string="Archived Files" name="inactive"
 				domain="[('active', '!=',  True)]"/>
 			<group expand="0" string="Group By">
 				<filter string="Color" domain="[]" context="{'group_by':'color'}" />
@@ -300,8 +302,7 @@
 	<field name="name">Files</field>
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,graph,pivot,form</field>
-	<field name="domain">[("show_tree", "=",  True)]</field>
-	<field name="context">{'mail_create_nolog': True}</field>
+	<field name="context">{'search_default_visible': True, 'mail_create_nolog': True}</field>
 	<field name="help" type="html">
 	    <p class="oe_view_nocontent_create">
 	      	Click to add a new file.

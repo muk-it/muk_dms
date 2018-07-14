@@ -27,12 +27,12 @@
 	<field name="domain">
 		[
 			("parent_directory", "=",  active_id),
-			("show_tree", "=",  True)
 		]
 	</field>
 	<field name="context">
 		{
 			'default_parent_directory': active_id,
+			'search_default_visible': True,
 			'mail_create_nolog': True,
 		}
     </field>
@@ -55,12 +55,12 @@
 	<field name="domain">
 		[
 			("directory", "=",  active_id),
-			("show_tree", "=",  True)
 		]
 	</field>
 	<field name="context">
 		{
 			'default_directory': active_id,
+			'search_default_visible': True,
 			'mail_create_nolog': True,
 		}
     </field>
@@ -82,14 +82,18 @@
 			<field name="name" />
 			<field name="path" />
 			<field name="tags" />
-			<filter string="All Directories" 
+			<filter string="All Directories" name="all"
 				domain="['|', ('show_tree', '=',  False), ('show_tree', '!=',  False)]"/>
-			<filter string="Top Directories" 
+			<filter string="Top Directories" name="top"
 				domain="[('is_top_directory', '=', True)]"/>
-			<filter string="Root Directories" 
+			<filter string="Visible Directories" name="visible"
+				domain="[('show_tree', '!=',  False)]"/>
+			<filter string="Hidden Directories" name="hiden"
+				domain="[('show_tree', '=',  False)]"/>
+			<filter string="Root Directories" name="root"
 				domain="[('is_root_directory', '=', True)]" 
 				groups="muk_dms.group_dms_admin"/>
-			<filter string="Starred Directories" 
+			<filter string="Starred Directories" name="starred"
 				domain="[('starred', '=', True)]" />
 			<group expand="0" string="Group By">
 				<filter string="Color" domain="[]" context="{'group_by':'color'}" />
@@ -381,8 +385,7 @@
 	<field name="res_model">muk_dms.directory</field>
     <field name="view_type">form</field>
 	<field name="view_mode">kanban,tree,graph,pivot,form</field>
-	<field name="domain">[("show_tree", "=",  True)]</field>
-	<field name="context">{'mail_create_nolog': True}</field>
+	<field name="context">{'search_default_visible': True, 'mail_create_nolog': True}</field>
 	<field name="help" type="html">
 	    <p class="oe_view_nocontent_create">
 	      	Click to add a new directory.

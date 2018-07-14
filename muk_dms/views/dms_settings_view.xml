@@ -27,13 +27,13 @@
 	<field name="domain">
 		[
 			("settings", "=",  active_id),
-			("show_tree", "=",  True)
 		]
 	</field>
 	<field name="context">
 		{
 			'default_settings': active_id,
 			'default_is_root_directory': True,
+			'search_default_visible': True,
 			'mail_create_nolog': True,
 		}
     </field>
@@ -53,10 +53,15 @@
     <field name="view_type">form</field>
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,form</field>
-	<field name="domain">[("settings", "=",  active_id)]</field>
+	<field name="domain">
+		[
+			("settings", "=",  active_id)
+		]
+	</field>
     <field name="context">
 		{
 			'mail_create_nolog': True,
+			'search_default_visible': True,
 		}
     </field>
 	<field name="help" type="html">
