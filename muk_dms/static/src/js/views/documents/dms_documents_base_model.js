@@ -101,7 +101,7 @@ var DocumentsModel = Class.extend(mixins.EventDispatcherMixin, ServicesMixin, {
         			data_parts.push(data_part_directory);
 	        		self._rpc({
 	                    fields: _.union(args.directory.fields || [], [
-	                    	'name', 'parent_directory',
+	                    	'name', 'parent_directory', 'locked',
 	                    	'permission_read', 'permission_create',
 	      				  	'permission_write', 'permission_unlink',
 	      				  	'count_directories', 'count_files',
@@ -183,7 +183,7 @@ var DocumentsModel = Class.extend(mixins.EventDispatcherMixin, ServicesMixin, {
     		var files_loaded = $.Deferred();
     		this._rpc({
                 fields: _.union(args.directory.fields || [], [
-                	'name', 'parent_directory', 
+                	'name', 'parent_directory', 'locked', 
                 	'permission_read', 'permission_create',
   				  	'permission_write', 'permission_unlink',
   				  	'count_directories', 'count_files',
@@ -240,7 +240,7 @@ var DocumentsModel = Class.extend(mixins.EventDispatcherMixin, ServicesMixin, {
     		var files_loaded = $.Deferred();
     		this._rpc({
                 fields: _.union(args.directory.fields || [], [
-                	'name', 'parent_directory', 
+                	'name', 'parent_directory', 'locked', 
                 	'permission_read', 'permission_create',
   				  	'permission_write', 'permission_unlink',
   				  	'count_directories', 'count_files',
@@ -352,10 +352,11 @@ var DocumentsModel = Class.extend(mixins.EventDispatcherMixin, ServicesMixin, {
 				odoo_model: "muk_dms.directory",
 				odoo_record: directory,
 				name: directory.name,
+				locked: directory.locked,
 				perm_read: directory.permission_read,
-				perm_create: directory.permission_create,
-				perm_write: directory.permission_write,
-				perm_unlink: directory.permission_unlink,
+				perm_create: directory.permission_create && !directory.locked,
+				perm_write: directory.permission_write && !directory.locked,
+				perm_unlink: directory.permission_unlink && !directory.locked,
 				directories: directory.count_directories,
 				files: directory.count_files,
 				parent: directory.parent_directory ?

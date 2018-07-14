@@ -201,7 +201,7 @@ var DocumentsViewController = DocumentsController.extend({
 			action: function(data) {
 				self._uploadFiles(node);
 			},
-	    	disabled: function (data) {
+	    	_disabled: function (data) {
 				return !node.data.perm_create;
 			},
     	};
@@ -250,7 +250,7 @@ var DocumentsViewController = DocumentsController.extend({
 			action: function(data) {
 				self._replaceFile(node);
 			},
-	    	disabled: function (data) {
+	    	_disabled: function (data) {
 				return !node.data.perm_write;
 			},
     	};
