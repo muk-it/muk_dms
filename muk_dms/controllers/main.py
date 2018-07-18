@@ -52,13 +52,36 @@ class DocumentController(http.Controller):
             'directory': record.id,
             'content': content})
         return werkzeug.wrappers.Response(status=200)
-             
+    
+    @http.route(['/dms/download/',
+        '/dms/download/<int:id>',
+        '/dms/download/<int:id>/<string:filename>',
+        '/dms/download/<int:id>-<string:unique>',
+        '/dms/download/<int:id>-<string:unique>/<string:filename>'], type='http', auth="user")
+    def download(self, id=None, filename=None, unique=None, data=None, token=None, **kw):
+        status, headers, content = request.registry['ir.http'].binary_content(
+            model='muk_dms.file', id=id, field='content', unique=unique,
+            filename=filename, filename_field='name', download=True)
+        if status == 304:
+            response = werkzeug.wrappers.Response(status=status, headers=headers)
+        elif status == 301:
+            return werkzeug.utils.redirect(content, code=301)
+        elif status != 200:
+            response = request.not_found()
+        else:
+            content_base64 = base64.b64decode(content)
+            headers.append(('Content-Length', len(content_base64)))
+            response = request.make_response(content_base64, headers)
+        if token:
+            response.set_cookie('fileToken', token)
+        return response
+        
     @http.route(['/dms/checkout/',
         '/dms/checkout/<int:id>',
         '/dms/checkout/<int:id>/<string:filename>',
         '/dms/checkout/<int:id>-<string:unique>',
         '/dms/checkout/<int:id>-<string:unique>/<string:filename>'], type='http', auth="user")
-    def checkout(self, id=None, filename=None, unique=None, data=None, token=None):
+    def checkout(self, id=None, filename=None, unique=None, data=None, token=None, **kw):
         status, headers, content = request.registry['ir.http'].binary_content(
             model='muk_dms.file', id=id, field='content', unique=unique,
             filename=filename, filename_field='name', download=True)
@@ -82,7 +105,7 @@ class DocumentController(http.Controller):
         return response
     
     @http.route('/dms/checkin/', type='http', auth="user")
-    def checkin(self, ufile, token=None):
+    def checkin(self, ufile, token=None, **kw):
         file_token = request.httprequest.headers.get('token') or token
         if not file_token:
             return werkzeug.exceptions.Forbidden()
