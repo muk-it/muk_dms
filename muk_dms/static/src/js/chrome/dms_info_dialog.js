@@ -53,7 +53,6 @@ var DocumentInfoDialog = Dialog.extend({
         	if(self.record.write_uid) {
         		self.record.write_uid = self.record.write_uid[1];
         	}
-        	console.log(self.record, self.options.qweb)
         	self.$content = $(QWeb.render(self.options.qweb, {
         		widget: self,
         		record: self.record,

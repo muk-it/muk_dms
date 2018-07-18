@@ -260,6 +260,8 @@ var DocumentsController = Widget.extend({
 	    	}).then(function(data) {
 				callback.call(this, data);
 			});
+    	} else {
+    		callback.call(this, []);
     	}
     },
     _searchCallback: function (val, node) {
@@ -271,7 +273,9 @@ var DocumentsController = Widget.extend({
         		return false; 
         	} 
     	} else {
-    		if(val === node.text || node.text.indexOf(val) !== -1) {
+    		var lval = val.toLowerCase();
+    		var ltext = node.text.toLowerCase();
+    		if(lval === ltext || ltext.indexOf(lval) !== -1) {
     			return true;
     		} else {
     			return false;
