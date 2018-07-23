@@ -58,6 +58,7 @@
         </xpath>
         <xpath expr="//field[@name='create_date']" position="after">
         	 <field name="storage_type" groups="base.group_no_one"/>
+        	 <field name="store_directory" groups="base.group_no_one"/>
         </xpath>
     </field>
 </record>
@@ -74,6 +75,7 @@
                   <field name="store_fname" readonly="1" attrs="{'invisible':[('store_fname','=',False)]}"/>
                   <field name="store_lobject" readonly="1" attrs="{'invisible':[('store_lobject','=',False)]}"/>
                   <field name="store_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
+        	 	  <field name="store_directory" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
                   <field name="is_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
               </group>
         </xpath>

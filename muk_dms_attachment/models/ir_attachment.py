@@ -48,13 +48,18 @@ class DocumentIrAttachment(models.Model):
         string="Storage Type")
     
     store_document = fields.Many2one(
-        'muk_dms.file', 
+        comodel_name='muk_dms.file', 
         string="Document File",
         index=True,)
     
     is_document = fields.Boolean(
         string="Document",
         default=False)
+    
+    store_directory = fields.Many2one(
+        related="store_document.directory",
+        string="Document Directory",
+        readonly=True)
     
     #----------------------------------------------------------
     # Function
@@ -169,7 +174,8 @@ class DocumentIrAttachment(models.Model):
                 if value:
                     if attach.store_document:
                         store_document = attach.store_document
-                        store_document.sudo().write({'content': value})
+                        directory = attach._attachment_directory()
+                        store_document.sudo().write({'content': value, 'directory': directory,})
                     else: 
                         directory = attach._attachment_directory()
                         store_document = self.env['muk_dms.file'].sudo().create({
