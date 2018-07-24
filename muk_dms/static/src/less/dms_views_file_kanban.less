@@ -96,14 +96,23 @@
 	    	height: 100%;
 			.oe_kanban_content {
 		    	height: 70px;
-				.mk_dms_file_thumbnail {		
+				.mk_dms_file_thumbnail {	
+     				position: relative;	
 			     	float: left;
 			    	width: 70px;
 			    	height: 70px;
 			    	border-right: solid 1px @odoo-color-silver-darker;
 			    	img {
-			    		width: 100%;
-			    		height: 100%;
+					    top: 0;  
+					    bottom: 0;  
+					    left: 0;  
+					    right: 0;  
+					    position: absolute;  
+			    		max-height: 100%;  
+					    max-width: 100%; 
+					    width: auto;
+					    height: auto;
+					    margin: auto;
 			    	}
 					&:hover::before {
 						z-index: 99;
