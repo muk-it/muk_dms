@@ -42,7 +42,7 @@ class SystemFile(models.Model):
     
     @api.multi
     def notify_change(self, values, *largs, **kwargs):
-        super(SystemFile, self).notify_change(values, refresh, operation)
+        super(SystemFile, self).notify_change(values, *largs, **kwargs)
         if "base_path" in values:
             self._check_reference_values({'base_path': values['base_path']})         
     
