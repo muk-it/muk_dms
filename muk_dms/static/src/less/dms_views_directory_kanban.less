@@ -21,9 +21,22 @@
 	.o_kanban_card_content {
 		width: 100%;
 		.mk_dms_directory_thumbnail {
+			position: relative;	
 		    width: 90px;
 			height: 90px;
 			float: left;
+			img {
+			    top: 0;  
+			    bottom: 0;  
+			    left: 0;  
+			    right: 0;  
+			    position: absolute;  
+	    		max-height: 100%;  
+			    max-width: 100%; 
+			    width: auto;
+			    height: auto;
+			    margin: auto;
+	    	}
 		}
 		.muk_dms_directory_info_panel {
 			position: relative;

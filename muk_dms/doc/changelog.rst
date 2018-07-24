@@ -1,3 +1,8 @@
+`2.1.0`
+-------
+
+- Added small and medium thumbnail size fields
+
 `2.0.0`
 -------
 

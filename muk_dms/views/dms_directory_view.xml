@@ -122,7 +122,6 @@
 			<field name="permission_write" />
 			<field name="permission_unlink" />
 			<field name="name" />
-			<field name="thumbnail" />
 			<field name="count_files" />
 			<field name="count_directories" />
             <field name="message_needaction_counter"/>
@@ -133,7 +132,9 @@
 				 	<div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
 				 		<div class="mk_dms_directory_main">
 		                    <div class="o_kanban_card_content">
-								<img class="mk_dms_directory_thumbnail" t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
+								<div class="mk_dms_directory_thumbnail">
+									<img t-att-src="kanban_image('muk_dms.directory', 'thumbnail_medium', record.id.raw_value)"/>
+								</div>
 								<div class="muk_dms_directory_info_panel">
 									<div class="mk_dms_directory_info_name">
 										<t name="name" t-esc="record.name.value" />
@@ -264,13 +265,13 @@
 	 				</button>     
                 </div>
 				<field name="thumbnail" 
-					widget="image" 
-					class="oe_avatar oe_read_only" 
-					options="{'size': [90, 90]}"/>
+                	widget='image' 
+                	class="oe_avatar oe_read_only" 
+                	options="{'preview_image': 'thumbnail_medium', 'size': [90, 90]}" />
 				<field name="custom_thumbnail" 
 					widget="image" 
 					class="oe_avatar oe_edit_only" 
-					options="{'size': [90, 90]}"/>
+					options="{'preview_image': 'custom_thumbnail_medium', 'size': [90, 90]}" />
 				<div class="oe_title">
 					<label for="name" class="oe_edit_only" />
 					<h1>

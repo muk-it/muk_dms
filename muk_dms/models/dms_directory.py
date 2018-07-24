@@ -22,7 +22,7 @@ import json
 import base64
 import logging
 
-from odoo import models, api, fields
+from odoo import models, api, fields, tools
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -170,9 +170,23 @@ class Directory(models.Model):
     custom_thumbnail = fields.Binary(
         string="Custom Thumbnail")
     
+    custom_thumbnail_medium = fields.Binary(
+        string="Medium Custom Thumbnail")
+    
+    custom_thumbnail_small = fields.Binary(
+        string="Small Custom Thumbnail")
+    
     thumbnail = fields.Binary(
         compute='_compute_thumbnail',
         string="Thumbnail")
+
+    thumbnail_medium = fields.Binary(
+        compute='_compute_thumbnail_medium',
+        string="Medium Thumbnail")
+    
+    thumbnail_small = fields.Binary(
+        compute='_compute_thumbnail_small',
+        string="Small Thumbnail")
         
     #----------------------------------------------------------
     # Functions
@@ -357,6 +371,24 @@ class Directory(models.Model):
             else:
                 with open(os.path.join(_img_path, "folder.png"), "rb") as image_file:
                     record.thumbnail = base64.b64encode(image_file.read())
+    
+    @api.depends('custom_thumbnail_medium')
+    def _compute_thumbnail_medium(self):
+        for record in self:
+            if record.custom_thumbnail_medium:
+                record.thumbnail_medium = record.with_context({}).custom_thumbnail_medium        
+            else:
+                with open(os.path.join(_img_path, "folder_128x128.png"), "rb") as image_file:
+                    record.thumbnail_medium = base64.b64encode(image_file.read())
+    
+    @api.depends('custom_thumbnail_small')
+    def _compute_thumbnail_small(self):
+        for record in self:
+            if record.custom_thumbnail_small:
+                record.thumbnail_small = record.with_context({}).custom_thumbnail_small     
+            else:
+                with open(os.path.join(_img_path, "folder_64x64.png"), "rb") as image_file:
+                    record.thumbnail_small = base64.b64encode(image_file.read())
              
     #----------------------------------------------------------
     # Create, Update, Delete
@@ -408,7 +440,23 @@ class Directory(models.Model):
             'user_stars': [(4, self.env.uid)]})
         starred_records.write({
             'user_stars': [(3, self.env.uid)]})
+    
+    @api.model
+    def _before_create(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(Directory, self)._before_create(vals, *largs, **kwargs)
 
+    @api.multi
+    def _before_write(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(Directory, self)._before_write(vals, *largs, **kwargs)
+    
     @api.multi
     def _before_write_operation(self, vals, operation, *largs, **kwargs):
         vals = super(Directory, self)._before_write_operation(vals, operation, *largs, **kwargs)

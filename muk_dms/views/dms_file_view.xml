@@ -66,7 +66,6 @@
 			<field name="permission_write" />
 			<field name="permission_unlink" />
 			<field name="name" />
-			<field name="thumbnail" />
             <field name="message_needaction_counter"/>
 			<field name="activity_state"/>
 			<field name="activity_ids"/>
@@ -76,7 +75,7 @@
 					    <div class="mk_dms_file_main">
 						    <div class="oe_kanban_content">
 						    	<div class="mk_dms_file_thumbnail" t-attf-data-id="#{record.id.raw_value}">
-									<img t-attf-src="data:image/*;base64,{{record.thumbnail.raw_value}}" />
+									<img t-att-src="kanban_image('muk_dms.file', 'thumbnail_medium', record.id.raw_value)"/>
 								</div>
 		                        <div class="o_kanban_record_top">
 		                            <div class="o_kanban_record_headings">
@@ -204,14 +203,14 @@
                     	<field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                     </button>
                 </div>
-				<field name="thumbnail" 
-					widget="image" 
-					class="oe_avatar oe_read_only" 
-					options="{'size': [90, 90]}"/>
+                <field name="thumbnail" 
+                	widget='image' 
+                	class="oe_avatar oe_read_only" 
+                	options="{'preview_image': 'thumbnail_medium', 'size': [90, 90]}" />
 				<field name="custom_thumbnail" 
 					widget="image" 
 					class="oe_avatar oe_edit_only" 
-					options="{'size': [90, 90]}"/>
+					options="{'preview_image': 'custom_thumbnail_medium', 'size': [90, 90]}" />
 				<div class="oe_title">
 					<label for="name" class="oe_edit_only" />
 					<h1>

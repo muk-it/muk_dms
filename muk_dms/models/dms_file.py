@@ -25,7 +25,7 @@ import mimetypes
 import itertools
 
 from odoo import _
-from odoo import models, api, fields
+from odoo import models, api, fields, tools
 from odoo.tools.mimetypes import guess_mimetype
 from odoo.exceptions import ValidationError
 
@@ -143,9 +143,23 @@ class File(models.Model):
     custom_thumbnail = fields.Binary(
         string="Custom Thumbnail")
     
+    custom_thumbnail_medium = fields.Binary(
+        string="Medium Custom Thumbnail")
+    
+    custom_thumbnail_small = fields.Binary(
+        string="Small Custom Thumbnail")
+    
     thumbnail = fields.Binary(
         compute='_compute_thumbnail',
         string="Thumbnail")
+
+    thumbnail_medium = fields.Binary(
+        compute='_compute_thumbnail_medium',
+        string="Medium Thumbnail")
+    
+    thumbnail_small = fields.Binary(
+        compute='_compute_thumbnail_small',
+        string="Small Thumbnail")
 
     #----------------------------------------------------------
     # Functions
@@ -300,6 +314,32 @@ class File(models.Model):
                     path = os.path.join(_img_path, "file_unkown.png")
                 with open(path, "rb") as image_file:
                     record.thumbnail = base64.b64encode(image_file.read())
+                    
+    @api.depends('custom_thumbnail_medium')
+    def _compute_thumbnail_medium(self):
+        for record in self:
+            if record.custom_thumbnail_medium:
+                record.thumbnail_medium = record.with_context({}).custom_thumbnail_medium        
+            else:
+                extension = record.extension and record.extension.strip(".") or ""
+                path = os.path.join(_img_path, "file_%s_128x128.png" % extension)
+                if not os.path.isfile(path):
+                    path = os.path.join(_img_path, "file_unkown_128x128.png")
+                with open(path, "rb") as image_file:
+                    record.thumbnail_medium = base64.b64encode(image_file.read())
+    
+    @api.depends('custom_thumbnail_small')
+    def _compute_thumbnail_small(self):
+        for record in self:
+            if record.custom_thumbnail_small:
+                record.thumbnail_small = record.with_context({}).custom_thumbnail_small        
+            else:
+                extension = record.extension and record.extension.strip(".") or ""
+                path = os.path.join(_img_path, "file_%s_64x64.png" % extension)
+                if not os.path.isfile(path):
+                    path = os.path.join(_img_path, "file_unkown_64x64.png")
+                with open(path, "rb") as image_file:
+                    record.thumbnail_small = base64.b64encode(image_file.read())
         
     #----------------------------------------------------------
     # Create, Update, Delete
@@ -353,6 +393,22 @@ class File(models.Model):
                 record._unlink_reference()
                 record.reference = None
     
+    @api.model
+    def _before_create(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(File, self)._before_create(vals, *largs, **kwargs)
+
+    @api.multi
+    def _before_write(self, vals, *largs, **kwargs):
+        tools.image_resize_images(
+            vals, big_name='custom_thumbnail',
+            medium_name='custom_thumbnail_medium',
+            small_name='custom_thumbnail_small')
+        return super(File, self)._before_write(vals, *largs, **kwargs)
+
     @api.multi
     def _before_unlink(self, *largs, **kwargs):
         info = super(File, self)._before_unlink(*largs, **kwargs)
