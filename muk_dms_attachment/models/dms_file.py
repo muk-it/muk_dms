@@ -50,7 +50,7 @@ class AttachmentFile(models.Model):
     
     is_attachment = fields.Boolean(
         compute='_compute_attachment',
-        string="Attachment")
+        string="Is Attachment")
     
     attachments = fields.One2many(
         comodel_name='ir.attachment',
