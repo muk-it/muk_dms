@@ -31,12 +31,16 @@ def unlink(self):
     if 'muk_dms.file' in self.env:
         cr = self.env.cr
         files = self.env['muk_dms.file'].sudo()
-        for sub_ids in cr.split_for_in_conditions(self.ids):
-            query = 'SELECT id FROM muk_dms_file WHERE reference_model=%s AND reference_id IN %s'
-            cr.execute(query, (self._name, sub_ids))
-            files |= files.browse([row[0] for row in cr.fetchall()])
+        try:
+            for sub_ids in cr.split_for_in_conditions(self.ids):
+                query = 'SELECT id FROM muk_dms_file WHERE reference_model=%s AND reference_id IN %s'
+                cr.execute(query, (self._name, sub_ids))
+                files |= files.browse([row[0] for row in cr.fetchall()])
+        except Exception:
+            _logger.exception("Failed to delete referenced files.")
         unlink.super(self)
         if files.exists():
             files.unlink()
     else:
         unlink.super(self)
+
