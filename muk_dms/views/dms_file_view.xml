@@ -107,6 +107,12 @@
 			                                    </a>
 		                                    </li>
 		                                    <li>
+			                                    <a t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=muk_dms.file&amp;filename_field=name&amp;download=true">
+			                                    	<i class="fa fa-download" aria-hidden="true" />
+			                                    	<span>Download</span>
+			                                    </a>
+		                                    </li>
+		                                    <li>
 		                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
 		                                    </li>
 		                                </ul>
