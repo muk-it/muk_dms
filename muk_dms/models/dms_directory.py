@@ -168,16 +168,13 @@ class Directory(models.Model):
         string="Size")    
     
     custom_thumbnail = fields.Binary(
-        string="Custom Thumbnail",
-        attachment=True)
+        string="Custom Thumbnail")
     
     custom_thumbnail_medium = fields.Binary(
-        string="Medium Custom Thumbnail",
-        attachment=True)
+        string="Medium Custom Thumbnail")
     
     custom_thumbnail_small = fields.Binary(
-        string="Small Custom Thumbnail",
-        attachment=True)
+        string="Small Custom Thumbnail")
     
     thumbnail = fields.Binary(
         compute='_compute_thumbnail',
