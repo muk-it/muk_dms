@@ -141,13 +141,16 @@ class File(models.Model):
         compute='_compute_relational_path')
     
     custom_thumbnail = fields.Binary(
-        string="Custom Thumbnail")
+        string="Custom Thumbnail",
+        attachment=True)
     
     custom_thumbnail_medium = fields.Binary(
-        string="Medium Custom Thumbnail")
+        string="Medium Custom Thumbnail",
+        attachment=True)
     
     custom_thumbnail_small = fields.Binary(
-        string="Small Custom Thumbnail")
+        string="Small Custom Thumbnail",
+        attachment=True)
     
     thumbnail = fields.Binary(
         compute='_compute_thumbnail',
