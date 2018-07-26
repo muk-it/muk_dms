@@ -322,6 +322,7 @@ var DocumentsController = Widget.extend({
 		    	                	'directory': parent,
 		    	                }],
 		    	                context: _.extend({}, {
+		    	                	mail_create_nosubscribe: true,
 		    	                	mail_create_nolog: true,
 		    	                }, session.user_context),
 						    }).then(function (id) {
@@ -348,6 +349,7 @@ var DocumentsController = Widget.extend({
 			                	'parent_directory': parent,
 			                }],
 			                context: _.extend({}, {
+	    	                	mail_create_nosubscribe: true,
 			                	mail_create_nolog: true,
 			                }, session.user_context),
 						}).done(function(id) {
