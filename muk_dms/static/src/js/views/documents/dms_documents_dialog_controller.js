@@ -44,6 +44,7 @@ var DocumentsDialogController = DocumentsController.extend({
     			name: name,
             	parent_directory: node.data.odoo_id,
             	context: _.extend({}, {
+                	mail_create_nosubscribe: true,
                 	mail_create_nolog: true,
                 }, session.user_context),
             },
