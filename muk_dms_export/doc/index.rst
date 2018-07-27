@@ -2,10 +2,9 @@
 MuK Documents Export
 ====================
 
-MuK Documents Export erlaubt es, Files zu in eine Vielzahl von Formaten zu
-exportieren. You can access the Export Wizard via the KANBAN and Form view.
-Exported files can either be downloaded or saved directly into the Document
-Management System.
+MuK Documents Export allows files to be exported into a variety of formats. You
+can access the Export Wizard via the kanban and form view. Exported files can
+either be downloaded or saved directly into the document management system.
 				
 Installation
 ============
