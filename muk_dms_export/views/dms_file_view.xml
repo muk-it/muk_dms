@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+			
+<record id="view_dms_file_kanban" model="ir.ui.view">
+	<field name="name">muk_dms_file.kanban</field>
+	<field name="model">muk_dms.file</field>
+	<field name="inherit_id" ref="muk_dms.view_dms_file_kanban" />
+	<field name="arch" type="xml">
+		<xpath expr="//field[@name='permission_unlink']" position="after">
+			<field name="is_exportable" />
+		</xpath>
+		<xpath expr="//ul[hasclass('oe_kanban_colorpicker')]/.." position="before">
+			 <li attrs="{'invisible':[('is_exportable','!=',True)]}">
+				 <a name="export_file" type="object">
+		         	<i class="fa fa-sign-out" aria-hidden="true" />
+		         	<span>Export</span>
+		         </a>
+	         </li>
+		</xpath>
+	</field>
+</record>
+					
+<record id="view_dms_file_form" model="ir.ui.view">
+	<field name="name">muk_dms_file.form</field>
+	<field name="model">muk_dms.file</field>
+	<field name="inherit_id" ref="muk_dms.view_dms_file_form" />
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="inside">
+			<button class="oe_highlight" type="object" string="Export" 
+				attrs="{'invisible':[('is_exportable','!=',True)]}"
+				name="export_file"  />
+		</xpath>
+		<xpath expr="//notebook" position="after">
+			<field name="is_exportable" invisible="1" />
+		</xpath>
+	</field>
+</record>
+	
+</odoo>

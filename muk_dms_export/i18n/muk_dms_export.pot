@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_export
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-27 07:30+0000\n"
+"PO-Revision-Date: 2018-07-27 07:30+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_dms_export
+#: model:ir.ui.view,arch_db:muk_dms_export.view_dms_file_kanban
+msgid "<i class=\"fa fa-sign-out\" aria-hidden=\"true\"/>\n"
+"		         	<span>Export</span>"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.ui.view,arch_db:muk_dms_export.view_dms_export_converter_form
+msgid "Convert and Save"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_directory
+msgid "Directory"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.ui.view,arch_db:muk_dms_export.view_dms_file_form
+msgid "Export"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_file_is_exportable
+msgid "Exportable"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model,name:muk_dms_export.model_muk_dms_file
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_file
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_input_binary
+msgid "File"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_input_name
+msgid "Filename"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_id
+msgid "ID"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model.fields,field_description:muk_dms_export.field_muk_dms_export_convert_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: muk_dms_export
+#: model:ir.model,name:muk_dms_export.model_muk_dms_export_convert
+msgid "muk_dms_export.convert"
+msgstr ""
+
