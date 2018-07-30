@@ -31,13 +31,29 @@ class ResConfigSettings(models.TransientModel):
         string="Binary Widget Support",
         help="Allows the user to use DMS documents as input for any binary field.")
     
+    module_muk_archive = fields.Boolean(
+        string="Download Directories",
+        help="Allows to download directories as a archive file.")
+    
+    module_muk_dms_thumbnails = fields.Boolean(
+        string="Automatic Thumbnails",
+        help="Allows the creation of thumbnails for files.")
+    
+    module_muk_dms_export = fields.Boolean(
+        string="Export Files",
+        help="Allows the conversion of existing files.")
+    
     module_muk_dms_attachment = fields.Boolean(
         string="Attachment Storage Location",
         help="Allows attachments to be stored inside of MuK Documents.")
-    
+
     module_muk_dms_attachment_rules = fields.Boolean(
         string="Attachment Storage Rules",
         help="Allows attachments to be automatically placed in the right directory.")
+    
+    module_muk_dms_attachment_automation = fields.Boolean(
+        string="Attachment Rule Automation",
+        help="Allows you to create rule templates to create attachment rules.")
     
     module_muk_dms_attachment_wizard = fields.Boolean(
         string="Attachment Wizard",
