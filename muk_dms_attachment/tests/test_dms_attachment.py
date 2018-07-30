@@ -40,8 +40,13 @@ class AttachmentTestCase(dms_case.DMSTestCase):
     def tearDown(self):
         super(AttachmentTestCase, self).tearDown()
         
+    @unittest.skip("The test takes a long time and is therefore skipped by default.")
     def test_migiration(self):
         self.env['ir.attachment'].sudo().force_storage()
         self.assertTrue(self.attachment.store_document.id)
+        copy = self.attachment.copy()
+        copy.unlink()
+        
+    def test_copy(self):
         copy = self.attachment.copy()
         copy.unlink()

@@ -28,7 +28,12 @@
 	<function model="ir.config_parameter" name="set_param" 
 		eval="('ir_attachment.location', 'documents')" />
 	
-	<function model="ir.attachment" name="force_storage"/>
+	<!-- 
+		Makes the installation time unnecessarily long and can be triggered
+		manually in the settings if required.
+		
+		<function model="ir.attachment" name="force_storage"/>
+	-->
 
 	</data>
 </odoo>

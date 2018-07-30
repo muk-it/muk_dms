@@ -50,7 +50,8 @@ class DocumentIrAttachment(models.Model):
     store_document = fields.Many2one(
         comodel_name='muk_dms.file', 
         string="Document File",
-        index=True,)
+        index=True,
+        copy=False)
     
     is_document = fields.Boolean(
         string="Document",
@@ -146,13 +147,14 @@ class DocumentIrAttachment(models.Model):
     @api.constrains('store_document')
     def _check_store_document(self):
         for attach in self:
-            attachments = attach.sudo().search([
-                '&', ('store_document', '=', attach.store_document.id),
-                '&', ('is_document', '=', False),
-                '|', ('res_field', '=', False),
-                ('res_field', '!=', False)])
-            if len(attachments) >= 2:
-                raise ValidationError(_('The file is already referenced by another attachment.'))
+            if attach.store_document.id:
+                attachments = attach.sudo().search([
+                    '&', ('store_document', '=', attach.store_document.id),
+                    '&', ('is_document', '=', False),
+                    '|', ('res_field', '=', False),
+                    ('res_field', '!=', False)])
+                if len(attachments) >= 2:
+                    raise ValidationError(_('The file is already referenced by another attachment.'))
     
     @api.multi
     def _inverse_datas(self):
@@ -199,9 +201,9 @@ class DocumentIrAttachment(models.Model):
         self.ensure_one()
         default = dict(default or [])
         if not 'store_document' in default and self.store_document:
-            default['store_document'] = False
+            default.update({'store_document': False})
             directory_id = self.store_document.directory.id
-            content =self.store_document.content
+            content = self.store_document.content
             copy = super(DocumentIrAttachment, self).copy(default)
             store_document = self.env['muk_dms.file'].sudo().create({
                 'name': "[A-%s] %s" % (copy.id, copy.datas_fname or copy.name),
