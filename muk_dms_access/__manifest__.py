@@ -20,7 +20,7 @@
 {
     'name': "MuK Documents Access",
     'summary': """Access Control""",
-    'version': '11.0.2.0.0',   
+    'version': '11.0.2.0.1',   
     'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
