@@ -24,10 +24,7 @@
 	<field name="name">muk_dms_file.form</field>
 	<field name="model">muk_dms.file</field>
 	<field name="arch" type="xml">
-		<xpath expr="//field[@name='reference']" position="replace">
-			<group>
-				<field name="reference" />
-			</group>
+		<xpath expr="//field[@name='reference']/.." position="after">
 			<group>
 				<field name="reference_name" />
 				<field name="reference_model" />

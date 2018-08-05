@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record id="view_security_groups_tree" model="ir.ui.view">
+	<field name="name">muk_security_groups.tree</field>
+	<field name="model">muk_security.groups</field>
+	<field name="inherit_id" ref="muk_security.view_security_groups_tree" />
+	<field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//field[last()]" position="after">
+			<field name="count_directories" />
+			<field name="count_files" />
+		</xpath>
+	</field>
+</record>
+
+<record id="view_security_groups_form" model="ir.ui.view">
+	<field name="name">muk_security_groups.form</field>
+	<field name="model">muk_security.groups</field>
+	<field name="inherit_id" ref="muk_security.view_security_groups_form" />
+	<field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//group[last()]" position="after">
+			<group>
+				<field name="count_directories" />
+			</group>
+			<group>
+				<field name="count_files" />
+			</group>
+		</xpath>
+		<xpath expr="//notebook//page[last()]" position="after">
+			<page string="Directories">
+				<field name="directories">
+					<tree string="Directories">
+						<field name="name" />
+						<field name="size" widget="dms_size" />
+						<field name="write_date" />
+						<field name="path" widget="dms_path" />
+					</tree>
+				</field>
+			</page>
+			<page string="Files">
+				<field name="files">
+					<tree string="Files">
+						<field name="name" />
+						<field name="mimetype" />
+						<field name="size" widget="dms_size" />
+						<field name="write_date" />
+						<field name="directory" />
+					</tree>
+				</field>
+			</page>
+		</xpath>
+	</field>
+</record>
+
+<record id="action_dms_groups" model="ir.actions.act_window">
+	<field name="name">Access Control</field>
+	<field name="res_model">muk_security.groups</field>
+	<field name="view_mode">tree,form</field>
+	<field name="view_ids" eval="[(5, 0, 0),
+		(0, 0, {'view_mode': 'tree', 'view_id': ref('view_security_groups_tree')}),
+		(0, 0, {'view_mode': 'form', 'view_id': ref('view_security_groups_form')})]"/>
+</record>
+
+<menuitem id="menu_dms_group" name="Access"
+	parent="muk_dms.cat_menu_muk_dms_config" action="action_dms_groups" />
+		
+</odoo>

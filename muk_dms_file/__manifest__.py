@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -22,26 +20,25 @@
 {
     "name": "MuK Documents File",
     "summary": """Document File System Support""",
-    "description": """ 
-        
-    """,
-    "version": '11.0.1.2.1',   
+    "version": '11.0.2.0.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
-        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     "depends": [
         "muk_dms",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/dms_actions.xml",
+        "actions/dms_actions.xml",
         "views/dms_settings_view.xml",
-        "views/dms_data_view.xml"
+        "views/dms_data_view.xml",
+        "views/res_config_settings_view.xml",
+        "data/ir_cron.xml",
     ],
     "demo": [
     ],
@@ -57,5 +54,6 @@
     },
     "application": False,
     "installable": True,
-    
+    "post_load": "_patch_system",
+    "uninstall_hook": "_delete_file_data",
 }

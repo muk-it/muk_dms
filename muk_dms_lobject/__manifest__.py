@@ -22,14 +22,11 @@
 {
     "name": "MuK Documents Large Object",
     "summary": """Document Large Object Support""",
-    "description": """ 
-        This module extends MuK Documents to use large
-        objects to store and load files.
-    """,
-    "version": '11.0.1.0.0',   
+    "version": '11.0.2.0.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
@@ -37,6 +34,8 @@
     "depends": [
         "muk_dms",
         "muk_fields_lobject",
+        "muk_web_fields_lobject",
+        "muk_web_preview_lobject",
     ],
     "data": [
         "security/ir.model.access.csv",
@@ -56,5 +55,4 @@
     },
     "application": False,
     "installable": True,
-    
 }

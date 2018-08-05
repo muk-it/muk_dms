@@ -21,10 +21,12 @@
 
 <template id="assets_backend" inherit_id="web.assets_backend">
 	<xpath expr="//link[last()]" position="after">
-		<link rel="stylesheet" href="/muk_dms_field/static/src/less/dms_widgets.less" />
+		<link rel="stylesheet" href="/muk_dms_field/static/src/less/dms_widgets_many2one.less" />
 	</xpath>
 	<xpath expr="//script[last()]" position="after">
-		<script type="text/javascript" src="/muk_dms_field/static/src/js/dms_widgets_binary.js" />
+		<script type="text/javascript" src="/muk_dms_field/static/src/js/field_utils.js" />
+		<script type="text/javascript" src="/muk_dms_field/static/src/js/dms_many2one.js" />
+		<script type="text/javascript" src="/muk_dms_field/static/src/js/dms_binary.js" />
 	</xpath>
 </template>
 

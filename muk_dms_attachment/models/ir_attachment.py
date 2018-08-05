@@ -1,5 +1,3 @@
-## -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -50,13 +48,19 @@ class DocumentIrAttachment(models.Model):
         string="Storage Type")
     
     store_document = fields.Many2one(
-        'muk_dms.file', 
+        comodel_name='muk_dms.file', 
         string="Document File",
-        index=True,)
+        index=True,
+        copy=False)
     
     is_document = fields.Boolean(
         string="Document",
         default=False)
+    
+    store_directory = fields.Many2one(
+        related="store_document.directory",
+        string="Document Directory",
+        readonly=True)
     
     #----------------------------------------------------------
     # Function
@@ -88,6 +92,16 @@ class DocumentIrAttachment(models.Model):
             if attach.is_document and storage != 'documents':
                 attach.is_document = False
             attach.write({'datas': attach.datas})
+    
+    @api.multi
+    def _attachment_directory(self):
+        attachment_directory = self.env['ir.config_parameter'].sudo().get_param(
+            'muk_dms_attachment.attachment_directory', None)
+        if attachment_directory:
+            directory = self.env['muk_dms.directory'].sudo().browse(int(attachment_directory)) 
+            if directory.exists() and directory.read(['settings']):
+                return directory.id
+        raise ValidationError(_('A directory has to be defined.'))
     
     #----------------------------------------------------------
     # Read
@@ -133,24 +147,16 @@ class DocumentIrAttachment(models.Model):
     @api.constrains('store_document')
     def _check_store_document(self):
         for attach in self:
-            attachments = attach.sudo().search([
-                '&', ('store_document', '=', attach.store_document.id),
-                '&', ('is_document', '=', False),
-                '|', ('res_field', '=', False),
-                ('res_field', '!=', False)])
-            if len(attachments) >= 2:
-                raise ValidationError(_('The file is already referenced by another attachment.'))
-
-    def _attachment_directory(self):
-        attachment_directory = self.env['ir.config_parameter'].sudo().get_param(
-            'muk_dms_attachment.attachment_directory', None)
-        if attachment_directory:
-            directory = self.env['muk_dms.directory'].sudo().browse(int(attachment_directory)) 
-            if directory.exists():
-                directory.read(['settings'])
-                return directory.id
-        raise ValidationError(_('A directory has to be defined.'))
-        
+            if attach.store_document.id:
+                attachments = attach.sudo().search([
+                    '&', ('store_document', '=', attach.store_document.id),
+                    '&', ('is_document', '=', False),
+                    '|', ('res_field', '=', False),
+                    ('res_field', '!=', False)])
+                if len(attachments) >= 2:
+                    raise ValidationError(_('The file is already referenced by another attachment.'))
+    
+    @api.multi
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
@@ -170,7 +176,8 @@ class DocumentIrAttachment(models.Model):
                 if value:
                     if attach.store_document:
                         store_document = attach.store_document
-                        store_document.sudo().write({'content': value})
+                        directory = attach._attachment_directory()
+                        store_document.sudo().write({'content': value, 'directory': directory,})
                     else: 
                         directory = attach._attachment_directory()
                         store_document = self.env['muk_dms.file'].sudo().create({
@@ -194,9 +201,9 @@ class DocumentIrAttachment(models.Model):
         self.ensure_one()
         default = dict(default or [])
         if not 'store_document' in default and self.store_document:
-            default['store_document'] = False
+            default.update({'store_document': False})
             directory_id = self.store_document.directory.id
-            content =self.store_document.content
+            content = self.store_document.content
             copy = super(DocumentIrAttachment, self).copy(default)
             store_document = self.env['muk_dms.file'].sudo().create({
                 'name': "[A-%s] %s" % (copy.id, copy.datas_fname or copy.name),

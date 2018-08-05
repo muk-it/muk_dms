@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -21,14 +19,11 @@
 
 import logging
 
-from odoo import _
 from odoo import models, api, fields
-
-from odoo.addons.muk_dms.models import dms_base
 
 _logger = logging.getLogger(__name__)
 
-class FieldFile(dms_base.DMSModel):
+class FieldFile(models.Model):
     
     _inherit = 'muk_dms.file'
     
@@ -57,15 +52,6 @@ class FieldFile(dms_base.DMSModel):
         help="The record id this is attached to.")
     
     #----------------------------------------------------------
-    # Functions
-    #----------------------------------------------------------
-        
-    def trigger_computation(self, fields, refresh=True, operation=None):
-        super(FieldFile, self).trigger_computation(fields)
-        if "reference_name" in fields:
-            self._compute_reference_name()
-    
-    #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
         
@@ -88,8 +74,3 @@ class FieldFile(dms_base.DMSModel):
             self._cr.execute('CREATE INDEX muk_dms_file_idx ON muk_dms_file (reference_model, reference_id)')
             self._cr.commit()
         return file
-    
-    def _check_recomputation(self, values, operation=None):
-        super(FieldFile, self)._check_recomputation(values, operation)
-        if 'reference_model' in values or 'reference_id' in values:
-            self.trigger_computation(['reference_name'])

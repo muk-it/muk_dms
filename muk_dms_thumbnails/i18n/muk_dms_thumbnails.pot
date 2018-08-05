@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_thumbnails
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-26 11:59+0000\n"
+"PO-Revision-Date: 2018-07-26 11:59+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_dms_thumbnails
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+msgid ".mov, .avi"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: selection:muk_dms.settings,thumbnails:0
+msgid "Cron Job"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.actions.server,name:muk_dms_thumbnails.cron_dms_file_synchronize_ir_actions_server
+#: model:ir.cron,cron_name:muk_dms_thumbnails.cron_dms_file_synchronize
+#: model:ir.cron,name:muk_dms_thumbnails.cron_dms_file_synchronize
+msgid "Cron job to generate File Thumbnails"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+msgid "Defines a list of file extensions for which no thumbnails are to be created."
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_res_config_settings_no_thumbnail_extensions
+msgid "Defines a list of file extensions for which no thumbnails are to be created. (Example: '.mov, .avi')"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_file_failed_auto_thumbnail
+msgid "Failed Thumbnail"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model,name:muk_dms_thumbnails.model_muk_dms_file
+msgid "File"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_muk_dms_settings_protect_thumbnails
+msgid "If this flag is enabled thumbnails set by a user wont be changed."
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model,name:muk_dms_thumbnails.model_muk_dms_settings
+msgid "MuK Documents Settings"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: selection:muk_dms.settings,thumbnails:0
+msgid "On Creation/Update"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_settings_protect_thumbnails
+msgid "Protect Thumbnails"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+msgid "Thumbnail Creation"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_res_config_settings_no_thumbnail_extensions
+msgid "Thumbnails"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_settings_thumbnails
+msgid "Thumbnails Settings"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_muk_dms_settings_thumbnails
+msgid "Thumbnails can be created either directly when changing the file or once an hour via cron job."
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_file_is_user_thumbnail
+msgid "User Thumbnail"
+msgstr ""
+
+#. module: muk_dms_thumbnails
+#: model:ir.model,name:muk_dms_thumbnails.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
+

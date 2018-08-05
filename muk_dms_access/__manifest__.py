@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2017 MuK IT GmbH
@@ -22,33 +20,24 @@
 {
     'name': "MuK Documents Access",
     'summary': """Access Control""",
-    'description': """ 
-        MuK Documents Access enables access control groups.
-        These groups can be used to customize the security
-        of your document management system.
-    """,
-    'version': '11.0.1.0.6',   
+    'version': '11.0.2.0.1',   
     'category': 'Document Management',   
     'license': 'AGPL-3',    
     'author': "MuK IT",
     'website': "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     'contributors': [
         "Mathias Markl <mathias.markl@mukit.at>",
-        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     'depends': [
-        'hr',
         'muk_dms',
     ],
     "data": [
-        "security/dms_access_security.xml",
-        'security/ir.model.access.csv',
-        'views/dms_groups_view.xml',
         'views/dms_directory_view.xml',
         'views/dms_file_view.xml',
+        'views/security_groups_view.xml',
     ],
     "demo": [
-        "demo/dms_hr_demo.xml",
         "demo/dms_access_groups_demo.xml",
         "demo/dms_settings_demo.xml",
         "demo/dms_directory_demo.xml",
@@ -60,7 +49,6 @@
     'images': [
         'static/description/banner.png'
     ],
-    "post_init_hook": '_auto_default_group',
     "application": False,
     "installable": True,
 }

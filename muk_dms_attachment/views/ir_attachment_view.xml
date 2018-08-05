@@ -58,6 +58,7 @@
         </xpath>
         <xpath expr="//field[@name='create_date']" position="after">
         	 <field name="storage_type" groups="base.group_no_one"/>
+        	 <field name="store_directory" groups="base.group_no_one"/>
         </xpath>
     </field>
 </record>
@@ -74,6 +75,7 @@
                   <field name="store_fname" readonly="1" attrs="{'invisible':[('store_fname','=',False)]}"/>
                   <field name="store_lobject" readonly="1" attrs="{'invisible':[('store_lobject','=',False)]}"/>
                   <field name="store_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
+        	 	  <field name="store_directory" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
                   <field name="is_document" readonly="1" attrs="{'invisible':[('store_document','=',False)]}"/>
               </group>
         </xpath>
@@ -86,14 +88,13 @@
 	<field name="view_mode">tree,form</field>
 	<field name="search_view_id" ref="base.view_attachment_search"/>
 	<field name="domain">[
+		'&amp;', ['type', '=', 'binary'], 
 		'&amp;', ['is_document', '=', False], 
 		'|', ['res_field', '=', False],
 		 ['res_field', '!=', False]]
 	</field>
 	<field name="context">
-		{'search_default_group_res_model': 1,
-	 	 'search_default_group_res_name': 1, 
-	 	 'search_default_group_res_field': 1}
+		{'search_default_group_res_model': 1}
 	</field>
     <field name="help" type="html">
         <p class="oe_view_nocontent_create">
@@ -103,7 +104,6 @@
 </record>
 
 <menuitem id="menu_dms_attachment" name="Attachments"
-	parent="muk_dms.cat_menu_muk_dms_models" action="action_dms_attachment"
-	groups="muk_dms.group_dms_admin,base.group_system" />
+	parent="cat_menu_muk_dms_attachment" action="action_dms_attachment" />
 
 </odoo>

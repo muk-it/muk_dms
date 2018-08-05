@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_thumbnails
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-26 12:00+0000\n"
+"PO-Revision-Date: 2018-07-26 12:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+#. module: muk_dms_thumbnails
+msgid ".mov, .avi"
+msgstr ".mov, .avi"
+
+#: selection:muk_dms.settings,thumbnails:0
+#. module: muk_dms_thumbnails
+msgid "Cron Job"
+msgstr "Cron Job"
+
+#: model:ir.actions.server,name:muk_dms_thumbnails.cron_dms_file_synchronize_ir_actions_server
+#: model:ir.cron,cron_name:muk_dms_thumbnails.cron_dms_file_synchronize
+#: model:ir.cron,name:muk_dms_thumbnails.cron_dms_file_synchronize
+#. module: muk_dms_thumbnails
+msgid "Cron job to generate File Thumbnails"
+msgstr "Cron-Job zum Erzeugen von Datei-Thumbnails"
+
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+#. module: muk_dms_thumbnails
+msgid "Defines a list of file extensions for which no thumbnails are to be created."
+msgstr "Definiert eine Liste von Dateierweiterungen, für die keine Thumbnails erstellt werden sollen."
+
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_res_config_settings_no_thumbnail_extensions
+#. module: muk_dms_thumbnails
+msgid "Defines a list of file extensions for which no thumbnails are to be created. (Example: '.mov, .avi')"
+msgstr "Definiert eine Liste von Dateierweiterungen, für die keine Thumbnails erstellt werden sollen. (Beispiel: .mov, .avi')"
+
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_file_failed_auto_thumbnail
+#. module: muk_dms_thumbnails
+msgid "Failed Thumbnail"
+msgstr "Fehlgeschlagenes Thumbnail"
+
+#: model:ir.model,name:muk_dms_thumbnails.model_muk_dms_file
+#. module: muk_dms_thumbnails
+msgid "File"
+msgstr "Datei"
+
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_muk_dms_settings_protect_thumbnails
+#. module: muk_dms_thumbnails
+msgid "If this flag is enabled thumbnails set by a user wont be changed."
+msgstr "Wenn dieses Flag aktiviert ist, werden die von einem Benutzer gesetzten Thumbnails nicht geändert."
+
+#: model:ir.model,name:muk_dms_thumbnails.model_muk_dms_settings
+#. module: muk_dms_thumbnails
+msgid "MuK Documents Settings"
+msgstr "MuK Documents Einstellungen"
+
+#: selection:muk_dms.settings,thumbnails:0
+#. module: muk_dms_thumbnails
+msgid "On Creation/Update"
+msgstr "Bei Erstellung/Aktualisierung"
+
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_settings_protect_thumbnails
+#. module: muk_dms_thumbnails
+msgid "Protect Thumbnails"
+msgstr "Thumbnails schützen"
+
+#: model:ir.ui.view,arch_db:muk_dms_thumbnails.res_config_settings_view_form
+#. module: muk_dms_thumbnails
+msgid "Thumbnail Creation"
+msgstr "Thumbnail-Erstellung"
+
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_res_config_settings_no_thumbnail_extensions
+#. module: muk_dms_thumbnails
+msgid "Thumbnails"
+msgstr "Thumbnails"
+
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_settings_thumbnails
+#. module: muk_dms_thumbnails
+msgid "Thumbnails Settings"
+msgstr "Thumbnails-Einstellungen"
+
+#: model:ir.model.fields,help:muk_dms_thumbnails.field_muk_dms_settings_thumbnails
+#. module: muk_dms_thumbnails
+msgid "Thumbnails can be created either directly when changing the file or once an hour via cron job."
+msgstr "Thumbnails können entweder direkt beim Ändern der Datei oder einmal pro Stunde über cron job erstellt werden."
+
+#: model:ir.model.fields,field_description:muk_dms_thumbnails.field_muk_dms_file_is_user_thumbnail
+#. module: muk_dms_thumbnails
+msgid "User Thumbnail"
+msgstr "Benutzer Thumbnail"
+
+#: model:ir.model,name:muk_dms_thumbnails.model_res_config_settings
+#. module: muk_dms_thumbnails
+msgid "res.config.settings"
+msgstr "res.config.settings"
+

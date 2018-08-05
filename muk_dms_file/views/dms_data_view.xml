@@ -25,7 +25,7 @@
 	<field name="arch" type="xml">
 		<tree string="Files">
 			<field name="id" />
-			<field name="base_path" />
+			<field name="complete_base_path" />
 			<field name="dms_path" />
 			<field name="checksum" />
 		</tree>
