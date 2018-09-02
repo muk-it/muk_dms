@@ -72,7 +72,7 @@ class DocumentBinary(fields.Field):
             ])
         with records.env.norecompute():
             if value:
-                for record in (records - (records - records.browse(files.mapped('reference_id'))):
+                for record in (records - (records - records.browse(files.mapped('reference_id')))):
                     files.write({
                         'content': value,
                         'name': self.filename(record) if callable(self.filename) else self.filename
