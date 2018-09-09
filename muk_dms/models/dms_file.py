@@ -488,8 +488,11 @@ class File(models.Model):
             if record.reference and save_type and save_type != record.reference.type():
                 reference = record._create_reference(
                     record.settings, record.directory.path, record.name, record.content)
-                record._unlink_reference()
-                record.reference = "%s,%s" % (reference._name, reference.id)
+                if reference:
+                    record._unlink_reference()
+                    record.reference = "%s,%s" % (reference._name, reference.id)
+                else:
+                    _logger.warning("Something went wrong %s not supported!" % save_type)
     
     @api.multi
     def _check_reference_values(self, values):
