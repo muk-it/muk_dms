@@ -385,10 +385,14 @@ class File(models.Model):
                 else:
                     directory = record.directory
                     settings = record.settings if record.settings else directory.settings
-                    reference = record._create_reference(
-                        settings, directory.path, record.name, content)
-                    reference = "%s,%s" % (reference._name, reference.id)
-                    record.write({'reference': reference, 'size': size})
+                    save_type = settings and settings.read(['save_type'])
+                    if save_type:
+                        reference = record._create_reference(
+                            settings, directory.path, record.name, content)
+                        reference = "%s,%s" % (reference._name, reference.id)
+                        record.write({'reference': reference, 'size': size})
+                    else:
+                        _logger.warning("Something went wrong %s not supported!" % save_type)
             else:
                 record._unlink_reference()
                 record.reference = None
