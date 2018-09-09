@@ -472,7 +472,6 @@ class File(models.Model):
     def _create_reference(self, settings, path, filename, content):
         self.ensure_one()
         self.check_access('create', raise_exception=True)
-        _logger.info("New File is created! Save Type: %s" % settings.read(['save_type']))
         if settings.read(['save_type']) and settings.save_type == 'database':
             return self.env['muk_dms.data_database'].sudo().create({'data': content})
         return None
