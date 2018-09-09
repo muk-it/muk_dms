@@ -386,9 +386,8 @@ class File(models.Model):
                     directory = record.directory
                     settings = record.settings if record.settings else directory.settings
                     save_type = settings and settings.read(['save_type'])
-                    if save_type:
-                        reference = record._create_reference(
-                            settings, directory.path, record.name, content)
+                    reference = record._create_reference(settings, directory.path, record.name, content)
+                    if reference:
                         reference = "%s,%s" % (reference._name, reference.id)
                         record.write({'reference': reference, 'size': size})
                     else:
@@ -473,7 +472,8 @@ class File(models.Model):
     def _create_reference(self, settings, path, filename, content):
         self.ensure_one()
         self.check_access('create', raise_exception=True)
-        if settings.save_type == 'database':
+        _logger.info("New File is created! Save Type: %s" % settings.read(['save_type']))
+        if settings.read(['save_type']) and settings.save_type == 'database':
             return self.env['muk_dms.data_database'].sudo().create({'data': content})
         return None
     
