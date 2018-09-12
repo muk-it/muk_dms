@@ -1,6 +1,6 @@
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Build Status](https://travis-ci.org/muk-it/muk_dms.svg?branch=11.0)](https://travis-ci.org/muk-it/muk_dms)
-[![codecov](https://codecov.io/gh/muk-it/muk_dms/branch/11.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_dms)
+[![Build Status](https://travis-ci.org/muk-it/muk_dms.svg?branch=12.0)](https://travis-ci.org/muk-it/muk_dms)
+[![codecov](https://codecov.io/gh/muk-it/muk_dms/branch/12.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_dms)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/410a58134cc446538a3edf01b56a9b95)](https://www.codacy.com/app/keshrath/muk_dms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=muk-it/muk_dms&amp;utm_campaign=Badge_Grade)
 [![Demo](https://img.shields.io/badge/demo-Try%20me-243742.svg)](https://demo.mukit.at/)
 
