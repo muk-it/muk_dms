@@ -75,7 +75,7 @@ class SystemSettings(models.Model):
     def _check_notification(self, vals, *largs, **kwargs):
         super(SystemSettings, self)._check_notification(vals, *largs, **kwargs)
         if 'base_path' in vals:
-            self.suspend_security().notify_change({'base_path': os.path.join(vals['base_path'], self.env.cr.dbname)})
+            self.suspend_security().notify_change({'base_path': vals['base_path']})
             
     #----------------------------------------------------------
     # File Synchronization
@@ -99,7 +99,7 @@ class SystemSettings(models.Model):
         settings = self.sudo().search([('save_type', '=', 'file')])
         data_files = settings.mapped('settings_files')
         system_file_paths = set()
-        for base_path in settings.mapped('base_path'):
+        for base_path in settings.mapped('complete_base_path'):
             for path, subdirs, files in os.walk(base_path):
                 for name in files:
                     system_file_paths.add(os.path.join(path, name))

@@ -127,7 +127,7 @@ class SystemFileDataModel(models.Model):
             if 'dms_path' in values:
                 old_file_path = record._build_path()
                 new_file_path = record._build_path(
-                    base_path=record.base_path, 
+                    base_path=record.complete_base_path, 
                     dms_path=values['dms_path'])
                 record._ensure_dir(new_file_path)
                 record._move_file(old_file_path, new_file_path)

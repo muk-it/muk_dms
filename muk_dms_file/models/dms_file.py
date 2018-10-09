@@ -57,7 +57,7 @@ class SystemFile(models.Model):
             return result
         if settings.read(['save_type', 'base_path', 'complete_base_path']) and settings.save_type == 'file':
             reference = self.env['muk_dms.data_system'].sudo().create(
-                {'base_path': settings.complete_base_path,
+                {'base_path': settings.base_path,
                  'dms_path': os.path.join(path, filename)})
             reference.sudo().update({'content': content})
             return reference
