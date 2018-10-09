@@ -75,7 +75,7 @@ class SystemSettings(models.Model):
     def _check_notification(self, vals, *largs, **kwargs):
         super(SystemSettings, self)._check_notification(vals, *largs, **kwargs)
         if 'base_path' in vals:
-            self.suspend_security().notify_change({'base_path': vals['base_path']})
+            self.suspend_security().notify_change({'base_path': os.path.join(vals['base_path'], self.env.cr.dbname)})
             
     #----------------------------------------------------------
     # File Synchronization

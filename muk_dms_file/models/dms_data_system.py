@@ -232,7 +232,7 @@ class SystemFileDataModel(models.Model):
         try:
             shutil.move(old_file_path, new_file_path)
         except IOError as exc:
-            _logger.error("Failed to move the file(%s): %s" % (file_path, str(exc)))
+            _logger.error("Failed to move the file(%s): %s" % (old_file_path, str(exc)))
             if exc.errno == errno.ENOENT:
                 raise MissingError(
                 _("Something went wrong! Seems that the file (%s) is missing or broken.") %

@@ -55,12 +55,13 @@ class SystemFile(models.Model):
         result = super(SystemFile, self)._create_reference(settings, path, filename, content)
         if result:
             return result
-        if settings.save_type == 'file':
+        if settings.read(['save_type', 'base_path', 'complete_base_path']) and settings.save_type == 'file':
             reference = self.env['muk_dms.data_system'].sudo().create(
-                {'base_path': settings.base_path,
+                {'base_path': settings.complete_base_path,
                  'dms_path': os.path.join(path, filename)})
             reference.sudo().update({'content': content})
             return reference
+        _logger.info("NOT SAVED: %s, %s" % (settings.read(['save_type', 'base_path', 'complete_base_path']), settings.save_type))
         return None
 
     @api.multi
