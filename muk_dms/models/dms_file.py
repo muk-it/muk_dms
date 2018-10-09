@@ -487,7 +487,7 @@ class File(models.Model):
     def _update_reference_type(self):
         self.check_access('write', raise_exception=True)
         for record in self:
-            save_type = record.settings and record.settings.read(['save_type'])
+            save_type = record.settings.read(['save_type']) and record.settings
             if record.reference and save_type and save_type != record.reference.type():
                 reference = record._create_reference(
                     record.settings, record.directory.path, record.name, record.content)
