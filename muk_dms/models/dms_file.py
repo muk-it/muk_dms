@@ -415,11 +415,13 @@ class File(models.Model):
     @api.multi
     def _before_unlink(self, *largs, **kwargs):
         info = super(File, self)._before_unlink(*largs, **kwargs)
+        records = self.filtered(lambda r: r.reference)
         references = [
-            list((k, list(map(lambda rec: rec.reference.id, v)))) 
+            list((k, list(map(lambda rec: rec.reference.id, v))))
                for k, v in itertools.groupby(
-                   self.sorted(key=lambda rec: rec.reference._name),
-                   lambda rec: rec.reference._name)]
+                   records.sorted(key=lambda rec: rec.reference._name),
+                   lambda rec: rec.reference._name)
+            ]
         info['references'] = references
         return info
     
@@ -514,9 +516,10 @@ class File(models.Model):
     @api.multi
     def _unlink_reference(self):
         self.check_access('unlink', raise_exception=True)
+        record = self.filtered(lambda r: r.reference)
         for tuple in [
             list((k, list(map(lambda rec: rec.reference.id, v)))) 
                for k, v in itertools.groupby(
-                   self.sorted(key=lambda rec: rec.reference._name),
+                   record.sorted(key=lambda rec: rec.reference._name),
                    lambda rec: rec.reference._name)]:
             self.env[tuple[0]].sudo().browse(list(filter(None, tuple[1]))).unlink()
