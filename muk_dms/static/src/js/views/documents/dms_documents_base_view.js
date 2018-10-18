@@ -54,10 +54,10 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
             contextmenu: true,
         }
 
-        if(action.params && action.params.directory){
+        if(action.params && action.params.directory && action.params.name){
             var init_data = [{
                 id: "directory" + action.params.directory,
-                text: "Documents",
+                text: action.params.name,
                 icon: "fa fa-folder-o",
                 type: "directory",
                 data: {
