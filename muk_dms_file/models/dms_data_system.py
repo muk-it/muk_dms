@@ -118,7 +118,7 @@ class SystemFileDataModel(models.Model):
             if 'base_path' in values:
                 old_file_path = record._build_path()
                 new_file_path = record._build_path(
-                    base_path=os.path.join(values['base_path'], self.env.cr.dbname),
+                    base_path=values['base_path'],
                     dms_path=record.dms_path)
                 record._ensure_dir(new_file_path)
                 record._move_file(old_file_path, new_file_path)
@@ -127,7 +127,7 @@ class SystemFileDataModel(models.Model):
             if 'dms_path' in values:
                 old_file_path = record._build_path()
                 new_file_path = record._build_path(
-                    base_path=record.complete_base_path, 
+                    base_path=record.base_path, 
                     dms_path=values['dms_path'])
                 record._ensure_dir(new_file_path)
                 record._move_file(old_file_path, new_file_path)
@@ -167,7 +167,7 @@ class SystemFileDataModel(models.Model):
     
     @api.model
     def _build_path(self, base_path=None, dms_path=None):
-        base_path = (base_path or self.complete_base_path)
+        base_path = (os.path.join(base_path, self.env.cr.dbname) or self.complete_base_path)
         dms_path = (dms_path or self.dms_path)
         return os.path.normpath("%s%s" % (base_path, dms_path))
 
