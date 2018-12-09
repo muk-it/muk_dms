@@ -167,8 +167,8 @@ class SystemFileDataModel(models.Model):
     
     @api.model
     def _build_path(self, base_path=None, dms_path=None):
-        base_path = (os.path.join(base_path, self.env.cr.dbname) or self.complete_base_path)
-        dms_path = (dms_path or self.dms_path)
+        base_path = base_path and os.path.join(base_path, self.env.cr.dbname) or self.complete_base_path
+        dms_path = dms_path or self.dms_path
         return os.path.normpath("%s%s" % (base_path, dms_path))
 
     @api.model
