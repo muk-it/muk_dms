@@ -1,0 +1,84 @@
+/**********************************************************************************
+* 
+*   Copyright (C) 2018 MuK IT GmbH
+*    		
+*   Odoo Proprietary License v1.0
+*   This software and associated files (the "Software") may only be used 
+*	(executed, modified, executed after modifications) if you have
+*	purchased a valid license from the authors, typically via Odoo Apps,
+*	or if you have received a written agreement from the authors of the
+*	Software (see the COPYRIGHT file).
+*	
+*	You may develop Odoo modules that use the Software as a library 
+*	(typically by depending on it, importing it and using its resources),
+*	but without copying any source code or material from the Software.
+*	You may distribute those modules under the license of your choice,
+*	provided that this license is compatible with the terms of the Odoo
+*	Proprietary License (For example: LGPL, MIT, or proprietary licenses
+*	similar to this one).
+*	
+*	It is forbidden to publish, distribute, sublicense, or sell copies of
+*	the Software or modified copies of the Software.
+*	
+*	The above copyright notice and this permission notice must be included
+*	in all copies or substantial portions of the Software.
+*	
+*	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+*	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+*	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+*	THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+*	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+*	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+*	DEALINGS IN THE SOFTWARE.
+*
+**********************************************************************************/
+
+.mk_directory_kanban_view .o_kanban_record {
+	padding: 0;
+	.mk_directory_kanban_actions {
+		float: left;
+		border-right: solid 1px $gray-400;
+		.mk_directory_kanban_actions_wrapper {
+			min-height: $o-kanban-image-width;
+			.btn-outline-primary {
+				display: flex;
+				border-radius: 0;
+				align-items: center;
+				justify-content: center;
+    			border-color: transparent;
+				min-width: $o-kanban-image-width / 2;
+				min-height: $o-kanban-image-width / 2;
+				&.mk_directory_kanban_directories {
+					border-bottom: solid 1px $gray-400;
+				}
+			}
+		}
+	}
+	.o_kanban_image {
+		width: $o-kanban-image-width + 1;
+		border-right: solid 1px $gray-400;
+		+ div {
+            padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter + $o-kanban-image-width / 2;
+            @include media-breakpoint-down(sm) {
+                padding-left: $o-kanban-image-width + $o-kanban-inside-hgutter-mobile + $o-kanban-image-width / 2;
+            }
+        }
+	}
+	.o_kanban_details .o_kanban_details_wrapper {
+		padding: 4px 4px 4px 0;
+		.o_kanban_record_title {
+			font-weight: bold;
+		}
+		.o_kanban_record_body {
+			max-height: 12px;
+			.o_kanban_tags {
+				@include o-text-overflow;
+			}
+		}
+		.favorite_sign_button {
+			margin-top: 1px;
+			font-size: 1.5rem;
+		    line-height: 20px;
+		}
+	}
+}
