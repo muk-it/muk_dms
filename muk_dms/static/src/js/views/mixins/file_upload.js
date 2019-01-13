@@ -104,7 +104,7 @@ var FileUploadMixin = {
 	    };
 	    var finish = function() {
 	    	this._closeUploadNotification(notification);
-	    	this.reload({offset: 0});
+	    	this.reload();
 	    };
     	async.syncLoop(
     		tree.files, 
