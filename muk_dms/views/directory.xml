@@ -310,7 +310,7 @@
 					</group>
 				</group>
 				<notebook>
-					<page string="Subdirectories">
+					<page name="page_directories" string="Subdirectories">
 						<field name="child_directories" 
 							context="{'default_parent_directory': active_id, 'mail_create_nolog': True}" 
 							attrs="{'readonly':[('permission_create','=',False)]}">
@@ -322,7 +322,7 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Files">
+					<page name="page_files" string="Files">
 						<field name="files" 
 							context="{'default_directory': active_id, 'mail_create_nolog': True}"
 							attrs="{'readonly':[('permission_create','=',False)]}">
@@ -333,7 +333,7 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Meta Information">
+					<page name="page_meta" string="Meta Information">
 						<group>
 							<group>
 								<field name="create_date" readonly="1" />
@@ -345,8 +345,8 @@
 							</group>
 						</group>
 					</page>
-					<page string="Access Information">
-						<group>
+					<page name="page_access" string="Access Information">
+						<group name="permissions">
 							<group>
 								<field name="permission_read" readonly="1" />
 								<field name="permission_create" readonly="1" />

@@ -135,7 +135,7 @@
 					</group>
 				</group>
 				<notebook>
-					<page string="Root Directories">
+					<page name="page_roots" string="Root Directories">
 						<field name="root_directories" groups="muk_dms.group_dms_manager"
 							context="{'default_root_storage': active_id, 'default_is_root_directory': True}" >
 							<tree string="Root Directories">

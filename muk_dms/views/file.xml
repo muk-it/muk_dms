@@ -215,7 +215,7 @@
 					</group>
 				</group>
 				<notebook>
-					<page string="Meta Information">
+					<page name="page_meta" string="Meta Information">
 						<group>
 							<group>
 								<field name="create_date" readonly="1" />
@@ -227,7 +227,7 @@
 							</group>
 						</group>
 					</page>
-					<page string="Access Information">
+					<page name="page_access" string="Access Information">
 						<group>
 							<group>
 								<field name="permission_write" readonly="1" />
@@ -240,7 +240,7 @@
 							</group>
 						</group>
 					</page>
-					<page string="Technical Information" invisible="1" groups="muk_dms.group_dms_manager">
+					<page name="page_technical" string="Technical Information" invisible="1" groups="muk_dms.group_dms_manager">
 						<group>
 							<group name="technical_left">
 							</group>
