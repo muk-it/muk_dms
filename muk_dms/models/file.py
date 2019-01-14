@@ -253,6 +253,22 @@ class File(models.Model):
     #----------------------------------------------------------
     
     @api.model
+    def _get_directories_from_database(self, file_ids):
+        if not file_ids:
+            return self.env['muk_dms.directory']
+        sql_query = '''
+            SELECT directory 
+            FROM {table} 
+            WHERE id = ANY (VALUES {ids});
+        '''.format(
+            table=self._table,
+            ids=', '.join(map(lambda id: '(%s)' % id, file_ids)),
+        )
+        self.env.cr.execute(sql_query, [])
+        result = set(val[0] for val in self.env.cr.fetchall())
+        return self.env['muk_dms.directory'].browse(result)
+    
+    @api.model
     def _read_group_process_groupby(self, gb, query):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return super(File, self)._read_group_process_groupby(gb, query)
@@ -277,25 +293,9 @@ class File(models.Model):
             return 0 if count else []
         file_ids = set(result)
         for directory in self._get_directories_from_database(result):
-            if not directory['permission_read']:
-                file_ids -= directory.mapped('files').ids
-        return len(result) if count else result
-    
-    @api.model
-    def _get_directories_from_database(self, file_ids):
-        if not file_ids:
-            return self.env['muk_dms.directory']
-        sql_query = '''
-            SELECT directory 
-            FROM {table} 
-            WHERE id = ANY (VALUES {ids});
-        '''.format(
-            table=self._table,
-            ids=', '.join(map(lambda id: '(%s)' % id, file_ids)),
-        )
-        self.env.cr.execute(sql_query, [])
-        result = set(val[0] for val in self.env.cr.fetchall())
-        return self.env['muk_dms.directory'].browse(result)
+            if not directory.check_access('read', raise_exception=False):
+                file_ids -= set(directory.sudo().mapped('files').ids)
+        return len(file_ids) if count else list(file_ids)
     
     @api.multi
     def _filter_access(self, operation):
@@ -303,8 +303,8 @@ class File(models.Model):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return records
         for directory in self._get_directories_from_database(records.ids):
-            if not directory['permission_%s' % operation]:
-                records -= directory.mapped('files')
+            if not directory.check_access(operation, raise_exception=False):
+                records -= self.browse(directory.sudo().mapped('files').ids)
         return records
 
     @api.multi
@@ -321,7 +321,10 @@ class File(models.Model):
     def check_directory_access(self, operation, vals={}, raise_exception=False):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
-        records = self._get_directories_from_database(self.ids)
+        if 'directory' in vals and vals['directory']:
+            records = self.env['muk_dms.directory'].browse(vals['directory'])
+        else:
+            records = self._get_directories_from_database(self.ids)
         return records.check_access(operation, raise_exception)
 
     #----------------------------------------------------------
