@@ -93,7 +93,7 @@ class DirectoryTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
     def test_storage(self):
-        new_storage = self.create_storage()
+        new_storage = self.create_storage(sudo=True)
         root_directory = self.create_directory(storage=self.new_storage)
         sub_directory = self.create_directory(directory=root_directory)
         self.assertTrue(sub_directory.storage.id == self.new_storage.id)

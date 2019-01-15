@@ -60,10 +60,10 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
     def test_lock_file(self):
-        file = self.create_file()
-        file.lock()
+        file = self.create_file(sudo=True)
+        file.sudo(self.env.uid).lock()
         self.assertTrue(file.is_locked)
-        file.unlock()
+        file.sudo(self.env.uid).unlock()
         self.assertFalse(file.is_locked)
     
     @multi_users(lambda self: self.multi_users())
@@ -76,9 +76,9 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
     def test_rename_file(self):
-        file = self.create_file()
+        file = self.create_file(sudo=True)
         extension = file.extension
-        file.write({'name': "Test.jpg"})
+        file.sudo(self.env.uid).write({'name': "Test.jpg"})
         self.assertFalse(file.extension == extension)
         
     @multi_users(lambda self: self.multi_users())
@@ -104,8 +104,8 @@ class FileTestCase(DocumentsBaseCase):
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
     def test_unlink_file(self):
-        file = self.create_file()
-        file.unlink()
+        file = self.create_file(sudo=True)
+        file.sudo(self.env.uid).unlink()
         self.assertFalse(file.exists())
         
     @multi_users(lambda self: self.multi_users())
