@@ -197,7 +197,7 @@ class File(models.Model):
             paths = [list(map(int, rec.directory.parent_path.split('/')[:-1])) for rec in records_with_directory]
             ids = set(functools.reduce(operator.concat, paths))
             model = self.env['muk_dms.directory'].with_context(dms_directory_show_path=False)
-            data = dict(model.browse(ids).name_get())
+            data = dict(model.browse(ids)._filter_access('read').name_get())
             for record in self:
                 path_names = []
                 path_json = []
