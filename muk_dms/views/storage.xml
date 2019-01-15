@@ -119,14 +119,14 @@
 						<field name="name" />
 					</h1>
 				</div>
-				<group name="save_storage" string="Save Settings">
+				<group name="save_storage">
 					<group>
 						<field name="save_type" />
 					</group>
 					<group>
 					</group>
 				</group>
-				<group name="data_storage" string="Storage Settings">
+				<group name="data_storage">
 					<group>
 						<field name="is_hidden" />
 					</group>
