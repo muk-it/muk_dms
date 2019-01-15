@@ -48,6 +48,9 @@ class Directory(models.Model):
 
     _parent_store = True
     _parent_name = "parent_directory"
+    
+    _parent_path_sudo = False
+    _parent_path_store = False
 
     #----------------------------------------------------------
     # Database

@@ -100,13 +100,13 @@ class File(models.Model):
         compute='_compute_path',
         string="Path Names", 
         readonly=True,
-        store=True)
+        store=False)
 
     path_json = fields.Text(
         compute='_compute_path',
         string="Path Json", 
         readonly=True,
-        store=True)
+        store=False)
      
     color = fields.Integer(
         string="Color",

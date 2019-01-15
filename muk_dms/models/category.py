@@ -37,6 +37,9 @@ class Category(models.Model):
     _parent_store = True
     _parent_name = "parent_category"
     
+    _parent_path_sudo = False
+    _parent_path_store = True
+    
     #----------------------------------------------------------
     # Database
     #----------------------------------------------------------
