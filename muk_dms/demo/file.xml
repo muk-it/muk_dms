@@ -38,6 +38,7 @@
 		<field name="name">Logo_02.jpg</field>
 	    <field name="color" eval="1"/>
 	    <field name="directory" ref="muk_dms.directory_07_demo" />
+	    <field name="category" ref="muk_dms.category_02_demo" />
 	    <field name="content" type="base64" file="muk_dms/demo/data/image03.jpg"/>
 	</record>
 	
@@ -52,6 +53,7 @@
 		<field name="name">Logo.svg</field>
 	    <field name="color" eval="1"/>
 	    <field name="directory" ref="muk_dms.directory_10_demo" />
+	    <field name="category" ref="muk_dms.category_03_demo" />
 	    <field name="content" type="base64" file="muk_dms/demo/data/vector.svg"/>
 	</record>
 	
@@ -100,6 +102,7 @@
 	    <field name="color" eval="4"/>
 	    <field name="directory" ref="muk_dms.directory_11_demo" />
 	    <field name="content" type="base64" file="muk_dms/demo/data/mail01.eml"/>
+	    <field name="category" ref="muk_dms.category_03_demo" />
 	</record>
 	
 	<record id="file_12_demo" model="muk_dms.file">	      
@@ -120,6 +123,7 @@
 		<field name="name">ASPECTJ.aj</field>
 	    <field name="directory" ref="muk_dms.directory_13_demo" />
 	    <field name="content" type="base64" file="muk_dms/demo/data/code01.aj"/>
+	    <field name="category" ref="muk_dms.category_01_demo" />
 	</record>
 	
 	<record id="file_15_demo" model="muk_dms.file">	      

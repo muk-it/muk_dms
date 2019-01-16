@@ -23,9 +23,28 @@ class ResConfigSettings(models.TransientModel):
     
     _inherit = 'res.config.settings'
     
+    #----------------------------------------------------------
+    # Base Addons
+    #----------------------------------------------------------
+    
     module_muk_dms_access = fields.Boolean(
         string="Access Control",
         help="Allows the creation of groups to define access rights.")
+    
+    module_muk_dms_mail = fields.Boolean(
+        string="Mail Support",
+        help="Adds support for messages and activities on directories and files.")
+    
+    #----------------------------------------------------------
+    # ... Addons
+    #----------------------------------------------------------
+    
+    
+    
+    
+    
+    
+    
     
     module_muk_dms_widget = fields.Boolean(
         string="Binary Widget Support",
@@ -71,6 +90,10 @@ class ResConfigSettings(models.TransientModel):
         string="Large Objects ",
         help="Enables a new save option to store files into large objects.")
     
+    #----------------------------------------------------------
+    # Database
+    #----------------------------------------------------------
+    
     documents_binary_max_size = fields.Integer(
         string="Size",
         help="Defines the maximum upload size in MB. Default (25MB)")
@@ -78,6 +101,10 @@ class ResConfigSettings(models.TransientModel):
     documents_forbidden_extensions = fields.Char(
         string="Extensions",
         help="Defines a list of forbidden file extensions. (Example: 'exe,msi')")
+    
+    #----------------------------------------------------------
+    # Functions
+    #----------------------------------------------------------
     
     @api.multi
     def set_values(self):
