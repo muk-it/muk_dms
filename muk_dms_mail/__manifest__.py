@@ -20,7 +20,7 @@
 {
     "name": "MuK Documents Chatter",
     "summary": """Documents Mail Chatter Support""",
-    "version": '12.0.1.0.0',   
+    "version": '12.0.1.0.1',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -36,6 +36,7 @@
     "data": [
         "views/directory.xml",
         "views/file.xml",
+        "views/res_config_settings.xml",
     ],
     "demo": [
     ],
