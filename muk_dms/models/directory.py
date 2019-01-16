@@ -346,9 +346,9 @@ class Directory(models.Model):
         starred_records = self.env['muk_dms.directory'].sudo()
         not_starred_records = self.env['muk_dms.directory'].sudo()
         for record in self:
-            if self.env.user in record.user_stars:
+            if not record.starred and self.env.user in record.user_stars:
                 starred_records |= record
-            else:
+            elif record.starred and self.env.user not in record.user_stars:
                 not_starred_records |= record
         not_starred_records.write({'user_stars': [(4, self.env.uid)]})
         starred_records.write({'user_stars': [(3, self.env.uid)]})
