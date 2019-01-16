@@ -88,10 +88,10 @@ class DocumentsBaseCase(common.TransactionCase):
             'root_storage': storage.id,
         }) 
         
-    def create_file(self, directory=False, content=False, sudo=False):
+    def create_file(self, directory=False, content=False, storage=False, sudo=False):
         model = self.file.sudo() if sudo else self.file
         if not directory:
-            directory = self.create_directory(sudo=sudo)
+            directory = self.create_directory(storage=storage, sudo=sudo)
         return model.create({
             'name': uuid.uuid4().hex,
             'directory': directory.id,
