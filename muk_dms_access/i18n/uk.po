@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_dms_access
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-26 09:11+0000\n"
+"PO-Revision-Date: 2018-01-26 09:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Center of Research & Development\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_directory_perm_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_file_perm_access
+msgid "Access"
+msgstr "Доступ"
+
+#. module: muk_dms_access
+#: model:ir.actions.act_window,name:muk_dms_access.action_dms_groups
+#: model:ir.ui.menu,name:muk_dms_access.menu_dms_group
+msgid "Access Control"
+msgstr "Контроль доступу"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_access_groups
+#: model:ir.model,name:muk_dms_access.model_res_groups
+msgid "Access Groups"
+msgstr "Групи доступу"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_additional_users
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Additional Users"
+msgstr "Додаткові користувачі"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_child_groups
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Child Groups"
+msgstr "Дочірні групи"
+
+#. module: muk_dms_access
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_file_form
+msgid "Complete Groups"
+msgstr "Повні групи"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_create
+msgid "Create"
+msgstr "Створити"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_create_uid
+msgid "Created by"
+msgstr "Створив"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_create_date
+msgid "Created on"
+msgstr "Дата Створення"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_departments
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Departments"
+msgstr "Відділи"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_directories
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_directories
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Directories"
+msgstr "Каталоги"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_display_name
+msgid "Display Name"
+msgstr "Назва для відображення"
+
+#. module: muk_dms_access
+#: model:hr.job,name:muk_dms_access.job_dmshr_demo
+msgid "Documents Officer"
+msgstr "Керівник документів"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_file
+msgid "File"
+msgstr "Файл"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_files
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_files
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Files"
+msgstr "Файли"
+
+#. module: muk_dms_access
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Group"
+msgstr "Група"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_name
+msgid "Group Name"
+msgstr "Назва групи"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_hr_department_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_hr_job_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_res_groups_groups
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_file_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_tree
+msgid "Groups"
+msgstr "Групи"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_hr_department
+msgid "HR Department"
+msgstr "HR відділ"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_id
+msgid "ID"
+msgstr "ID"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_inherit_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_directory_inherit_groups
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_file_inherit_groups
+msgid "Inherit Groups"
+msgstr "Успадковані групи"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_hr_job
+msgid "Job Position"
+msgstr "Посада"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_jobs
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Jobs"
+msgstr "Роботи"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups___last_update
+msgid "Last Modified on"
+msgstr "Остання модифікація"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_write_uid
+msgid "Last Updated by"
+msgstr "Востанне оновив"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_write_date
+msgid "Last Updated on"
+msgstr "Останнє оновлення"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_left
+msgid "Left Parent"
+msgstr "Лівий батько"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_access
+msgid "MuK Documents Access"
+msgstr "MuK Документи Доступ"
+
+#. module: muk_dms_access
+#: model:ir.model,name:muk_dms_access.model_muk_dms_directory
+msgid "MuK Documents Directory"
+msgstr "MuK Документи Каталоги"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_group
+msgid "Parent Group"
+msgstr "Батьківська група"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_read
+msgid "Read"
+msgstr "Читати"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_parent_right
+msgid "Right Parent"
+msgstr "Правий Батько
+
+#. module: muk_dms_access
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Settings"
+msgstr "Налаштування
+
+#. module: muk_dms_access
+#: sql_constraint:muk_dms_access.groups:0
+msgid "The name of the group must be unique!"
+msgstr "Назва групи повинна бути унікальною!"
+
+#. module: muk_dms_access
+#: code:addons/muk_dms_access/models/dms_base.py:108
+#: code:addons/muk_dms_access/models/dms_base.py:229
+#, python-format
+msgid "This operation is forbidden!"
+msgstr "Ця операція заборонена!"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_unlink
+msgid "Unlink"
+msgstr "Видалити"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_count_users
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_users
+#: model:ir.ui.view,arch_db:muk_dms_access.view_dms_groups_form
+msgid "Users"
+msgstr "Користувачі"
+
+#. module: muk_dms_access
+#: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_access_groups_perm_write
+msgid "Write"
+msgstr "Писати"

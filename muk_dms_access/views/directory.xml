@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--     
+	Copyright (C) 2017 MuK IT GmbH
+	
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+-->
+
+<odoo>
+
+<record id="view_dms_directory_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="inherit_id" ref="muk_dms.view_dms_directory_form" />
+	<field name="active" eval="False"/>
+	<field name="arch" type="xml">
+		<xpath expr="//field[@name='parent_directory']" position="before">
+			<field name="inherit_groups" />
+		</xpath>
+		<xpath expr="//page[last()]" position="after">
+			<page string="Groups">
+				<field name="groups">
+					<tree string="Groups">
+						<field name="name" />
+						<field name="perm_read" />
+						<field name="perm_create" />
+						<field name="perm_write" />
+						<field name="perm_unlink" />
+					</tree>
+				</field>
+			</page>
+			<page string="Complete Groups">
+				<field name="complete_groups">
+					<tree string="Complete Groups">
+						<field name="name" />
+						<field name="perm_read" />
+						<field name="perm_create" />
+						<field name="perm_write" />
+						<field name="perm_unlink" />
+					</tree>
+				</field>
+			</page>
+		</xpath>
+	</field>
+</record>
+
+<record id="view_dms_directory_manager_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="inherit_id" ref="muk_dms.view_dms_directory_manager_form" />
+	<field name="arch" type="xml">
+		<xpath expr="//field[@name='parent_directory']" position="before">
+			<field name="inherit_groups" />
+		</xpath>
+		<xpath expr="//page[last()]" position="after">
+			<page string="Groups">
+				<field name="groups">
+					<tree string="Groups">
+						<field name="name" />
+						<field name="perm_read" />
+						<field name="perm_create" />
+						<field name="perm_write" />
+						<field name="perm_unlink" />
+					</tree>
+				</field>
+			</page>
+			<page string="Complete Groups">
+				<field name="complete_groups">
+					<tree string="Complete Groups">
+						<field name="name" />
+						<field name="perm_read" />
+						<field name="perm_create" />
+						<field name="perm_write" />
+						<field name="perm_unlink" />
+					</tree>
+				</field>
+			</page>
+		</xpath>
+	</field>
+</record>
+	
+</odoo>
