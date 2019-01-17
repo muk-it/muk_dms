@@ -170,6 +170,10 @@ class File(models.Model):
     #----------------------------------------------------------
 
     @api.model
+    def _get_content_vals(self):
+        return {'content_binary': False}
+    
+    @api.model
     def _get_binary_max_size(self):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         return int(get_param('muk_web_utils.binary_max_size', default=25))
@@ -401,7 +405,8 @@ class File(models.Model):
                 'content_binary': record.content,
                 'size': len(base64.b64decode(record.content or "")),
             }
-            updates[tools.frozendict(vals)].add(record.id)
+            init = self._get_content_vals()
+            updates[tools.frozendict({**init, **vals})].add(record.id)
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
