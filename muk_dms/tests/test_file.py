@@ -149,3 +149,13 @@ class FileTestCase(DocumentsBaseCase):
     def test_compute_content_base64(self):
         file = self.file_demo_01.with_context(bin_size=False)
         self.assertTrue(file.content)
+        
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
+    def test_compute_save_type(self):
+        self.assertTrue(self.file_demo_01.save_type)
+        
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
+    def test_compute_migration(self):
+        self.assertTrue(self.file_demo_01.migration)

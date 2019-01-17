@@ -153,6 +153,18 @@ class File(models.Model):
         prefetch=False,
         invisible=True)
     
+    save_type = fields.Char(
+        compute='_compute_save_type',
+        string='Current Save Type',
+        invisible=True,
+        prefetch=False)
+    
+    migration = fields.Char(
+        compute='_compute_migration',
+        string='Migration Status',
+        readonly=True,
+        prefetch=False)
+    
     #----------------------------------------------------------
     # Helper
     #----------------------------------------------------------
@@ -243,6 +255,25 @@ class File(models.Model):
         for record in self:
             record.content = record.content_binary
     
+    @api.depends('content_binary') 
+    def _compute_save_type(self):
+        for record in self:
+            record.save_type = "database"
+    
+    @api.depends('storage', 'storage.save_type') 
+    def _compute_migration(self):
+        for record in self:
+            storage_type = record.storage.save_type
+            field = record.storage._fields['save_type']
+            values = field._description_selection(self.env)
+            selection = {value[0]: value[1] for value in values}
+            if storage_type != record.save_type:
+                storage_label = selection.get(storage_type)
+                file_label = selection.get(record.save_type)
+                record.migration = "%s > %s" % (file_label, storage_label)
+            else:
+                record.migration = selection.get(storage_type)
+
     @api.multi
     def read(self, fields=None, load='_classic_read'):
         self.check_directory_access('read', {}, True)
