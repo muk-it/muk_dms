@@ -283,5 +283,57 @@
 
 <menuitem id="menu_dms_file" name="Files" sequence="20"
 	parent="main_menu_muk_dms" action="action_dms_file" />
+	
+<record id="search_dms_file_migration" model="ir.ui.view">
+	<field name="name">muk_dms_file.search</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<search>
+			<field name="name" filter_domain="[('name','ilike',self)]"/>
+			<group expand="0" string="Group By">
+				<filter name="group_storage" string="Storage" domain="[]" context="{'group_by':'storage'}" />
+			</group>
+		</search>
+	</field>
+</record>
+
+<record id="view_dms_file_migration_tree" model="ir.ui.view">
+	<field name="name">muk_dms_file.tree</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<tree string="Files" decoration-muted="(is_locked and not is_lock_editor)">
+			<field name="is_locked" invisible="1"/>
+			<field name="is_lock_editor" invisible="1"/>
+			<field name="name" />
+			<field name="write_date" />
+			<field name="mimetype" />
+			<field name="size" widget="binary_size" />
+			<field name="storage" />
+			<field name="migration" />
+		</tree>
+	</field>
+</record>
+
+<record id="action_dms_file_migration" model="ir.actions.act_window">
+	<field name="name">Files</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">tree</field>
+	<field name="search_view_id" ref="search_dms_file_migration"/>
+	<field name="domain">['|',('active', '=',  False), ('active', '!=',  False)]</field>
+	<field name="context">{'search_default_group_storage': 1}</field>
+	<field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_dms_file_migration_tree')})]"/>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Add a new File.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
+<menuitem id="menu_dms_file_migration" name="Migration" 
+	parent="cat_menu_muk_dms_config_system" 
+	action="action_dms_file_migration" />
 
 </odoo>

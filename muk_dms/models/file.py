@@ -266,11 +266,12 @@ class File(models.Model):
     
     @api.depends('storage', 'storage.save_type') 
     def _compute_migration(self):
+        storage_model = self.env['muk_dms.storage']
+        save_field = storage_model._fields['save_type']
+        values = save_field._description_selection(self.env)
+        selection = {value[0]: value[1] for value in values}
         for record in self:
             storage_type = record.storage.save_type
-            field = record.storage._fields['save_type']
-            values = field._description_selection(self.env)
-            selection = {value[0]: value[1] for value in values}
             if storage_type != record.save_type:
                 storage_label = selection.get(storage_type)
                 file_label = selection.get(record.save_type)

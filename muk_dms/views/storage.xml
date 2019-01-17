@@ -68,6 +68,28 @@
     </field>
 </record>
 
+<record id="action_dms_file_storage_migration" model="ir.actions.act_window">
+	<field name="name">Files</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">tree</field>
+	<field name="search_view_id" ref="search_dms_file_migration"/>
+	<field name="domain">
+		[
+			"&amp;", ("storage", "=",  active_id),
+			"|",("active", "=",  False), ("active", "!=",  False)
+		]
+	</field>
+	<field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_dms_file_migration_tree')})]"/>
+	<field name="help" type="html">
+	    <p class="o_view_nocontent_smiling_face">
+	      	Add a new File.
+	    </p>
+	    <p>
+			Files are used to save content directly in Odoo.
+	    </p>
+    </field>
+</record>
+
 <record id="view_dms_storage_search" model="ir.ui.view">
 	<field name="name">muk_dms_storage.search</field>
 	<field name="model">muk_dms.storage</field>
@@ -101,6 +123,8 @@
 		<form string="Document Setting">
 			<header>
 				<button name="action_storage_migrate" type="object" string="Migrate Files" />
+				<button  type="action" name="%(muk_dms.action_dms_file_storage_migration)d" 
+					class="oe_stat_button" string="Manual File Migration" />
 			</header>
 			<sheet>
 				<div class="oe_button_box" name="button_box">
