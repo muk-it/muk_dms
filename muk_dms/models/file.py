@@ -185,7 +185,6 @@ class File(models.Model):
         self.ensure_one()
         return self.extension and "file_%s.png" % self.extension or ""
     
-    
     #----------------------------------------------------------
     # Actions
     #----------------------------------------------------------
@@ -195,7 +194,8 @@ class File(models.Model):
         record_count = len(self)
         for index, file in enumerate(self):
             if logging:
-                _logger.info(_("Migrate File %s of %s") % (index + 1, record_count))
+                info = (index + 1, record_count, file.migration)
+                _logger.info(_("Migrate File %s of %s [ %s ]") % info)
             file.with_context(migration=True).write({'content': file.content})
     
     #----------------------------------------------------------
