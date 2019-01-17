@@ -36,15 +36,20 @@ class ResConfigSettings(models.TransientModel):
         help="Adds support for messages and activities on directories and files.")
     
     #----------------------------------------------------------
+    # Storage Addons
+    #----------------------------------------------------------
+    
+    module_muk_dms_lobject = fields.Boolean(
+        string="Large Objects Storage",
+        help="Enables a new save option to store files into large objects.")
+    
+    #----------------------------------------------------------
     # ... Addons
     #----------------------------------------------------------
     
-    
-    
-    
-    
-    
-    
+
+
+
     
     module_muk_dms_widget = fields.Boolean(
         string="Binary Widget Support",
@@ -85,10 +90,6 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_file = fields.Boolean(
         string="File Store",
         help="Enables a new save option to store files into a file store.")
-    
-    module_muk_dms_lobject = fields.Boolean(
-        string="Large Objects ",
-        help="Enables a new save option to store files into large objects.")
     
     #----------------------------------------------------------
     # Database
