@@ -176,12 +176,20 @@ class File(models.Model):
     #----------------------------------------------------------
 
     @api.model
-    def _get_content_vals(self):
+    def _get_checksum(self, binary):
+        return hashlib.sha1(binary or b'').hexdigest()
+    
+    @api.model
+    def _get_content_inital_vals(self):
         return {'content_binary': False}
     
     @api.model
-    def _get_checksum(self, binary):
-        return hashlib.sha1(binary or b'').hexdigest()
+    def _update_content_vals(self, vals, binary):
+        vals.update({
+            'checksum': self._get_checksum(binary),
+            'size': binary and len(binary) or 0,
+        })
+        return vals
     
     @api.model
     def _get_binary_max_size(self):
@@ -413,13 +421,12 @@ class File(models.Model):
         updates = defaultdict(set)
         for record in self:
             binary = base64.b64decode(record.content or "")
-            vals = {
+            values = self._get_content_inital_vals()
+            values = self._update_content_vals(values, binary)
+            values.update({
                 'content_binary': record.content,
-                'checksum': self._get_checksum(binary),
-                'size': len(binary),
-            }
-            init = self._get_content_vals()
-            updates[tools.frozendict({**init, **vals})].add(record.id)
+            })
+            updates[tools.frozendict(values)].add(record.id)
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
