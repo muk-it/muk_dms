@@ -179,6 +179,7 @@ class File(models.Model):
     def _get_content_vals(self):
         return {'content_binary': False}
     
+    @api.model
     def _get_checksum(self, binary):
         return hashlib.sha1(binary or b'').hexdigest()
     
@@ -414,8 +415,8 @@ class File(models.Model):
             binary = base64.b64decode(record.content or "")
             vals = {
                 'content_binary': record.content,
-                'size': len(binary),
                 'checksum': self._get_checksum(binary),
+                'size': len(binary),
             }
             init = self._get_content_vals()
             updates[tools.frozendict({**init, **vals})].add(record.id)
