@@ -35,10 +35,11 @@
 
 .mk_file_kanban {
 	#mk_file_kanban_sidebar { 
+    	float: left;
+    	width: $mk-file-kanban-sidebar-width;
     	padding: $mk-file-kanban-sidebar-padding;
     	background-color: $o-control-panel-background-color;
     	height: calc(100% - #{$mk-file-kanban-sidebar-padding});
-		@include mk-flex-child(0, 0, $mk-file-kanban-sidebar-width);
 		@include mk-flex-container(column);
 		.mk_file_kanban_sidebar_section {
 			max-height: calc(100% - #{$mk-file-kanban-sidebar-padding});
@@ -89,6 +90,12 @@
 				    line-height: 20px;
 				}
 			}
+		}
+	}
+	&.o_has_banner {
+		overflow: hidden;
+		.mk_file_kanban_view {
+			height: calc(100% - 190px);
 		}
 	}
 }

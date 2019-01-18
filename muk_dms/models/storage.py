@@ -102,6 +102,12 @@ class Storage(models.Model):
             domain = ['&', ('content_binary', '=', False), ('storage', '=', record.id)]
             files |= files.search(domain)
         files.action_migrate()
+
+    @api.multi
+    def action_save_onboarding_storage_step(self):
+        self.env.user.company_id.set_onboarding_step_done(
+            'documents_onboarding_storage_state'
+        )
     
     #----------------------------------------------------------
     # Read, View 

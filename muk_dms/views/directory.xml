@@ -81,6 +81,7 @@
 		[
 			("parent_directory", "child_of",  active_id),
 			("is_hidden", "=",  False),
+			("id", "!=",  active_id),
 		]
 	</field>
 	<field name="context">
@@ -152,7 +153,7 @@
 	<field name="name">muk_dms_directory.kanban</field>
 	<field name="model">muk_dms.directory</field>
 	<field name="arch" type="xml">
-		<kanban class="mk_directory_kanban_view o_emphasize_colors">
+		<kanban class="mk_directory_kanban_view o_emphasize_colors" banner_route="/dms/document_onboarding/directory">
 			<field name="id"/>
 			<field name="tags"/>
 			<field name="name"/>
@@ -242,8 +243,8 @@
 			<field name="write_date" />
 			<field name="count_files" string="Files" />
 			<field name="count_directories" string="Directories" />
-			<field name="storage" groups="muk_dms.group_dms_manager" />
 			<field name="parent_path_names" widget="path_names" string="Path" />
+			<field name="storage" groups="muk_dms.group_dms_manager" />
 		</tree>
 	</field>
 </record>
@@ -381,7 +382,6 @@
 		</field>
     </field>
 </record>
-		
 
 <record id="action_dms_directory" model="ir.actions.act_window">
 	<field name="name">Directories</field>
@@ -402,5 +402,47 @@
 
 <menuitem id="menu_dms_directory" name="Directories" sequence="30"
 	parent="main_menu_muk_dms" action="action_dms_directory" />
-		
+	
+<record id="view_dms_directory_new_form" model="ir.ui.view">
+	<field name="name">muk_dms_directory.form</field>
+	<field name="model">muk_dms.directory</field>
+	<field name="inherit_id" ref="view_dms_directory_form" />
+    <field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="replace" />
+		<xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
+		<xpath expr="//sheet//group[@name='settings']" position="replace" />
+		<xpath expr="//sheet//group[@name='data']" position="replace" >
+			<group>
+				<group>
+					<field name="is_root_directory" readonly="1" />
+					<field name="root_storage" options="{'no_quick_create': True}" />
+				</group>
+				<group>
+					<field name="category" placeholder="Internal / Human Resource"
+ 						options="{'no_open': True, 'no_create': True}" />
+					<field name="tags" widget="many2many_tags" placeholder="Tags..."
+ 						options="{'color_field': 'color', 'no_create_edit': True}" />
+				</group>
+			</group>
+		</xpath>
+		<form position="inside">
+	        <footer position="replace">
+	            <button class="btn btn-primary" type="object" string="Create" 
+	            	name="action_save_onboarding_directory_step" />
+	            <button special="cancel" string="Cancel" />
+	        </footer>
+	    </form>
+    </field>
+</record>
+
+<record id="action_dms_directory_new" model="ir.actions.act_window">
+	<field name="name">New Root Directory</field>
+	<field name="res_model">muk_dms.directory</field>
+	<field name="view_mode">form</field>
+    <field name="view_type">form</field>
+	<field name="target">new</field>
+    <field name="view_id" ref="view_dms_directory_new_form" />
+</record>
+
 </odoo>

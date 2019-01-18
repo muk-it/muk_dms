@@ -45,7 +45,8 @@
 	<field name="name">muk_dms_file.kanban</field>
 	<field name="model">muk_dms.file</field>
 	<field name="arch" type="xml">
-		<kanban class="mk_file_kanban_view o_kanban_small_column o_emphasize_colors" js_class="file_kanban">
+		<kanban class="mk_file_kanban_view o_kanban_small_column o_emphasize_colors" 
+				banner_route="/dms/document_onboarding/file" js_class="file_kanban">
 			<field name="id" />
 			<field name="tags"/>
 			<field name="name" />
@@ -132,8 +133,8 @@
 			<field name="is_lock_editor" invisible="1"/>
 			<field name="name" />
 			<field name="write_date" />
-			<field name="mimetype" />
 			<field name="size" widget="binary_size" />
+			<field name="mimetype" />
 			<field name="path_names" widget="path_names" string="Path" />
 		</tree>
 	</field>
@@ -306,8 +307,8 @@
 			<field name="is_lock_editor" invisible="1"/>
 			<field name="name" />
 			<field name="write_date" />
-			<field name="mimetype" />
 			<field name="size" widget="binary_size" />
+			<field name="mimetype" />
 			<field name="storage" />
 			<field name="migration" />
 		</tree>
@@ -335,5 +336,32 @@
 <menuitem id="menu_dms_file_migration" name="Migration" 
 	parent="cat_menu_muk_dms_config_system" 
 	action="action_dms_file_migration" />
+
+<record id="view_dms_file_new_form" model="ir.ui.view">
+	<field name="name">muk_dms_file.form</field>
+	<field name="model">muk_dms.file</field>
+	<field name="inherit_id" ref="view_dms_file_form" />
+    <field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="replace" />
+		<xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
+		<form position="inside">
+	        <footer position="replace">
+	            <button class="btn btn-primary" type="object" string="Create" 
+	            	name="action_save_onboarding_file_step" />
+	            <button special="cancel" string="Cancel" />
+	        </footer>
+	    </form>
+    </field>
+</record>
+
+<record id="action_dms_file_new" model="ir.actions.act_window">
+	<field name="name">New Root Directory</field>
+	<field name="res_model">muk_dms.file</field>
+	<field name="view_mode">form</field>
+    <field name="view_type">form</field>
+	<field name="target">new</field>
+    <field name="view_id" ref="view_dms_file_new_form" />
+</record>
 
 </odoo>

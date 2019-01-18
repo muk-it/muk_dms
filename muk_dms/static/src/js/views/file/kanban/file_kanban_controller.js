@@ -42,7 +42,7 @@ var FileKanbanController = KanbanController.extend(FileUpload, {
 		search_changed: '_onSearchChanged',
     }),
     start: function () {
-		this.$el.addClass('mk_file_kanban d-flex');
+		this.$el.addClass('mk_file_kanban');
         return this._super.apply(this, arguments);
     },
     update: function (params, options) {

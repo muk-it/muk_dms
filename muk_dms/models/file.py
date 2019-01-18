@@ -220,6 +220,12 @@ class File(models.Model):
                 _logger.info(_("Migrate File %s of %s [ %s ]") % info)
             file.with_context(migration=True).write({'content': file.content})
     
+    @api.multi
+    def action_save_onboarding_file_step(self):
+        self.env.user.company_id.set_onboarding_step_done(
+            'documents_onboarding_file_state'
+        )
+    
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------     

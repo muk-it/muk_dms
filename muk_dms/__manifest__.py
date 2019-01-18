@@ -20,7 +20,7 @@
 {
     "name": "MuK Documents",
     "summary": """Document Management System""",
-    "version": '12.0.2.4.3',   
+    "version": '12.0.2.5.0',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -38,6 +38,7 @@
         "security/ir.model.access.csv",
         "actions/file.xml",
         "template/assets.xml",
+        "template/onboarding.xml",
         "views/menu.xml",
         "views/tag.xml",
         "views/category.xml",

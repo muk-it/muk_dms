@@ -185,6 +185,17 @@ class Directory(models.Model):
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
         self.recompute()
+        
+    #----------------------------------------------------------
+    # Actions
+    #----------------------------------------------------------
+
+    @api.multi
+    def action_save_onboarding_directory_step(self):
+        self.env.user.company_id.set_onboarding_step_done(
+            'documents_onboarding_directory_state'
+        )
+    
     #----------------------------------------------------------
     # Search
     #----------------------------------------------------------

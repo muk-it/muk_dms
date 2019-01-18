@@ -107,7 +107,7 @@
 	<field name="name">muk_dms_storage.tree</field>
 	<field name="model">muk_dms.storage</field>
 	<field name="arch" type="xml">
-		<tree string="Document Settings">
+		<tree string="Storages">
 			<field name="name" />
 			<field name="save_type" />
 			<field name="is_hidden" />
@@ -120,7 +120,7 @@
 	<field name="name">muk_dms_storage.form</field>
 	<field name="model">muk_dms.storage</field>
 	<field name="arch" type="xml">
-		<form string="Document Setting">
+		<form string="Storage">
 			<header>
 				<button name="action_storage_migrate" type="object" string="Migrate Files" />
 				<button  type="action" name="%(muk_dms.action_dms_file_storage_migration)d" 
@@ -193,5 +193,32 @@
 <menuitem id="menu_dms_storage" name="Storages"
 	parent="cat_menu_muk_dms_config_system" 
 	action="action_dms_storage" />
+	
+<record id="view_dms_storage_new_form" model="ir.ui.view">
+	<field name="name">muk_dms_storage.form</field>
+	<field name="model">muk_dms.storage</field>
+	<field name="inherit_id" ref="view_dms_storage_form" />
+    <field name="mode">primary</field>
+	<field name="arch" type="xml">
+		<xpath expr="//header" position="replace" />
+		<xpath expr="//sheet//div[hasclass('oe_button_box')]" position="replace" />
+		<form position="inside">
+	        <footer position="replace">
+	            <button class="btn btn-primary" type="object" string="Create" 
+	            	name="action_save_onboarding_storage_step" />
+	            <button special="cancel" string="Cancel" />
+	        </footer>
+	    </form>
+    </field>
+</record>
+
+<record id="action_dms_storage_new" model="ir.actions.act_window">
+	<field name="name">New Storage</field>
+	<field name="res_model">muk_dms.storage</field>
+	<field name="view_mode">form</field>
+    <field name="view_type">form</field>
+	<field name="target">new</field>
+    <field name="view_id" ref="view_dms_storage_new_form" />
+</record>
 
 </odoo>
