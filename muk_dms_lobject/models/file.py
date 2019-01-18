@@ -46,13 +46,11 @@ class File(models.Model):
     #----------------------------------------------------------
 
     @api.model
-    def _get_content_vals(self):
-        res = super(File, self)._get_content_vals()
+    def _get_content_inital_vals(self):
+        res = super(File, self)._get_content_inital_vals()
         res.update({'content_lobject': False})
         return res
         
-        
-    
     #----------------------------------------------------------
     # Read, View 
     #---------------------------------------------------------- 
@@ -87,12 +85,13 @@ class File(models.Model):
         )
         updates = defaultdict(set)
         for record in records:
-            vals = {
+            binary = base64.b64decode(record.content or "")
+            values = self._get_content_inital_vals()
+            values = self._update_content_vals(values, binary)
+            values.update({
                 'content_lobject': record.content,
-                'size': len(base64.b64decode(record.content or "")),
-            }
-            init = self._get_content_vals()
-            updates[tools.frozendict({**init, **vals})].add(record.id)
+            })
+            updates[tools.frozendict(values)].add(record.id)
         with self.env.norecompute():
             for vals, ids in updates.items():
                 self.browse(ids).write(dict(vals))
