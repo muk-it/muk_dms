@@ -140,6 +140,11 @@ class FileTestCase(DocumentsBaseCase):
         
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
+    def test_checksum_calculation(self):
+        self.assertTrue(self.file_demo_01.checksum)
+        
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
     def test_compute_content_bin_size(self):
         file = self.file_demo_01.with_context(bin_size=True)
         self.assertTrue(file.content)

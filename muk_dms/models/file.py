@@ -147,6 +147,12 @@ class File(models.Model):
         string='Size',
         readonly=True)
     
+    checksum = fields.Char(
+        string="Checksum/SHA1",
+        readonly=True, 
+        size=40, 
+        index=True)
+    
     content_binary = fields.Binary(
         string="Content Binary",
         attachment=False,
@@ -172,6 +178,9 @@ class File(models.Model):
     @api.model
     def _get_content_vals(self):
         return {'content_binary': False}
+    
+    def _get_checksum(self, binary):
+        return hashlib.sha1(binary or b'').hexdigest()
     
     @api.model
     def _get_binary_max_size(self):
@@ -402,9 +411,11 @@ class File(models.Model):
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
+            binary = base64.b64decode(record.content or "")
             vals = {
                 'content_binary': record.content,
-                'size': len(base64.b64decode(record.content or "")),
+                'size': len(binary),
+                'checksum': self._get_checksum(binary),
             }
             init = self._get_content_vals()
             updates[tools.frozendict({**init, **vals})].add(record.id)
