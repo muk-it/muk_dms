@@ -43,6 +43,10 @@ class ResConfigSettings(models.TransientModel):
         string="Large Objects Storage",
         help="Enables a new save option to store files into large objects.")
     
+    module_muk_dms_file = fields.Boolean(
+        string="File Store",
+        help="Enables a new save option to store files into a file store.")
+    
     #----------------------------------------------------------
     # ... Addons
     #----------------------------------------------------------
@@ -86,10 +90,6 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_finder = fields.Boolean(
         string="Finder",
         help="Enables the Document Finder.")
-    
-    module_muk_dms_file = fields.Boolean(
-        string="File Store",
-        help="Enables a new save option to store files into a file store.")
     
     #----------------------------------------------------------
     # Database
