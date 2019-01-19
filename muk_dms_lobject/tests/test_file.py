@@ -38,7 +38,7 @@ class FileLObjectTestCase(FileTestCase):
     
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
-    def test_lobject(self):
+    def test_content_lobject(self):
         storage = self.create_storage(save_type="lobject", sudo=True)
         lobject_file = self.create_file(storage=storage)
         self.assertTrue(lobject_file.content)
