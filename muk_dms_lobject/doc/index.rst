@@ -84,7 +84,7 @@ No additional configuration is needed to use this module.
 Usage
 =============
         
-I case you want to change the save type of an existing Root Setting be aware that this
+I case you want to change the save type of an existing storage be aware that this
 can trigger a heavy migration process, depending on how many files are currently stored.
 
 Before you start the migration process make sure the following conditions are met:
