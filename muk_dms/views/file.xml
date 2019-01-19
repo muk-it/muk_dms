@@ -335,7 +335,8 @@
 
 <menuitem id="menu_dms_file_migration" name="Migration" 
 	parent="cat_menu_muk_dms_config_system" 
-	action="action_dms_file_migration" />
+	action="action_dms_file_migration"
+	sequence="8" />
 
 <record id="view_dms_file_new_form" model="ir.ui.view">
 	<field name="name">muk_dms_file.form</field>

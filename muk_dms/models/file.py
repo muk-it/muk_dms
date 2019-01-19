@@ -129,7 +129,8 @@ class File(models.Model):
         string='Content',
         attachment=False,
         prefetch=False, 
-        required=True)
+        required=True,
+        store=False)
     
     extension = fields.Char(
         compute='_compute_extension',

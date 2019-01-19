@@ -144,10 +144,10 @@
 					</h1>
 				</div>
 				<group name="save_storage">
-					<group>
+					<group name="save_storage_left">
 						<field name="save_type" />
 					</group>
-					<group>
+					<group name="save_storage_right">
 					</group>
 				</group>
 				<group name="data_storage">
@@ -192,7 +192,8 @@
 
 <menuitem id="menu_dms_storage" name="Storages"
 	parent="cat_menu_muk_dms_config_system" 
-	action="action_dms_storage" />
+	action="action_dms_storage"
+	sequence="5" />
 	
 <record id="view_dms_storage_new_form" model="ir.ui.view">
 	<field name="name">muk_dms_storage.form</field>

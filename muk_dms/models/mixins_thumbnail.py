@@ -91,10 +91,6 @@ class Thumbnail(models.AbstractModel):
             path = get_resource_path('muk_dms', 'static/src/img', size, "file_unkown.png")
         return path
     
-    @api.model
-    def _check_context_bin_size(self, field):
-        return any(key in self.env.context for key in ['bin_size', 'bin_size_%s' % (field)])
-    
     @api.multi
     def _get_thumbnail_placeholder_name(self):
         self.ensure_one()
