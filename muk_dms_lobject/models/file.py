@@ -54,10 +54,10 @@ class File(models.Model):
     #----------------------------------------------------------
     # Read, View 
     #---------------------------------------------------------- 
-    
+
     @api.depends('content_lobject')     
     def _compute_content(self):
-        bin_size = self.env.context.get('bin_size')
+        bin_size = self._check_context_bin_size('content')
         bin_recs = self.with_context({'bin_size': True})
         records = bin_recs.filtered(lambda rec: bool(rec.content_lobject))
         for record in records.with_context(self.env.context):
@@ -67,7 +67,6 @@ class File(models.Model):
     
     @api.depends('content_lobject')
     def _compute_save_type(self):
-        bin_size = self.env.context.get('bin_size')
         bin_recs = self.with_context({'bin_size': True})
         records = bin_recs.filtered(lambda rec: bool(rec.content_lobject))
         for record in records.with_context(self.env.context):

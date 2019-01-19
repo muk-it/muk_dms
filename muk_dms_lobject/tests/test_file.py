@@ -18,6 +18,7 @@
 ###################################################################################
 
 import os
+import base64
 import logging
 
 from odoo.exceptions import AccessError, ValidationError
@@ -34,3 +35,23 @@ class FileLObjectTestCase(FileTestCase):
     def _setup_test_data(self):
         super(FileLObjectTestCase, self)._setup_test_data()
         self.new_storage.write({'save_type': 'lobject'})
+    
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
+    def test_lobject(self):
+        storage = self.create_storage(save_type="lobject", sudo=True)
+        lobject_file = self.create_file(storage=storage)
+        self.assertTrue(lobject_file.content)
+        self.assertTrue(lobject_file.content_lobject)
+        self.assertTrue(lobject_file.with_context({'bin_size': True}).content)
+        self.assertTrue(lobject_file.with_context({'bin_size': True}).content_lobject)
+        self.assertTrue(lobject_file.with_context({'human_size': True}).content_lobject)
+        self.assertTrue(lobject_file.with_context({'base64': True}).content_lobject)
+        self.assertTrue(lobject_file.with_context({'stream': True}).content_lobject)
+        oid = lobject_file.with_context({'oid': True}).content_lobject
+        self.assertTrue(oid)
+        lobject_file.write({'content': base64.b64encode(b"\xff content")})
+        self.assertTrue(oid != lobject_file.with_context({'oid': True}).content_lobject)
+        self.assertTrue(lobject_file.export_data(['content']))
+        self.assertTrue(lobject_file.export_data(['content'], raw_data=True))
+        lobject_file.unlink()
