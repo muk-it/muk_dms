@@ -34,6 +34,7 @@
         "muk_dms",
     ],
     "data": [
+        "views/res_config_settings.xml",
     ],
     "demo": [
     ],
