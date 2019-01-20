@@ -44,7 +44,7 @@ class ResConfigSettings(models.TransientModel):
         help="Enables a new save option to store files into large objects.")
     
     module_muk_dms_file = fields.Boolean(
-        string="File Store",
+        string="Filestore Storage",
         help="Enables a new save option to store files into a filestore.")
     
     #----------------------------------------------------------
