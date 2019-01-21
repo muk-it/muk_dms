@@ -32,7 +32,7 @@ class Category(models.Model):
         'muk_utils.mixins.hierarchy',
     ]
     
-    _order = "name asc, write_date desc"
+    _order = "name asc"
     
     _parent_store = True
     _parent_name = "parent_category"

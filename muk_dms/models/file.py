@@ -52,7 +52,7 @@ class File(models.Model):
         'muk_dms.mixins.thumbnail',
     ]
     
-    _order = "name asc, write_date desc"
+    _order = "name asc"
     
     #----------------------------------------------------------
     # Database

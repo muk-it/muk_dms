@@ -44,7 +44,7 @@ class Directory(models.Model):
         'muk_dms.mixins.thumbnail',
     ]
     
-    _order = "name asc, write_date desc"
+    _order = "name asc"
 
     _parent_store = True
     _parent_name = "parent_directory"
