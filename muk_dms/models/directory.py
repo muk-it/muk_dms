@@ -246,7 +246,8 @@ class Directory(models.Model):
             count = self.search_count([
                 ('id', 'child_of', record.id)
             ])
-            record.count_total_directories = count - 1
+            count = count - 1 if count > 0 else 0
+            record.count_total_directories = count
             
     @api.multi
     def _compute_count_total_files(self):
