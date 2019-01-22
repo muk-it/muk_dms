@@ -35,6 +35,10 @@ class ResConfigSettings(models.TransientModel):
         string="Mail Support",
         help="Adds support for messages and activities on directories and files.")
     
+    module_muk_dms_version = fields.Boolean(
+        string="Versioning",
+        help="Enables version control for files inside the document management system.")
+    
     #----------------------------------------------------------
     # Storage Addons
     #----------------------------------------------------------
