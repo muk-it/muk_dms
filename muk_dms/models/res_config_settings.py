@@ -37,7 +37,7 @@ class ResConfigSettings(models.TransientModel):
     
     module_muk_dms_version = fields.Boolean(
         string="Versioning",
-        help="Enables version control for files inside the document management system.")
+        help="Enables version control for files.")
     
     #----------------------------------------------------------
     # Storage Addons
