@@ -27,7 +27,7 @@ env:
 
 before_install:
   - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
-  - pip install moviepy Wand unoconv lxml simplejson serial odfpy
+  - pip install moviepy Wand unoconv lxml simplejson serial odfpy bsdiff4
 
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
