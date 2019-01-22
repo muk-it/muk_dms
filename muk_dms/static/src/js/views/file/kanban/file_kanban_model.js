@@ -54,7 +54,7 @@ var FileKanbanModel = KanbanModel.extend({
         		options.domain = this._updateDirectoryDomain(options);
         		options.domain = this._updateSidebarDomainDomain(options);
         	} else {
-        		options.domain = dataPoint.search || [];
+        		options.domain = options.domain || [];
         		options.domain = this._updateSidebarDomainDomain(options);
         	}
         	return this._super.apply(this, arguments).then(function (dataPointID) {
