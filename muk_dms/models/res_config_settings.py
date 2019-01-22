@@ -39,6 +39,10 @@ class ResConfigSettings(models.TransientModel):
         string="Versioning",
         help="Enables version control for files.")
     
+    module_muk_dms_trash = fields.Boolean(
+        string="Restore Files",
+        help="Activates a file trash to restore deleted files.")
+    
     #----------------------------------------------------------
     # Storage Addons
     #----------------------------------------------------------
