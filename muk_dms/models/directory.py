@@ -392,7 +392,7 @@ class Directory(models.Model):
     @api.multi
     def write(self, vals):
         res = super(Directory, self).write(vals)
-        if any(field in vals for field in ['root_storage', 'parent_directory']):
+        if self and any(field in vals for field in ['root_storage', 'parent_directory']):
             records = self.sudo().search([('id', 'child_of', self.ids)]) - self
             if 'root_storage' in vals:
                 records.write({'storage': vals['root_storage']})
@@ -404,13 +404,14 @@ class Directory(models.Model):
 
     @api.multi
     def unlink(self):
-        self.check_access('unlink', raise_exception=True)
-        domain = [
-            '&', ('directory', 'child_of', self.ids), 
-            '&', ('locked_by', '!=', self.env.uid),
-            ('locked_by', '!=', False),
-        ]
-        if self.env['muk_dms.file'].sudo().search(domain):
-            raise AccessError(_("A file is locked, the folder cannot be deleted.")) 
-        self.env['muk_dms.file'].sudo().search([('directory', 'child_of', self.ids)]).unlink()
-        return super(Directory, self.sudo().search([('id', 'child_of', self.ids)])).unlink()
+        if self and self.check_access('unlink', raise_exception=True):
+            domain = [
+                '&', ('directory', 'child_of', self.ids), 
+                '&', ('locked_by', '!=', self.env.uid),
+                ('locked_by', '!=', False),
+            ]
+            if self.env['muk_dms.file'].sudo().search(domain):
+                raise AccessError(_("A file is locked, the folder cannot be deleted.")) 
+            self.env['muk_dms.file'].sudo().search([('directory', 'child_of', self.ids)]).unlink()
+            return super(Directory, self.sudo().search([('id', 'child_of', self.ids)])).unlink()
+        return super(Directory, self).unlink()
