@@ -56,6 +56,14 @@ class ResConfigSettings(models.TransientModel):
         help="Enables a new save option to store files into a filestore.")
     
     #----------------------------------------------------------
+    # Attachment Addons
+    #----------------------------------------------------------
+    
+    module_muk_dms_attachment = fields.Boolean(
+        string="Attachment Storage Location",
+        help="Allows attachments to be stored inside of Documents.")
+    
+    #----------------------------------------------------------
     # ... Addons
     #----------------------------------------------------------
     
@@ -78,10 +86,6 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_export = fields.Boolean(
         string="Export Files",
         help="Allows the conversion of existing files.")
-    
-    module_muk_dms_attachment = fields.Boolean(
-        string="Attachment Storage Location",
-        help="Allows attachments to be stored inside of MuK Documents.")
 
     module_muk_dms_attachment_rules = fields.Boolean(
         string="Attachment Storage Rules",

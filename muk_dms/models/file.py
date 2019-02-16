@@ -454,6 +454,7 @@ class File(models.Model):
         default.update({
             'name': file.unique_name(self.name, names, self.extension)
         })
+        self.check_directory_access('create', default, True)
         return super(File, self).copy(default)
     
     @api.multi

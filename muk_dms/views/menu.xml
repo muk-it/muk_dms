@@ -39,12 +39,4 @@
 	parent="cat_menu_muk_dms_config"
 	sequence="25" />
 	
-	<!--  
-<menuitem id="cat_menu_muk_dms_files" 
-	name="System Data" 
-	groups="muk_dms.group_dms_admin"
-	parent="main_menu_muk_dms"
-	sequence="70" />
-	-->
-	
 </odoo>
