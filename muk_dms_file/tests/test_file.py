@@ -30,10 +30,10 @@ from odoo.addons.muk_dms.tests.test_file import FileTestCase
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-class FileLObjectTestCase(FileTestCase):
+class FileFilestoreTestCase(FileTestCase):
 
     def _setup_test_data(self):
-        super(FileLObjectTestCase, self)._setup_test_data()
+        super(FileFilestoreTestCase, self)._setup_test_data()
         self.new_storage.write({'save_type': 'file'})
     
     @multi_users(lambda self: self.multi_users())
