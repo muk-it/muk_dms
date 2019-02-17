@@ -60,7 +60,7 @@ class ResConfigSettings(models.TransientModel):
     #----------------------------------------------------------
     
     module_muk_dms_attachment = fields.Boolean(
-        string="Attachment Storage Location",
+        string="Documents Storage Location",
         help="Allows attachments to be stored inside of Documents.")
     
     #----------------------------------------------------------
