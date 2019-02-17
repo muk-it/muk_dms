@@ -61,7 +61,7 @@
 			</xpath>
 	        <div id="msg_module_muk_dms_attachment" position="replace">
 	            <div class="content-group" attrs="{'invisible': [('module_muk_dms_attachment','=',False)]}">
-					<button name="%(muk_dms_attachment.action_dms_attachment)d" string="Attachmentss" 
+					<button name="%(muk_dms_attachment.action_dms_attachment)d" string="Attachments" 
 	                	type="action" class="oe_link" icon="fa-arrow-right"/>
 	            </div>
 	        </div>
