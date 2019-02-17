@@ -62,6 +62,10 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_attachment = fields.Boolean(
         string="Documents Storage Location",
         help="Allows attachments to be stored inside of Documents.")
+
+    module_muk_dms_attachment_rules = fields.Boolean(
+        string="Documents Storage Rules",
+        help="Allows attachments to be automatically placed in the right directory.")
     
     #----------------------------------------------------------
     # ... Addons
@@ -86,10 +90,6 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_export = fields.Boolean(
         string="Export Files",
         help="Allows the conversion of existing files.")
-
-    module_muk_dms_attachment_rules = fields.Boolean(
-        string="Attachment Storage Rules",
-        help="Allows attachments to be automatically placed in the right directory.")
     
     module_muk_dms_attachment_automation = fields.Boolean(
         string="Attachment Rule Automation",
