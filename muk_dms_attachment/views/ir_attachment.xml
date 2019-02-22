@@ -58,6 +58,7 @@
 		{
 			'search_default_all': 1,
 			'search_default_group_res_model': 1
+			'dms_directory_show_path': True
 		}
 	</field>
     <field name="help" type="html">
