@@ -45,6 +45,7 @@ class ResConfigSettings(models.TransientModel):
     documents_attachment_directory = fields.Many2one(
         comodel_name='muk_dms.directory', 
         string="Default Directory", 
+        context="{'dms_directory_show_path': True}",
         config_parameter='muk_dms_attachment.attachment_directory',
         help="""After an attachment has been created, it is automatically saved
             in the default directory should no other rule exist.""")
