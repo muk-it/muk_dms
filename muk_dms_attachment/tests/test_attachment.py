@@ -57,7 +57,7 @@ class AttachmentTestCase(DocumentsBaseCase):
         self.new_storage = self.new_storage.sudo(self.env.uid)
         self.new_directory = self.new_directory.sudo(self.env.uid)
     
-    def create_attachment(self, res_model=None, res_field=None, res_id=0, sudo=False):
+    def create_attachment(self, res_model=None, res_field=None, res_id=0, context={}, sudo=False):
         model = self.attachment.sudo() if sudo else self.attachment
         values = {'name': "Test", 'datas': self.content_base64()}
         if res_model:
@@ -66,7 +66,7 @@ class AttachmentTestCase(DocumentsBaseCase):
             values.update({'res_field': res_field})
         if res_id:
             values.update({'res_id': res_id})
-        return model.create(values)
+        return model.with_context(**context).create(values)
     
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')
