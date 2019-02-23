@@ -43,6 +43,10 @@ class ResConfigSettings(models.TransientModel):
         string="Restore Files",
         help="Activates a file trash to restore deleted files.")
     
+    module_muk_dms_preview = fields.Boolean(
+        string="File Preview",
+        help="Activates the preview function on files.")
+    
     #----------------------------------------------------------
     # Storage Addons
     #----------------------------------------------------------
