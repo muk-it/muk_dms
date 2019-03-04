@@ -51,6 +51,7 @@
 			<field name="tags"/>
 			<field name="name" />
 			<field name="color"/>
+            <field name="mimetype"/>
             <field name="create_uid"/>
             <field name="write_date"/>
 			<field name="locked_by" />
@@ -58,6 +59,7 @@
 			<field name="is_lock_editor" />
 			<field name="permission_write" />
 			<field name="permission_unlink" />
+			<field name="__last_update" />
 			<templates>
 				<t t-name="kanban-box">
 					<div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
