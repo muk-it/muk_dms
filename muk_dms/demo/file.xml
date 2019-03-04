@@ -251,5 +251,12 @@
 	    <field name="directory" ref="muk_dms.directory_03_demo" />
 	    <field name="content" type="base64" file="muk_dms/demo/data/sheet03.ods"/>
 	</record>
+	
+	<record id="file_35_demo" model="muk_dms.file">	      
+		<field name="name">Document_04.rtf</field>
+	    <field name="color" eval="6"/>
+	    <field name="directory" ref="muk_dms.directory_03_demo" />
+	    <field name="content" type="base64" file="muk_dms/demo/data/document04.rtf"/>
+	</record>
 
 </odoo>
