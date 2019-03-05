@@ -40,19 +40,20 @@ class IrHttp(models.AbstractModel):
             xmlid=xmlid, model=model, id=id, field=field, unique=unique, filename=filename, mimetype=mimetype,
             filename_field=filename_field, download=download, access_mode=access_mode, related_id=related_id,
             default_mimetype=default_mimetype, access_token=access_token, env=env)
-        env = env or request.env
-        if model == "muk_dms.file" and field != 'content':
-            obj = cls._xmlid_to_obj(env, xmlid) if xmlid else env[model].browse(int(id))
-            filename = obj[filename_field] if not filename and filename_field in obj else filename
-            mimetype = filename and mimetypes.guess_type(filename)[0]
-            if not mimetype:
-                mimetype = guess_mimetype(base64.b64decode(res_content), default=default_mimetype)
-            headers = []
-            for header in res_headers:
-                if header[0] == 'Content-Type':
-                    headers.append(('Content-Type', mimetype))
-                else:
-                    headers.append(header)
-            return res_status, headers, res_content
+        if res_status == 200:
+            env = env or request.env
+            if model == "muk_dms.file" and field != 'content':
+                obj = cls._xmlid_to_obj(env, xmlid) if xmlid else env[model].browse(int(id))
+                filename = obj[filename_field] if not filename and filename_field in obj else filename
+                mimetype = filename and mimetypes.guess_type(filename)[0]
+                if not mimetype:
+                    mimetype = guess_mimetype(base64.b64decode(res_content), default=default_mimetype)
+                headers = []
+                for header in res_headers:
+                    if header[0] == 'Content-Type':
+                        headers.append(('Content-Type', mimetype))
+                    else:
+                        headers.append(header)
+                return res_status, headers, res_content
         return res_status, res_headers, res_content
         

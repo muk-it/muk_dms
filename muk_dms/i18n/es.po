@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:28+0000\n"
-"PO-Revision-Date: 2019-03-05 18:28+0000\n"
+"POT-Creation-Date: 2019-03-05 18:29+0000\n"
+"PO-Revision-Date: 2019-03-05 18:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "<strong>Save</strong> this page and come back here to set up the feature."
-msgstr ""
+msgstr "Guarde esa página y regrese aquí para configurar la función."
 
 #. module: muk_dms
 #: code:addons/muk_dms/models/directory.py:332
@@ -149,7 +149,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__active
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__active
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directory
@@ -176,7 +176,7 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_search
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
@@ -271,7 +271,7 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Attachments"
-msgstr ""
+msgstr "Adjuntos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_thumbnails
@@ -288,7 +288,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_new_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: muk_dms
 #. openerp-web
@@ -312,7 +312,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #. module: muk_dms
 #: sql_constraint:muk_dms.category:0
@@ -322,7 +322,7 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__checksum
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Suma de verificación/SHA1"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__child_categories
@@ -367,29 +367,29 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__color
 msgid "Color Index"
-msgstr ""
+msgstr "Índice de Colores"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__company
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__company
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__company
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Opciones de Configuración"
 
 #. module: muk_dms
 #: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_config
 msgid "Configuration"
-msgstr ""
+msgstr "Configuración"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__content
@@ -443,7 +443,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_create
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__permission_create
 msgid "Create Access"
-msgstr ""
+msgstr "Acceso para crear"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_directory_step
@@ -482,7 +482,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__create_uid
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__create_date
@@ -491,13 +491,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__create_date
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 msgid "Creation Date"
-msgstr ""
+msgstr "Fecha de Creación"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__save_type
@@ -552,7 +552,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_unlink
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__permission_unlink
 msgid "Delete Access"
-msgstr ""
+msgstr "Permiso para eliminar"
 
 #. module: muk_dms
 #. openerp-web
@@ -596,7 +596,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__display_name
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_category
@@ -661,7 +661,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "Dropdown menu"
-msgstr ""
+msgstr "Menú desplegable"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__is_lock_editor
@@ -760,7 +760,7 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__name
 msgid "Filename"
-msgstr ""
+msgstr "Nombre de archivo"
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_file
@@ -807,7 +807,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:muk_dms.action_dms_settings_general
 #: model:ir.ui.menu,name:muk_dms.menu_dms_settings_general
 msgid "General Settings"
-msgstr ""
+msgstr "Opciones Generales"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
@@ -815,7 +815,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file_migration
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_ir_http
@@ -900,7 +900,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage____last_update
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__write_uid
@@ -909,7 +909,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__write_uid
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__write_date
@@ -918,7 +918,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__write_date
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
@@ -1023,7 +1023,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__name
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_directory_new
@@ -1070,7 +1070,7 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__parent_category
 msgid "Parent Category"
-msgstr ""
+msgstr "Categoría padre"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__parent_directory
@@ -1127,7 +1127,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_read
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__permission_read
 msgid "Read Access"
-msgstr ""
+msgstr "Permiso para leer"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_trash
@@ -1162,7 +1162,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__size
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__documents_binary_max_size
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__custom_thumbnail_small
@@ -1256,7 +1256,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_tree
 #, python-format
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_tag
@@ -1268,7 +1268,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Tags..."
-msgstr ""
+msgstr "Etiquetas..."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
@@ -1278,7 +1278,7 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_category__active
 msgid "The active field allows you to hide the category without removing it."
-msgstr ""
+msgstr "El campo activo le permite ocultar la categoría sin tener que eliminarla."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_tag__active
@@ -1340,7 +1340,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_mixins_thumbnail
@@ -1370,7 +1370,7 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__mimetype
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
@@ -1426,13 +1426,13 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Views"
-msgstr ""
+msgstr "Vistas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_write
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__permission_write
 msgid "Write Access"
-msgstr ""
+msgstr "Permiso de escritura"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_directory_panel
