@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_views.FileKanbanModel', function (require) {
+odoo.define('muk_dms.FileKanbanModel', function (require) {
 "use strict";
 
 var core = require('web.core');

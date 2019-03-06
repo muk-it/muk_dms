@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_views.FileKanbanRenderer', function (require) {
+odoo.define('muk_dms.FileKanbanRenderer', function (require) {
 "use strict";
 
 var core = require('web.core');
@@ -27,7 +27,7 @@ var session = require('web.session');
 var dropzone = require('muk_web_utils.dropzone');
 
 var KanbanRenderer = require('web.KanbanRenderer');
-var FileKanbanRecord = require('muk_dms_views.FileKanbanRecord');
+var FileKanbanRecord = require('muk_dms.FileKanbanRecord');
 
 var _t = core._t;
 var QWeb = core.qweb;

@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_views.FileKanbanController', function (require) {
+odoo.define('muk_dms.FileKanbanController', function (require) {
 "use strict";
 
 var core = require('web.core');
@@ -30,7 +30,7 @@ var Domain = require('web.Domain');
 var KanbanController = require('web.KanbanController');
 
 var FileUpload = require('muk_dms_mixins.FileUpload');
-var FileSidebar = require('muk_dms_views.FileSidebar');
+var FileSidebar = require('muk_dms.FileSidebar');
 
 var _t = core._t;
 var QWeb = core.qweb;

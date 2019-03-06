@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_views.DirectoryFormController', function (require) {
+odoo.define('muk_dms.DirectoryFormController', function (require) {
 "use strict";
 
 var core = require('web.core');
