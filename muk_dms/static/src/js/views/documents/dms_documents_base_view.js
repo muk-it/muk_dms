@@ -44,14 +44,39 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 	custom_events: _.extend({}, Widget.prototype.custom_events, {
 		reverse_breadcrumb: '_on_reverse_breadcrumb',
     }),
-	init: function(parent, params) {
+	init: function(parent, action) {
 		this._super.apply(this, arguments);
+
+        var data = $.Deferred();
+
+        var view_data = {
+            dnd: true,
+            contextmenu: true,
+        }
+
+        if(action.params && action.params.directory && action.params.name){
+            var init_data = [{
+                id: "directory" + action.params.directory,
+                text: action.params.name,
+                icon: "fa fa-folder-o",
+                type: "directory",
+                data: {
+                    odoo_id: action.params.directory,
+                    odoo_model: "muk_dms.directory",
+                },
+                children: true,
+            }];
+            data.resolve(init_data)
+            _.extend(view_data, {
+	        	model: {
+	        	    noSettings: true,
+	        	    init_data: data,
+	        	}
+            })
+        }
+
         this.controller = new DocumentsViewController(this,
-        	DocumentsModel, DocumentsRenderer,
-        	_.extend({}, {
-	        	dnd: true,
-	        	contextmenu: true,
-        	}, params));
+        	DocumentsModel, DocumentsRenderer, view_data, action);
     },
     start: function () {
         return $.when(this._super.apply(this, arguments))
