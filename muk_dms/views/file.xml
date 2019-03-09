@@ -70,7 +70,7 @@
 						    </a>
 						    <div class="dropdown-menu" role="menu">
 						    	<div class="row">
-							    	<div class="col-6">
+							    	<div class="col-6 mk_file_kanban_operations">
 										<h6 class="dropdown-header">Operations</h6>
 								        <a t-if="record.permission_write.raw_value and !record.is_locked.raw_value" role="menuitem" name="lock" type="object" class="dropdown-item">
 											<i class="fa fa-lock" /> Lock
@@ -88,7 +88,7 @@
 		                                	<i class="fa fa-download" /> Download
 		                                </a>
 									</div>
-									<div class="col-6 border-left">
+									<div class="col-6 border-left mk_file_kanban_actions">
 										<h6 class="dropdown-header">Actions</h6>
 								        <a role="menuitem" type="open" class="dropdown-item">
 											<i class="fa fa-external-link" /> Open
