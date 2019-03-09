@@ -174,7 +174,7 @@
 						    </a>
 						    <div class="dropdown-menu" role="menu">
 						    	<div class="row">
-							    	<div class="col-6">
+							    	<div class="col-6 mk_directory_kanban_views">
 										<h6 class="dropdown-header">Views</h6>
 								        <a type="action" name="%(muk_dms.action_dms_directories_directory)d" role="menuitem" class="dropdown-item">
 											<i class="fa fa-folder-o" /> Directories
@@ -183,7 +183,7 @@
 											<i class="fa fa-file-o" /> Files
 										</a>
 									</div>
-									<div class="col-6 border-left">
+									<div class="col-6 border-left mk_directory_kanban_actions">
 										<h6 class="dropdown-header">Actions</h6>
 								        <a role="menuitem" type="open" class="dropdown-item">
 											<i class="fa fa-external-link" /> Open

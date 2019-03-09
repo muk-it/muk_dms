@@ -54,7 +54,7 @@
 			font-weight: bold;
 		}
 		.o_kanban_record_body {
-			max-height: 12px;
+			max-height: 15px;
 			.o_kanban_tags {
 				@include o-text-overflow;
 			}
