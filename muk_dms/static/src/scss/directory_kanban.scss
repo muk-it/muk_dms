@@ -65,4 +65,20 @@
 		    line-height: 20px;
 		}
 	}
+	.o_dropdown_kanban {
+        .dropdown-menu {
+            min-width: 20rem;
+            .fa {
+	           	min-width: 12px;
+	           	padding-right: 2px;
+			    text-align: center;
+            }
+	        .oe_kanban_colorpicker {
+	            max-width: none;    
+	            margin: 5px 5px;
+    			padding: 10px 0 0 25px;
+	            border-top: 1px solid gray('300');
+	        }
+        }
+    }
 }
