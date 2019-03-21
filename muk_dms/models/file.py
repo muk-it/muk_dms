@@ -235,19 +235,16 @@ class File(models.Model):
     #----------------------------------------------------------  
     
     @api.model
-    def _search_panel_directory(self, field_name, **kwargs):
+    def _search_panel_directory(self, **kwargs):
         search_domain = kwargs.get('search_domain', []),
         category_domain = kwargs.get('category_domain', [])
-        directory_id = False
-        domain_operator = '='
-        if len(category_domain):
-            directory_id = category_domain[0][2]
-        if not directory_id and len(search_domain):
+        if category_domain and len(category_domain):
+            return '=', category_domain[0][2]
+        if search_domain and len(search_domain):
             for domain in search_domain[0]:
                 if domain[0] == 'directory':
-                    directory_id = domain[2]
-                    domain_operator = domain[1]
-        return domain_operator, directory_id
+                    return domain[1], domain[2]
+        return None, None
     
     @api.model
     def _search_panel_domain(self, field, operator, directory_id, comodel_domain=[]):
@@ -256,7 +253,7 @@ class File(models.Model):
     
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
-        operator, directory_id = self._search_panel_directory(field_name, **kwargs)
+        operator, directory_id = self._search_panel_directory(**kwargs)
         if directory_id and field_name == 'directory':
             comodel_model = self.env['muk_dms.directory']
             comodel_domain = kwargs.pop('comodel_domain', [])
@@ -280,7 +277,7 @@ class File(models.Model):
     
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
-        operator, directory_id = self._search_panel_directory(field_name, **kwargs)
+        operator, directory_id = self._search_panel_directory(**kwargs)
         if directory_id and field_name in ['directory', 'tags', 'category']:
             comodel_domain = kwargs.pop('comodel_domain', [])
             directory_comodel_domain = self._search_panel_domain(
