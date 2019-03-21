@@ -41,6 +41,13 @@ class Tag(models.Model):
         default=True, 
         help="The active field allows you to hide the tag without removing it.")
     
+    category = fields.Many2one(
+        comodel_name='muk_dms.category', 
+        context="{'dms_category_show_path': True}",
+        string='Category',
+        ondelete='cascade',
+        required=True)
+    
     color = fields.Integer(
         string='Color Index', 
         default=10)
@@ -58,7 +65,33 @@ class Tag(models.Model):
         column1='tid',
         column2='fid',
         string='Files')
+    
+    count_directories = fields.Integer(
+        compute='_compute_count_directories',
+        string="Count Directories")
+    
+    count_files = fields.Integer(
+        compute='_compute_count_files',
+        string="Count Files")
+    
+    #----------------------------------------------------------
+    # Constrains
+    #----------------------------------------------------------
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', "Tag name already exists!"),
+        ('name_uniq', 'unique (name, category)', "Tag name already exists!"),
     ]
+    
+    #----------------------------------------------------------
+    # Read
+    #----------------------------------------------------------
+    
+    @api.depends('directories')
+    def _compute_count_directories(self):
+        for record in self:
+            record.count_directories = len(record.directories)
+    
+    @api.depends('files')
+    def _compute_count_files(self):
+        for record in self:
+            record.count_files = len(record.files)

@@ -1,3 +1,8 @@
+`2.7.0`
+-------
+
+- Added Kanban Search Panel
+
 `2.6.0`
 -------
 

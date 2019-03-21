@@ -113,16 +113,18 @@ class File(models.Model):
         string="Color",
         default=0)
      
+    category = fields.Many2one(
+        comodel_name='muk_dms.category',
+        context="{'dms_category_show_path': True}", 
+        string="Category")
+    
     tags = fields.Many2many(
         comodel_name='muk_dms.tag',
         relation='muk_dms_file_tag_rel', 
+        domain="[['category', 'child_of', category]]",
         column1='fid',
         column2='tid',
         string='Tags')
-     
-    category = fields.Many2one(
-        comodel_name='muk_dms.category', 
-        string="Category")
     
     content = fields.Binary(
         compute='_compute_content',

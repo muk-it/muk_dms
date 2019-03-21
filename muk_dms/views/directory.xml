@@ -249,10 +249,9 @@
 				</t>
 			</templates>
             <searchpanel>
-            
                 <field name="parent_directory" string="Starred"  domain="[['starred', '=', True]]" select="multi" icon="fa-star"/>
                 <field name="category" select="multi" icon="fa-users"/>
-                <field name="tags" select="multi" icon="fa-tag"/>
+                <field name="tags" select="multi" icon="fa-tag" groupby="category" />
             </searchpanel>
 		</kanban>
 	</field>
@@ -328,10 +327,10 @@
 						<field name="count_elements" string="Elements"/>
 					</group>
 					<group>
- 						<field name="tags" widget="many2many_tags" placeholder="Tags..."
- 							options="{'color_field': 'color', 'no_create_edit': True}" />
  						<field name="category" placeholder="Internal / Human Resource"
  							options="{'no_open': True, 'no_create': True}" />
+ 						<field name="tags" widget="many2many_tags" placeholder="Tags..."
+ 							options="{'color_field': 'color', 'no_create_edit': True}" />
 					</group>
 				</group>
 				<notebook>

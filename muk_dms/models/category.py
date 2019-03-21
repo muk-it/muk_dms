@@ -57,8 +57,8 @@ class Category(models.Model):
         comodel_name='muk_dms.category', 
         context="{'dms_category_show_path': True}",
         string='Parent Category',
-        index=True,
-        ondelete='cascade')
+        ondelete='cascade',
+        index=True)
     
     child_categories = fields.One2many(
         comodel_name='muk_dms.category', 
@@ -69,15 +69,42 @@ class Category(models.Model):
         string="Parent Path", 
         index=True)
     
+    tags = fields.One2many(
+        comodel_name='muk_dms.tag', 
+        inverse_name='category',
+        string='Tags')
+    
     directories = fields.One2many(
         comodel_name='muk_dms.directory', 
         inverse_name='category',
-        string='Directories')
+        string='Directories',
+        readonly=True)
     
     files = fields.One2many(
         comodel_name='muk_dms.file', 
         inverse_name='category',
-        string='Files')
+        string='Files',
+        readonly=True)
+    
+    count_categories = fields.Integer(
+        compute='_compute_count_categories',
+        string="Count Subcategories")
+    
+    count_tags = fields.Integer(
+        compute='_compute_count_tags',
+        string="Count Tags")
+    
+    count_directories = fields.Integer(
+        compute='_compute_count_directories',
+        string="Count Directories")
+    
+    count_files = fields.Integer(
+        compute='_compute_count_files',
+        string="Count Files")
+    
+    #----------------------------------------------------------
+    # Constrains
+    #----------------------------------------------------------
     
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Category name already exists!"),
@@ -112,7 +139,27 @@ class Category(models.Model):
                     res.append((record.id, ".." + names[-48:]))
             return res
         return super(Category, self).name_get()
-
+    
+    @api.depends('child_categories')
+    def _compute_count_categories(self):
+        for record in self:
+            record.count_categories = len(record.child_categories)
+    
+    @api.depends('tags')
+    def _compute_count_tags(self):
+        for record in self:
+            record.count_tags = len(record.tags)
+    
+    @api.depends('directories')
+    def _compute_count_directories(self):
+        for record in self:
+            record.count_directories = len(record.directories)
+    
+    @api.depends('files')
+    def _compute_count_files(self):
+        for record in self:
+            record.count_files = len(record.files)
+    
     #----------------------------------------------------------
     # Create
     #----------------------------------------------------------
