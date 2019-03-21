@@ -38,29 +38,22 @@ var FileKanbanController = KanbanController.extend(FileUpload, {
 	custom_events: _.extend({}, KanbanController.prototype.custom_events, {
 		upload_files: '_onUploadFiles',
     }),
-//    _getDirectory: function () {
-//        var record = this.model.get(this.handle, {raw: true});
-//    	var context = record.getContext();
-//    	if (this.selectedDirectory) {
-//    		return this.selectedDirectory;
-//    	} else if (context.active_model === "muk_dms.directory") {
-//    		return context.active_id;
-//    	}
-//    },
-//    _getSidebarDomain: function() {
-//    	if (!_.isEmpty(this.activeCategories) && !_.isEmpty(this.activeTags)) {
-//    		return ['&', ['category', 'in', this.activeCategories], ['tags', 'in', this.activeTags]];
-//    	} else if (!_.isEmpty(this.activeCategories)) {
-//    		return [['category', 'in', this.activeCategories]];
-//    	} else if (!_.isEmpty(this.activeTags)) {
-//    		return [['tags', 'in', this.activeTags]];
-//    	}
-//    },
+    _getSelectedDirectory: function () {
+        var record = this.model.get(this.handle, {raw: true});
+        console.log(this)
+        var directoryID = this._searchPanel.getSelectedDirectory();
+    	var context = record.getContext();
+    	if (directoryID) {
+    		return directoryID;
+    	} else if (context.active_model === "muk_dms.directory") {
+    		return context.active_id;
+    	}
+    },
 	_onUploadFiles: function(event) {
-		var directory = this._getDirectory();
-		if (directory) {
+		var directoryID = this._getSelectedDirectory();
+		if (directoryID) {
 			utils.getFileTree(event.data.items, true).then(
-				this._uploadFiles.bind(this, directory) 
+				this._uploadFiles.bind(this, directoryID) 
 			);
 		} else {
 			this.do_warn(_t("Upload Error"), _t("No Directory has been selected!"));

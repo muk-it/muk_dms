@@ -28,7 +28,7 @@ var KanbanView = require('web.KanbanView');
 var FileKanbanModel = require('muk_dms.FileKanbanModel');
 var FileKanbanRenderer = require('muk_dms.FileKanbanRenderer');
 var FileKanbanController = require('muk_dms.FileKanbanController');
-//var FileSearchPanel = require('muk_dms.FileSearchPanel');
+var FileSearchPanel = require('muk_dms.FileSearchPanel');
 
 var _t = core._t;
 var QWeb = core.qweb;
@@ -38,7 +38,7 @@ var FileKanbanView = KanbanView.extend({
 		Renderer: FileKanbanRenderer,
         Controller: FileKanbanController,
         Model: FileKanbanModel,
-//		SearchPanel: FileSearchPanel,
+		SearchPanel: FileSearchPanel,
     }),
 });
 
