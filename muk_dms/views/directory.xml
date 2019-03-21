@@ -176,10 +176,10 @@
 						    	<div class="row">
 							    	<div class="col-6 mk_directory_kanban_views">
 										<h6 class="dropdown-header">Views</h6>
-								        <a type="action" name="%(muk_dms.action_dms_directories_directory)d" role="menuitem" class="dropdown-item">
+								        <a type="action" name="%(muk_dms.action_dms_directories_all_directory)d" role="menuitem" class="dropdown-item">
 											<i class="fa fa-folder-o" /> Directories
 										</a>
-										<a type="action" name="%(muk_dms.action_dms_files_directory)d" role="menuitem" class="dropdown-item">
+										<a type="action" name="%(muk_dms.action_dms_files_all_directory)d" role="menuitem" class="dropdown-item">
 											<i class="fa fa-file-o" /> Files
 										</a>
 									</div>
@@ -248,6 +248,10 @@
 					</div>
 				</t>
 			</templates>
+            <searchpanel>
+                <field name="category" select="multi" icon="fa-users"/>
+                <field name="tags" select="multi" icon="fa-tag"/>
+            </searchpanel>
 		</kanban>
 	</field>
 </record>

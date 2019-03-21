@@ -35,6 +35,7 @@ from odoo import _, SUPERUSER_ID
 from odoo import models, api, fields, tools
 from odoo.tools.mimetypes import guess_mimetype
 from odoo.exceptions import ValidationError
+from odoo.osv import expression
 
 from odoo.addons.muk_utils.tools import file
 from odoo.addons.muk_security.tools.security import NoSecurityUid
@@ -226,6 +227,67 @@ class File(models.Model):
         self.env.user.company_id.set_onboarding_step_done(
             'documents_onboarding_file_state'
         )
+    
+    #----------------------------------------------------------
+    # SearchPanel
+    #----------------------------------------------------------  
+    
+    @api.model
+    def _search_panel_directory(self, field_name, **kwargs):
+        search_domain = kwargs.get('search_domain', []),
+        category_domain = kwargs.get('category_domain', [])
+        directory_id = False
+        domain_operator = '='
+        if len(category_domain):
+            directory_id = category_domain[0][2]
+        if not directory_id and len(search_domain):
+            for domain in search_domain[0]:
+                if domain[0] == 'directory':
+                    directory_id = domain[2]
+                    domain_operator = domain[1]
+        return domain_operator, directory_id
+    
+    @api.model
+    def _search_panel_domain(self, field, operator, directory_id, comodel_domain=[]):
+        files_ids = self.search([('directory', operator, directory_id)]).ids
+        return expression.AND([comodel_domain, [(field, 'in', files_ids)]])
+    
+    @api.model
+    def search_panel_select_range(self, field_name, **kwargs):
+        operator, directory_id = self._search_panel_directory(field_name, **kwargs)
+        if directory_id and field_name == 'directory':
+            comodel_model = self.env['muk_dms.directory']
+            comodel_domain = kwargs.pop('comodel_domain', [])
+            fields = ['display_name', comodel_model._parent_name]
+            directory_comodel_domain = self._search_panel_domain(
+                'files', operator, directory_id, comodel_domain
+            )
+            values = comodel_model.search_read(
+                directory_comodel_domain, fields
+            )
+            field = comodel_model._parent_name
+            ids = {value['id'] for value in values} 
+            for value in values:
+                if value[field] and value[field][0] not in ids:
+                    value[field] = None
+            return {
+                'parent_field': field,
+                'values': values,
+            }
+        return super(File, self).search_panel_select_range(field_name, **kwargs)
+    
+    @api.model
+    def search_panel_select_multi_range(self, field_name, **kwargs):
+        operator, directory_id = self._search_panel_directory(field_name, **kwargs)
+        if directory_id and field_name in ['directory', 'tags', 'category']:
+            comodel_domain = kwargs.pop('comodel_domain', [])
+            directory_comodel_domain = self._search_panel_domain(
+                'files', operator, directory_id, comodel_domain
+            )
+            return super(File, self).search_panel_select_multi_range(
+                field_name, comodel_domain=directory_comodel_domain, **kwargs
+            )
+        return super(File, self).search_panel_select_multi_range(field_name, **kwargs)
     
     #----------------------------------------------------------
     # Read, View 

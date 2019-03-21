@@ -33,7 +33,7 @@
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_view.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js" />
-		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_sidebar.js" />
+<!-- 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js" /> -->
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_renderer.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_view.js" />

@@ -17,33 +17,21 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms.FileKanbanView', function (require) {
+odoo.define('muk_dms.FileSearchPanel', function (require) {
 "use strict";
 
 var core = require('web.core');
-var registry = require('web.view_registry');
 
-var KanbanView = require('web.KanbanView');
-
-var FileKanbanModel = require('muk_dms.FileKanbanModel');
-var FileKanbanRenderer = require('muk_dms.FileKanbanRenderer');
-var FileKanbanController = require('muk_dms.FileKanbanController');
-//var FileSearchPanel = require('muk_dms.FileSearchPanel');
+var SearchPanel = require('web.SearchPanel');
 
 var _t = core._t;
 var QWeb = core.qweb;
 
-var FileKanbanView = KanbanView.extend({
-	config: _.extend({}, KanbanView.prototype.config, {
-		Renderer: FileKanbanRenderer,
-        Controller: FileKanbanController,
-        Model: FileKanbanModel,
-//		SearchPanel: FileSearchPanel,
-    }),
+
+var FileSearchPanel = SearchPanel.extend({
+
 });
 
-registry.add('file_kanban', FileKanbanView);
-
-return FileKanbanView;
+return FileSearchPanel;
 
 });

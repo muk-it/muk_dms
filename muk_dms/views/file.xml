@@ -141,6 +141,12 @@
 					</div>
 				</t>
 			</templates>
+            <searchpanel>
+                <field name="directory" icon="fa-folder"/>
+                <field name="directory" string="Starred"  domain="[['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="category" select="multi" icon="fa-users"/>
+                <field name="tags" select="multi" icon="fa-tag"/>
+            </searchpanel>
 		</kanban>
 	</field>
 </record>

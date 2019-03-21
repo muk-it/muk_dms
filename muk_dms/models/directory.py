@@ -28,6 +28,7 @@ from collections import defaultdict
 from odoo import _, models, api, fields, tools
 from odoo.modules.module import get_resource_path
 from odoo.exceptions import ValidationError, AccessError
+from odoo.osv import expression
 
 from odoo.addons.muk_utils.tools import file
 
@@ -196,6 +197,31 @@ class Directory(models.Model):
             'documents_onboarding_directory_state'
         )
     
+    #----------------------------------------------------------
+    # SearchPanel
+    #----------------------------------------------------------  
+    
+    @api.model
+    def _search_panel_directory(self, **kwargs):
+        search_domain = kwargs.get('search_domain', []),
+        if search_domain and len(search_domain):
+            for domain in search_domain[0]:
+                if domain[0] == 'parent_directory':
+                    return domain[1], domain[2]
+        return None, None
+    
+    @api.model
+    def search_panel_select_multi_range(self, field_name, **kwargs):
+        operator, directory_id = self._search_panel_directory(**kwargs)
+        if directory_id and field_name in ['tags', 'category']:
+            comodel_domain = kwargs.pop('comodel_domain', [])
+            domain = [('directories', operator, directory_id)]
+            comodel_domain = expression.AND([comodel_domain, domain])
+            return super(Directory, self).search_panel_select_multi_range(
+                field_name, comodel_domain=comodel_domain, **kwargs
+            )
+        return super(Directory, self).search_panel_select_multi_range(field_name, **kwargs)
+     
     #----------------------------------------------------------
     # Search
     #----------------------------------------------------------
