@@ -272,7 +272,7 @@ class File(models.Model):
                     value[field] = None
             return {
                 'parent_field': field,
-                'values': values,
+                'values': values if len(values) > 1 else [],
             }
         return super(File, self).search_panel_select_range(field_name, **kwargs)
     

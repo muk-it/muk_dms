@@ -220,6 +220,13 @@ class Directory(models.Model):
             return super(Directory, self).search_panel_select_multi_range(
                 field_name, comodel_domain=comodel_domain, **kwargs
             )
+        if directory_id and field_name in ['parent_directory']:
+            comodel_domain = kwargs.pop('comodel_domain', [])
+            domain = [('parent_directory', operator, directory_id)]
+            comodel_domain = expression.AND([comodel_domain, domain])
+            return super(Directory, self).search_panel_select_multi_range(
+                field_name, comodel_domain=comodel_domain, **kwargs
+            )
         return super(Directory, self).search_panel_select_multi_range(field_name, **kwargs)
      
     #----------------------------------------------------------
