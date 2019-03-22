@@ -84,7 +84,11 @@ class Directory(models.Model):
     
     parent_directory = fields.Many2one(
         comodel_name='muk_dms.directory', 
-        domain="[('permission_create', '=', True), ('id', '!=', active_id)]",
+        domain="""[
+            '&', ('id', '=', active_id),
+            '&', ('permission_create', '=', True),
+            '!', ('parent_directory', 'child_of', active_id)
+        ]""",
         context="{'dms_directory_show_path': True}",
         string="Parent Directory",
         ondelete='restrict',
