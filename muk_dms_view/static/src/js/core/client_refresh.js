@@ -30,8 +30,9 @@ WebClient.include({
     refresh: function(message) {
     	var action = this.action_manager.getCurrentAction();
     	var controller = this.action_manager.getCurrentController();
-    	if (!this.call('bus_service', 'isMasterTab') || session.uid !== message.uid && action &&
-    			controller && controller.widget.action_descr.tag === "muk_dms_view.documents" && 
+    	if (!this.call('bus_service', 'isMasterTab') || session.uid !== message.uid && 
+    			action && controller && controller.widget && controller.widget.action_descr && 
+    			controller.widget.action_descr.tag === "muk_dms_view.documents" && 
     			(message.model === 'muk_dms.directory' || message.model === 'muk_dms.file')) {
     		controller.widget.refresh(message);
         } else {
