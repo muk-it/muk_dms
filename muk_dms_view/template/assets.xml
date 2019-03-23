@@ -24,10 +24,6 @@
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/base.scss" />
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/main.scss" />
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/preview.scss" />
-		
-		<link rel="stylesheet" href="/muk_dms_view/static/lib/jsTree/themes/default/style.css" />
-		
-		
 	</xpath>
 	<xpath expr="//script[last()]" position="after">
 		<script type="text/javascript" src="/muk_dms_view/static/src/js/core/client_refresh.js" />

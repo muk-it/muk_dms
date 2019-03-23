@@ -156,7 +156,7 @@ var DocumentsController = Widget.extend(FileUpload, {
     _buildTreeConfig: function() {
 		var self = this;
 		var plugins = this.params.plugins || [
-			"conditionalselect", "massload",  "state", "sort", "search", "types", "wholerow",
+			"conditionalselect", "massload", "wholerow", "state", "sort", "search", "types"
 		];
 		if(this.params.dnd) {
 			plugins = _.union(plugins, ["dnd"]);
@@ -164,35 +164,15 @@ var DocumentsController = Widget.extend(FileUpload, {
 		if(this.params.contextmenu) {
 			plugins = _.union(plugins, ["contextmenu"]);
 		}
-		if(!config.device.isMobile) {
-			plugins = _.union(plugins, ["grid"]);
-		}
-		var jstreeConfig = {
+		var config = {
         	core : {
         		widget: this,
         		animation: this.params.animation || 0,
         		multiple: this.params.disable_multiple ? false : true,
         	    check_callback: this.params.check_callback || this._checkCallback.bind(this),
-        		themes: {
-
-
-        			dots			: true,
-
-        			icons			: true,
-        			/**
-        			 * a boolean indicating if node ellipsis should be shown - this only works with a fixed with on the container
-        			 * @name $.jstree.defaults.core.themes.ellipsis
-        			 */
-        			ellipsis		: true, 
-        			/**
-        			 * a boolean indicating if the tree background is striped
-        			 * @name $.jstree.defaults.core.themes.stripes
-        			 */
-        			stripes			: true,
-
-        			responsive		: true
-        			
-        			
+        		themes: this.params.themes || {
+                    name: 'proton',
+                    responsive: true
                 },
         		data: this._loadData.bind(this),
         	},
@@ -214,19 +194,7 @@ var DocumentsController = Widget.extend(FileUpload, {
         	},
 	        plugins: plugins,
     	};
-		if(!config.device.isMobile) {
-			jstreeConfig.grid = {
-        		columns: [
-        			{width: 500, header: "Nodes"},
-        			{width: 300, header: "Price", value: "odoo_model"}
-        		],
-				fixedHeader: true,
-				resizable: true,
-				contextmenu: true,
-				gridcontextmenu: this._loadContextMenu.bind(this),
-        	};
-		}
-		return jstreeConfig;
+		return config;
     },
     _checkCallback: function (operation, node, parent, position, more) {
     	if(operation === "copy_node" || operation === "move_node") {

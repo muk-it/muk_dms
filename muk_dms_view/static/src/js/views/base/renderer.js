@@ -36,11 +36,10 @@ var DocumentsRenderer = Widget.extend(dropzone.FileDropzoneMixin, {
 		'/muk_dms_view/static/src/xml/tree.xml'
 	],
 	cssLibs: [
-//        '/muk_dms_view/static/lib/jsTree/themes/default/style.css',
+        '/muk_dms_view/static/lib/jsTree/themes/proton/style.css',
     ],
     jsLibs: [
         '/muk_dms_view/static/lib/jsTree/jstree.js',
-        '/muk_dms_view/static/lib/jsTree/plugins/jstreegrid.js',
     ],
     template: 'muk_dms.DocumentTree',
     init: function (parent, params) {
