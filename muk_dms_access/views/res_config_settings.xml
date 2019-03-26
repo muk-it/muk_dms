@@ -26,7 +26,7 @@
 	    <field name="arch" type="xml">
 	        <xpath expr="//div[@name='file']" position="after">
                 <h2>Access Control</h2>
-                <div class="row mt16 o_settings_container" name="file">
+                <div class="row mt16 o_settings_container" name="access">
                     <div class="col-12 col-lg-6 o_setting_box">
                         <div class="o_setting_left_pane">
                             <field name="documents_access_groups_user_view"/>
