@@ -148,7 +148,7 @@ class DirectoryTestCase(DocumentsBaseCase):
     @setup_data_function(setup_func='_setup_test_data')
     def test_name_get(self):
         directory = self.directory_sub_demo_01.with_context(dms_directory_show_path=True)
-        self.assertTrue("/" in directory.name_get()[0][1])
+        self.assertTrue("/" in directory.with_context(dms_directory_show_path=True).name_get()[0][1])
         
     @multi_users(lambda self: self.multi_users())
     @setup_data_function(setup_func='_setup_test_data')

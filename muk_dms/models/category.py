@@ -40,6 +40,8 @@ class Category(models.Model):
     _parent_path_sudo = False
     _parent_path_store = True
     
+    _name_path_context = "dms_category_show_path"
+    
     #----------------------------------------------------------
     # Database
     #----------------------------------------------------------
@@ -113,32 +115,6 @@ class Category(models.Model):
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
-
-    @api.model
-    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
-        domain = list(args or [])
-        if not (name == '' and operator == 'ilike') :
-            if '/' in name:
-                domain += [('parent_path_names', operator, name)]  
-            else:
-                domain += [(self._rec_name, operator, name)]
-        records = self.browse(self._search(domain, limit=limit, access_rights_uid=name_get_uid))
-        return models.lazy_name_get(records.sudo(name_get_uid or self.env.uid)) 
-            
-    @api.multi
-    def name_get(self):
-        if self.env.context.get('dms_category_show_path'):
-            res = []
-            for record in self:
-                names = record.parent_path_names
-                if not names:
-                    res.append(super(Category, record).name_get()[0])
-                elif not len(names) > 50:
-                    res.append((record.id, names))
-                else:
-                    res.append((record.id, ".." + names[-48:]))
-            return res
-        return super(Category, self).name_get()
     
     @api.depends('child_categories')
     def _compute_count_categories(self):

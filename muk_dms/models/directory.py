@@ -52,6 +52,8 @@ class Directory(models.Model):
     
     _parent_path_sudo = False
     _parent_path_store = False
+    
+    _name_path_context = "dms_directory_show_path"
 
     #----------------------------------------------------------
     # Database
@@ -312,33 +314,7 @@ class Directory(models.Model):
                 fields=['size'],
             )
             record.size = sum(rec.get('size', 0) for rec in recs)
-    
-    @api.model
-    def _name_search(self, name='', args=None, operator='ilike', limit=100, name_get_uid=None):
-        domain = list(args or [])
-        if not (name == '' and operator == 'ilike') :
-            if '/' in name:
-                domain += [('parent_path_names', operator, name)]  
-            else:
-                domain += [(self._rec_name, operator, name)]
-        records = self.browse(self._search(domain, limit=limit, access_rights_uid=name_get_uid))
-        return models.lazy_name_get(records.sudo(name_get_uid or self.env.uid)) 
-            
-    @api.multi
-    def name_get(self):
-        if self.env.context.get('dms_directory_show_path'):
-            res = []
-            for record in self:
-                names = record.parent_path_names
-                if not names:
-                    res.append(super(Directory, record).name_get()[0])
-                elif not len(names) > 50:
-                    res.append((record.id, names))
-                else:
-                    res.append((record.id, ".." + names[-48:]))
-            return res
-        return super(Directory, self).name_get()
-        
+
     #----------------------------------------------------------
     # View
     #----------------------------------------------------------
