@@ -66,7 +66,6 @@ class ResConfigSettings(models.TransientModel):
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
         params = self.env['ir.config_parameter'].sudo()
-        directory = params.get_param('muk_dms_attachment.attachment_directory', False)
         res.update(
             documents_attachment_location=params.get_param('ir_attachment.location', 'file'),
         )
