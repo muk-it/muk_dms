@@ -23,19 +23,6 @@ from odoo import api, SUPERUSER_ID
 from odoo.tools import config
 
 from . import models
-
-def _install_force_storage(cr, registry):
-    if config.get("auto_storage_migration", False):
-        if not config.get("dms_attachment_directory", False):
-            raise ValueError("Storage Migration needs a default Directory.")
-        env = api.Environment(cr, SUPERUSER_ID, {})
-        params = env['ir.config_parameter'].sudo()
-        param.set_param(
-            'muk_dms_attachment.attachment_directory',
-            config.get("dms_attachment_directory")
-        )
-        params.set_param('ir_attachment.location', 'document')
-        attachment = env['ir.attachment'].sudo().force_storage()
     
 def _uninstall_force_storage(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})

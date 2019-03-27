@@ -22,7 +22,7 @@
 {
     "name": "MuK Documents Attachment",
     "summary": """Documents as Attachment Storage""",
-    "version": '12.0.2.0.12',   
+    "version": '12.0.2.0.13',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -55,6 +55,5 @@
     },
     "application": False,
     "installable": True,
-    "post_init_hook": "_install_force_storage",
     "uninstall_hook": "_uninstall_force_storage",
 }
