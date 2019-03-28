@@ -254,23 +254,16 @@ class File(models.Model):
     @api.model
     def search_panel_select_range(self, field_name, **kwargs):
         operator, directory_id = self._search_panel_directory(**kwargs)
-        comodel_model = self.env['muk_dms.directory']
-        comodel_domain = kwargs.pop('comodel_domain', [])
-        fields = ['display_name', comodel_model._parent_name]
         if directory_id and field_name == 'directory':
-            comodel_domain = self._search_panel_domain(
-                'files', operator, directory_id, comodel_domain
+            domain = [('parent_directory', operator, directory_id)]
+            values = self.env['muk_dms.directory'].search_read(
+                domain, ['display_name', 'parent_directory']
             )
-        field = comodel_model._parent_name
-        values = comodel_model.search_read(comodel_domain, fields)
-        ids = {value['id'] for value in values} 
-        for value in values:
-            if value[field] and value[field][0] not in ids:
-                value[field] = None
-        return {
-            'parent_field': field,
-            'values': values if len(values) > 1 else [],
-        }
+            return {
+                'parent_field': 'parent_directory',
+                'values': values if len(values) > 1 else [],
+            }
+        return super(File, self).search_panel_select_range(field_name, **kwargs)
     
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
