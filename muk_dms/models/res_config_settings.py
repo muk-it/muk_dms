@@ -43,6 +43,14 @@ class ResConfigSettings(models.TransientModel):
         string="Restore Files",
         help="Activates a file trash to restore deleted files.")
     
+    module_muk_dms_widget = fields.Boolean(
+        string="Binary Widget Support",
+        help="Allows the user to use documents as input for any binary field.")
+    
+    module_muk_archive = fields.Boolean(
+        string="Download Directories",
+        help="Allows to download directories as a archive file.")
+    
     #----------------------------------------------------------
     # Views
     #----------------------------------------------------------
@@ -54,6 +62,10 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_view = fields.Boolean(
         string="Tree View",
         help="Activates the documents tree view.")
+    
+    module_muk_dms_finder = fields.Boolean(
+        string="Finder",
+        help="Enables the Document Finder.")
     
     #----------------------------------------------------------
     # Storage Addons
@@ -83,21 +95,23 @@ class ResConfigSettings(models.TransientModel):
         string="Attachment Rule Automation",
         help="Allows you to create rule templates to create attachment rules.")
     
+    module_muk_dms_attachment_wizard = fields.Boolean(
+        string="Attachment Wizard",
+        help="Allows documents to be used as attachments.")
+    
+    #----------------------------------------------------------
+    # Integrations
+    #----------------------------------------------------------
+    
+    module_muk_dms_users = fields.Boolean(
+        string="Personal Documents",
+        help="Automatic creation of user directories.")
+    
     #----------------------------------------------------------
     # ... Addons
     #----------------------------------------------------------
     
 
-
-
-    
-    module_muk_dms_widget = fields.Boolean(
-        string="Binary Widget Support",
-        help="Allows the user to use DMS documents as input for any binary field.")
-    
-    module_muk_archive = fields.Boolean(
-        string="Download Directories",
-        help="Allows to download directories as a archive file.")
     
     module_muk_dms_thumbnails = fields.Boolean(
         string="Automatic Thumbnails",
@@ -106,14 +120,6 @@ class ResConfigSettings(models.TransientModel):
     module_muk_dms_export = fields.Boolean(
         string="Export Files",
         help="Allows the conversion of existing files.")
-    
-    module_muk_dms_attachment_wizard = fields.Boolean(
-        string="Attachment Wizard",
-        help="Allows documents to be used as attachments.")
-    
-    module_muk_dms_finder = fields.Boolean(
-        string="Finder",
-        help="Enables the Document Finder.")
     
     #----------------------------------------------------------
     # Database
