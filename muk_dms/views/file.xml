@@ -26,8 +26,8 @@
 		<search>
 			<field name="name" filter_domain="[('name','ilike',self)]"/>
 			<filter string="All Files" name="all" domain="['|',('active', '=',  False), ('active', '!=',  False)]"/>
-			<separator/>
 			<filter string="My Files" name="filter_user" domain="[('create_uid', '=', uid)]"/>
+			<separator/>
 			<filter string="Archived Files" name="filter_active" domain="[('active', '=', False)]"/>
 			<separator/>
 			<filter string="Creation Date" name="filter_create" date="create_date"/>
