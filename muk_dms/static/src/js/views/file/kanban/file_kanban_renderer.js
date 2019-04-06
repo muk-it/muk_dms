@@ -38,7 +38,6 @@ var FileKanbanRenderer = KanbanRenderer.extend(dropzone.FileDropzoneMixin, {
     }),
 	start: function () {
     	var res = this._super.apply(this, arguments);
-    	this.$el.addClass('align-content-start');
 		this._startDropzone(this.$el);
         return res;
     },

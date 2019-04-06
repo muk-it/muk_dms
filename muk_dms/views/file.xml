@@ -47,7 +47,7 @@
 	<field name="name">muk_dms_file.kanban</field>
 	<field name="model">muk_dms.file</field>
 	<field name="arch" type="xml">
-		<kanban class="mk_file_kanban_view o_kanban_small_column o_emphasize_colors" 
+		<kanban class="mk_file_kanban_view o_kanban_small_column align-content-start" 
 				banner_route="/dms/document_onboarding/file" js_class="file_kanban">
 			<field name="id" />
 			<field name="tags"/>

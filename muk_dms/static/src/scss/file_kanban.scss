@@ -21,6 +21,7 @@
 	height: 100%;
 	.o_kanban_record {
 		padding: 0;
+		max-height: $o-kanban-image-width + 1;
 		.o_kanban_image {
 			width: $o-kanban-image-width + 1;
 			border-right: solid 1px $gray-400;
