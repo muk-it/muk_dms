@@ -32,15 +32,19 @@
 				font-weight: bold;
 			}
 			.o_kanban_record_body {
-				max-height: 15px;
+				max-height: 12px;
 				.o_kanban_tags {
 					@include o-text-overflow;
 				}
 			}
+			.oe_kanban_avatar {
+			    margin-left: 0px;
+			}
 			.mk_file_kanban_lock {
-				margin-top: 1px;
+				margin-top: 2px;
 			    font-size: 1.2rem;
 			    line-height: 20px;
+			    margin-right: 6px;
 			}
 		}
 		.o_dropdown_kanban {

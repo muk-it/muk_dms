@@ -129,7 +129,7 @@
 											<field name="write_date" widget="date"/>
 								     	</div>
 										<div class="oe_kanban_bottom_right">
-											<span class="mk_file_kanban_lock">
+											<span t-if="record.is_locked.raw_value" class="mk_file_kanban_lock">
 												<i t-attf-class="fa #{(record.is_locked.raw_value and !record.is_lock_editor.raw_value) ? 'fa-lock' : ''} #{((record.is_locked.raw_value and record.is_lock_editor.raw_value)) ? 'fa-unlock-alt' : ''}" 
 													t-att-title="record.locked_by.value"/>
 											</span>
