@@ -20,7 +20,7 @@
 <odoo>
 	
 <menuitem id="cat_menu_muk_dms_attachment" name="Attachment" 
-	groups="muk_dms.group_dms_manager" parent="muk_dms.main_menu_muk_dms"
-	sequence="30" />
+	groups="muk_dms.group_dms_manager" parent="muk_dms.cat_menu_muk_dms_config"
+	sequence="20" />
 	
 </odoo>
