@@ -282,7 +282,7 @@ class File(models.Model):
         return super(File, self).search_panel_select_multi_range(field_name, **kwargs)
     
     #----------------------------------------------------------
-    # Read, View 
+    # Read 
     #----------------------------------------------------------     
     
     @api.depends('name', 'directory', 'directory.parent_path')
@@ -363,6 +363,18 @@ class File(models.Model):
         self.check_directory_access('read', {}, True)
         return super(File, self).read(fields, load=load)
     
+    #----------------------------------------------------------
+    # View
+    #----------------------------------------------------------
+    
+    @api.onchange('category')
+    def _change_category(self):
+        tags = self.tags.filtered(
+            lambda rec: not rec.category or \
+            rec.category == self.category
+        )
+        self.tags = tags
+        
     #----------------------------------------------------------
     # Security
     #----------------------------------------------------------

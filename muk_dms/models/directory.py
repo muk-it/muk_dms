@@ -329,6 +329,14 @@ class Directory(models.Model):
         else:
             self.root_storage = None
     
+    @api.onchange('category')
+    def _change_category(self):
+        tags = self.tags.filtered(
+            lambda rec: not rec.category or \
+            rec.category == self.category
+        )
+        self.tags = tags
+    
     #----------------------------------------------------------
     # Constrains
     #----------------------------------------------------------
