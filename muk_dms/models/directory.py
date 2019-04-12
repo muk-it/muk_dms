@@ -127,7 +127,10 @@ class Directory(models.Model):
     tags = fields.Many2many(
         comodel_name='muk_dms.tag',
         relation='muk_dms_directory_tag_rel', 
-        domain="[['category', 'child_of', category]]",
+        domain="""[
+            '|', ['category', '=', False],
+            ['category', 'child_of', category]]
+        """,
         column1='did',
         column2='tid',
         string='Tags')

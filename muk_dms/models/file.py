@@ -120,8 +120,11 @@ class File(models.Model):
     
     tags = fields.Many2many(
         comodel_name='muk_dms.tag',
-        relation='muk_dms_file_tag_rel', 
-        domain="[['category', 'child_of', category]]",
+        relation='muk_dms_file_tag_rel',         
+        domain="""[
+            '|', ['category', '=', False],
+            ['category', 'child_of', category]]
+        """,
         column1='fid',
         column2='tid',
         string='Tags')

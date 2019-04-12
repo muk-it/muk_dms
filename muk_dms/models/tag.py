@@ -45,8 +45,7 @@ class Tag(models.Model):
         comodel_name='muk_dms.category', 
         context="{'dms_category_show_path': True}",
         string='Category',
-        ondelete='cascade',
-        required=True)
+        ondelete='set null')
     
     color = fields.Integer(
         string='Color Index', 
