@@ -31,6 +31,8 @@
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/directory/form/directory_form_view.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_controller.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/form/file_form_view.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_controller.js" />
+		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/list/file_list_view.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_model.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_record.js" />
 		<script type="text/javascript" src="/muk_dms/static/src/js/views/file/kanban/file_kanban_searchpanel.js" />

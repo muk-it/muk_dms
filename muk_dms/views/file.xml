@@ -156,7 +156,8 @@
 	<field name="name">muk_dms_file.tree</field>
 	<field name="model">muk_dms.file</field>
 	<field name="arch" type="xml">
-		<tree string="Files" decoration-warning="not active" decoration-muted="(is_locked and not is_lock_editor)">
+		<tree string="Files" js_class="file_list" decoration-warning="not active"
+				decoration-muted="(is_locked and not is_lock_editor)" >
 			<field name="active" invisible="1"/>
 			<field name="is_locked" invisible="1"/>
 			<field name="is_lock_editor" invisible="1"/>
