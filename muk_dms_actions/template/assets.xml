@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+<template id="assets_backend" name="muk_dms_assets" inherit_id="web.assets_backend">
+	<xpath expr="//link[last()]" position="after">
+		<link rel="stylesheet" href="/muk_dms_actions/static/src/scss/form_actions.scss" />
+		<link rel="stylesheet" href="/muk_dms_actions/static/src/scss/list_actions.scss" />
+		<link rel="stylesheet" href="/muk_dms_actions/static/src/scss/kanban_actions.scss" />
+	</xpath>						
+	<xpath expr="//script[last()]" position="after">
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/fields/abstract_actions.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/fields/form_actions.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/fields/list_actions.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/fields/kanban_actions.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/views/form_controller.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/views/list_controller.js" />
+		<script type="text/javascript" src="/muk_dms_actions/static/src/js/views/kanban_controller.js" />
+	</xpath>
+</template>
+
+</odoo>
