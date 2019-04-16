@@ -103,6 +103,10 @@ class ResConfigSettings(models.TransientModel):
     # Integrations
     #----------------------------------------------------------
     
+    module_muk_dms_actions = fields.Boolean(
+        string="Document Actions",
+        help="Create custom file operations.")
+    
     module_muk_dms_users = fields.Boolean(
         string="Personal Documents",
         help="Automatic creation of user directories.")

@@ -40,7 +40,6 @@ var FileKanbanController = KanbanController.extend(FileUpload, {
     }),
     _getSelectedDirectory: function () {
         var record = this.model.get(this.handle, {raw: true});
-        console.log(this)
         var directoryID = this._searchPanel.getSelectedDirectory();
     	var context = record.getContext();
     	if (directoryID) {
