@@ -92,7 +92,7 @@
 		        </group>
 		        <notebook>
 		        	<page string="Domain Criteria">
-				        <field name="criteria_domain" widget="domain" options="{'model':'muk_dms.file'}" />
+				        <field name="criteria_domain" widget="domain" options="{'model':'muk_dms.file'}" context="{'tree_view_ref': 'muk_dms_actions.view_dms_file_domain_tree'}" />
 		        	</page>
 		        	<page string="Server Actions">
 		        		<field name="server_action_model" invisible="1" />

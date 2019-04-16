@@ -44,6 +44,19 @@
 	</field>
 </record>
 
+<record id="view_dms_file_domain_tree" model="ir.ui.view">
+	<field name="name">muk_dms_file_domain.tree</field>
+	<field name="model">muk_dms.file</field>
+	<field name="arch" type="xml">
+		<tree string="Files">
+			<field name="name" />
+			<field name="write_date" readonly="1" />
+			<field name="size" widget="binary_size"/>
+			<field name="path_names" />
+		</tree>
+	</field>
+</record>
+
 <record id="view_dms_file_form" model="ir.ui.view">
 	<field name="name">muk_dms_file.form</field>
 	<field name="model">muk_dms.file</field>

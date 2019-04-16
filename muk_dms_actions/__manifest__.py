@@ -20,7 +20,7 @@
 {
     "name": "MuK Documents Actions",
     "summary": """Custom File Operations""",
-    "version": '12.0.1.0.4',   
+    "version": '12.0.1.0.5',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
