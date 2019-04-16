@@ -353,6 +353,7 @@
 							attrs="{'readonly':[('permission_create','=',False)]}">
 							<tree string="Files" limit="10">
 								<field name="name" />
+								<field name="mimetype" />
 								<field name="size" widget="binary_size"/>
 								<field name="write_date" readonly="1" />
 							</tree>
