@@ -96,8 +96,7 @@
 		        	</page>
 		        	<page string="Server Actions">
 		        		<field name="server_action_model" invisible="1" />
-		        		<field name="server_actions" widget="many2many" mode="tree" 
-		        			context="{'tree_view_ref': 'base.action_view_tree', 'form_view_ref': 'base.action_view', 'default_state': 'code', 'default_model_id': server_action_model}">
+		        		<field name="server_actions" widget="many2many" mode="tree" context="{'form_view_ref': 'muk_dms_actions.view_server_action_form', 'default_state': 'code', 'default_model_id': server_action_model}">
 		        			<tree>
 		        				<field name="name"/>
 		        				<field name="state"/>
