@@ -19,3 +19,4 @@
 
 from . import test_file
 from . import test_attachment
+from . import test_action
