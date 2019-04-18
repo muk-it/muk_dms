@@ -17,27 +17,5 @@
 #
 ###################################################################################
 
-import base64
-import logging
-
-from odoo import models, api, fields
-
-_logger = logging.getLogger(__name__)
-
-class File(models.Model):
-    
-    _name = 'muk_dms.file'
-    
-    _inherit = [
-        'mail.thread',
-        'mail.activity.mixin',
-        'muk_dms.file',
-    ]
-    
-    #----------------------------------------------------------
-    # Create / Update / Delete
-    #----------------------------------------------------------
-    
-    @api.model_create_multi
-    def create(self, vals_list):
-        return super(File, self.with_context(mail_create_nolog=True)).create(vals_list)
+from . import test_directory
+from . import test_action

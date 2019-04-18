@@ -24,6 +24,26 @@
 	<field name="model">muk_dms.directory</field>
     <field name="inherit_id" ref="muk_dms.view_dms_directory_form"/>
 	<field name="arch" type="xml">
+		<xpath expr="//page[last()]" position="after">
+			<page string="Email Alias">
+			    <group>
+					<group>
+				    	<field name="alias_contact" string="Accept Emails from"/>
+				    	<field name="alias_process" />
+				    </group>
+				    <group>
+				    	<label for="alias_name" string="Email Alias"/>
+				         <div>
+			                <field name="alias_name" class="oe_inline"/>  
+			                <span class="oe_read_only">@</span>
+			                <span class="oe_edit_only"> @ </span>
+			                <field name="alias_domain" placeholder="mail.catchall.domain" class="oe_inline" readonly="1"/>
+			            </div>
+			            <field name="alias_id" readonly="1" required="0" groups="base.group_no_one" string="Alias Setting"/> 
+				    </group>
+			    </group>
+			</page>
+		</xpath>
  		<xpath expr="//sheet" position="after">
 			<div class="oe_chatter">
 			    <field name="message_follower_ids" widget="mail_followers"/>
