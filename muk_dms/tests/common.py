@@ -56,11 +56,15 @@ class DocumentsBaseCase(common.TransactionCase):
         self.storage = self.env['muk_dms.storage']
         self.directory = self.env['muk_dms.directory']
         self.file = self.env['muk_dms.file']
+        self.category = self.env['muk_dms.category']
+        self.tag = self.env['muk_dms.tag']
         
     def _setup_test_data(self):
         self.storage = self.storage.sudo(self.env.uid)
         self.directory = self.directory.sudo(self.env.uid)
         self.file = self.file.sudo(self.env.uid)
+        self.category = self.category.sudo(self.env.uid)
+        self.tag = self.tag.sudo(self.env.uid)
     
     def multi_users(self, super=True, admin=True, demo=True):
         return [[self.super_uid, super], [self.admin_uid, admin], [self.demo_uid, demo]]
