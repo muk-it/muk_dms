@@ -65,143 +65,62 @@ class BenchmarkTestCase(common.SavepointCase):
         cls._load('muk_dms', 'tests', 'data', 'muk_dms.directory.csv')
         cls._load('muk_dms', 'tests', 'data', 'muk_dms.file.csv')
 
-    def test_file_search_benchmark_super_limit_80(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
-        
-    def test_file_search_benchmark_super_limit_500(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
+    def _benchmark_table(self, data):
+        columns = len(data[0]) - 1
+        format = "{:8}" + "{:25}" * columns
+        result = (format.format(*data[0]) + "\n")
+        for row in data[1:]:
+            result += (format.format(*row) + "\n")
+        return result
 
-    def test_file_search_benchmark_super_limit_none(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search)([]))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_benchmark_admin_limit_80(self): 
-        admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
-        
-    def test_file_search_benchmark_admin_limit_500(self): 
-        admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_benchmark_admin_limit_none(self): 
-        admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search)([]))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_benchmark_demo_limit_80(self): 
+    def test_file_search_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
-        
-    def test_file_search_benchmark_demo_limit_500(self): 
-        demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_benchmark_demo_limit_none(self): 
-        demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search)([]))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_read_benchmark_super_limit_80(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
-        
-    def test_file_search_read_benchmark_super_limit_500(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_read_benchmark_super_limit_none(self): 
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo().with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search_read)([]))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_read_benchmark_admin_limit_80(self): 
         admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
+        track_function_wrapper = track_function(return_tracking=True)
+        model =  self.env['muk_dms.file'].with_context(bin_size=True)
         
-    def test_file_search_read_benchmark_admin_limit_500(self): 
-        admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_read_benchmark_admin_limit_none(self): 
-        admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(admin_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search_read)([]))
-        _logger.info("%s files have been found." % count_files)
-
-    def test_file_search_read_benchmark_demo_limit_80(self): 
-        demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 80 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=80))
-        _logger.info("%s files have been found." % count_files)
+        benchmark_data_super = ['Super']
+        benchmark_data_admin = ['Admin']
+        benchmark_data_demo = ['Demo']
         
-    def test_file_search_read_benchmark_demo_limit_500(self): 
-        demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with limit = 500 and context bin_size = True")   
-        count_files = len(track_function_wrapper(model.search_read)([], limit=500))
-        _logger.info("%s files have been found." % count_files)
+        file_search = track_function_wrapper(model.sudo().search)
+        file_search_result, tracking = file_search([], limit=80)
+        benchmark_data_super.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([], limit=500)
+        benchmark_data_super.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([])
+        benchmark_data_super.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        
+        file_search = track_function_wrapper(model.sudo(admin_uid).search)
+        file_search_result, tracking = file_search([], limit=80)
+        benchmark_data_admin.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([], limit=500)
+        benchmark_data_admin.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([])
+        benchmark_data_admin.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        
+        file_search = track_function_wrapper(model.sudo(demo_uid).search)
+        file_search_result, tracking = file_search([], limit=80)
+        benchmark_data_demo.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([], limit=500)
+        benchmark_data_demo.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        model.clear_caches()
+        file_search_result, tracking = file_search([])
+        benchmark_data_demo.append("%sQ %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
 
-    def test_file_search_read_benchmark_demo_limit_none(self): 
-        demo_uid = self.browse_ref("base.user_demo").id
-        track_function_wrapper = track_function(return_tracking=False)
-        model =  self.env['muk_dms.file'].sudo(demo_uid).with_context(bin_size=True)
-        _logger.info("Searching files and reading all fields with no limit and context bin_size = True") 
-        count_files = len(track_function_wrapper(model.search_read)([]))
-        _logger.info("%s files have been found." % count_files)
+        info_message = "\n\nSearching files with bin_size = True | "
+        info_message += "Benchmark with Limit 80 / 500 / None\n\n"
+        info_message += self._benchmark_table([
+            ["User", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            benchmark_data_super, benchmark_data_admin, benchmark_data_demo
+        ])
+        info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
+        _logger.info(info_message)
     
     @unittest.skip("Takes to long to be tested every time.")
     def test_file_search_read_profile_admin(self):
