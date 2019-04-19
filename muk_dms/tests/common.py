@@ -25,6 +25,9 @@ import functools
 
 from odoo import SUPERUSER_ID
 from odoo.tests import common
+from odoo.tools import config, convert_file
+from odoo.modules.module import get_resource_path
+from odoo.modules.module import get_module_resource
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
@@ -65,6 +68,10 @@ class DocumentsBaseCase(common.TransactionCase):
         self.file = self.file.sudo(self.env.uid)
         self.category = self.category.sudo(self.env.uid)
         self.tag = self.tag.sudo(self.env.uid)
+    
+    def _load(self, module, *args):
+        convert_file(self.cr, 'muk_dms', get_module_resource(module, *args),
+            {}, 'init', False, 'test', self.registry._assertion_report)
     
     def multi_users(self, super=True, admin=True, demo=True):
         return [[self.super_uid, super], [self.admin_uid, admin], [self.demo_uid, demo]]
