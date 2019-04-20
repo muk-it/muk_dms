@@ -67,60 +67,49 @@ class BenchmarkTestCase(common.SavepointCase):
 
     def _benchmark_table(self, data):
         columns = len(data[0]) - 1
-        format = "{:8}" + "{:30}" * columns
+        format = "{:7}" + "| {:28}" * columns
+
         result = (format.format(*data[0]) + "\n")
+        result += (("-" * 7) + (("+" + ("-") * 29) * columns) + "\n")
         for row in data[1:]:
             result += (format.format(*row) + "\n")
         return result
-
+    
+    def _benchmark_function(self, func, args_list):
+        tfunc = track_function(return_tracking=True)(func)
+        benchmark = []
+        for item in args_list:
+            self.registry.clear_caches()
+            args = item[0] if len(item) > 0 else []
+            kwargs = item[1] if len(item) > 1 else {}
+            tracking = tuple(tfunc(*args, **kwargs)[1][1:])
+            benchmark.append("%sq %.3fs %.3fs %.3fs" % tracking)
+        return benchmark
+    
     #----------------------------------------------------------
     # File
     #----------------------------------------------------------
 
+    def _file_kanban_fields(self):
+        return [
+            'id', 'tags', 'name', 'color', 'active', 'mimetype', 'create_uid', 'write_date', 'locked_by',
+            'is_locked', 'is_lock_editor', 'permission_write', 'permission_unlink', '__last_update'
+        ]
+
     def test_file_search_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=True)
         model =  self.env['muk_dms.file'].with_context(bin_size=True)
+        args = [[[[]], {'limit': 1}], [[[]], {'limit': 80}], [[[]], {'limit': 500}], [[[]]]]
         
-        benchmark_data_super = ['Super']
-        benchmark_data_admin = ['Admin']
-        benchmark_data_demo = ['Demo']
-        
-        file_search = track_function_wrapper(model.sudo().search)
-        file_search_result, tracking = file_search([], limit=80)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([], limit=500)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([])
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        file_search = track_function_wrapper(model.sudo(admin_uid).search)
-        file_search_result, tracking = file_search([], limit=80)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([], limit=500)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([])
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        file_search = track_function_wrapper(model.sudo(demo_uid).search)
-        file_search_result, tracking = file_search([], limit=80)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([], limit=500)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_result, tracking = file_search([])
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        benchmark_data_super = ['Super'] + self._benchmark_function(model.sudo().search, args)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(model.sudo(admin_uid).search, args)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(model.sudo(demo_uid).search, args)
 
         info_message = "\n\nSearching files with bin_size = True | "
-        info_message += "Benchmark with Limit 80 / 500 / None (1500)\n\n"
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table([
-            ["User", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
             benchmark_data_super, benchmark_data_admin, benchmark_data_demo
         ])
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
@@ -129,52 +118,83 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_file_search_read_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=True)
         model =  self.env['muk_dms.file'].with_context(bin_size=True)
+        args = [[[], {'limit': 1}], [[], {'limit': 80}], [[], {'limit': 500}], [[]]]
         
-        benchmark_data_super = ['Super']
-        benchmark_data_admin = ['Admin']
-        benchmark_data_demo = ['Demo']
+        benchmark_data_super = ['Super'] + self._benchmark_function(model.sudo().search_read, args)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(model.sudo(admin_uid).search_read, args)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(model.sudo(demo_uid).search_read, args)
         
-        file_search_read = track_function_wrapper(model.sudo().search_read)
-        file_search_read_result, tracking = file_search_read(limit=80)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read(limit=500)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read()
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        file_search_read = track_function_wrapper(model.sudo(admin_uid).search_read)
-        file_search_read_result, tracking = file_search_read(limit=80)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read(limit=500)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read()
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        file_search_read = track_function_wrapper(model.sudo(demo_uid).search_read)
-        file_search_read_result, tracking = file_search_read(limit=80)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read(limit=500)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        file_search_read_result, tracking = file_search_read()
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
-        info_message += "Benchmark with Limit 80 / 500 / None (1500)\n\n"
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table([
-            ["User", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
             benchmark_data_super, benchmark_data_admin, benchmark_data_demo
         ])
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
         
+    def test_file_search_name_get_benchmark(self):
+        demo_uid = self.browse_ref("base.user_demo").id
+        admin_uid = self.browse_ref("base.user_admin").id
+        model =  self.env['muk_dms.file'].with_context(bin_size=True)
+        
+        def test_function(model, limit):
+            return model.search([], limit=limit).name_get()
+        
+        model_super = model.sudo()
+        model_admin = model.sudo(admin_uid)
+        model_demo = model.sudo(demo_uid)
+        args_super = [[[model_super, 1]], [[model_super, 800]], [[model_super, 500]], [[model_super, None]]]
+        args_admin = [[[model_admin, 1]], [[model_admin, 800]], [[model_admin, 500]], [[model_admin, None]]]
+        args_demo = [[[model_demo, 1]], [[model_demo, 800]], [[model_demo, 500]], [[model_demo, None]]]
+        
+        benchmark_data_super = ['Super'] + self._benchmark_function(test_function, args_super)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(test_function, args_admin)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(test_function, args_demo)
+        
+        info_message = "\n\nSearching and 'name_get' function with bin_size = True | "
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
+        info_message += self._benchmark_table([
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            benchmark_data_super, benchmark_data_admin, benchmark_data_demo
+        ])
+        info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
+        _logger.info(info_message)
+    
+    def test_file_kanban_backend_benchmark(self):
+        demo_uid = self.browse_ref("base.user_demo").id
+        admin_uid = self.browse_ref("base.user_admin").id
+        model =  self.env['muk_dms.file'].with_context(bin_size=True)
+        kanban_fields = self._file_kanban_fields()
+        
+        def test_function(model, kanban_fields, limit=80):
+            model.search_panel_select_range('directory')
+            model.search_panel_select_multi_range('directory')
+            model.search_panel_select_multi_range('tags')
+            model.search_read(fields=kanban_fields, limit=limit)
+        
+        def function_args(args, kwargs):
+            return [[args, {'limit': arg}] for arg in kwargs]
+                
+        args_super = function_args([model.sudo(), kanban_fields], [1, 80, 500, None])
+        args_admin = function_args([model.sudo(admin_uid), kanban_fields], [1, 80, 500, None])
+        args_demo = function_args([model.sudo(demo_uid), kanban_fields], [1, 80, 500, None])
+        
+        benchmark_data_super = ['Super'] + self._benchmark_function(test_function, args_super)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(test_function, args_admin)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(test_function, args_demo)
+        
+        info_message = "\n\nSimulate kanban view loading on the backend | "
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
+        info_message += self._benchmark_table([
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            benchmark_data_super, benchmark_data_admin, benchmark_data_demo
+        ])
+        info_message += "\nLegend: Queries | Query Time | Server Time | Total Time || "
+        info_message += "500 Directories | 150 Tags | 50 Categories\n"
+        _logger.info(info_message)
+    
     #----------------------------------------------------------
     # Directory
     #----------------------------------------------------------
@@ -182,47 +202,36 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_directory_search_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=True)
         model =  self.env['muk_dms.directory'].with_context(bin_size=True)
+        args = [[[[]], {'limit': 1}], [[[]], {'limit': 80}], [[[]], {'limit': 500}], [[[]]]]
         
-        benchmark_data_super = ['Super']
-        benchmark_data_admin = ['Admin']
-        benchmark_data_demo = ['Demo']
-        
-        directory_search = track_function_wrapper(model.sudo().search)
-        directory_search_result, tracking = directory_search([], limit=80)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([], limit=250)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([])
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        directory_search = track_function_wrapper(model.sudo(admin_uid).search)
-        directory_search_result, tracking = directory_search([], limit=80)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([], limit=250)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([])
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        directory_search = track_function_wrapper(model.sudo(demo_uid).search)
-        directory_search_result, tracking = directory_search([], limit=80)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([], limit=250)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_result, tracking = directory_search([])
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
+        benchmark_data_super = ['Super'] + self._benchmark_function(model.sudo().search, args)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(model.sudo(admin_uid).search, args)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(model.sudo(demo_uid).search, args)
 
         info_message = "\n\nSearching directories with bin_size = True | "
-        info_message += "Benchmark with Limit 80 / 250 / None (500)\n\n"
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table([
-            ["User", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
+            benchmark_data_super, benchmark_data_admin, benchmark_data_demo
+        ])
+        info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
+        _logger.info(info_message)
+    
+    def test_directory_search_parents_benchmark(self):
+        demo_uid = self.browse_ref("base.user_demo").id
+        admin_uid = self.browse_ref("base.user_admin").id
+        model =  self.env['muk_dms.directory'].with_context(bin_size=True)
+        args = [[[[]], {'limit': 1}], [[[]], {'limit': 80}], [[[]], {'limit': 500}], [[[]]]]
+        
+        benchmark_data_super = ['Super'] + self._benchmark_function(model.sudo().search_parents, args)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(model.sudo(admin_uid).search_parents, args)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(model.sudo(demo_uid).search_parents, args)
+
+        info_message = "\n\nSearching directory parents with bin_size = True | "
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
+        info_message += self._benchmark_table([
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
             benchmark_data_super, benchmark_data_admin, benchmark_data_demo
         ])
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
@@ -231,51 +240,25 @@ class BenchmarkTestCase(common.SavepointCase):
     def test_directory_search_read_benchmark(self):
         demo_uid = self.browse_ref("base.user_demo").id
         admin_uid = self.browse_ref("base.user_admin").id
-        track_function_wrapper = track_function(return_tracking=True)
         model =  self.env['muk_dms.directory'].with_context(bin_size=True)
+        args = [[[], {'limit': 1}], [[], {'limit': 80}], [[], {'limit': 500}], [[]]]
         
-        benchmark_data_super = ['Super']
-        benchmark_data_admin = ['Admin']
-        benchmark_data_demo = ['Demo']
+        benchmark_data_super = ['Super'] + self._benchmark_function(model.sudo().search_read, args)
+        benchmark_data_admin = ['Admin'] + self._benchmark_function(model.sudo(admin_uid).search_read, args)
+        benchmark_data_demo = ['Demo'] + self._benchmark_function(model.sudo(demo_uid).search_read, args)
         
-        directory_search_read = track_function_wrapper(model.sudo().search_read)
-        directory_search_read_result, tracking = directory_search_read(limit=80)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read(limit=250)
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read()
-        benchmark_data_super.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        directory_search_read = track_function_wrapper(model.sudo(admin_uid).search_read)
-        directory_search_read_result, tracking = directory_search_read(limit=80)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read(limit=250)
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read()
-        benchmark_data_admin.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        
-        directory_search_read = track_function_wrapper(model.sudo(demo_uid).search_read)
-        directory_search_read_result, tracking = directory_search_read(limit=80)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read(limit=250)
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-        model.clear_caches()
-        directory_search_read_result, tracking = directory_search_read()
-        benchmark_data_demo.append("%sq %.3fs %.3fs %.3fs" % tuple(tracking[1:]))
-
         info_message = "\n\nSearching and reading all fields with bin_size = True | "
-        info_message += "Benchmark with Limit 80 / 250 / None (500)\n\n"
+        info_message += "Benchmark with Limit 1 / 80 / 500 / None (1500)\n\n"
         info_message += self._benchmark_table([
-            ["User", "Search Limit 80", "Search Limit 250", "Search No Limit"], 
+            ["User", "Search Limit 1", "Search Limit 80", "Search Limit 500", "Search No Limit"], 
             benchmark_data_super, benchmark_data_admin, benchmark_data_demo
         ])
         info_message += "\nLegend: Queries | Query Time | Server Time | Total Time\n"
         _logger.info(info_message)
+    
+    #----------------------------------------------------------
+    # Profiler
+    #----------------------------------------------------------
     
     @unittest.skip("Takes to long to be tested every time.")
     def test_file_search_read_profile_admin(self):
