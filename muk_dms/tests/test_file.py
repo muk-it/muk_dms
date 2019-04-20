@@ -164,3 +164,10 @@ class FileTestCase(DocumentsBaseCase):
     @setup_data_function(setup_func='_setup_test_data')
     def test_compute_migration(self):
         self.assertTrue(self.file_demo_01.migration)
+        
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
+    def test_search_panel(self):
+        self.assertTrue(self.file.search_panel_select_range('directory'))
+        self.assertTrue(self.file.search_panel_select_multi_range('directory'))
+        self.assertTrue(self.file.search_panel_select_multi_range('tags'))

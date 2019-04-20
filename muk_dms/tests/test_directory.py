@@ -155,3 +155,10 @@ class DirectoryTestCase(DocumentsBaseCase):
     def test_name_search(self):
         directories = self.directory.name_search("/")
         self.assertTrue(len(directories))
+        
+    @multi_users(lambda self: self.multi_users())
+    @setup_data_function(setup_func='_setup_test_data')
+    def test_search_panel(self):
+        self.assertTrue(self.directory.search_panel_select_multi_range('parent_directory'))
+        self.assertTrue(self.directory.search_panel_select_multi_range('category'))
+        self.assertTrue(self.directory.search_panel_select_multi_range('tags'))

@@ -26,6 +26,7 @@ import functools
 
 from odoo import SUPERUSER_ID
 from odoo.tests import common
+from odoo.tests import tagged
 from odoo.tools.profiler import profile
 from odoo.tools import config, convert_file
 from odoo.modules.module import get_resource_path
@@ -37,6 +38,7 @@ from odoo.addons.muk_utils.tests.common import track_function
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
+@tagged('-standard', 'benchmark')
 class BenchmarkTestCase(common.SavepointCase): 
     
     @classmethod
