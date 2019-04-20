@@ -19,3 +19,5 @@
 
 from . import test_file
 from . import test_action
+from . import test_benchmark
+
