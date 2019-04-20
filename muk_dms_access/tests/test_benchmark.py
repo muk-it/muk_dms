@@ -24,6 +24,7 @@ import unittest
 import threading
 import functools
 
+from odoo.tests import tagged
 from odoo.tools.profiler import profile
 from odoo.tools import config, convert_file
 from odoo.modules.module import get_resource_path
@@ -36,5 +37,11 @@ from odoo.addons.muk_dms.tests.test_benchmark import BenchmarkTestCase
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
+@tagged('-standard', 'benchmark')
 class BenchmarkTestCase(BenchmarkTestCase): 
-    pass
+    
+    @classmethod  
+    def _setup_benchmark_data(cls):
+        super(BenchmarkTestCase, cls)._setup_benchmark_data()
+        cls._load('muk_dms_access', 'tests', 'data', 'muk_dms.directory.csv')
+        cls._load('muk_dms_access', 'tests', 'data', 'muk_security.access_groups.csv')
