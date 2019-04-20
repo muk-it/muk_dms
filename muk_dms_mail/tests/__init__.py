@@ -19,3 +19,4 @@
 
 from . import test_directory
 from . import test_action
+from . import test_benchmark
