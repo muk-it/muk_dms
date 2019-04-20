@@ -267,11 +267,31 @@ class File(models.Model):
                 'values': values if len(values) > 1 else [],
             }
         return super(File, self).search_panel_select_range(field_name, **kwargs)
-    
+     
     @api.model
     def search_panel_select_multi_range(self, field_name, **kwargs):
         operator, directory_id = self._search_panel_directory(**kwargs)
-        if directory_id and field_name in ['directory', 'tags', 'category']:
+        if field_name == 'tags':
+            sql_query = '''
+                SELECT t.name AS name, t.id AS id, c.name AS group_name,
+                    c.id AS group_id, COUNT(r.fid) AS count
+                FROM muk_dms_tag t
+                JOIN muk_dms_category c ON t.category = c.id
+                LEFT JOIN muk_dms_file_tag_rel r ON t.id = r.tid 
+                {directory_where_clause}
+                GROUP BY c.name, c.id, t.name, t.id
+                ORDER BY c.name, c.id, t.name, t.id;
+            '''
+            where_clause = ''
+            if directory_id:
+                directory_where_clause = 'WHERE r.fid = ANY (VALUES {ids})'
+                file_ids = self.search([('directory', operator, directory_id)]).ids
+                where_clause = '' if not file_ids else directory_where_clause.format(
+                    ids=', '.join(map(lambda id: '(%s)' % id, file_ids))
+                )
+            self.env.cr.execute(sql_query.format(directory_where_clause=where_clause), [])
+            return self.env.cr.dictfetchall()
+        if directory_id and field_name in ['directory', 'category']:
             comodel_domain = kwargs.pop('comodel_domain', [])
             directory_comodel_domain = self._search_panel_domain(
                 'files', operator, directory_id, comodel_domain
@@ -385,11 +405,10 @@ class File(models.Model):
             return self.env['muk_dms.directory']
         sql_query = '''
             SELECT directory 
-            FROM {table} 
+            FROM muk_dms_file
             WHERE id = ANY (VALUES {ids});
         '''.format(
-            table=self._table,
-            ids=', '.join(map(lambda id: '(%s)' % id, file_ids)),
+            ids=', '.join(map(lambda id: '(%s)' % id, file_ids))
         )
         self.env.cr.execute(sql_query, [])
         result = set(val[0] for val in self.env.cr.fetchall())
@@ -419,9 +438,9 @@ class File(models.Model):
         if not result:
             return 0 if count else []
         file_ids = set(result)
-        for directory in self._get_directories_from_database(result):
-            if not directory.check_access('read', raise_exception=False):
-                file_ids -= set(directory.sudo().mapped('files').ids)
+        directories = self._get_directories_from_database(result)
+        for directory in directories - directories._filter_access('read'):
+            file_ids -= set(directory.sudo().mapped('files').ids)
         return len(file_ids) if count else list(file_ids)
     
     @api.multi
@@ -429,9 +448,9 @@ class File(models.Model):
         records = super(File, self)._filter_access(operation)
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return records
-        for directory in self._get_directories_from_database(records.ids):
-            if not directory.check_access(operation, raise_exception=False):
-                records -= self.browse(directory.sudo().mapped('files').ids)
+        directories = self._get_directories_from_database(records.ids)
+        for directory in directories - directories._filter_access('read'):
+            records -= self.browse(directory.sudo().mapped('files').ids)
         return records
 
     @api.multi
