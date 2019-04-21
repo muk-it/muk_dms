@@ -86,15 +86,15 @@ class Thumbnail(models.AbstractModel):
     
     @api.model
     def _get_thumbnail_path(self, size, name):
-        path = get_resource_path('muk_dms', 'static/src/img', size, name)
+        folders = ['static', 'src', 'img', 'thumbnails']
+        path = get_resource_path('muk_dms', *folders, name)
         if not os.path.isfile(path):
-            path = get_resource_path('muk_dms', 'static/src/img', size, "file_unkown.png")
+            path = get_resource_path('muk_dms', *folders, "file_unkown.svg")
         return path
     
     @api.multi
     def _get_thumbnail_placeholder_name(self):
-        self.ensure_one()
-        return "folder.png"
+        return "folder.svg"
     
     #----------------------------------------------------------
     # Read 

@@ -211,8 +211,7 @@ class File(models.Model):
 
     @api.multi
     def _get_thumbnail_placeholder_name(self):
-        self.ensure_one()
-        return self.extension and "file_%s.png" % self.extension or ""
+        return self.extension and "file_%s.svg" % self.extension or ""
     
     #----------------------------------------------------------
     # Actions
