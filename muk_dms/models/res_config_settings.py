@@ -51,6 +51,10 @@ class ResConfigSettings(models.TransientModel):
         string="Download Directories",
         help="Allows to download directories as a archive file.")
     
+    module_muk_dms_thumbnails = fields.Boolean(
+        string="File Thumbnails",
+        help="Automatically create file thumbnails based on the content.")
+    
     #----------------------------------------------------------
     # Views
     #----------------------------------------------------------
