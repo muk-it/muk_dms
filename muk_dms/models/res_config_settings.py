@@ -55,6 +55,10 @@ class ResConfigSettings(models.TransientModel):
         string="File Thumbnails",
         help="Automatically create file thumbnails based on the content.")
     
+    module_muk_dms_index = fields.Boolean(
+        string="File Indexation",
+        help="Automatically create a file index based on the content.")
+    
     #----------------------------------------------------------
     # Views
     #----------------------------------------------------------
