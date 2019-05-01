@@ -22,7 +22,7 @@
 {
     "name": "MuK Documents Large Object",
     "summary": """Large Object Storage""",
-    "version": '12.0.2.0.5',   
+    "version": '12.0.2.0.6',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",

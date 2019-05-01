@@ -84,9 +84,9 @@ class File(models.Model):
         )
         updates = defaultdict(set)
         for record in records:
-            binary = base64.b64decode(record.content or "")
             values = self._get_content_inital_vals()
-            values = self._update_content_vals(values, binary)
+            binary = base64.b64decode(record.content or "")
+            values = self._update_content_vals(record, values, binary)
             values.update({
                 'content_lobject': record.content,
             })
