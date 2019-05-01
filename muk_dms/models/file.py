@@ -191,7 +191,7 @@ class File(models.Model):
         return {'content_binary': False}
     
     @api.model
-    def _update_content_vals(self, vals, binary):
+    def _update_content_vals(self, file, vals, binary):
         vals.update({
             'checksum': self._get_checksum(binary),
             'size': binary and len(binary) or 0,
@@ -511,9 +511,9 @@ class File(models.Model):
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
-            binary = base64.b64decode(record.content or "")
             values = self._get_content_inital_vals()
-            values = self._update_content_vals(values, binary)
+            binary = base64.b64decode(record.content or "")
+            values = self._update_content_vals(record, values, binary)
             values.update({
                 'content_binary': record.content,
             })
