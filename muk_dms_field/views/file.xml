@@ -24,6 +24,9 @@
 	<field name="model">muk_dms.file</field>
 	<field name="inherit_id" ref="muk_dms.view_dms_file_form" />
 	<field name="arch" type="xml">
+		<xpath expr="//page[@name='page_technical']" position="attributes">
+			<attribute name="invisible">0</attribute>
+		</xpath>
 		<xpath expr="//group[@name='technical_right']" position="inside">
 			<field name="reference_name" attrs="{'invisible':[('reference_model','=',False)]}" />
 			<field name="reference_model" attrs="{'invisible':[('reference_model','=',False)]}" />
