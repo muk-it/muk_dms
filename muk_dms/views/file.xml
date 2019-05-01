@@ -271,7 +271,7 @@
 							</group>
 						</group>
 					</page>
-					<page name="page_technical" string="Technical Information" invisible="1" groups="muk_dms.group_dms_manager">
+					<page name="page_technical" string="Technical Information" invisible="1" groups="muk_dms.group_dms_manager,base.group_no_one">
 						<group>
 							<group name="technical_left">
 							</group>
