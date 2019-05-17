@@ -204,7 +204,7 @@ class DocumentIrAttachment(models.Model):
                 elif not value and attach.store_document:
                     attach.store_document.unlink()
                 clean_vals = self._get_datas_clean_vals(attach)
-                super(DocumentIrAttachment, attach.sudo()).write(vals)
+                models.Model.write(attach.sudo(), vals)
                 self._clean_datas_after_write(clean_vals)
             else:
                 super(DocumentIrAttachment, attach)._inverse_datas()
