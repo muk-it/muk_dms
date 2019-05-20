@@ -17,22 +17,6 @@
 *
 **********************************************************************************/
 
-.mk_treeview {
-	height: 100%;
-
-	.mk_document_container {
-		height: 100%;
-		
-		.mk_document_row {
-			height: 100% ! important;
-			
-			.mk_document_col {
-				padding: 0;
-			}
-		}
-	}
-}
-
 .mk_document_controls {
     padding: 5px 0 10px 0;
 }

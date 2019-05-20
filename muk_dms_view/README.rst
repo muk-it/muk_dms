@@ -2,7 +2,9 @@
 MuK Document View
 =================
 
-TODO
+A new view that makes working with the document management system easy and fast.
+Drag and drop directories and files. Trigger actions and simply create whole new
+structures by draging folder to the view.
 
 Installation
 ============
@@ -82,7 +84,7 @@ No additional configuration is needed to use this module.
 Usage
 =============
 
-TODO
+Click on the new menu item "Documents" to enter the tree view.
 
 Credits
 =======

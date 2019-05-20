@@ -17,32 +17,8 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_dialogs.DocumentDirectoryInfoDialog', function(require) {
-"use strict";
-
-var core = require('web.core');
-
-var DocumentInfoDialog = require('muk_dms_dialogs.DocumentInfoDialog');
-
-var _t = core._t;
-var QWeb = core.qweb;
-
-var DocumentDirectoryInfoDialog = DocumentInfoDialog.extend({
-    init: function (parent, options) {
-    	this.options = options || {};
-        this._super(parent, _.extend({}, {
-            fields: [
-            	"name", "count_directories", "count_files", "size",
-            	"count_total_directories", "count_total_files", 
-            	"thumbnail", "write_date", "write_uid"
-            ],
-            title: _t("Directory"),
-            model: "muk_dms.directory",
-            qweb: "muk_dms.DocumentDirectoryInfoDialog",
-        }, this.options));
-    },
-});
-
-return DocumentDirectoryInfoDialog;
-
-});
+.mk_info_dialog {
+	.mk_info_file_icon, .mk_info_directory_icon {
+		
+	}
+}

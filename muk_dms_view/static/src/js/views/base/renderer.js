@@ -47,8 +47,7 @@ var DocumentsRenderer = Widget.extend(dropzone.FileDropzoneMixin, {
 		this.params = params || {};
     },
     willStart: function() {
-        return $.when(
-        	ajax.loadLibs(this), 
+        return $.when(ajax.loadLibs(this), 
         	this._super.apply(this, arguments)
         );
     },

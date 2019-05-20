@@ -17,7 +17,7 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_dms_view.DocumentsDialogController', function(require) {
+odoo.define('muk_dms_view.DocumentTreeDialogView', function(require) {
 "use strict";
 
 var ajax = require('web.ajax');
@@ -25,76 +25,46 @@ var core = require('web.core');
 var config = require('web.config');
 var session = require('web.session');
 var web_client = require('web.web_client');
-var framework = require('web.framework');
-var crash_manager = require('web.crash_manager');
 
-var DocumentsController = require('muk_dms_view.DocumentsController');
+var Widget = require('web.Widget');
+var Dialog = require('web.Dialog');
+var ControlPanelMixin = require('web.ControlPanelMixin');
+
+var DocumentsModel = require('muk_dms_view.DocumentsModel');
+var DocumentsRenderer = require('muk_dms_view.DocumentsRenderer');
+var DocumentsDialogController = require('muk_dms_view.DocumentsDialogController');
 
 var _t = core._t;
 var QWeb = core.qweb;
 
-var DocumentsDialogController = DocumentsController.extend({
-    _createDirecotry: function(node, name) {
-		return this._rpc({
-    		route: '/tree/create/directory',
-    		params: {
-    			name: name,
-            	parent_directory: node.data.odoo_id,
-            	context: _.extend({}, {
-                	mail_create_nosubscribe: true,
-                	mail_create_nolog: true,
-                }, session.user_context),
-            },
-		});
+var DocumentTreeDialogView = Widget.extend({
+	template: 'muk_dms.DocumentDialog',
+	init: function(parent, params) {
+		this._super.apply(this, arguments);
+        this.controller = new DocumentsDialogController(this,
+        	DocumentsModel, DocumentsRenderer,
+        	_.extend({}, {
+	        	dnd: false,
+	        	contextmenu: true,
+        	}, params));
     },
-    _loadContextMenuDirectory: function($jstree, node, menu) {
-    	var self = this;
-    	menu = this._super($jstree, node, menu);
-    	menu.create = {
-			separator_before: false,
-			separator_after: false,
-			icon: "fa fa-plus",
-			label: _t("Create"),
-			action: false,
-			submenu: {
-				directory: {
-					separator_before: false,
-					separator_after: false,
-					label: _t("Directory"),
-					icon: "fa fa-folder-o",
-					action: function(data) {
-						function create() {
-							self._createDirecotry(node).done(function(result) {
-								$jstree.create_node(node, result, "last", function (new_node) {
-									try {
-										$jstree.edit(new_node);
-									} catch (ex) {
-										setTimeout(function () {
-											$jstree.edit(new_node); 
-										}, 0);
-									}
-								});
-							}).fail(function() {
-								self.do_warn(_t("Directory couldn't be created!"));
-								self.refresh();
-							});
-						}
-						if(!$jstree.is_open(node)) {
-							$jstree.open_node(node, create);
-						} else {
-							create();
-						}
-					},
-					_disabled: function (data) {
-		    			return !node.data.perm_create;
-	    			},
-				},
-			}	
-		};
-    	return menu;
+    start: function () {
+        return $.when(this._super.apply(this, arguments))
+	        .then(this._update_cp.bind(this))
+	     	.then(this._update_view.bind(this));
     },
+    _update_cp: function() {
+    	this.$('#mk_searchview_input').keyup(this._trigger_search.bind(this));
+    },
+    _update_view: function() {
+    	this.controller.appendTo(this.$('.mk_treeview'));
+    },
+    _trigger_search: _.debounce(function() {
+		var val = this.$('#mk_searchview_input').val();
+    	this.controller.search(val);
+    }, 200),
 });
 
-return DocumentsDialogController;
+return DocumentTreeDialogView;
 
 });

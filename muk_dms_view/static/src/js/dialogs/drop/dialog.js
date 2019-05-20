@@ -31,10 +31,10 @@ var QWeb = core.qweb;
 
 var DocumentDropDialog = Dialog.extend({
 	cssLibs: [
-        '/muk_web_utils/static/lib/dropzone/dropzone.css',
+        '/muk_dms_view/static/lib/dropzone/dropzone.css',
     ],
     jsLibs: [
-        '/muk_web_utils/static/lib/dropzone/dropzone.js',
+        '/muk_dms_view/static/lib/dropzone/dropzone.js',
     ],
 	init: function (parent, options) {
     	this.options = options || {};
@@ -55,7 +55,7 @@ var DocumentDropDialog = Dialog.extend({
     willStart: function() {
     	var self = this;
 		var load_max_upload_size = this._rpc({
-            route: '/config/muk_dms.max_upload_size',
+            route: '/config/muk_web_utils.binary_max_size',
         }).done(function(result) {
         	self.max_upload_size = result.max_upload_size;
         });

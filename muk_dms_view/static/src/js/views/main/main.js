@@ -54,66 +54,59 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
         this._super(parent, _.extend({}, {
         	key: "dms_documents",
 	    }), action);
-        this.controller.params.action_open_dialog = this._get_storage('dms_documents_open_dialog', true);
+        this.controller.params.action_open_dialog = this._get_storage('dms_documents_open_dialog');
     },
     willStart: function() {
         return $.when(ajax.loadLibs(this), this._super.apply(this, arguments));
     },
     toggle_dialog: function() {
-    	var open_dialog = !this._get_storage('dms_documents_open_dialog', true);
+    	var open_dialog = !this._get_storage('dms_documents_open_dialog');
     	this.controller.params.action_open_dialog = open_dialog;
     	this._set_storage('dms_documents_open_dialog', open_dialog);        
     	this._display_open_dialog();
     },
     toggle_refresh: function() {
-    	var auto_refresh = !this._get_storage('dms_documents_auto_refresh', true);
+    	var auto_refresh = !this._get_storage('dms_documents_auto_refresh');
         this._set_storage('dms_documents_auto_refresh', auto_refresh);
         this._display_auto_refresh();
     },
     show_preview: function() {
-    	if(!this.$switch_buttons.parent().find('.mk_show_preview').hasClass("active")) {
-        	this.$switch_buttons.parent().find('.mk_show_preview').addClass("active");
-        	this.$switch_buttons.parent().find('.mk_hide_preview').removeClass("active");
-    		this.$el.find('.mk_document_col_preview').show();
-        	this.splitter = this.$el.find('.mk_document_row').split({
-        	    orientation: 'vertical',
-        	    limit: 100,
-        	    position: '60%'
-        	});
-    	}
+    	this.$switch_buttons.parent().find('.mk_show_preview').addClass("active");
+    	this.$switch_buttons.parent().find('.mk_hide_preview').removeClass("active");
+		this.$el.find('.mk_document_col_preview').show();
+		this.$el.find('.mk_document_col_tree').removeClass('w-100');
+    	this.splitter = this.$el.find('.mk_document_row').split({
+    	    orientation: 'vertical',
+    	    limit: 100,
+    	    position: '60%'
+    	});
     	this._set_storage('dms_documents_disable_preview', false);
     },
     hide_preview: function() {
-    	if(!this.$switch_buttons.parent().find('.mk_hide_preview').hasClass("active")) {
-    		this.$switch_buttons.parent().find('.mk_hide_preview').addClass("active");
-    		this.$switch_buttons.parent().find('.mk_show_preview').removeClass("active");
-    		this.$el.find('.mk_document_col_preview').hide();
-    		this.$el.find('.mk_document_col_tree').width('100%');
-    		if(this.splitter) {
-    			this.splitter.destroy();
-    		}
-    		this.splitter = false;
-    	}
+    	this.$switch_buttons.parent().find('.mk_hide_preview').addClass("active");
+		this.$switch_buttons.parent().find('.mk_show_preview').removeClass("active");
+		this.$el.find('.mk_document_col_preview').hide();
+		this.$el.find('.mk_document_col_tree').addClass('w-100');
+		if(this.splitter) {
+			this.splitter.destroy();
+		}
+		this.splitter = false;
     	this._set_storage('dms_documents_disable_preview', true);
     },
     refresh: function(message) {
-    	if(this._get_storage('dms_documents_auto_refresh', true)) {
+    	if(this._get_storage('dms_documents_auto_refresh')) {
     		this.controller.refresh(message);
     	}
     },
-    _get_storage: function(key, bool) {
-    	var value = this.call('local_storage', 'getItem', key);
-    	if(bool) {
-    		return value === 'true';
-    	} else {
-    		return value;
-    	}
+    _get_storage: function(key) {
+    	return this.call('local_storage', 'getItem', key);
     },
     _set_storage: function(key, value) {
     	this.call('local_storage', 'setItem', key, value);
     },
     _display_open_dialog: function() {
-    	var open_dialog = this._get_storage('dms_documents_open_dialog', true);
+    	var open_dialog = this._get_storage('dms_documents_open_dialog');
+    	console.log(open_dialog)
     	if(open_dialog) {
     		this.$pager.find('.mk_action_dialog').addClass("active");
     	} else {
@@ -121,7 +114,7 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
     	}
     },
     _display_auto_refresh: function() {
-    	var auto_refresh = this._get_storage('dms_documents_auto_refresh', true);
+    	var auto_refresh = this._get_storage('dms_documents_auto_refresh');
     	if(auto_refresh) {
     		this.$pager.find('.mk_auto_refresh').addClass("active");
         	this.$pager.find('.mk_refresh').prop("disabled", false);
@@ -154,6 +147,8 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
             this.$switch_buttons = $(QWeb.render('muk_dms.DocumentTreeViewOptions', {
                 widget: this,
             }));
+            $(this.$switch_buttons[0]).on('click', _.bind(this.show_preview, this));
+            $(this.$switch_buttons[2]).on('click', _.bind(this.hide_preview, this));
         }
     	if (!this.$searchview) {
             this.$searchview = $(QWeb.render('muk_dms.DocumentTreeViewSearch', {
@@ -178,7 +173,9 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
     	this.controller.appendTo(this.$('.mk_document_col_tree'));
     },    
     _treeReady: function(ev) {
-    	if(!config.device.isMobile && !this._get_storage('dms_documents_disable_preview', true)) {
+    	if(config.device.isMobile) {
+    		this.hide_preview();
+    	} else if(!this._get_storage('dms_documents_disable_preview')) {
 			this.show_preview();
 		} else {
 			this.hide_preview();
@@ -187,7 +184,7 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
     _treeChanged: function(ev) {
     	var data = ev.data.data;
     	if(data.selected && data.selected.length === 1) {
-			if(!this._get_storage('dms_documents_disable_preview', true)) {
+			if(!this._get_storage('dms_documents_disable_preview')) {
 				this._preview_node(data.node);
 			}
 			this.$buttons.find('button.mk_open').prop('disabled', !data.node.data.perm_read);

@@ -17,27 +17,32 @@
 *
 **********************************************************************************/
 
-.mk_searchview {
-	.mk_searchview_info {
-		cursor: default;
-		position: absolute;
-		top: 6px;
-		right: 7px;
-	}
-}
+odoo.define('muk_dms_dialogs.DocumentDirectoryInfoDialog', function(require) {
+"use strict";
 
-.mk_treeview {
-	height: 100%;
+var core = require('web.core');
 
-	.mk_document_container {
-		height: 100%;
-		
-		.mk_document_row {
-			height: 100% ! important;
-			
-			.mk_document_col {
-				padding: 0;
-			}
-		}
-	}
-}
+var DocumentInfoDialog = require('muk_dms_dialogs.DocumentInfoDialog');
+
+var _t = core._t;
+var QWeb = core.qweb;
+
+var DocumentDirectoryInfoDialog = DocumentInfoDialog.extend({
+    init: function (parent, options) {
+    	this.options = options || {};
+        this._super(parent, _.extend({}, {
+            fields: [
+            	"name", "count_directories", "count_files",
+            	"count_total_directories", "count_total_files", 
+            	"size", "write_date", "write_uid"
+            ],
+            title: _t("Directory"),
+            model: "muk_dms.directory",
+            qweb: "muk_dms.DocumentDirectoryInfoDialog",
+        }, this.options));
+    },
+});
+
+return DocumentDirectoryInfoDialog;
+
+});

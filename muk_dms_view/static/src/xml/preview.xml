@@ -24,9 +24,9 @@
 			<div class="o_preview_directory_header">
 				<h3><t t-esc="directory.name"/></h3>
 			</div>
-			<div class="o_preview_directory_body">
+			<div class="o_preview_directory_body row">
 				<div class="col-sm-3 o_preview_directory_icon" align="center"> 
-	            	<img src="/muk_dms/static/src/img/medium/folder.png" />
+	            	<img class="h-100 w-100" t-att-src="directory.thumbnail_link" />
 	            </div>
 	            <div class=" col-sm-9"> 
 	            	<table class="table o_preview_directory_table">
@@ -36,12 +36,48 @@
 		                       <td><t t-esc="directory.name"/></td>
 		                     </tr>
 		                     <tr>
-		                       <td>Directories:</td>
-		                       <td><t t-esc="directory.directories"/></td>
+		                       <td>Read:</td>
+		                       <td>
+		                       		<t t-if="directory.perm_read">
+		                       			yes
+		                       		</t>
+		                       		<t t-else="">
+		                       			no
+		                       		</t>
+		                       </td>
 		                     </tr>
 		                     <tr>
-		                       <td>Files:</td>
-		                       <td><t t-esc="directory.files"/></td>
+		                       <td>Create:</td>
+		                       <td>
+		                       		<t t-if="directory.perm_create">
+		                       			yes
+		                       		</t>
+		                       		<t t-else="">
+		                       			no
+		                       		</t>
+		                       </td>
+		                     </tr>
+		                     <tr>
+		                       <td>Write:</td>
+		                       <td>
+		                       		<t t-if="directory.perm_write">
+		                       			yes
+		                       		</t>
+		                       		<t t-else="">
+		                       			no
+		                       		</t>
+		                       </td>
+		                     </tr>
+		                     <tr>
+		                       <td>Delete:</td>
+		                       <td>
+		                       		<t t-if="directory.perm_delete">
+		                       			yes
+		                       		</t>
+		                       		<t t-else="">
+		                       			no
+		                       		</t>
+		                       </td>
 		                     </tr>
 	                   </tbody>
 	            	</table>

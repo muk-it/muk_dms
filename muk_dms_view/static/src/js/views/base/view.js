@@ -26,8 +26,8 @@ var config = require('web.config');
 var session = require('web.session');
 var web_client = require('web.web_client');
 
-var Widget = require('web.Widget');
 var Dialog = require('web.Dialog');
+var AbstractAction = require('web.AbstractAction');
 var ControlPanelMixin = require('web.ControlPanelMixin');
 
 var DocumentsModel = require('muk_dms_view.DocumentsModel');
@@ -37,27 +37,23 @@ var DocumentsController = require('muk_dms_view.DocumentsController');
 var _t = core._t;
 var QWeb = core.qweb;
 
-var DocumentTreeView = Widget.extend({
+var DocumentTreeView = AbstractAction.extend({
 	config: {
 		DocumentsModel: DocumentsModel,
 		DocumentsRenderer: DocumentsRenderer,
 		DocumentsController: DocumentsController,
 	},
 	init: function(parent, params, action) {
-		
-		console.log(params, action)
-		
 		this._super.apply(this, arguments);
 		var settings = $.extend(true, {}, {
 			dnd: true, contextmenu: true,
         }, params || {}, action.params && action.params || {})
-        
-        
-        console.log(settings);
-        
 		this.controller = new this.config.DocumentsController(this,
 			this.config.DocumentsModel, this.config.DocumentsRenderer, settings
         );
+    },
+    reload: function(message) {
+    	this.refresh(message);
     },
     refresh: function(message) {
     	this.controller.refresh(message);

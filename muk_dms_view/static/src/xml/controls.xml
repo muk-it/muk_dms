@@ -20,7 +20,7 @@
 <templates xml:space="preserve">
 
 	<t t-name="muk_dms.DocumentTreeViewSearch">
-		<div class="o_searchview">
+		<div class="o_searchview mk_searchview d-none d-sm-block">
 			<input id="mk_searchview_input" class="o_searchview_input" placeholder="Search..." type="text" />
 			<div class="mk_searchview_info fa fa-lg fa-info" data-toggle="tooltip" data-placement="left"
 			        title="Tip: An underscore _ in the pattern matches any single character. A percent sign % matches any string of zero or more characters." />	
@@ -33,15 +33,15 @@
 	         	<i class="fa fa-external-link"></i>
 	            <span>Open</span>
 	         </button>
-	         <button accesskey="C" class="mk_create btn btn-sm btn-warning" type="button">
+	         <button accesskey="C" class="mk_create btn btn-sm btn-secondary" type="button">
 	         	<i class="fa fa-plus-circle"></i>
 	            <span>Create</span>
 	         </button>
-	         <button accesskey="E" class="mk_edit btn btn-sm btn-info" type="button">
+	         <button accesskey="E" class="mk_edit btn btn-sm btn-secondary" type="button">
 	         	<i class="fa fa-pencil-square-o"></i>
 	            <span>Edit</span>
 	         </button>
-	         <button accesskey="D" class="mk_delete btn btn-sm btn-danger" type="button">
+	         <button accesskey="D" class="mk_delete btn btn-sm btn-secondary" type="button">
 	         	<i class="fa fa-trash-o"></i>
 	            <span>Delete</span>
 	         </button>
@@ -49,26 +49,26 @@
     </t>
 
 	<t t-name="muk_dms.DocumentTreeViewActions">
-		<span class="btn-group btn-group-sm">
-	        <button type="button" class="mk_action_help fa fa-question btn btn-icon" 
+		<span class="btn-group btn-group-sm d-none d-sm-inline-flex">
+	        <button type="button" class="mk_action_help fa fa-question btn btn-secondary" 
 	        	data-toggle="tooltip" data-placement="bottom" title="Show Help" />
 		</span>
-		<span class="btn-group btn-group-sm">
-	        <button type="button" class="mk_refresh fa fa-refresh btn btn-icon" 
+		<span class="btn-group btn-group-sm d-none d-sm-inline-flex">
+	        <button type="button" class="mk_refresh fa fa-refresh btn btn-secondary" 
 	        	data-toggle="tooltip" data-placement="bottom" title="Refresh" />
-	        <button type="button" class="mk_auto_refresh fa fa-ban btn btn-icon" 
+	        <button type="button" class="mk_auto_refresh fa fa-ban btn btn-secondary" 
 	        	data-toggle="tooltip" data-placement="bottom" title="Disable Refresh" />
 		</span>
-		<span class="btn-group btn-group-sm">
-	        <button type="button" class="mk_action_dialog fa fa-window-restore btn btn-icon" 
+		<span class="btn-group btn-group-sm d-none d-sm-inline-flex">
+	        <button type="button" class="mk_action_dialog fa fa-window-restore btn btn-secondary" 
 	        	data-toggle="tooltip" data-placement="bottom" title="Enable Dialog Mode" />
 		</span>
 	</t>
 
 	<t t-name="muk_dms.DocumentTreeViewOptions">
-		<button type="button" class="mk_show_preview btn btn-default fa fa-file-o o_cp_switch_list " 
+		<button type="button" class="mk_show_preview d-none d-sm-block btn btn-secondary fa fa-file-o o_cp_switch_list " 
 	        	data-toggle="tooltip" data-placement="bottom" title="Show Preview" />
-		<button type="button" class="mk_hide_preview btn btn-default fa fa-ban o_cp_switch_list active"
+		<button type="button" class="mk_hide_preview d-none d-sm-block btn btn-secondary fa fa-ban o_cp_switch_list active"
 	        	data-toggle="tooltip" data-placement="bottom" title="Hide Preview" />
 	</t>
 

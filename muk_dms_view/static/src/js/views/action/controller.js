@@ -38,121 +38,6 @@ var _t = core._t;
 var QWeb = core.qweb;
 
 var DocumentsViewController = DocumentsController.extend({
-	_openInfo: function(node) {
-		if(node.data.odoo_model == "muk_dms.file") {
-			new DocumentFileInfoDialog(this, {
-				id: node.data.odoo_id,
-		    }).open();
-    	} else {
-    		new DocumentDirectoryInfoDialog(this, {
-				id: node.data.odoo_id,
-		    }).open();
-    	}
-    },
-	_openNode: function(node) {
-		var self = this;
-		this.do_action({
-    		type: 'ir.actions.act_window',
-            res_model: node.data.odoo_model,
-            res_id: node.data.odoo_id,
-            views: [[false, 'form']],
-            target: this.params.action_open_dialog ? 'new' : 'current',
-            flags: {'form': {'initial_mode': 'readonly'}},
-            context: session.user_context,
-        }, {
-            on_reverse_breadcrumb: function() {
-            	self.trigger_up('reverse_breadcrumb', {});
-            }
-        });
-    },
-    _editNode: function(node) {
-		var self = this;
-    	this.do_action({
-    		type: 'ir.actions.act_window',
-            res_model: node.data.odoo_model,
-            res_id: node.data.odoo_id,
-            views: [[false, 'form']],
-            target: this.params.action_open_dialog ? 'new' : 'current',
-    	    flags: {'form': {'mode': 'edit', 'initial_mode': 'edit'}},
-            context: session.user_context,
-        }, {
-            on_reverse_breadcrumb: function() {
-            	self.trigger_up('reverse_breadcrumb', {});
-            }
-        });
-    },
-    _createNode: function(node, type) {
-		var self = this;
-    	var context = {};
-    	if(type == "muk_dms.file") {
-    		context = $.extend(session.user_context, {
-    			default_directory: node.data.odoo_id
-            });
-    	} else if(type == "muk_dms.directory") {
-    		context = $.extend(session.user_context, {
-    			default_parent_directory: node.data.odoo_id
-            });
-    	}
-    	this.do_action({
-    		type: 'ir.actions.act_window',
-            res_model: type,
-            views: [[false, 'form']],
-            target: this.params.action_open_dialog ? 'new' : 'current',
-            flags: {'form': {'mode': 'edit', 'initial_mode': 'edit'}},
-            context: session.user_context,
-        }, {
-            on_reverse_breadcrumb: function() {
-            	self.trigger_up('reverse_breadcrumb', {});
-            }
-        });
-    },
-    _replaceFile: function(node) {
-    	var self = this;
-    	new DocumentDropFileDialog(this, {
-			id: node.data.odoo_id,
-			name: node.data.name,
-			callback: function() {
-				self.refreshParent(node);
-			},
-	    }).open();
-    },
-    _uploadFilesDialog: function(node) {
-    	var self = this;
-    	new DocumentDropFilesDialog(this, {
-			id: node.data.odoo_id,
-			name: node.data.name,
-			callback: function() {
-				self.refreshNode(node);
-			},
-	    }).open();
-    },
-    _deleteNodes: function(nodes) {
-    	var self = this;
-    	var data = _.chain(nodes).map(function(node) {
-    		return {model: node.data.odoo_model, id: node.data.odoo_id};
-    	}).groupBy(function(tuple) {
-    		return tuple.model;
-    	}).value();
-		data = _.mapObject(data, function(values, key) {
-    		return _.map(values, function(value) {
-    			return value.id;
-    		});
-    	});
-		_.each(_.keys(data), function(key) {
-			self._rpc({
-	            model: key,
-	            method: 'unlink',
-	            args: [data[key]],
-	            context: session.user_context,
-			}).done(function() {
-				self.do_notify(_t("The records have been deleted!"));
-				self.refresh();
-			}).fail(function() {
-				self.refresh();
-				self.do_warn(_t("The records couldn't be deleted!"));
-			});
-		});
-    },
     _loadContextMenuBasic: function($jstree, node, menu) {
     	var self = this;
     	menu.info = {
@@ -251,6 +136,28 @@ var DocumentsViewController = DocumentsController.extend({
 				return !node.data.perm_write;
 			},
     	};
+    	var operations = {};
+    	_.each(node.data.actions, function(action, index, list) {
+    		operations['operation_' + action[0]] = {
+				separator_before: false,
+				separator_after: false,
+				label: action[1],
+				icon: "fa fa-gear",
+				action: function(data) {
+					self._executeOperation(node, action[0]);
+				},
+    		};
+    	});
+    	if (!_.isEmpty(operations)) {
+	    	menu.operation = {
+				separator_before: false,
+				separator_after: false,
+				icon: "fa fa-gears",
+				label: _t("Operation"),
+				action: false,
+				submenu: operations,
+			};
+    	}
     	return this._super($jstree, node, menu);
     },
 });

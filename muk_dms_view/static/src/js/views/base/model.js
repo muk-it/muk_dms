@@ -103,7 +103,7 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
             method: 'search_read',
         });
     },
-    _loadDirectories: function(storage_id, args) {
+    _loadDirectories: function(operator, value, args) {
     	return this._rpc({
             model: 'muk_dms.directory',
             method: 'search_read_parents',
@@ -112,25 +112,31 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
                 	'permission_read', 'permission_create',
     			  	'permission_write', 'permission_unlink',
     			  	'count_directories', 'count_files',
-                	'name', 'parent_directory',
+                	'name', 'parent_directory', '__last_update', 
     			]),
                 domain: this._buildDomain(
-                	[['storage', '=', storage_id]],
+                	[['storage', operator, value]],
                 	args.directory.domain
                 ), 
                 context: args.directory.context || session.user_context,
             },
         });
     },
+    _loadDirectoriesSingle: function(storage_id, args) {
+    	return this._loadDirectories('=', storage_id, args);
+    },
+    _loadDirectoriesMulti: function(storage_ids, args) {
+    	return this._loadDirectories('in', storage_ids, args);
+    },
     _loadSubdirectories: function(operator, value, args) {
     	return this._rpc({
     		model: 'muk_dms.directory',
             method: 'search_read',
-            fields: _.union(args.file.fields || [], [
+            fields: _.union(args.directory.fields || [], [
             	'permission_read', 'permission_create',
 			  	'permission_write', 'permission_unlink',
 			  	'count_directories', 'count_files',
-            	'name', 'parent_directory',
+            	'name', 'parent_directory', '__last_update', 
 			]),
             domain: this._buildDomain(
             	[['parent_directory', operator, value]],
@@ -153,14 +159,38 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
             	'permission_read', 'permission_create', 
             	'permission_write', 'permission_unlink',
             	'name', 'mimetype', 'directory', 'size',
-            	'is_locked', 'is_lock_editor', 'extension'
+            	'is_locked', 'is_lock_editor', 'extension', 
+            	'actions', 'actions_multi', '__last_update', 
 			]),
             domain: this._buildDomain(
             	[['directory', operator, value]],
             	args.file.domain
             ),
             context: args.file.context || session.user_context,
-        });
+        }).then(function (records) {
+        	var actions_ids = _.flatten(_.pluck(records, 'actions'));
+        	var actions_multi_ids = _.flatten(_.pluck(records, 'actions_multi'));
+            return this._rpc({
+                model: 'muk_dms_actions.action',
+                method: 'name_get',
+                args: [_.union(actions_ids, actions_multi_ids)],
+                context: session.user_context,
+            }).then(function (names) {
+                _.each(records, function (record) {
+                	record.actions = _.map(record.actions, function (action) {
+                		return _.find(names, function (name) {
+                            return name[0] === action;
+                        });
+                	});
+                	record.actions_multi = _.map(record.actions_multi, function (action) {
+                		return _.find(names, function (name) {
+                            return name[0] === action;
+                        });
+                	});
+                });
+                return records;
+            });
+        }.bind(this));
     },
     _loadFilesSingle: function(directory_id, args) {
     	return this._loadFiles('=', directory_id, args);
@@ -198,7 +228,7 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
                 model: 'muk_dms.file',
                 method: 'search_read',
         		fields: ['directory'],
-                domain: self._buildDomain([
+                domain: this._buildDomain([
             		['directory', 'in', ids],
             		['name', args.search.operator || "ilike", value]
                 ], args.file.domain),
@@ -220,7 +250,7 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
         		if(storage.count_storage_directories > 0) {
         			var directory_loaded = $.Deferred();
         			loading_data_parts.push(directory_loaded);
-        			this._loadDirectories(storage.id, args).then(function(directories) {
+        			this._loadDirectoriesSingle(storage.id, args).then(function(directories) {
         				storages[index].directories = directories;
         				directory_loaded.resolve();
         			});
@@ -252,7 +282,14 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
     },
     _loadNode: function(node, args) {
     	var result = $.Deferred();
-    	if(node.data && node.data.odoo_model === "muk_dms.directory") {
+    	if(node.data && node.data.odoo_model === "muk_dms.storage") {
+    		this._loadDirectoriesSingle(node.data.odoo_id, args).then(function(directories) {
+    			var directory_nodes = _.map(directories, function (directory) {
+					return this._makeNodeDirectory(directory, args.file.show);
+				}.bind(this));		
+    			result.resolve(directory_nodes);
+            }.bind(this));
+    	} else if(node.data && node.data.odoo_model === "muk_dms.directory") {
     		var files_loaded = $.Deferred();
     		var directories_loaded = $.Deferred();
     		this._loadSubdirectoriesSingle(node.data.odoo_id, args).then(function(directories) {
@@ -281,24 +318,39 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
     },
     _loadNodes: function(nodes, args) {
     	var result = $.Deferred();
-    	var ids = _.chain(nodes).filter(function(node) {
-    		var tuple = node.split("_");
-     		return tuple[0] === "directory";
-    	 }).map(function(node, i) { 
-    		 var tuple = node.split("_");
-    		 return parseInt(tuple[1]);
-    	 }).value();
-    	if(ids.length > 0) {
-    		var files_loaded = $.Deferred();
-    		var directories_loaded = $.Deferred();
-    		this._loadSubdirectoriesMulti(ids, args).then(function(directories) {
+		var storages_loaded = $.Deferred();
+		var directories_loaded = $.Deferred();
+    	var storage_ids = _.chain(nodes).filter(function(node) {
+    		return node.split("_")[0] === "storage";
+    	}).map(function(node, i) { 
+    		 return parseInt(node.split("_")[1]);
+    	}).value();
+    	var directory_ids = _.chain(nodes).filter(function(node) {
+     		return node.split("_")[0] === "directory";
+    	}).map(function(node, i) { 
+    		 return parseInt(node.split("_")[1]);
+    	}).value();
+    	if(storage_ids.length > 0) {
+    		this._loadDirectoriesMulti(storage_ids, args).then(function(directories) {
     			var directory_nodes = _.map(directories, function (directory) {
 					return this._makeNodeDirectory(directory, args.file.show);
 				}.bind(this));		
-            	directories_loaded.resolve(directory_nodes);
+    			storages_loaded.resolve(directory_nodes);
+            }.bind(this));
+    	} else {
+    		storages_loaded.resolve([]);
+    	}
+    	if(directory_ids.length > 0) {
+    		var files_loaded = $.Deferred();
+    		var subdirectories_loaded = $.Deferred();
+    		this._loadSubdirectoriesMulti(directory_ids, args).then(function(directories) {
+    			var directory_nodes = _.map(directories, function (directory) {
+					return this._makeNodeDirectory(directory, args.file.show);
+				}.bind(this));		
+            	subdirectories_loaded.resolve(directory_nodes);
             }.bind(this));
     		if(args.file.show) {
-    			this._loadFilesMulti(ids, args).then(function(files) {
+    			this._loadFilesMulti(directory_ids, args).then(function(files) {
         			var file_nodes = _.map(files, function (file) {
 						return this._makeNodeFile(file);
 					}.bind(this));
@@ -307,15 +359,18 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
     		} else {
     			files_loaded.resolve([]);
     		}
-    		$.when(directories_loaded, files_loaded).then(function(directories, files) {
-    			var tree = _.groupBy(_.union(directories, files), function(item) {
-    				return item.data.parent;
-    			});
-    			result.resolve(tree);
+    		$.when(subdirectories_loaded, files_loaded).then(function(directories, files) {
+    			directories_loaded.resolve((_.union(directories, files)));
     		});
     	} else {
-    		result.resolve({});
+    		directories_loaded.resolve([])
     	}
+    	$.when(storages_loaded, directories_loaded).then(function(storages, directories) {
+			var tree = _.groupBy(_.union(storages, directories), function(item) {
+				return item.data.parent;
+			});
+			result.resolve(tree);
+		});
     	return result;
     },
     _searchNodes: function(val, node, args) {
@@ -324,7 +379,7 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
     	var directories_loaded = $.Deferred();
     	this._searchDirectories(node.data.odoo_id, val, args).then(function(directories) {
     		var directories = _.map(directories, function (directory) {
-    			return "directory_" + directory[0];
+    			return "directory_" + directory.id;
 			}.bind(this));		
         	directories_loaded.resolve(directories);
         }.bind(this));
@@ -332,15 +387,11 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
 			files_loaded.resolve([]);
 		} else {
 			this._searchFiles(node.data.odoo_id, val, args).then(function(files) {
-				var directories = _.map(files, function (file) {
-					return "directory_" + file.directory[0];
-				}.bind(this));
-				files_loaded.resolve(directories);
+				files_loaded.resolve(files);
             }.bind(this));
 		}
 		$.when(directories_loaded, files_loaded).then(function(directories, files) {
-			var result = _.union(directories, files);
-			result.resolve(result);
+			result.resolve(_.union(directories, files));
 		});
     	return result;
     },
@@ -374,6 +425,12 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
 				perm_write: directory.permission_write,
 				perm_unlink: directory.permission_unlink,
 				parent: directory.parent_directory ? "directory_" + directory.parent_directory[0] : "#",
+				thumbnail_link: session.url('/web/image', {
+		    		model: "muk_dms.directory",
+		    		field: 'thumbnail_medium', 
+		    		unique: directory.__last_update.replace(/[^0-9]/g, ''),
+		    		id: directory.id, 
+		    	}),
 			},
 		};
     	if(showFiles) {
@@ -406,6 +463,14 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
 				perm_write: file.permission_write && (!file.is_locked || file.is_lock_editor),
 				perm_unlink: file.permission_unlink && (!file.is_locked || file.is_lock_editor),
 				parent: "directory_" + file.directory[0],
+				actions_multi: file.actions_multi || [],
+				actions: file.actions || [],
+				thumbnail_link: session.url('/web/image', {
+		    		model: "muk_dms.file",
+		    		field: 'thumbnail_medium', 
+		    		unique: file.__last_update.replace(/[^0-9]/g, ''),
+		    		id: file.id, 
+		    	}),
 			},
 		};
     },

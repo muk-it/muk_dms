@@ -20,7 +20,7 @@
 {
     "name": "MuK Documents View",
     "summary": """Documents View""",
-    "version": '12.0.0.0.3',   
+    "version": '12.0.0.1.3',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -32,7 +32,7 @@
     "depends": [
         "muk_web_preview",
         "muk_web_client_refresh",
-        "muk_dms",
+        "muk_dms_actions",
     ],
     "data": [
         "template/assets.xml",

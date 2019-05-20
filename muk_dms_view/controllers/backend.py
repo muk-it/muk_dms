@@ -22,31 +22,20 @@ import logging
 from odoo import _, http
 from odoo.http import request
 
+from odoo.addons.muk_utils.tools import file
+
 _logger = logging.getLogger(__name__)
 
 class BackendController(http.Controller):
-    
-    @http.route('/config/muk_dms.max_upload_size', type='json', auth="user")
-    def max_upload_size(self, **kw):
-        params = request.env['ir.config_parameter'].sudo()
-        return {
-            'max_upload_size': int(params.get_param("muk_dms.max_upload_size", default=25))
-        }
 
-    @http.route('/config/muk_dms.forbidden_extensions', type='json', auth="user")
-    def forbidden_extensions(self, **kw):
-        params = request.env['ir.config_parameter'].sudo()
-        return {
-            'forbidden_extensions': params.get_param("muk_dms.forbidden_extensions", default="")
-        }
-    
-    @http.route('/tree/create/directory', type='json', auth="user")
+    @http.route('/dms/view/tree/create/directory', type='json', auth="user")
     def create_directory(self, parent_directory, name=None, context=None, **kw):
         parent = request.env['muk_dms.directory'].sudo().browse(parent_directory)
-        uname = parent.unique_name(name or _("New Directory"), parent.child_directories.mapped('name'))
+        uname = file.unique_name(name or _("New Directory"), parent.child_directories.mapped('name'))
         directory = request.env['muk_dms.directory'].with_context(context or request.env.context).create({
             'name': uname,
-            'parent_directory': parent_directory})
+            'parent_directory': parent_directory
+        })
         return {
             'id': "directory_%s" % directory.id,
             'text': directory.name,
@@ -55,14 +44,12 @@ class BackendController(http.Controller):
             'data': {
                 'odoo_id': directory.id,
                 'odoo_model': "muk_dms.directory",
-                'odoo_record': False,
+                'odoo_record': {},
                 'name': directory.name,
                 'perm_read': directory.permission_read,
                 'perm_create': directory.permission_create,
                 'perm_write': directory.permission_write,
                 'perm_unlink': directory.permission_unlink,
-                'directories': directory.count_directories,
-                'files': directory.count_files,
                 'parent': "directory_%s" % parent_directory,
             },
             'children': False,

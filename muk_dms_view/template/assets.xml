@@ -23,6 +23,7 @@
 	<xpath expr="//link[last()]" position="after">
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/base.scss" />
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/main.scss" />
+		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/dialog.scss" />
 		<link rel="stylesheet" href="/muk_dms_view/static/src/scss/preview.scss" />
 	</xpath>
 	<xpath expr="//script[last()]" position="after">
@@ -33,16 +34,18 @@
 		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/base/view.js" />
 		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/action/controller.js" />
 		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/action/view.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/action/main.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/drop_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/drop_file_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/drop_files_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/info_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/info_directory_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/info_file_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/selection_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/selection_directory_dialog.js" />
-		<script type="text/javascript" src="/muk_dms_view/static/src/js/chrome/selection_directory_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/dialog/controller.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/dialog/view.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/views/main/main.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/info/dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/info/directory_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/info/file_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/drop/dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/drop/file_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/drop/files_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/selection/dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/selection/directory_dialog.js" />
+		<script type="text/javascript" src="/muk_dms_view/static/src/js/dialogs/selection/file_dialog.js" />
 	</xpath>
 </template>
 

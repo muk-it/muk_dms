@@ -45,9 +45,6 @@ var ActionDocumentTreeView = DocumentTreeView.extend(ControlPanelMixin, {
 		DocumentsRenderer: DocumentsRenderer,
 		DocumentsController: DocumentsViewController,
 	},
-	canBeRemoved: function () {
-        return $.when();
-    },
     _update_cp: function() {
     	var self = this;
     	if (!this.$searchview) {

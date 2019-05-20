@@ -36,6 +36,10 @@ var mimetype = require('muk_web_utils.mimetype');
 var Widget = require('web.Widget');
 
 var FileUpload = require('muk_dms_mixins.FileUpload');
+var DocumentDropFileDialog = require('muk_dms_dialogs.DocumentDropFileDialog');
+var DocumentDropFilesDialog = require('muk_dms_dialogs.DocumentDropFilesDialog');
+var DocumentFileInfoDialog = require('muk_dms_dialogs.DocumentFileInfoDialog');
+var DocumentDirectoryInfoDialog = require('muk_dms_dialogs.DocumentDirectoryInfoDialog');
 
 var _t = core._t;
 var QWeb = core.qweb;
@@ -67,8 +71,8 @@ var DocumentsController = Widget.extend(FileUpload, {
             this.renderer.appendTo(this.$el)
         );
     },
-    reload: function() {
-    	this.refresh();
+    reload: function(message) {
+    	this.refresh(message);
     },
     refresh: function(message) {
     	var jstree = this.renderer.$tree.jstree(true);
@@ -80,15 +84,13 @@ var DocumentsController = Widget.extend(FileUpload, {
 	    	}).groupBy(function(parent) {
 	    		return parent;
 	    	}).value()), function(node, index, nodes) {
-    			if(message.model === 'muk_dms.directory') {
-    				node = jstree.get_parent(node);
-    			}
     			jstree.refresh_node(node);
     		});
     	} else if(message && message.ids && message.model && message.create) {
     		var id = message.ids && message.ids.length > 0 ? message.ids[0] : false;
     		if(id && message.model) {
-    			var field = message.model === 'muk_dms.directory' ? 'parent_directory' : 'directory';
+    			var field = message.model === 'muk_dms.directory' ?
+    				'parent_directory' : 'directory';
     			this._rpc({
     				 fields: [field],
     				 domain: [['id', '=', id]],
@@ -96,8 +98,7 @@ var DocumentsController = Widget.extend(FileUpload, {
     				 method: 'search_read',
     				 context: session.user_context,
     			}).then(function(records) {
-    				var record = records.length > 0 && records[0];
-    				jstree.refresh_node(message.model.split(".")[1] + "_" + record[field][0]);
+    				jstree.refresh_node(message.model.split(".")[1] + "_" + records[0][field]);
     			});
     		}
     	} else {
@@ -154,9 +155,9 @@ var DocumentsController = Widget.extend(FileUpload, {
     	return this.renderer.$tree.jstree(true).get_top_selected(true);
     },
     _buildTreeConfig: function() {
-		var self = this;
 		var plugins = this.params.plugins || [
-			"conditionalselect", "massload", "wholerow", "state", "sort", "search", "types"
+			"conditionalselect", "massload", "wholerow",
+			"state", "sort", "search", "types"
 		];
 		if(this.params.dnd) {
 			plugins = _.union(plugins, ["dnd"]);
@@ -240,22 +241,20 @@ var DocumentsController = Widget.extend(FileUpload, {
     	return !(node.parent === '#' && node.data.odoo_model === "muk_dms.settings");
     },
     _treeChanged: function(ev) {
-    	$("#menuContinenti").prop('disabled', function (_, val) { return ! val; });
+//    	$("#menuContinenti").prop('disabled', function (_, val) { return ! val; });
     },
     _loadData: function (node, callback) {
     	this.model.load(node).then(function(data) {
-    		console.log("L", data)
 			callback.call(this, data);
 		});
     },
     _massloadData: function (data, callback) {
     	this.model.massload(data).then(function(data) {
-    		console.log("M", data)
 			callback.call(this, data);
 		});
     },
-    _searchData: function(val, node, callback) {
-    	node = node || this.getSelectedDirectory();
+    _searchData: function(val, callback) {
+    	var node = this.getSelectedDirectory();
     	if(node) {
 	    	this.model.search(val, node, {
 	    		search: {
@@ -295,6 +294,49 @@ var DocumentsController = Widget.extend(FileUpload, {
 		} else {
 			this.do_warn(_t("Upload Error"), _t("No Directory has been selected!"));
 		}
+    },	
+    _openInfo: function(node) {
+		if(node.data.odoo_model == "muk_dms.file") {
+			new DocumentFileInfoDialog(this, {
+				id: node.data.odoo_id,
+		    }).open();
+    	} else {
+    		new DocumentDirectoryInfoDialog(this, {
+				id: node.data.odoo_id,
+		    }).open();
+    	}
+    },
+	_openNode: function(node) {
+		var self = this;
+		this.do_action({
+    		type: 'ir.actions.act_window',
+            res_model: node.data.odoo_model,
+            res_id: node.data.odoo_id,
+            views: [[false, 'form']],
+            target: this.params.action_open_dialog ? 'new' : 'current',
+            flags: {'form': {'initial_mode': 'readonly'}},
+            context: session.user_context,
+        }, {
+            on_reverse_breadcrumb: function() {
+            	self.trigger_up('reverse_breadcrumb', {});
+            }
+        });
+    },
+    _editNode: function(node) {
+		var self = this;
+    	this.do_action({
+    		type: 'ir.actions.act_window',
+            res_model: node.data.odoo_model,
+            res_id: node.data.odoo_id,
+            views: [[false, 'form']],
+            target: this.params.action_open_dialog ? 'new' : 'current',
+    	    flags: {'form': {'mode': 'edit', 'initial_mode': 'edit'}},
+            context: session.user_context,
+        }, {
+            on_reverse_breadcrumb: function() {
+            	self.trigger_up('reverse_breadcrumb', {});
+            }
+        });
     },
     _moveNode: function(ev) {
     	var self = this;
@@ -338,6 +380,33 @@ var DocumentsController = Widget.extend(FileUpload, {
 			self.do_warn(node.text + _t(" couldn't be deleted!"));
 		});
     },
+    _deleteNodes: function(nodes) {
+    	var self = this;
+    	var data = _.chain(nodes).map(function(node) {
+    		return {model: node.data.odoo_model, id: node.data.odoo_id};
+    	}).groupBy(function(tuple) {
+    		return tuple.model;
+    	}).value();
+		data = _.mapObject(data, function(values, key) {
+    		return _.map(values, function(value) {
+    			return value.id;
+    		});
+    	});
+		_.each(_.keys(data), function(key) {
+			self._rpc({
+	            model: key,
+	            method: 'unlink',
+	            args: [data[key]],
+	            context: session.user_context,
+			}).done(function() {
+				self.do_notify(_t("The records have been deleted!"));
+				self.refresh();
+			}).fail(function() {
+				self.refresh();
+				self.do_warn(_t("The records couldn't be deleted!"));
+			});
+		});
+    },
     _copyNode: function(ev) {
     	var self = this;
 		var vals = {};
@@ -378,6 +447,53 @@ var DocumentsController = Widget.extend(FileUpload, {
 			self.refresh();
 			self.do_warn(node.text + _t(" couldn't be renamed!"));
 		});
+    },
+    _createDirecotry: function(node, name) {
+		return this._rpc({
+    		route: '/dms/view/tree/create/directory',
+    		params: {
+    			name: name,
+            	parent_directory: node.data.odoo_id,
+            	context: _.extend({}, {
+                	mail_create_nosubscribe: true,
+                	mail_create_nolog: true,
+                }, session.user_context),
+            },
+		});
+    },
+    _replaceFile: function(node) {
+    	var self = this;
+    	new DocumentDropFileDialog(this, {
+			id: node.data.odoo_id,
+			name: node.data.name,
+			callback: function() {
+				self.refreshParent(node);
+			},
+	    }).open();
+    },
+    _uploadFilesDialog: function(node) {
+    	var self = this;
+    	new DocumentDropFilesDialog(this, {
+			id: node.data.odoo_id,
+			name: node.data.name,
+			callback: function() {
+				self.refreshNode(node);
+			},
+	    }).open();
+    },
+    _executeOperation: function(node, action_id) {
+    	var self = this;
+    	this._rpc({
+            model: 'muk_dms_actions.action',
+            method: 'trigger_actions',
+            args: [[action_id], node.data.odoo_id],
+        }).then(function (result) {
+        	if (_.isObject(result)) {
+                return self.do_action(result);
+            } else {
+                return self.reload();
+            }
+        });
     },
     _loadContextMenu: function(node, callback) {
     	var menu = {};

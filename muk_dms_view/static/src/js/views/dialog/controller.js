@@ -28,28 +28,12 @@ var web_client = require('web.web_client');
 var framework = require('web.framework');
 var crash_manager = require('web.crash_manager');
 
-var utils = require('muk_web_utils.common');
-var mimetype = require('muk_web_utils.mimetype');
-
 var DocumentsController = require('muk_dms_view.DocumentsController');
 
 var _t = core._t;
 var QWeb = core.qweb;
 
 var DocumentsDialogController = DocumentsController.extend({
-    _createDirecotry: function(node, name) {
-		return this._rpc({
-    		route: '/tree/create/directory',
-    		params: {
-    			name: name,
-            	parent_directory: node.data.odoo_id,
-            	context: _.extend({}, {
-                	mail_create_nosubscribe: true,
-                	mail_create_nolog: true,
-                }, session.user_context),
-            },
-		});
-    },
     _loadContextMenuDirectory: function($jstree, node, menu) {
     	var self = this;
     	menu = this._super($jstree, node, menu);

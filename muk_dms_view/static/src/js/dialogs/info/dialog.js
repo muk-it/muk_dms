@@ -39,7 +39,7 @@ var DocumentInfoDialog = Dialog.extend({
     willStart: function() {
     	var self = this;
     	var load = this._rpc({
-            fields: this.options.fields,
+            fields: _.union(['__last_update'], this.options.fields),
             domain: [['id', '=', this.options.id]],
             model: this.options.model,
             method: 'search_read',
@@ -52,6 +52,13 @@ var DocumentInfoDialog = Dialog.extend({
         	if(self.record.write_uid) {
         		self.record.write_uid = self.record.write_uid[1];
         	}
+        	var unique = self.record.__last_update.replace(/[^0-9]/g, '');
+        	self.record.thumbnail_link = session.url('/web/image', {
+        		model: self.options.model,
+        		field: 'thumbnail_medium', 
+        		id: self.record.id, 
+        		unique: unique
+        	});
         	self.$content = $(QWeb.render(self.options.qweb, {
         		widget: self,
         		record: self.record,

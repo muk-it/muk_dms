@@ -32,8 +32,8 @@ var DocumentFileInfoDialog = DocumentInfoDialog.extend({
     	this.options = options || {};
         this._super(parent, _.extend({}, {
             fields: [
-            	"name", "mimetype", "thumbnail",
-            	"write_date", "write_uid", "size"
+            	"name", "mimetype", "size",
+            	"write_date", "write_uid"
             ],
             title: _t("File"),
             model: "muk_dms.file",
