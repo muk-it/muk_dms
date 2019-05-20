@@ -29,6 +29,29 @@
 	width: 3px ! important;
 }
 
+
+.mk_treeview {
+	height: 100%;
+	.mk_document_container {
+		height: 100%;
+		.mk_document_row {
+			height: 100% ! important;
+			.mk_document_col {
+				padding: 0;
+			}
+			.mk_document_col_tree > div {
+				height: 100%;
+				.mk_document_tree {
+					height: 100%;
+					.mk_content, .mk_tree {
+						height: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
 .vakata-context {
 	z-index: 9999;
 	

@@ -20,7 +20,7 @@
 {
     "name": "MuK Documents View",
     "summary": """Documents View""",
-    "version": '12.0.0.1.3',   
+    "version": '12.0.0.1.4',   
     "category": 'Document Management',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
