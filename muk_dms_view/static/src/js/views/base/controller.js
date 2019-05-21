@@ -338,6 +338,31 @@ var DocumentsController = Widget.extend(FileUpload, {
             }
         });
     },
+    _createNode: function(node, type) {
+		var self = this;
+    	var context = {};
+    	if(type == "muk_dms.file") {
+    		context = $.extend(session.user_context, {
+    			default_directory: node.data.odoo_id
+            });
+    	} else if(type == "muk_dms.directory") {
+    		context = $.extend(session.user_context, {
+    			default_parent_directory: node.data.odoo_id
+            });
+    	}
+    	this.do_action({
+    		type: 'ir.actions.act_window',
+            res_model: type,
+            views: [[false, 'form']],
+            target: this.params.action_open_dialog ? 'new' : 'current',
+            flags: {'form': {'mode': 'edit', 'initial_mode': 'edit'}},
+            context: session.user_context,
+        }, {
+            on_reverse_breadcrumb: function() {
+            	self.trigger_up('reverse_breadcrumb', {});
+            }
+        });
+    },
     _moveNode: function(ev) {
     	var self = this;
 		var vals = {};
