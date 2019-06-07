@@ -56,14 +56,16 @@ class Tag(models.Model):
         relation='muk_dms_directory_tag_rel', 
         column1='tid',
         column2='did',
-        string='Directories')
+        string='Directories',
+        readonly=True)
     
     files = fields.Many2many(
         comodel_name='muk_dms.file',
         relation='muk_dms_file_tag_rel', 
         column1='tid',
         column2='fid',
-        string='Files')
+        string='Files',
+        readonly=True)
     
     count_directories = fields.Integer(
         compute='_compute_count_directories',

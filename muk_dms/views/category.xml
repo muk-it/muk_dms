@@ -79,10 +79,10 @@
 		        </group>
 		        <notebook>
 		        	<page string="Tags">
-		        		<field name="tags" widget="one2many" mode="kanban" />
+		        		<field name="tags" widget="one2many" mode="kanban" context="{'default_category': active_id}" />
 		        	</page>
 		        	<page string="Subcategories">
-		        		<field name="child_categories" widget="one2many" mode="tree" />
+		        		<field name="child_categories" widget="one2many" mode="tree" context="{'default_parent_category': active_id}" />
 		        	</page>
 		        </notebook>
         	</sheet>

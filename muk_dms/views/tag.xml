@@ -38,7 +38,7 @@
 	<field name="name">muk_dms_tag.kanban</field>
 	<field name="model">muk_dms.tag</field>
 	<field name="arch" type="xml">
-		<kanban class="o_kanban_small_column o_emphasize_colors" >
+		<kanban class="o_kanban_small_column o_emphasize_colors" on_create="quick_create" >
 			<field name="color" />
 			<templates>
 				<t t-name="kanban-box">
