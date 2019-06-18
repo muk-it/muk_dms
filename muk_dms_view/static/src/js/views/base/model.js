@@ -454,6 +454,7 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
 				odoo_model: "muk_dms.file",
 				odoo_record: file,
 				name: file.name,
+				filename: file.name,
 				locked: file.is_locked,
 				mimetype: file.mimetype,
 				extension: file.extension,
