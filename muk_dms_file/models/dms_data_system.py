@@ -243,7 +243,7 @@ class SystemFileDataModel(models.Model):
     @api.model
     def _delete_file(self, file_path):
         try:
-            os.remove(file_path)
+            os.remove(file_path.encode("utf-8"))
         except OSError as exc:
             if exc.errno != errno.ENOENT:
                 _logger.error("Failed to delete the file(%s): %s" % (file_path, str(exc)))
