@@ -224,7 +224,9 @@ class File(models.Model):
             if logging:
                 info = (index + 1, record_count, file.migration)
                 _logger.info(_("Migrate File %s of %s [ %s ]") % info)
-            file.with_context(migration=True).write({'content': file.content})
+            file.with_context(migration=True).write({
+                'content': file.with_context({}).content
+            })
     
     @api.multi
     def action_save_onboarding_file_step(self):
