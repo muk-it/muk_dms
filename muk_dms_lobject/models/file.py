@@ -88,7 +88,7 @@ class File(models.Model):
             binary = base64.b64decode(record.content or "")
             values = self._update_content_vals(record, values, binary)
             values.update({
-                'content_lobject': record.content,
+                'content_lobject': record.content and binary,
             })
             updates[tools.frozendict(values)].add(record.id)
         with self.env.norecompute():
