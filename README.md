@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/muk-it/muk_dms.svg?branch=12.0)](https://travis-ci.org/muk-it/muk_dms)
 [![codecov](https://codecov.io/gh/muk-it/muk_dms/branch/12.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_dms)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/410a58134cc446538a3edf01b56a9b95)](https://www.codacy.com/app/keshrath/muk_dms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=muk-it/muk_dms&amp;utm_campaign=Badge_Grade)
+[![Weblate](https://weblate.mukit.at/widgets/dms-12/-/svg-badge.svg)](https://weblate.mukit.at/projects/dms-12/)
 [![Demo](https://img.shields.io/badge/demo-Try%20me-243742.svg)](https://mukit.at/r/SgN)
 
 # MuK Document Management System
