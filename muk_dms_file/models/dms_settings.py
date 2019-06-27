@@ -124,5 +124,3 @@ class SystemSettings(models.Model):
                     except OSError as exc:
                         if exc.errno != errno.ENOTEMPTY:
                             _logger.exception("Failed to delete file!")
-        
-            

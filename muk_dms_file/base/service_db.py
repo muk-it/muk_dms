@@ -46,7 +46,7 @@ def exp_duplicate_database(db_original_name, db_name):
             settings = env['muk_dms.settings'].search([('save_type', '=', 'file')])
             for setting in settings:
                 filestore_paths.append({
-                '   complete_base_path': setting.complete_base_path,
+                    'complete_base_path': setting.complete_base_path,
                     'base_path': setting.base_path,
                     'db_name': db_name})
         res = exp_duplicate_database.super(db_original_name, db_name)
