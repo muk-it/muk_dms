@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,10 +18,10 @@
 ###################################################################################
 
 {
-    "name": "MuK Documents", 
+    "name": "MuK Documents",
     "summary": """Document Management System""",
-    "version": '12.0.2.7.42',   
-    "category": 'Document Management',   
+    "version": '12.0.2.7.42',
+    "category": 'Document Management',
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
     'live_test_url': 'https://mukit.at/r/SgN',
@@ -31,7 +31,6 @@
     ],
     "depends": [
         "muk_security",
-        "muk_web_searchpanel",
     ],
     "data": [
         "security/security.xml",

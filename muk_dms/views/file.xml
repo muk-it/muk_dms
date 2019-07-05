@@ -227,6 +227,7 @@
 					<group>
 						<field name="content" filename="name" />
 						<field name="size" widget="binary_size" />
+						<field name="version" />
 					</group>
 					<group>
 						<field name="extension" />
