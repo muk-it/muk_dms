@@ -35,6 +35,7 @@ from odoo import _, SUPERUSER_ID
 from odoo import models, api, fields, tools
 from odoo.tools.mimetypes import guess_mimetype
 from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError
 from odoo.osv import expression
 
 from odoo.addons.muk_utils.tools import file
