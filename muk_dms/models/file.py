@@ -175,7 +175,7 @@ class File(models.Model):
         readonly=True,
         prefetch=False)
 
-    version = fields.Float(digits=(2, 1))
+    version = fields.Float(digits=(2, 1), readonly=True, default=1.0)
 
     # ----------------------------------------------------------
     # Helper
