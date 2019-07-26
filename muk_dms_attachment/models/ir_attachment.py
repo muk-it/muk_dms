@@ -128,7 +128,7 @@ class DocumentIrAttachment(models.Model):
                 '&', ('is_store_document_link', '=', False),
                 '|', ('res_field', '=', False), ('res_field', '!=', False)
             ]
-            self.search(record_domain).migrate()
+            self.search(record_domain).migrate(batch_size=100)
             return True
     
     @api.multi
