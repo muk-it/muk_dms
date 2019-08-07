@@ -133,12 +133,12 @@ class DocumentIrAttachment(models.Model):
             return True
     
     @api.multi
-    def migrate(self):
+    def migrate(self, batch_size=None):
         if self._storage() != 'document':
             self.with_context(migration=True).write({
                 'is_store_document_link': False
             })
-        return super(DocumentIrAttachment, self).migrate()
+        return super(DocumentIrAttachment, self).migrate(batch_size=batch_size)
     
     #----------------------------------------------------------
     # Read
