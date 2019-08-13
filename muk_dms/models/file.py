@@ -119,7 +119,6 @@ class File(models.Model):
      
     category = fields.Many2one(
         comodel_name='muk_dms.category',
-        domain="[('category', '=', False)]",
         context="{'dms_category_show_path': True}", 
         string="Category")
     
