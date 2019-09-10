@@ -99,7 +99,8 @@ class File(models.Model):
         related="storage.company",
         comodel_name='res.company',
         string='Company',
-        readonly=True)
+        readonly=True,
+        store=True)
     
     path_names = fields.Char(
         compute='_compute_path',
