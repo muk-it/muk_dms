@@ -52,8 +52,8 @@ var DocumentTreeMainView = DocumentTreeView.extend({
     	tree_changed: '_treeChanged',
     }),
 	template: 'muk_dms.DocumentTreeView',
-	init: function(parent, action) {
-        this._super(parent, _.extend(action, {
+	init: function(parent) {
+        this._super(parent, _.extend({}, {
         	key: "dms_documents",
 	    }));
         this.controller.params.action_open_dialog = this._get_storage('dms_documents_open_dialog', true);

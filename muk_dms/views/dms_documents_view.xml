@@ -19,12 +19,12 @@
 
 <odoo>
 
-	<record id="action_dms_documents" model="ir.actions.client">
-		<field name="name">Documents</field>
-		<field name="tag">muk_dms_views.documents</field>
-	</record>
+<record id="action_dms_documents" model="ir.actions.client">
+	<field name="name">Documents</field>
+	<field name="tag">muk_dms_views.documents</field>
+</record>
 
-	<menuitem id="menu_dms_tree_view" name="Documents"
-			  parent="main_menu_muk_dms" action="action_dms_documents" sequence="5" />
+<menuitem id="menu_dms_tree_view" name="Documents"
+	parent="main_menu_muk_dms" action="action_dms_documents" sequence="5" />
 
 </odoo>

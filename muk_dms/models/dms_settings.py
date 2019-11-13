@@ -149,14 +149,15 @@ class Settings(models.Model):
     @api.depends('settings_directories')
     def _compute_top_directories(self):
         for record in self: 
+            access_ids = self.env['muk_dms.directory']._get_complete_access_ids("read")
             record.top_directories = record.settings_directories.filtered(
-                lambda d: d.is_root_directory or not d.parent_directory.check_access('read'))
+                lambda d: d.is_root_directory or not d.parent_directory.id in access_ids)
     
     @api.depends('settings_files')
     def _compute_top_files(self):
         for record in self: 
-            record.top_files = record.settings_files.filtered(
-                lambda f: not f.directory.check_access('read'))
+            access_ids = self.env['muk_dms.directory']._get_complete_access_ids("read")
+            record.top_files = record.settings_files.filtered(lambda f: not f.directory.id in access_ids)
         
     #----------------------------------------------------------
     # Create, Update, Delete
