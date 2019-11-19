@@ -102,7 +102,7 @@ class File(models.Model):
             else:
                 values.update({
                     'name': record.name,
-                    'datas': record.with_context({}).content,
+                    'datas': record.content,
                     'is_store_document_link': False
                 })
                 attachments |= attachments.create(values)
