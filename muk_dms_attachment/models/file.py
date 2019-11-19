@@ -80,7 +80,7 @@ class File(models.Model):
     @api.returns('ir.attachment')
     def attach_file(self, model=None, field=None, id=0, link=True, public=False):
         attachments = self.env['ir.attachment'].sudo()
-        for record in self.with_context(bin_size=False):
+        for record in self:
             values = {
                 'type': 'binary',
                 'datas_fname': record.name,
@@ -102,7 +102,7 @@ class File(models.Model):
             else:
                 values.update({
                     'name': record.name,
-                    'datas': record.content,
+                    'datas': record.with_context({}).content,
                     'is_store_document_link': False
                 })
                 attachments |= attachments.create(values)
