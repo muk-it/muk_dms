@@ -63,7 +63,7 @@ class File(models.Model):
         bin_size = self._check_context_bin_size('content')
         bin_recs = self.with_context({'bin_size': True})
         records = bin_recs.filtered(lambda rec: bool(rec.content_lobject))
-        for record in records.with_context(self.env.context):
+        for record in self & records:
             context = {'human_size': True} if bin_size else {'base64': True}
             record.content = record.with_context(context).content_lobject
         super(File, self - records)._compute_content()
