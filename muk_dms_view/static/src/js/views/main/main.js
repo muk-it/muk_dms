@@ -220,11 +220,12 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
                 field: "content",
                 download: true,
             });
+    		console.log(node)
             this.manager = new PreviewManager(
         		this, [{
         			url: binary_url,
         			filename: node.text,
-        			mimetype: undefined,
+        			mimetype: node.data && node.data.mimetype,
         		}], 0
             );
             this.$('.mk_document_preview').empty();
