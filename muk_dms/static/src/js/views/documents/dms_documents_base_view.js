@@ -44,8 +44,10 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
 	custom_events: _.extend({}, Widget.prototype.custom_events, {
 		reverse_breadcrumb: '_on_reverse_breadcrumb',
     }),
-    init: function(parent, action) {
-    	var data = $.Deferred();
+	init: function(parent, action) {
+		this._super.apply(this, arguments);
+
+        var data = $.Deferred();
 
         var view_data = {
             dnd: true,
@@ -74,11 +76,7 @@ var DocumentTreeView = Widget.extend(ControlPanelMixin, {
         }
 
         this.controller = new DocumentsViewController(this,
-    		DocumentsModel, DocumentsRenderer,
-        	_.extend({}, {
-	        	dnd: true,
-	        	contextmenu: true,
-        	}, params));
+        	DocumentsModel, DocumentsRenderer, view_data, action);
     },
     start: function () {
         return $.when(this._super.apply(this, arguments))
