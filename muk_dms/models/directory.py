@@ -241,7 +241,7 @@ class Directory(models.Model):
                 if operator == 'child_of':
                     directory_ids = self.search([('id', operator, directory_id)]).ids
                 directory_where_clause = 'WHERE r.did = ANY (VALUES {ids})'
-                where_clause = '' if not file_ids else directory_where_clause.format(
+                where_clause = '' if not directory_ids else directory_where_clause.format(
                     ids=', '.join(map(lambda id: '(%s)' % id, directory_ids))
                 )
             self.env.cr.execute(sql_query.format(directory_where_clause=where_clause), [])
