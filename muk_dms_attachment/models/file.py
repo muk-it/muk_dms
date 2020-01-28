@@ -119,7 +119,7 @@ class File(models.Model):
             '&', ('is_store_document_link', '=', False),
             '|', ('res_field', '=', False), ('res_field', '!=', False)
         ])
-        data = {attach.store_document: attach for attach in attachments}
+        data = {attach.store_document.id: attach for attach in attachments}
         for record in self:
             if record.id in data:
                 record.update({
