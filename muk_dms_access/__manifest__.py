@@ -22,7 +22,7 @@
     'summary': """Access Control""",
     'version': '11.0.2.0.1',   
     'category': 'Document Management',   
-    'license': 'AGPL-3',    
+    'license': 'LGPL-3',    
     'author': "MuK IT",
     'website': "http://www.mukit.at",
     "live_test_url": "https://demo.mukit.at/web/login",
