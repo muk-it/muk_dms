@@ -24,7 +24,7 @@
     "summary": """Documents as Attachment Storage""",
     "version": '11.0.2.0.4',
     "category": 'Document Management',
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "website": "http://www.mukit.at",
     "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
