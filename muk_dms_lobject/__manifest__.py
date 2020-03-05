@@ -24,7 +24,7 @@
     "summary": """Document Large Object Support""",
     "version": '11.0.2.0.1',   
     "category": 'Document Management',   
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "website": "http://www.mukit.at",
     "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
