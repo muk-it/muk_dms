@@ -142,9 +142,9 @@ class File(models.Model):
     #----------------------------------------------------------
      
     @api.model
-    def _get_attachments_from_files(self, file_ids):
+    def _get_attachments_from_files(self, file_ids, search_uid=None):
         if file_ids:
-            return self.env['ir.attachment'].sudo().search([
+            return self.env['ir.attachment'].sudo(search_uid or SUPERUSER_ID).search([
                 '&', ['store_document', 'in', file_ids],
                 '&', ('is_store_document_link', '=', False),
                 '|', ('res_field', '=', False), ('res_field', '!=', False)
@@ -152,14 +152,17 @@ class File(models.Model):
         return self.env['ir.attachment']
     
     def _get_attachments_with_no_access(self, operation, file_ids):
-        attachments_with_no_access = self.env['ir.attachment']
         attachments = self._get_attachments_from_files(file_ids)
-        for attachment in attachments:
-            try:
-                attachment.check(operation, values=None)
-            except AccessError:
-                attachment |= attachments_with_no_access
-        return attachments_with_no_access
+        if operation == 'read':
+            return attachments - self._get_attachments_from_files(file_ids, self.env.uid)
+        else:
+            attachments_with_no_access_ids = set()
+            for attachment in attachments:
+                try:
+                    attachment.check(operation, values=None)
+                except AccessError:
+                    attachments_with_no_access_ids |= attachment.id
+            return self.env['ir.attachment'].browse(list(attachments_with_no_access_ids))
         
     @api.model
     def _search(self, args, offset=0, limit=None, order=None, count=False, access_rights_uid=None):
