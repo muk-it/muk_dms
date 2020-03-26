@@ -149,8 +149,8 @@
 				</t>
 			</templates>
             <searchpanel>
-                <field name="directory" icon="fa-folder"/>
-                <field name="directory" string="Starred"  domain="[['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="directory" domain="[['is_hidden', '=', False]]" icon="fa-folder"/>
+                <field name="directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
                 <field name="tags" select="multi" icon="fa-tag" groupby="category" />
             </searchpanel>
 		</kanban>

@@ -255,7 +255,7 @@
 				</t>
 			</templates>
             <searchpanel>
-                <field name="parent_directory" string="Starred"  domain="[['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="parent_directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
                 <field name="category" select="multi" icon="fa-users"/>
                 <field name="tags" select="multi" icon="fa-tag" groupby="category" />
             </searchpanel>
