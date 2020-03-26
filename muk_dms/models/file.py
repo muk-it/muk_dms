@@ -80,7 +80,8 @@ class File(models.Model):
         context="{'dms_directory_show_path': True}",
         ondelete='restrict',  
         auto_join=True,
-        required=True)
+        required=True,
+        index=True)
     
     storage = fields.Many2one(
         related="directory.storage",
@@ -100,7 +101,8 @@ class File(models.Model):
         comodel_name='res.company',
         string='Company',
         readonly=True,
-        store=True)
+        store=True,
+        index=True)
     
     path_names = fields.Char(
         compute='_compute_path',

@@ -113,7 +113,8 @@ class Directory(models.Model):
         comodel_name='res.company',
         string='Company',
         readonly=True,
-        store=True)
+        store=True,
+        index=True)
     
     color = fields.Integer(
         string="Color",
