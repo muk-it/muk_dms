@@ -49,17 +49,17 @@ var DocumentsModel = Class.extend(EventDispatcherMixin, ServicesMixin, {
     setParams: function(params) {
         this.params = $.extend(true, {}, {
         	storage: {
-            	domain: [],
-            	context: [],
+            	domain: [['is_hidden', '=', false]],
+            	context: session.user_context,
             	show: true,
             }, 
             directory: {
             	domain: [],
-            	context: [],
+            	context: session.user_context,
             }, 
             file: {
             	domain: [],
-            	context: [],
+            	context: session.user_context,
             	show: true,
             },
             initial: undefined,
