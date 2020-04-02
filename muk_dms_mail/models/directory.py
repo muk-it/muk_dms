@@ -22,6 +22,7 @@
 
 import logging
 import textwrap
+import base64
 
 from odoo import _, models, api, fields
 
@@ -102,7 +103,7 @@ class Directory(models.Model):
         for attachment in msg_dict['attachments']:
             uname = unique_name(attachment.fname, names, escape_suffix=True)
             self.env['muk_dms.file'].sudo().create({
-                'content': attachment.content,
+                'content':  base64.b64encode(attachment.content),
                 'directory': self.id,
                 'name': uname,
             })
