@@ -23,9 +23,9 @@
 {
     "name": "MuK Documents Actions",
     "summary": """Custom File Operations""",
-    "version": '12.0.2.0.0',   
+    "version": '12.0.2.0.1',   
     "category": 'Document Management',   
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "website": "http://www.mukit.at",
     'live_test_url': 'https://mukit.at/r/SgN',
     "author": "MuK IT",
