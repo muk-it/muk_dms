@@ -65,7 +65,7 @@ class ActionTestCase(DocumentsBaseCase):
             'name': "Test Criteria Directory",
         })
         self.assertEqual(test_action_directory.filter_domain,
-            "[['directory', 'child_of', %s]]" % self.new_directory.id)
+            "[('directory', 'child_of', %s)]" % self.new_directory.id)
     
     @setup_data_function(setup_func='_setup_test_data')
     def test_criteria_category(self):
@@ -74,7 +74,7 @@ class ActionTestCase(DocumentsBaseCase):
             'name': "Test Criteria Category",
         })
         self.assertEqual(test_action_category.filter_domain,
-            "[['category', 'child_of', %s]]" % self.test_category.id)
+            "[('category', 'child_of', %s)]" % self.test_category.id)
    
     @setup_data_function(setup_func='_setup_test_data')
     def test_criteria_tags(self):
@@ -83,7 +83,7 @@ class ActionTestCase(DocumentsBaseCase):
             'name': "Test Criteria Tag",
         })
         self.assertEqual(test_action_tags.filter_domain,
-            "[['tags', 'in', [%s]]]" % self.test_tag.id)
+            "[('tags', 'in', [%s])]" % self.test_tag.id)
    
     @setup_data_function(setup_func='_setup_test_data')
     def test_criteria_mulit(self):
@@ -92,8 +92,8 @@ class ActionTestCase(DocumentsBaseCase):
             'criteria_category': self.test_category.id,
             'name': "Test Criteria Multi",
         })
-        domain_01 = "['directory', 'child_of', %s]" % self.new_directory.id
-        domain_02 = "['category', 'child_of', %s]" % self.test_category.id
+        domain_01 = "('directory', 'child_of', %s)" % self.new_directory.id
+        domain_02 = "('category', 'child_of', %s)" % self.test_category.id
         self.assertEqual(test_action_multi.filter_domain,
             "['&', %s, %s]" % (domain_01, domain_02))
         
