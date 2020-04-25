@@ -18,29 +18,29 @@ msgstr ""
 #. module: muk_dms_attachment
 #: model_terms:ir.ui.view,arch_db:muk_dms_attachment.res_config_settings_view_form
 msgid "<strong>Save</strong> this page before triggering the migration."
-msgstr ""
+msgstr "<strong>Guardar</strong> esta página antes de iniciar la migración."
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/ir_attachment.py:104
 #, python-format
 msgid "A directory has to be defined."
-msgstr ""
+msgstr "Se debe definir un directorio."
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/ir_attachment.py:173
 #, python-format
 msgid "A linked attachments has to be linked to a file."
-msgstr ""
+msgstr "Los archivos adjuntos vinculados deben estar vinculados a un archivo."
 
 #. module: muk_dms_attachment
 #: model:ir.model,name:muk_dms_attachment.model_muk_dms_actions_action
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: muk_dms_attachment
 #: model_terms:ir.actions.act_window,help:muk_dms_attachment.action_dms_attachment
 msgid "Add a new Attachment."
-msgstr ""
+msgstr "Añadir un nuevo adjunto."
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_res_config_settings__documents_attachment_directory
@@ -52,7 +52,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms_attachment.res_config_settings_view_form
 msgid "After an attachment has been created, it is automatically saved in the default directory should\n"
 "			                no other rule exist. By creating attachment rules its possible to further customize the process."
-msgstr ""
+msgstr "Una vez creado un archivo adjunto, se guarda automáticamente en la carpeta predeterminada\n"
+"			                si no existe otra regla. Al crear reglas de archivos adjuntos, es posible personalizar aún más el proceso."
 
 #. module: muk_dms_attachment
 #: model:ir.actions.act_window,name:muk_dms_attachment.action_dms_attachment
@@ -60,125 +61,126 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_muk_dms_file__attachment
 #: model:ir.ui.menu,name:muk_dms_attachment.cat_menu_muk_dms_attachment
 msgid "Attachment"
-msgstr ""
+msgstr "Adjunto"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_res_config_settings__documents_attachment_location
 msgid "Attachment Storage Location"
-msgstr ""
+msgstr "Ubicación de almacenamiento de archivos adjuntos"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_res_config_settings__documents_attachment_location_changed
 msgid "Attachment Storage Location Changed"
-msgstr ""
+msgstr "Se cambió la ubicación de almacenamiento de archivos adjuntos"
 
 #. module: muk_dms_attachment
 #: model_terms:ir.ui.view,arch_db:muk_dms_attachment.res_config_settings_view_form
 msgid "Attachment storage location"
-msgstr ""
+msgstr "Ubicación de almacenamiento de archivos adjuntos"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_muk_dms_file__attachments
 #: model:ir.ui.menu,name:muk_dms_attachment.menu_dms_attachment
 #: model_terms:ir.ui.view,arch_db:muk_dms_attachment.res_config_settings_view_form
 msgid "Attachments"
-msgstr ""
+msgstr "Adjuntos"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_muk_dms_file__attachments
 msgid "Attachments linked to a file."
-msgstr ""
+msgstr "Adjuntos vinculados a un archivo."
 
 #. module: muk_dms_attachment
 #: model:ir.model,name:muk_dms_attachment.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Opciones de Configuración"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_res_config_settings__documents_attachment_directory
 msgid "Default Directory"
-msgstr ""
+msgstr "Carpeta predeterminada"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_muk_dms_actions_action__attachment_link
 msgid "Define if attachments which are created during a file\n"
 "             action are copied or linked to the file."
-msgstr ""
+msgstr "Defina si los archivos adjuntos que se crean duranten"
+"             una acción de archivo se copian o vinculan al archivo."
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_ir_attachment__store_document_directory
 msgid "Document Directory"
-msgstr ""
+msgstr "Carpeta de documentos"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_ir_attachment__store_document
 msgid "Document File"
-msgstr ""
+msgstr "Archivo de documento"
 
 #. module: muk_dms_attachment
 #: model:ir.model,name:muk_dms_attachment.model_muk_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_dms_attachment
 #: model_terms:ir.ui.view,arch_db:muk_dms_attachment.res_config_settings_view_form
 msgid "Force Storage Migration"
-msgstr ""
+msgstr "Migración de almacenamiento forzado"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_muk_dms_file__is_attachment
 msgid "Is Attachment"
-msgstr ""
+msgstr "Es Adjunto"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_ir_attachment__is_store_document_link
 msgid "Is Document Link"
-msgstr ""
+msgstr "Es enlace de documento"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,field_description:muk_dms_attachment.field_muk_dms_actions_action__attachment_link
 msgid "Link Attachments"
-msgstr ""
+msgstr "Link de Adjuntos"
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/action.py:65
 #, python-format
 msgid "New Partner"
-msgstr ""
+msgstr "Nuevo Contacto"
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/ir_attachment.py:119
 #, python-format
 msgid "Only administrators can execute this action."
-msgstr ""
+msgstr "Solo los administradores pueden ejecutar esta acción."
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/action.py:79
 #, python-format
 msgid "Partner created from Documents"
-msgstr ""
+msgstr "Contacto creado a partir de documentos"
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_muk_dms_file__attachment
 msgid "Reference to the attachment, if the file was created from one."
-msgstr ""
+msgstr "Referencia al archivo adjunto, si el archivo se creó a partir de uno."
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_res_config_settings__documents_attachment_location
 msgid "System Attachment storage location."
-msgstr ""
+msgstr "Ubicación de almacenamiento de archivos adjuntos del sistema."
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/ir_attachment.py:185
 #, python-format
 msgid "The data of an attachment created by a file cannot be changed."
-msgstr ""
+msgstr "Los datos de un archivo adjunto creado por un archivo no se pueden cambiar."
 
 #. module: muk_dms_attachment
 #: code:addons/muk_dms_attachment/models/ir_attachment.py:167
 #, python-format
 msgid "The file is already referenced by another attachment."
-msgstr ""
+msgstr "El archivo ya está referenciado por otro archivo adjunto."
 
 #. module: muk_dms_attachment
 #: model:ir.model.fields,help:muk_dms_attachment.field_ir_attachment__is_store_document_link
@@ -186,5 +188,8 @@ msgid "There are two possible ways in which a file and an attachment can be rela
 "- True: The attachment is a link to a file. A file can have any number of links.\n"
 "- False: The attachment stores its contents in a file. This is a one to one relationship.\n"
 ""
-msgstr ""
+msgstr "Hay dos formas posibles de relacionar un archivo y un archivo adjunto.\n"
+"- Verdadero: el archivo adjunto es un link a un archivo. Un archivo puede tener cualquier número de links.\n"
+"- Falso: el archivo adjunto almacena su contenido en un archivo. Esta es una relación uno a uno.\n"
+""
 

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190327\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 19:43+0000\n"
-"PO-Revision-Date: 2019-04-15 19:43+0000\n"
+"POT-Creation-Date: 2020-04-11 04:28+0000\n"
+"PO-Revision-Date: 2020-04-11 04:28+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,12 +18,12 @@ msgstr ""
 #. module: muk_dms_actions
 #: model:ir.model,name:muk_dms_actions.model_muk_dms_actions_action
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__is_limited_to_single_file
 msgid "Action is limited to a single File"
-msgstr ""
+msgstr "La acción está limitada a un solo archivo"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__active
@@ -38,39 +38,39 @@ msgstr "Todos"
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_file__actions
 msgid "Available Actions"
-msgstr ""
+msgstr "Acciones disponibles"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_file__actions_multi
 msgid "Available Multi Actions"
-msgstr ""
+msgstr "Múltiples acciones disponibles"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__is_single_file_action
 msgid "Can only be triggered on single records"
-msgstr ""
+msgstr "Solo se puede activar en registros únicos"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__criteria_category
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_search
 msgid "Category Criteria"
-msgstr ""
+msgstr "Criterios de categoría"
 
 #. module: muk_dms_actions
 #: model_terms:ir.actions.act_window,help:muk_dms_actions.action_dms_action
 msgid "Click to create a new operation."
-msgstr ""
+msgstr "Haga clic para crear una nueva operación."
 
 #. module: muk_dms_actions
 #: selection:muk_dms_actions.action,state:0
 msgid "Create a Partner"
-msgstr ""
+msgstr "Crear un Concacto"
 
 #. module: muk_dms_actions
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
 #: model:muk_dms_actions.action,name:muk_dms_actions.action_01_demo
 msgid "Create a new Partner"
-msgstr ""
+msgstr "Crear nuevo contacto"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__create_uid
@@ -84,16 +84,16 @@ msgstr "Creado el"
 
 #. module: muk_dms_actions
 #. openerp-web
-#: code:addons/muk_dms_actions/static/src/xml/actions.xml:25
+#: code:addons/muk_dms_actions/static/src/xml/actions.xml:31
 #, python-format
 msgid "Custom Operations"
-msgstr ""
+msgstr "Operaciones personalizadas"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__criteria_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_search
 msgid "Directory Criteria"
-msgstr ""
+msgstr "Criterios de carpeta"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__display_name
@@ -104,22 +104,27 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__criteria_domain
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
 msgid "Domain Criteria"
-msgstr ""
+msgstr "Criterios de dominio"
 
 #. module: muk_dms_actions
 #: model:ir.model,name:muk_dms_actions.model_muk_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__state
 msgid "File Action"
-msgstr ""
+msgstr "Acción de archivo"
+
+#. module: muk_dms_actions
+#: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_file_domain_tree
+msgid "Files"
+msgstr "Archivos"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__filter_domain
 msgid "Filter Domain"
-msgstr ""
+msgstr "Dominio de filtro"
 
 #. module: muk_dms_actions
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_search
@@ -134,12 +139,12 @@ msgstr ""
 #. module: muk_dms_actions
 #: model:ir.model.fields,help:muk_dms_actions.field_muk_dms_actions_action__is_limited_to_single_file
 msgid "If checked the action is limited to a single file record."
-msgstr ""
+msgstr "Si está marcada, la acción se limita a un solo registro de archivo."
 
 #. module: muk_dms_actions
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
 msgid "Internal / Human Resource"
-msgstr ""
+msgstr "Interno / Recursos Humanos"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action____last_update
@@ -159,7 +164,7 @@ msgstr "Última actualización el"
 #. module: muk_dms_actions
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
 msgid "Limited to single Files"
-msgstr ""
+msgstr "Limitado a archivos individuales"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__name
@@ -167,46 +172,47 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: muk_dms_actions
-#: code:addons/muk_dms_actions/models/action.py:168
+#: code:addons/muk_dms_actions/models/action.py:171
 #, python-format
 msgid "New Partner"
-msgstr ""
+msgstr "Nuevo Contacto"
 
 #. module: muk_dms_actions
 #. openerp-web
-#: code:addons/muk_dms_actions/static/src/xml/actions.xml:54
-#: code:addons/muk_dms_actions/static/src/xml/actions.xml:67
+#: code:addons/muk_dms_actions/static/src/xml/actions.xml:60
+#: code:addons/muk_dms_actions/static/src/xml/actions.xml:73
 #: model:ir.actions.act_window,name:muk_dms_actions.action_dms_action
 #: model:ir.ui.menu,name:muk_dms_actions.menu_dms_action
+#: model_terms:ir.ui.view,arch_db:muk_dms_actions.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_search
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_file_tree
 #, python-format
 msgid "Operations"
-msgstr ""
+msgstr "Operaciones"
 
 #. module: muk_dms_actions
 #: model_terms:ir.actions.act_window,help:muk_dms_actions.action_dms_action
 msgid "Operations are used to trigger document workflows."
-msgstr ""
+msgstr "Las operaciones se utilizan para desencadenar flujos de trabajo de documentos."
 
 #. module: muk_dms_actions
-#: code:addons/muk_dms_actions/models/action.py:182
+#: code:addons/muk_dms_actions/models/action.py:185
 #, python-format
 msgid "Partner created from Documents"
-msgstr ""
+msgstr "Contacto creado a partir de documentos"
 
 #. module: muk_dms_actions
-#: code:addons/muk_dms_actions/models/action.py:191
+#: code:addons/muk_dms_actions/models/action.py:194
 #, python-format
 msgid "Partners created from Documents"
-msgstr ""
+msgstr "Contactos creado a partir de documentos"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__server_action_model
 msgid "Server Action Model"
-msgstr ""
+msgstr "Modelo de acción del servidor"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__server_actions
@@ -217,22 +223,22 @@ msgstr "Acciones de servidor"
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__set_category
 msgid "Set Category"
-msgstr ""
+msgstr "Establecer categoría"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__set_directory
 msgid "Set Directory"
-msgstr ""
+msgstr "Establecer carpeta"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__set_tags
 msgid "Set Tags"
-msgstr ""
+msgstr "Establecer etiquetas"
 
 #. module: muk_dms_actions
 #: model:ir.model.fields,field_description:muk_dms_actions.field_muk_dms_actions_action__criteria_tags
 msgid "Tag Criteria"
-msgstr ""
+msgstr "Criterios de etiqueta"
 
 #. module: muk_dms_actions
 #: model_terms:ir.ui.view,arch_db:muk_dms_actions.view_dms_action_form
@@ -241,8 +247,8 @@ msgstr "Etiquetas..."
 
 #. module: muk_dms_actions
 #. openerp-web
-#: code:addons/muk_dms_actions/static/src/js/fields/abstract_actions.js:41
+#: code:addons/muk_dms_actions/static/src/js/fields/abstract_actions.js:44
 #, python-format
 msgid "The field '%s' must be a many2many field with a relation to file actions for the widget to work."
-msgstr ""
+msgstr "El campo '%s' debe ser un campo many2many con relación a las acciones del archivo para que funcione el widget."
 

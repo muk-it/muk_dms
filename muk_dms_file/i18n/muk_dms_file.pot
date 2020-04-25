@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190522\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 21:22+0000\n"
-"PO-Revision-Date: 2019-06-24 21:22+0000\n"
+"POT-Creation-Date: 2020-04-11 04:29+0000\n"
+"PO-Revision-Date: 2020-04-11 04:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,7 @@ msgid "Filestore"
 msgstr ""
 
 #. module: muk_dms_file
-#: code:addons/muk_dms_file/models/storage.py:45
+#: code:addons/muk_dms_file/models/storage.py:48
 #, python-format
 msgid "Only managers can execute this action."
 msgstr ""
@@ -61,4 +61,3 @@ msgstr ""
 msgid "The save type is used to determine how a file is saved by the system. If you change \n"
 "            this setting, you can migrate existing files manually by triggering the action."
 msgstr ""
-

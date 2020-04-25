@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190522\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 21:22+0000\n"
-"PO-Revision-Date: 2019-06-24 21:22+0000\n"
+"POT-Creation-Date: 2020-04-11 04:29+0000\n"
+"PO-Revision-Date: 2020-04-11 04:29+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,47 +18,48 @@ msgstr ""
 #. module: muk_dms_file
 #: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_file__content_file
 msgid "Content File"
-msgstr ""
+msgstr "Archivo de contenido"
 
 #. module: muk_dms_file
 #: selection:muk_dms.storage,save_type:0
 msgid "Database"
-msgstr ""
+msgstr "Base de datos"
 
 #. module: muk_dms_file
 #: model:ir.model,name:muk_dms_file.model_muk_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_dms_file
 #: selection:muk_dms.storage,save_type:0
 msgid "Filestore"
-msgstr ""
+msgstr "Almacén de archivos"
 
 #. module: muk_dms_file
-#: code:addons/muk_dms_file/models/storage.py:45
+#: code:addons/muk_dms_file/models/storage.py:48
 #, python-format
 msgid "Only managers can execute this action."
-msgstr ""
+msgstr "Solo los Administradores pueden ejecutar esta acción."
 
 #. module: muk_dms_file
 #: model:ir.model.fields,field_description:muk_dms_file.field_muk_dms_storage__save_type
 msgid "Save Type"
-msgstr ""
+msgstr "Guardar tipo"
 
 #. module: muk_dms_file
 #: model:ir.model,name:muk_dms_file.model_muk_dms_storage
 msgid "Storage"
-msgstr ""
+msgstr "Almacenamiento"
 
 #. module: muk_dms_file
 #: model_terms:ir.ui.view,arch_db:muk_dms_file.res_config_settings_view_form
 msgid "Storages"
-msgstr ""
+msgstr "Almacenamientos"
 
 #. module: muk_dms_file
 #: model:ir.model.fields,help:muk_dms_file.field_muk_dms_storage__save_type
 msgid "The save type is used to determine how a file is saved by the system. If you change \n"
 "            this setting, you can migrate existing files manually by triggering the action."
-msgstr ""
+msgstr "El tipo de guardado se usa para determinar cómo el sistema guarda un archivo. Si cambia \n"
+"            esta configuración, puede migrar los archivos existentes manualmente activando la acción."
 

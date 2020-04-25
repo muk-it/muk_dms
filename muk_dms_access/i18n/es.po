@@ -18,95 +18,95 @@ msgstr ""
 #. module: muk_dms_access
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.res_config_settings_view_form
 msgid "Access Control"
-msgstr ""
+msgstr "Control de acceso"
 
 #. module: muk_dms_access
 #: model:ir.actions.act_window,name:muk_dms_access.action_dms_access_groups
 #: model:ir.ui.menu,name:muk_dms_access.menu_dms_access_groups
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.res_config_settings_view_form
 msgid "Access Groups"
-msgstr ""
+msgstr "Grupos de acceso"
 
 #. module: muk_dms_access
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.res_config_settings_view_form
 msgid "Allows users to edit the access groups of a directory"
-msgstr ""
+msgstr "Permite a los usuarios editar los grupos de acceso a las carpetas"
 
 #. module: muk_dms_access
 #: model:ir.model.fields,help:muk_dms_access.field_res_config_settings__documents_access_groups_user_view
 msgid "Allows users to edit the access groups of a directory."
-msgstr ""
+msgstr "Permite a los usuarios editar los grupos de acceso a las carpetas."
 
 #. module: muk_dms_access
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_manager_form
 msgid "Complete Groups"
-msgstr ""
+msgstr "Grupos completos"
 
 #. module: muk_dms_access
 #: model:ir.model,name:muk_dms_access.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Opciones de Configuración"
 
 #. module: muk_dms_access
 #: model:ir.model.fields,field_description:muk_dms_access.field_muk_security_access_groups__count_directories
 msgid "Count Directories"
-msgstr ""
+msgstr "Contar carpetas"
 
 #. module: muk_dms_access
 #: model:ir.model.fields,field_description:muk_dms_access.field_muk_security_access_groups__directories
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_access_groups_form
 msgid "Directories"
-msgstr ""
+msgstr "Carpetas"
 
 #. module: muk_dms_access
 #: model:ir.model,name:muk_dms_access.model_muk_dms_directory
 msgid "Directory"
-msgstr ""
+msgstr "Carpeta"
 
 #. module: muk_dms_access
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_access_groups_form
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #. module: muk_dms_access
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms_access.view_dms_directory_manager_form
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #. module: muk_dms_access
 #: model:ir.model.fields,field_description:muk_dms_access.field_muk_dms_directory__inherit_groups
 msgid "Inherit Groups"
-msgstr ""
+msgstr "Heredar grupos"
 
 #. module: muk_dms_access
 #: model:muk_security.access_groups,name:muk_dms_access.access_group_02_demo
 msgid "Manager Group (All Rights)"
-msgstr ""
+msgstr "Grupo de Administradores (Todos los derechos)"
 
 #. module: muk_dms_access
 #: model:muk_security.access_groups,name:muk_dms_access.access_group_01_demo
 msgid "Manager Group (Read)"
-msgstr ""
+msgstr "Grupo de Administradores (Leer)"
 
 #. module: muk_dms_access
 #: model:ir.model,name:muk_dms_access.model_muk_security_access_groups
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Grupos de acceso a registros"
 
 #. module: muk_dms_access
 #: model:ir.model.fields,field_description:muk_dms_access.field_res_config_settings__documents_access_groups_user_view
 msgid "Show Access Groups on User Form"
-msgstr ""
+msgstr "Mostrar grupos de acceso en formulario de usuario"
 
 #. module: muk_dms_access
 #: model:muk_security.access_groups,name:muk_dms_access.access_group_04_demo
 msgid "User Group (All Rights)"
-msgstr ""
+msgstr "Grupo de usuarios (todos los derechos)"
 
 #. module: muk_dms_access
 #: model:muk_security.access_groups,name:muk_dms_access.access_group_03_demo
 msgid "User Group (Read/Write)"
-msgstr ""
+msgstr "Grupo de usuarios (Leer/Escribir)"
 

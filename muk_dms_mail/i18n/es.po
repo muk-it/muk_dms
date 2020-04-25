@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190327\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-17 23:54+0000\n"
-"PO-Revision-Date: 2019-04-17 23:54+0000\n"
+"POT-Creation-Date: 2020-04-24 21:50+0000\n"
+"PO-Revision-Date: 2020-04-24 21:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,12 +18,12 @@ msgstr ""
 #. module: muk_dms_mail
 #: model_terms:ir.ui.view,arch_db:muk_dms_mail.view_dms_directory_form
 msgid "Accept Emails from"
-msgstr ""
+msgstr "Aceptar correos electrónicos de"
 
 #. module: muk_dms_mail
 #: model:ir.model,name:muk_dms_mail.model_muk_dms_actions_action
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_type
@@ -39,19 +39,19 @@ msgstr "Tipos de actividad"
 #. module: muk_dms_mail
 #: model_terms:ir.ui.view,arch_db:muk_dms_mail.view_dms_directory_form
 msgid "Alias Setting"
-msgstr ""
+msgstr "Configuración de alias"
 
 #. module: muk_dms_mail
-#: code:addons/muk_dms_mail/models/directory.py:85
+#: code:addons/muk_dms_mail/models/directory.py:89
 #, python-format
 msgid "Alias-Mail-Extraction"
-msgstr ""
+msgstr "Extracción de correo alias"
 
 #. module: muk_dms_mail
-#: code:addons/muk_dms_mail/models/action.py:119
+#: code:addons/muk_dms_mail/models/action.py:122
 #, python-format
 msgid "An activity has to have a type!"
-msgstr ""
+msgstr "¡Una actividad tiene que tener un tipo!"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__assigned_user
@@ -59,26 +59,26 @@ msgid "Assigned to"
 msgstr "Asignada a"
 
 #. module: muk_dms_mail
-#: code:addons/muk_dms_mail/models/action.py:92
+#: code:addons/muk_dms_mail/models/action.py:95
 #, python-format
 msgid "Closed by operation!"
-msgstr ""
+msgstr "Cerrado por operación!"
 
 #. module: muk_dms_mail
-#: code:addons/muk_dms_mail/models/action.py:94
+#: code:addons/muk_dms_mail/models/action.py:97
 #, python-format
 msgid "Closed by operation: %s"
-msgstr ""
+msgstr "Cerrado por operación: %s"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_create
 msgid "Create a new Activity"
-msgstr ""
+msgstr "Crea una nueva actividad"
 
 #. module: muk_dms_mail
 #: selection:muk_dms_actions.action,activity_deadline_unit:0
 msgid "Days"
-msgstr ""
+msgstr "Dias"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,help:muk_dms_mail.field_muk_dms_directory__alias_process
@@ -86,22 +86,26 @@ msgid "Define how incoming emails are processed:\n"
 "- Single Files: The email gets attached to the directory and all attachments are created as files.\n"
 "- Subdirectory: A new subdirectory is created for each email and the mail is attached to this                             subdirectory. The attachments are created as files of the subdirectory.\n"
 ""
-msgstr ""
+msgstr "Definir cómo se procesan los correos electrónicos entrantes:\n"
+"- Archivos individuales: el correo se adjunta a la carpeta y todos los archivos adjuntos se crean como archivos.\n"
+"- Subdirectorio: se crea un nueva subcarpeta para cada correo y el correo se adjunta a esta subcarpeta.\n"
+"Los archivos adjuntos se crean como archivos de la subcarpeta.\n"
+""
 
 #. module: muk_dms_mail
 #: model:ir.model,name:muk_dms_mail.model_muk_dms_directory
 msgid "Directory"
-msgstr ""
+msgstr "Carpeta"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_deadline_value
 msgid "Due Date in"
-msgstr ""
+msgstr "Fecha de vencimiento en"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_deadline_unit
 msgid "Due type"
-msgstr ""
+msgstr "Tipo de vencimiento"
 
 #. module: muk_dms_mail
 #: model_terms:ir.ui.view,arch_db:muk_dms_mail.view_dms_directory_form
@@ -111,17 +115,17 @@ msgstr "Pseudónimo de correo"
 #. module: muk_dms_mail
 #: model:ir.model,name:muk_dms_mail.model_muk_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_done
 msgid "Mark all as done"
-msgstr ""
+msgstr "Marcar todo como hecho"
 
 #. module: muk_dms_mail
 #: selection:muk_dms_actions.action,activity_deadline_unit:0
 msgid "Months"
-msgstr ""
+msgstr "Meses"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_note
@@ -131,12 +135,12 @@ msgstr "Nota"
 #. module: muk_dms_mail
 #: selection:muk_dms.directory,alias_process:0
 msgid "Single Files"
-msgstr ""
+msgstr "Archivos individuales"
 
 #. module: muk_dms_mail
 #: selection:muk_dms.directory,alias_process:0
 msgid "Subdirectory"
-msgstr ""
+msgstr "Subcarpeta"
 
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_actions_action__activity_summary
@@ -146,12 +150,12 @@ msgstr "Resumen"
 #. module: muk_dms_mail
 #: model:ir.model.fields,field_description:muk_dms_mail.field_muk_dms_directory__alias_process
 msgid "Unpack Emails as"
-msgstr ""
+msgstr "Desempaquetar correos como"
 
 #. module: muk_dms_mail
 #: selection:muk_dms_actions.action,activity_deadline_unit:0
 msgid "Weeks"
-msgstr ""
+msgstr "Semanas"
 
 #. module: muk_dms_mail
 #: model_terms:ir.ui.view,arch_db:muk_dms_mail.view_dms_directory_form

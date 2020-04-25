@@ -4,19 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190128\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-05 18:29+0000\n"
-"PO-Revision-Date: 2019-06-25 08:16+0000\n"
-"Last-Translator: MuK IT <admin@mukit.at>\n"
-"Language-Team: Spanish <http://weblate.mukit.at/projects/dms-12/muk_dms/es/>"
-"\n"
-"Language: es\n"
+"POT-Creation-Date: 2020-04-11 04:25+0000\n"
+"PO-Revision-Date: 2020-04-11 04:25+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7\n"
+"Plural-Forms: \n"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_directory_panel
@@ -30,46 +27,69 @@ msgstr ""
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+msgid "<i class=\"fa fa-archive\"/> Archive"
+msgstr "<i class=\"fa fa-archive\"/> Archivar"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+msgid "<i class=\"fa fa-archive\"/> Desarchivar"
+msgstr ""
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-download\"/> Download"
 msgstr "<i class=\"fa fa-download\"/> Descargar"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-external-link\"/> Open"
-msgstr ""
+msgstr "<i class=\"fa fa-external-link\"/> Abrir"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
+msgid "<i class=\"fa fa-file-o\"/> Files"
+msgstr "<i class=\"fa fa-file-o\"/> Archivos"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
+msgid "<i class=\"fa fa-folder-o\"/> Directories"
+msgstr "<i class=\"fa fa-folder-o\"/> Carpetas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-lock\"/> Lock"
-msgstr ""
+msgstr "<i class=\"fa fa-lock\"/> Bloquear"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-pencil-square-o\"/> Edit"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil-square-o\"/> Editar"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_kanban
 msgid "<i class=\"fa fa-trash-o\"/> Delete"
-msgstr ""
+msgstr "<i class=\"fa fa-trash-o\"/> Eliminar"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-unlock-alt\"/> Unlock"
-msgstr ""
+msgstr "<i class=\"fa fa-unlock-alt\"/> Desbloquear"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">File Extensions</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Extensiones de archivo</span>"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">File Size</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Tamaño de archivo</span>"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
@@ -77,76 +97,92 @@ msgid "<strong>Save</strong> this page and come back here to set up the feature.
 msgstr "Guarde esa página y regrese aquí para configurar la función."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:332
+#: code:addons/muk_dms/models/directory.py:381
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
-msgstr ""
+msgstr "Una carpeta no puede ser root y tener una carpeta padre."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:330
+#: code:addons/muk_dms/models/directory.py:379
 #, python-format
 msgid "A directory has to have a parent directory."
-msgstr ""
+msgstr "Una carpeta debe tener una carpeta padre."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:350
+#: code:addons/muk_dms/models/directory.py:399
 #, python-format
 msgid "A directory with the same name already exists."
-msgstr ""
+msgstr "Ya existe una carpeta con el mismo nombre."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:414
+#: code:addons/muk_dms/models/directory.py:463
 #, python-format
 msgid "A file is locked, the folder cannot be deleted."
-msgstr ""
+msgstr "Un archivo está bloqueado, la carpeta no se puede eliminar."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:402
+#: code:addons/muk_dms/models/file.py:502
 #, python-format
 msgid "A file with the same name already exists."
-msgstr ""
+msgstr "Ya existe un archivo con el mismo nombre."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:328
+#: code:addons/muk_dms/models/directory.py:377
 #, python-format
 msgid "A root directory has to have a root storage."
-msgstr ""
+msgstr "Una carpeta raíz debe tener un almacenamiento raíz."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_access
 msgid "Access Control"
-msgstr ""
+msgstr "Control de acceso"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Access Information"
-msgstr ""
+msgstr "Informacion de acceso"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_07_demo
 msgid "Accounting"
-msgstr ""
+msgstr "Contabilidad"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+msgid "Actions"
+msgstr "Acciones"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Activates a file trash to restore deleted files"
-msgstr ""
+msgstr "Activar papelera de archivos para restaurar archivos borrados"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_trash
 msgid "Activates a file trash to restore deleted files."
-msgstr ""
+msgstr "Activar papelera de archivos para restaurar archivos borrados."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Activates the documents tree view"
+msgstr "Activa la vista de árbol de documentos"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_view
+msgid "Activates the documents tree view."
+msgstr "Activa la vista de árbol de documentos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Activates the preview function on files"
-msgstr ""
+msgstr "Activar la vista previa en archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_preview
 msgid "Activates the preview function on files."
-msgstr ""
+msgstr "Activar la vista previa en archivos."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__active
@@ -157,119 +193,140 @@ msgstr "Activo"
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directory
 msgid "Add a new Directory."
-msgstr ""
+msgstr "Agregar nueva Carpeta"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_file
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_file_migration
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_file_storage_migration
 msgid "Add a new File."
-msgstr ""
+msgstr "Agregar nuevo Archivo"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Adds support for messages and activities on directories and files"
-msgstr ""
+msgstr "Agrega soporte para mensajes y actividades en carpetas y archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_mail
 msgid "Adds support for messages and activities on directories and files."
-msgstr ""
+msgstr "Agrega soporte para mensajes y actividades en carpetas y archivos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_search
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_search
 msgid "All"
 msgstr "Todos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 msgid "All Files"
-msgstr ""
+msgstr "Todos los archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_attachment_rules
 msgid "Allows attachments to be automatically placed in the right directory."
-msgstr ""
+msgstr "Permite que los archivos adjuntos se coloquen automáticamente en la carpeta correcta."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Allows attachments to be stored inside of Documents"
-msgstr ""
+msgstr "Permite almacenar archivos adjuntos dentro de Documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_attachment
 msgid "Allows attachments to be stored inside of Documents."
-msgstr ""
+msgstr "Permite almacenar archivos adjuntos dentro de Documentos."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Allows documents to be used as attachments"
+msgstr "Permite que los documentos se utilicen como archivos adjuntos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_attachment_wizard
 msgid "Allows documents to be used as attachments."
-msgstr ""
+msgstr "Permite que los documentos se utilicen como archivos adjuntos."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_export
 msgid "Allows the conversion of existing files."
-msgstr ""
+msgstr "Permite la conversión de archivos existentes."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Allows the creation of groups to define access rights"
-msgstr ""
+msgstr "Permite la creación de grupos para definir derechos de acceso."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_access
 msgid "Allows the creation of groups to define access rights."
-msgstr ""
+msgstr "Permite la creación de grupos para definir permisos de acceso."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_thumbnails
 msgid "Allows the creation of thumbnails for files."
-msgstr ""
+msgstr "Permite la creación de miniaturas para archivos."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Allows the user to use documents as input for any binary field"
+msgstr "Permite al usuario usar documentos como entrada para cualquier campo binario"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_widget
-msgid "Allows the user to use DMS documents as input for any binary field."
-msgstr ""
+msgid "Allows the user to use documents as input for any binary field."
+msgstr "Permite al usuario usar documentos como entrada para cualquier campo binario."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Allows to download directories as a archive file"
+msgstr "Permite descargar carpetas como un archivo de almacenamiento"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_archive
 msgid "Allows to download directories as a archive file."
-msgstr ""
+msgstr "Permite descargar carpetas como un archivo de almacenamiento"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Allows to placed attachments in the right directory"
-msgstr ""
+msgstr "Permite colocar archivos adjuntos en la carpeta correcta"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Allows you to create rule templates to create attachment rules"
-msgstr ""
+msgstr "Le permite crear plantillas de reglas para crear reglas de archivos adjuntos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_attachment_automation
 msgid "Allows you to create rule templates to create attachment rules."
-msgstr ""
+msgstr "Le permite crear plantillas de reglas para crear reglas de archivos adjuntos."
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_06_demo
 msgid "Apps"
-msgstr ""
+msgstr "Aplicaciones"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__active
 msgid "Archived"
-msgstr ""
+msgstr "Archivado"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
+msgid "Archived Files"
+msgstr "Archivos archivados"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_attachment_automation
 msgid "Attachment Rule Automation"
-msgstr ""
+msgstr "Automatización de regla de adjunto"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_attachment_wizard
 msgid "Attachment Wizard"
-msgstr ""
+msgstr "Asistente de adjuntos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
@@ -279,12 +336,37 @@ msgstr "Adjuntos"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_thumbnails
 msgid "Automatic Thumbnails"
-msgstr ""
+msgstr "Miniaturas automáticas"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Automatic creation of user directories"
+msgstr "Creación automática de carpetas de usuarios"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_users
+msgid "Automatic creation of user directories."
+msgstr "Creación automática de carpetas de usuarios."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Automatically create a file index based on the content"
+msgstr "Crear automáticamente un índice de archivo basado en el contenido"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_index
+msgid "Automatically create a file index based on the content."
+msgstr "Crear automáticamente un índice de archivo basado en el contenido."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Automatically create file thumbnails based on the content"
+msgstr "Crear automáticamente miniaturas de archivos en función del contenido"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_widget
 msgid "Binary Widget Support"
-msgstr ""
+msgstr "Soporte de widget binario"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_new_form
@@ -295,32 +377,36 @@ msgstr "Cancelar"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/xml/views.xml:46
+#: code:addons/muk_dms/static/src/xml/views.xml:52
 #: model:ir.actions.act_window,name:muk_dms.action_dms_category
 #: model:ir.ui.menu,name:muk_dms.menu_dms_category
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_search
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_tree
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_search
 #, python-format
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_category
 msgid "Categories are used to categorize Documents."
-msgstr ""
+msgstr "Las categorías se utilizan para clasificar documentos."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__category
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__category
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__category
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_search
 msgid "Category"
 msgstr "Categoría"
 
 #. module: muk_dms
 #: sql_constraint:muk_dms.category:0
 msgid "Category name already exists!"
-msgstr ""
+msgstr "¡La categoría ya existe!"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__checksum
@@ -330,26 +416,26 @@ msgstr "Suma de verificación/SHA1"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__child_categories
 msgid "Child Categories"
-msgstr ""
+msgstr "Categorías hijos"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directories_all_directory
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directories_directory
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directories_storage
 msgid "Click to add a new directory."
-msgstr ""
+msgstr "Clic para agregar una nueva carpeta."
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_files_all_directory
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_files_storage
 msgid "Click to add a new file."
-msgstr ""
+msgstr "Clic para agregar un nuevo archivo."
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_tag
 msgid "Click to create a new tag."
-msgstr ""
+msgstr "Clic para crear una nueva etiqueta."
 
 #. module: muk_dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -357,13 +443,14 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Closed"
-msgstr ""
+msgstr "Cerrado"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__color
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__color
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_search
 msgid "Color"
 msgstr ""
 
@@ -375,14 +462,14 @@ msgstr "Índice de Colores"
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_res_company
 msgid "Companies"
-msgstr "Compañías"
+msgstr "Empresas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__company
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__company
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__company
 msgid "Company"
-msgstr "Compañía"
+msgstr "Empresa"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_res_config_settings
@@ -397,50 +484,64 @@ msgstr "Configuración"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__content
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__content_binary
 msgid "Content Binary"
-msgstr ""
+msgstr "Contenido binario"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_11_demo
 msgid "Contract"
-msgstr ""
+msgstr "Contrato"
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_03_demo
 msgid "Contracts"
-msgstr ""
+msgstr "Contratos"
 
 #. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__count_directories
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__count_storage_directories
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__count_directories
 msgid "Count Directories"
-msgstr ""
+msgstr "Contar carpetas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_elements
 msgid "Count Elements"
-msgstr ""
+msgstr "Contar elementos"
 
 #. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__count_files
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_files
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__count_storage_files
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__count_files
 msgid "Count Files"
-msgstr ""
+msgstr "Contar Archivos"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__count_categories
+msgid "Count Subcategories"
+msgstr "Contar subcategorías"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_directories
 msgid "Count Subdirectories"
-msgstr ""
+msgstr "Contar Subcarpetas"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__count_tags
+msgid "Count Tags"
+msgstr "Contar etiquetas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_new_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_new_form
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_create
@@ -451,32 +552,42 @@ msgstr "Acceso para crear"
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_directory_step
 msgid "Create Directory"
-msgstr ""
+msgstr "Crear carpetas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_storage_step
 msgid "Create Storage"
-msgstr ""
+msgstr "Crear Almacenamiento"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_category
 msgid "Create a new Category."
-msgstr ""
+msgstr "Crear una nueva categoría"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_storage_step
 msgid "Create a new Document Storage."
-msgstr ""
+msgstr "Crear un nuevo almacenamiento de documentos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_directory_step
 msgid "Create a new Root Directory."
-msgstr ""
+msgstr "Crear una nueva carpeta raíz."
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_storage
 msgid "Create a new Storage object."
-msgstr ""
+msgstr "Crear un nuevo objeto de almacenamiento."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Create custom file operations"
+msgstr "Crear operaciones de archivo personalizadas"
+
+#. module: muk_dms
+#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_actions
+msgid "Create custom file operations."
+msgstr "Crear operaciones de archivos personalizados."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__create_uid
@@ -505,51 +616,52 @@ msgstr "Fecha de Creación"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__save_type
 msgid "Current Save Type"
-msgstr ""
+msgstr "Tipo de guardado actual"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__custom_thumbnail
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__custom_thumbnail
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_mixins_thumbnail__custom_thumbnail
 msgid "Custom Thumbnail"
-msgstr ""
+msgstr "Miniatura personalizada"
 
 #. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_form
 #: model:muk_dms.tag,name:muk_dms.tag_01_demo
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_08_demo
 msgid "Customer Invoice"
-msgstr ""
+msgstr "Factura del cliente"
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/storage.py:42
+#: code:addons/muk_dms/models/storage.py:45
 #: selection:muk_dms.storage,save_type:0
 #, python-format
 msgid "Database"
-msgstr ""
+msgstr "Base de datos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Define forbidden file extensions"
-msgstr ""
+msgstr "Definir extensiones de archivo prohibidas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Define the maximum upload size of a file in MB"
-msgstr ""
+msgstr "Definir el tamaño máximo de carga de un archivo en MB"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__documents_forbidden_extensions
 msgid "Defines a list of forbidden file extensions. (Example: 'exe,msi')"
-msgstr ""
+msgstr "Define una lista de extensiones de archivo prohibidas. (Ejemplo: 'exe, msi')"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__documents_binary_max_size
 msgid "Defines the maximum upload size in MB. Default (25MB)"
-msgstr ""
+msgstr "Define el tamaño máximo de carga en MB. Por defecto (25MB)"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_unlink
@@ -559,7 +671,7 @@ msgstr "Permiso para eliminar"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/xml/views.xml:37
+#: code:addons/muk_dms/static/src/xml/views.xml:43
 #: model:ir.actions.act_window,name:muk_dms.action_dms_directories_storage
 #: model:ir.actions.act_window,name:muk_dms.action_dms_directory
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__directories
@@ -567,12 +679,14 @@ msgstr "Permiso para eliminar"
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__directories
 #: model:ir.ui.menu,name:muk_dms.menu_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_form
 #, python-format
 msgid "Directories"
-msgstr ""
+msgstr "Carpetas"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directories_all_directory
@@ -581,7 +695,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_directory
 msgid "Directories can be used to structure and organize\n"
 "			files directly in Odoo."
-msgstr ""
+msgstr "Las carpetas se pueden usar para estructurar y organizar  n			archivos directamente en el sistema."
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_directory
@@ -589,7 +703,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_directory_step
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 msgid "Directory"
-msgstr ""
+msgstr "Carpeta"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__display_name
@@ -602,50 +716,55 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_actions
+msgid "Document Actions"
+msgstr "Acciones de documentos"
+
+#. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_category
 msgid "Document Category"
-msgstr ""
+msgstr "Categoría de documento"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_tag
 msgid "Document Tag"
-msgstr ""
+msgstr "Etiqueta de documento"
 
 #. module: muk_dms
 #: model:ir.module.category,name:muk_dms.category_dms_security
 #: model:ir.ui.menu,name:muk_dms.main_menu_muk_dms
 msgid "Documents"
-msgstr ""
+msgstr "Documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_company__documents_onboarding_directory_state
 msgid "Documents Onboarding Directory State"
-msgstr ""
+msgstr "Estado de la carpeta de Onboarding de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_company__documents_onboarding_file_state
 msgid "Documents Onboarding File State"
-msgstr ""
+msgstr "Estado del archivo de Onboarding de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_company__documents_onboarding_state
 msgid "Documents Onboarding State"
-msgstr ""
+msgstr "Estado de Onboarding de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_company__documents_onboarding_storage_state
 msgid "Documents Onboarding Storage State"
-msgstr ""
+msgstr "Estado de almacenamiento de Onboarding de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_attachment
 msgid "Documents Storage Location"
-msgstr ""
+msgstr "Ubicación de almacenamiento de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_attachment_rules
 msgid "Documents Storage Rules"
-msgstr ""
+msgstr "Reglas de almacenamiento de documentos"
 
 #. module: muk_dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -653,16 +772,17 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_archive
 msgid "Download Directories"
-msgstr ""
+msgstr "Descargar carpetas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_kanban
 msgid "Dropdown menu"
 msgstr "Menú desplegable"
 
@@ -674,91 +794,101 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 msgid "Elements"
-msgstr ""
+msgstr "Elementos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Enables a new save option to store files into a filestore"
-msgstr ""
+msgstr "Habilita una nueva opción de guardar para almacenar archivos en un almacén de archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_file
 msgid "Enables a new save option to store files into a filestore."
-msgstr ""
+msgstr "Habilita una nueva opción de guardar para almacenar archivos en un almacén de archivos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Enables a new save option to store files into large objects"
-msgstr ""
+msgstr "Habilita una nueva opción de guardar para almacenar archivos en objetos grandes"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_lobject
 msgid "Enables a new save option to store files into large objects."
-msgstr ""
+msgstr "Habilita una nueva opción de guardar para almacenar archivos en objetos grandes."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Enables the Document Finder"
+msgstr "Habilita el Buscador de documentos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_finder
 msgid "Enables the Document Finder."
-msgstr ""
+msgstr "Habilita el Buscador de documentos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Enables version control for files"
-msgstr ""
+msgstr "Habilita el control de versiones para archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_version
 msgid "Enables version control for files."
-msgstr ""
+msgstr "Habilita el control de versiones para archivos."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/category.py:123
+#: code:addons/muk_dms/models/category.py:149
 #, python-format
 msgid "Error! You cannot create recursive categories."
-msgstr ""
+msgstr "¡Error! No puedes crear categorías recursivas."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:321
+#: code:addons/muk_dms/models/directory.py:370
 #, python-format
 msgid "Error! You cannot create recursive directories."
-msgstr ""
+msgstr "¡Error! No puede crear carpetas recursivas."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_export
 msgid "Export Files"
-msgstr ""
+msgstr "Exportar archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__extension
 msgid "Extension"
-msgstr ""
+msgstr "Extensión"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__documents_forbidden_extensions
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "Extensions"
-msgstr ""
+msgstr "Extensiones"
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_05_demo
 msgid "External"
-msgstr ""
+msgstr "Externo"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_file
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_file_step
 msgid "File"
-msgstr ""
+msgstr "Archivo"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_index
+msgid "File Indexation"
+msgstr "Indexación de archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_preview
 msgid "File Preview"
-msgstr ""
+msgstr "Vista previa del Archivo"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "File Upload"
-msgstr ""
+msgstr "Subir archivo"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__name
@@ -777,14 +907,16 @@ msgstr "Nombre de archivo"
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__storage_files
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_tag__files
 #: model:ir.ui.menu,name:muk_dms.menu_dms_file
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_migration_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_form
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_file
@@ -794,41 +926,47 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_files_directory
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_files_storage
 msgid "Files are used to save content directly in Odoo."
-msgstr ""
+msgstr "Los archivos se utilizan para guardar contenido directamente en el sistema."
+
+#. module: muk_dms
+#: selection:muk_dms.storage,save_type:0
+msgid "Filestore"
+msgstr "Almacén de archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_file
 msgid "Filestore Storage"
-msgstr ""
+msgstr "Almacenamiento en el almacén de archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_finder
 msgid "Finder"
-msgstr ""
+msgstr "Buscador"
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_settings_general
 #: model:ir.ui.menu,name:muk_dms.menu_dms_settings_general
 msgid "General Settings"
-msgstr "Opciones Generales"
+msgstr "Parametrizaciones generales"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file_migration
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_search
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_search
 msgid "Group By"
 msgstr "Agrupar por"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "Enrutamiento HTTP "
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_02_demo
 msgid "Human Resource"
-msgstr ""
+msgstr "Recursos humanos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__id
@@ -843,44 +981,55 @@ msgstr ""
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_file__active
 msgid "If a file is set to archived, it is not displayed, but still exists."
-msgstr ""
+msgstr "Si un archivo está configurado como archivado, no se muestra, pero aún existe."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_directory__company
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_file__company
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_storage__company
 msgid "If set, directories and files will only be available for the selected company."
-msgstr ""
+msgstr "Si está configurado, las carpetas y archivos solo estarán disponibles para la empresa seleccionada."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_directory__is_hidden
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_file__is_hidden
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_storage__is_hidden
 msgid "Indicates if directories and files are hidden by default."
-msgstr ""
+msgstr "Indica si las carpetas y archivos están ocultos por defecto."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_directory__is_root_directory
 msgid "Indicates if the directory is a root directory. A root directory has a settings object,\n"
 "            while a directory with a set parent inherits the settings form its parent."
-msgstr ""
+msgstr "Indica si una carpeta es un carpeta raíz. Una carpeta raíz tiene un objeto de configuración,\n"
+"            mientras que una carpeta con un conjunto primario hereda la configuración de su elemento primario."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+msgid "Integrations"
+msgstr "Integraciones"
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_01_demo
 msgid "Internal"
-msgstr ""
+msgstr "Interno"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_new_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Internal / Human Resource"
-msgstr ""
+msgstr "Interno / Recursos Humanos"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
+msgid "Invoices"
+msgstr "Facturas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__is_root_directory
 msgid "Is Root Directory"
-msgstr ""
+msgstr "Interno / Recursos Humanos"
 
 #. module: muk_dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -888,12 +1037,12 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Just done"
-msgstr ""
+msgstr "Recién hecho"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_lobject
 msgid "Large Objects Storage"
-msgstr ""
+msgstr "Almacenamiento de objetos grandes"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category____last_update
@@ -926,99 +1075,99 @@ msgstr "Última actualización el"
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Lock"
-msgstr ""
+msgstr "Bloquear"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__is_locked
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__locked_by
 msgid "Locked by"
-msgstr ""
+msgstr "Bloqueado por"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_mail
 msgid "Mail Support"
-msgstr ""
+msgstr "Soporte por correo"
 
 #. module: muk_dms
 #: model:res.groups,name:muk_dms.group_dms_manager
 msgid "Manager"
-msgstr ""
+msgstr "Responsable"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
 msgid "Manual File Migration"
-msgstr ""
+msgstr "Migración manual de archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__custom_thumbnail_medium
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__custom_thumbnail_medium
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_mixins_thumbnail__custom_thumbnail_medium
 msgid "Medium Custom Thumbnail"
-msgstr ""
+msgstr "Miniatura personalizada mediana"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__thumbnail_medium
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__thumbnail_medium
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_mixins_thumbnail__thumbnail_medium
 msgid "Medium Thumbnail"
-msgstr ""
+msgstr "Miniatura mediana"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Meta Information"
-msgstr ""
+msgstr "Meta informacion"
 
 #. module: muk_dms
 #: model:ir.actions.server,name:muk_dms.action_dms_attachment_migrate
 msgid "Migrate"
-msgstr ""
+msgstr "Migrar"
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:221
+#: code:addons/muk_dms/models/file.py:229
 #, python-format
 msgid "Migrate File %s of %s [ %s ]"
-msgstr ""
+msgstr "Migrar archivo %s de %s [ %s ]"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
 msgid "Migrate Files"
-msgstr ""
+msgstr "Migrar archivos"
 
 #. module: muk_dms
 #: model:ir.ui.menu,name:muk_dms.menu_dms_file_migration
 msgid "Migration"
-msgstr ""
+msgstr "Migración"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__migration
 msgid "Migration Status"
-msgstr ""
+msgstr "Estado migratorio"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 msgid "Modification Date"
-msgstr ""
+msgstr "Fecha de modificación"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 msgid "My Directories"
-msgstr ""
+msgstr "Mis carpetas"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 msgid "My Documents"
-msgstr ""
+msgstr "Mis documentos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file
 msgid "My Files"
-msgstr ""
+msgstr "Mis archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__name
@@ -1032,24 +1181,24 @@ msgstr "Nombre"
 #: model:ir.actions.act_window,name:muk_dms.action_dms_directory_new
 #: model:ir.actions.act_window,name:muk_dms.action_dms_file_new
 msgid "New Root Directory"
-msgstr ""
+msgstr "Nueva carpeta raíz"
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_storage_new
 msgid "New Storage"
-msgstr ""
+msgstr "Nuevo almacenamiento"
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_06_demo
 msgid "News"
-msgstr ""
+msgstr "Noticias"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js:92
+#: code:addons/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js:61
 #, python-format
 msgid "No Directory has been selected!"
-msgstr ""
+msgstr "¡No se ha seleccionado ningúna carpeta!"
 
 #. module: muk_dms
 #: selection:res.company,documents_onboarding_directory_state:0
@@ -1057,18 +1206,23 @@ msgstr ""
 #: selection:res.company,documents_onboarding_state:0
 #: selection:res.company,documents_onboarding_storage_state:0
 msgid "Not done"
-msgstr ""
+msgstr "No hecho"
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/storage.py:99
+#: code:addons/muk_dms/models/storage.py:102
 #, python-format
 msgid "Only managers can execute this action."
-msgstr ""
+msgstr "Solo los Administradores pueden ejecutar esta acción."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
+msgid "Operations"
+msgstr "Operaciones"
 
 #. module: muk_dms
 #: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_config_organizing
 msgid "Organizing"
-msgstr ""
+msgstr "Organizando"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__parent_category
@@ -1078,38 +1232,43 @@ msgstr "Categoría padre"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__parent_directory
 msgid "Parent Directory"
-msgstr ""
+msgstr "carpeta padre"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__parent_path
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__parent_path
 msgid "Parent Path"
-msgstr ""
+msgstr "Ruta padre"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_02_demo
 msgid "Partner"
-msgstr ""
+msgstr "Contacto"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_tree
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_tree
 msgid "Path"
-msgstr ""
+msgstr "Camino"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__parent_path_json
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__parent_path_json
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__path_json
 msgid "Path Json"
-msgstr ""
+msgstr "Ruta Json"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__parent_path_names
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__parent_path_names
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Ruta Nombres"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_users
+msgid "Personal Documents"
+msgstr "Documentos personales"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_05_demo
@@ -1119,12 +1278,12 @@ msgstr ""
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_10_demo
 msgid "Product"
-msgstr ""
+msgstr "Productos"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_03_demo
 msgid "Project"
-msgstr ""
+msgstr "Proyectos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__permission_read
@@ -1135,30 +1294,30 @@ msgstr "Permiso para leer"
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_trash
 msgid "Restore Files"
-msgstr ""
+msgstr "Restaurar archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__root_directories
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
 msgid "Root Directories"
-msgstr ""
+msgstr "Carpetas raíz"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__root_storage
 msgid "Root Storage"
-msgstr ""
+msgstr "Almacenamiento de raíz"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_04_demo
 msgid "Sales"
-msgstr ""
+msgstr "Ventas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__save_type
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_search
 msgid "Save Type"
-msgstr ""
+msgstr "Guardar tipo"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__size
@@ -1172,32 +1331,34 @@ msgstr "Tamaño"
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__custom_thumbnail_small
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_mixins_thumbnail__custom_thumbnail_small
 msgid "Small Custom Thumbnail"
-msgstr ""
+msgstr "Miniatura personalizada pequeña"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__thumbnail_small
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__thumbnail_small
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_mixins_thumbnail__thumbnail_small
 msgid "Small Thumbnail"
-msgstr ""
+msgstr "Miniatura pequeña"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/xml/views.xml:28
+#: code:addons/muk_dms/static/src/xml/views.xml:34
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__starred
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 #, python-format
 msgid "Starred"
-msgstr ""
+msgstr "Destacado"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_directory
 msgid "Starred Directories"
-msgstr ""
+msgstr "Carpetas destacadas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__user_stars
 msgid "Stars"
-msgstr ""
+msgstr "Estrellas"
 
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_storage
@@ -1210,26 +1371,31 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.search_dms_file_migration
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_form
 msgid "Storage"
-msgstr ""
+msgstr "Almacenamiento"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__is_hidden
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__is_hidden
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_storage__is_hidden
 msgid "Storage is Hidden"
-msgstr ""
+msgstr "El almacenamiento está oculto."
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_storage
 #: model:ir.ui.menu,name:muk_dms.menu_dms_storage
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_storage_tree
 msgid "Storages"
-msgstr ""
+msgstr "Almacenamientos"
 
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_storage
 msgid "Storages are used to configure your Documents."
-msgstr ""
+msgstr "Los almacenamientos se utilizan para configurar sus documentos."
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
+msgid "Subcategories"
+msgstr "Subcategorias"
 
 #. module: muk_dms
 #: model:ir.actions.act_window,name:muk_dms.action_dms_directories_all_directory
@@ -1237,25 +1403,32 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__child_directories
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
 msgid "Subdirectories"
-msgstr ""
+msgstr "Subcarpetas"
 
 #. module: muk_dms
 #: model:ir.ui.menu,name:muk_dms.cat_menu_muk_dms_config_system
 msgid "System"
-msgstr ""
+msgstr "Sistema"
+
+#. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_form
+msgid "Tag"
+msgstr "Etiqueta"
 
 #. module: muk_dms
 #: sql_constraint:muk_dms.tag:0
 msgid "Tag name already exists!"
-msgstr ""
+msgstr "¡El nombre de la etiqueta ya existe!"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/xml/views.xml:55
+#: code:addons/muk_dms/static/src/xml/views.xml:61
 #: model:ir.actions.act_window,name:muk_dms.action_dms_tag
+#: model:ir.model.fields,field_description:muk_dms.field_muk_dms_category__tags
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__tags
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__tags
 #: model:ir.ui.menu,name:muk_dms.menu_dms_tag
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_category_form
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_tag_tree
 #, python-format
 msgid "Tags"
@@ -1264,7 +1437,7 @@ msgstr "Etiquetas"
 #. module: muk_dms
 #: model_terms:ir.actions.act_window,help:muk_dms.action_dms_tag
 msgid "Tags are used to categorize Documents."
-msgstr ""
+msgstr "Las etiquetas se utilizan para clasificar documentos."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_form
@@ -1276,7 +1449,7 @@ msgstr "Etiquetas..."
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Technical Information"
-msgstr ""
+msgstr "Información técnica"
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_category__active
@@ -1286,55 +1459,56 @@ msgstr "El campo activo le permite ocultar la categoría sin tener que eliminarl
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_tag__active
 msgid "The active field allows you to hide the tag without removing it."
-msgstr ""
+msgstr "El campo activo le permite ocultar la etiqueta sin eliminarla."
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_directory_panel
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_file_panel
 msgid "The configuration is done!"
-msgstr ""
+msgstr "¡La configuración está hecha!"
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:420
+#: code:addons/muk_dms/models/file.py:520
 #, python-format
 msgid "The directory has to have the permission to create files."
-msgstr ""
+msgstr "La carpeta debe tener permiso para crear archivos."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:344
+#: code:addons/muk_dms/models/directory.py:393
 #, python-format
 msgid "The directory name is invalid."
-msgstr ""
+msgstr "El nombre del archivo no es válido."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:408
+#: code:addons/muk_dms/models/file.py:508
 #, python-format
 msgid "The file has a forbidden file extension."
-msgstr ""
+msgstr "El archivo tiene una extensión de archivo prohibida."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:399
+#: code:addons/muk_dms/models/file.py:499
 #, python-format
 msgid "The file name is invalid."
-msgstr ""
+msgstr "El nombre del archivo no es válido."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/file.py:414
+#: code:addons/muk_dms/models/file.py:514
 #, python-format
 msgid "The maximum upload size is %s MB)."
-msgstr ""
+msgstr "El tamaño máximo de carga es %s MB)."
 
 #. module: muk_dms
-#: code:addons/muk_dms/models/directory.py:338
+#: code:addons/muk_dms/models/directory.py:387
 #, python-format
 msgid "The parent directory has to have the permission to create directories."
-msgstr ""
+msgstr "La carpeta padre debe tener permiso para crear carpeta."
 
 #. module: muk_dms
 #: model:ir.model.fields,help:muk_dms.field_muk_dms_storage__save_type
 msgid "The save type is used to determine how a file is saved by the system. If you change \n"
 "            this setting, you can migrate existing files manually by triggering the action."
-msgstr ""
+msgstr "El tipo de guardado se usa para determinar cómo el sistema guarda un archivo. Si cambia \n"
+"            esta configuración, puede migrar los archivos existentes manualmente activando la acción."
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__thumbnail
@@ -1348,27 +1522,32 @@ msgstr "Miniatura"
 #. module: muk_dms
 #: model:ir.model,name:muk_dms.model_muk_dms_mixins_thumbnail
 msgid "Thumbnail Mixin"
-msgstr ""
+msgstr "Miniatura Mixin"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_total_elements
 msgid "Total Elements"
-msgstr ""
+msgstr "Total Elementos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_total_files
 msgid "Total Files"
-msgstr ""
+msgstr "Total Archivos"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_directory__count_total_directories
 msgid "Total Subdirectories"
-msgstr ""
+msgstr "Total Subcarpetas"
 
 #. module: muk_dms
 #: model:muk_dms.category,name:muk_dms.category_04_demo
 msgid "Traveling"
-msgstr ""
+msgstr "Viaje"
+
+#. module: muk_dms
+#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_view
+msgid "Tree View"
+msgstr "Vista de árbol"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_muk_dms_file__mimetype
@@ -1378,56 +1557,57 @@ msgstr "Tipo"
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
 msgid "Unlock"
-msgstr ""
+msgstr "Desbloquear"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js:92
+#: code:addons/muk_dms/static/src/js/views/file/kanban/file_kanban_controller.js:61
 #, python-format
 msgid "Upload Error"
-msgstr ""
+msgstr "Error al Subir"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_file_step
 msgid "Upload File"
-msgstr ""
+msgstr "Subir archivo"
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/js/views/mixins/file_upload.js:63
+#: code:addons/muk_dms/static/src/js/views/mixins/file_upload.js:66
 #, python-format
 msgid "Upload Files"
-msgstr ""
+msgstr "Subir archivos"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.onboarding_file_step
 msgid "Upload your first File."
-msgstr ""
+msgstr "Sube tu primer archivo."
 
 #. module: muk_dms
 #. openerp-web
-#: code:addons/muk_dms/static/src/js/views/mixins/file_upload.js:64
+#: code:addons/muk_dms/static/src/js/views/mixins/file_upload.js:67
 #, python-format
 msgid "Uploading..."
-msgstr ""
+msgstr "Subiendo ..."
 
 #. module: muk_dms
 #: model:res.groups,name:muk_dms.group_dms_user
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #. module: muk_dms
 #: model:muk_dms.tag,name:muk_dms.tag_09_demo
 msgid "Vendor Bill"
-msgstr ""
+msgstr "Facturas"
 
 #. module: muk_dms
 #: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_version
 msgid "Versioning"
-msgstr ""
+msgstr "Versionado"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban
 msgid "Views"
 msgstr "Vistas"
 
@@ -1446,7 +1626,7 @@ msgstr ""
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.res_config_settings_view_form
 msgid "exe,msi"
-msgstr ""
+msgstr "exe, msi"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_file_panel
@@ -1463,3 +1643,4 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_dms.document_onboarding_file_panel
 msgid "res.company"
 msgstr ""
+

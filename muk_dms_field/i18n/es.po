@@ -23,72 +23,72 @@ msgstr ""
 #. module: muk_dms_field
 #: model:ir.model.fields,field_description:muk_dms_field.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr ""
+msgstr "Tipo de campo"
 
 #. module: muk_dms_field
 #: model:ir.model,name:muk_dms_field.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Campos"
 
 #. module: muk_dms_field
 #: model:ir.model,name:muk_dms_field.model_muk_dms_file
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_dms_field
 #: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file__reference_field
 msgid "Reference Field"
-msgstr ""
+msgstr "Campo de referencia"
 
 #. module: muk_dms_field
 #: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file__reference_id
 msgid "Reference ID"
-msgstr ""
+msgstr "Referencia ID"
 
 #. module: muk_dms_field
 #: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file__reference_model
 msgid "Reference Model"
-msgstr ""
+msgstr "Modelo de referencia"
 
 #. module: muk_dms_field
 #: model:ir.model.fields,field_description:muk_dms_field.field_muk_dms_file__reference_name
 msgid "Reference Name"
-msgstr ""
+msgstr "nombre de referencia"
 
 #. module: muk_dms_field
 #: model:ir.model.fields,help:muk_dms_field.field_muk_dms_file__reference_model
 msgid "The database object this record will be attached to."
-msgstr ""
+msgstr "El objeto de la base de datos al que se adjuntará este registro."
 
 #. module: muk_dms_field
 #: model:ir.model.fields,help:muk_dms_field.field_muk_dms_file__reference_id
 msgid "The record id this is attached to."
-msgstr ""
+msgstr "El id. de registro está adjuntado a."
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr ""
+msgstr "binario"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "boolean"
-msgstr ""
+msgstr "booleano"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "char"
-msgstr ""
+msgstr "Carácter"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr ""
+msgstr "fecha"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "datetime"
-msgstr ""
+msgstr "Fecha y hora"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
@@ -98,12 +98,12 @@ msgstr ""
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "file"
-msgstr ""
+msgstr "archivo"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "float"
-msgstr ""
+msgstr "número flotante"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
@@ -113,7 +113,7 @@ msgstr ""
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "integer"
-msgstr ""
+msgstr "entero"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
@@ -128,7 +128,7 @@ msgstr ""
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr ""
+msgstr "Monetario"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
@@ -138,15 +138,15 @@ msgstr ""
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr ""
+msgstr "Referencia"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr ""
+msgstr "Selección"
 
 #. module: muk_dms_field
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr ""
+msgstr "texto"
 
