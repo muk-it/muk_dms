@@ -41,7 +41,7 @@ msgstr "<i class=\"fa fa-external-link\"/> Öffnen"
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_kanban
 msgid "<i class=\"fa fa-lock\"/> Lock"
-msgstr "<i class=\"fa fa-lock\"/> Gesperrt"
+msgstr "<i class=\"fa fa-lock\"/> Sperren"
 
 #. module: muk_dms
 #: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_directory_kanban

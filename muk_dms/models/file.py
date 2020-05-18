@@ -262,7 +262,12 @@ class File(models.Model):
     def search_panel_select_range(self, field_name, **kwargs):
         operator, directory_id = self._search_panel_directory(**kwargs)
         if directory_id and field_name == 'directory':
-            domain = [('parent_directory', operator, directory_id)]
+            domain = expression.AND([
+                kwargs.get('search_domain', []),
+                kwargs.get('category_domain', []),
+                kwargs.get('filter_domain', []),
+                [('parent_directory', operator, directory_id)],
+            ])
             values = self.env['muk_dms.directory'].search_read(
                 domain, ['display_name', 'parent_directory']
             )
