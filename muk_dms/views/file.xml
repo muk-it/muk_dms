@@ -209,6 +209,9 @@
 				<button class="oe_highlight" name="unlock" type="object" string="Unlock"
 					attrs="{'invisible':['|',('is_locked', '=', False),('is_lock_editor', '=', False)]}" />
 			</header>
+			<div class="alert alert-warning text-center o_form_header" attrs="{'invisible': [('is_locked', '!=', True)]}" role="status">
+         		<strong>This file is locked!</strong>
+      		</div>
 			<sheet>
 				<div class="oe_button_box" name="button_box">
 					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
