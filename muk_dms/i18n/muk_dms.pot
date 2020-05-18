@@ -74,6 +74,11 @@ msgid "<strong>Save</strong> this page and come back here to set up the feature.
 msgstr ""
 
 #. module: muk_dms
+#: model_terms:ir.ui.view,arch_db:muk_dms.view_dms_file_form
+msgid "<strong>This file is locked!</strong>"
+msgstr ""
+
+#. module: muk_dms
 #: code:addons/muk_dms/models/directory.py:332
 #, python-format
 msgid "A directory can't be a root and have a parent directory."
