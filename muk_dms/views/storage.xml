@@ -26,7 +26,7 @@
 
 <record id="action_dms_directories_storage" model="ir.actions.act_window">
     <field name="name">Directories</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.directory</field>
 	<field name="view_mode">kanban,tree,form</field>
 	<field name="domain">
@@ -54,7 +54,7 @@
 
 <record id="action_dms_files_storage" model="ir.actions.act_window">
     <field name="name">Files</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,graph,pivot,form</field>
 	<field name="domain">
@@ -222,7 +222,7 @@
 	<field name="name">New Storage</field>
 	<field name="res_model">muk_dms.storage</field>
 	<field name="view_mode">form</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="target">new</field>
     <field name="view_id" ref="view_dms_storage_new_form" />
 </record>

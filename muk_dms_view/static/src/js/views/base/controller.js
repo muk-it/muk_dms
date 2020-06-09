@@ -30,7 +30,7 @@ var config = require('web.config');
 var session = require('web.session');
 var framework = require('web.framework');
 var web_client = require('web.web_client');
-var crash_manager = require('web.crash_manager');
+var crash_manager = require('web.CrashManager').CrashManager;
 
 var files = require('muk_web_utils.files');
 var async = require('muk_web_utils.async');
@@ -381,11 +381,11 @@ var DocumentsController = Widget.extend(FileUpload, {
             method: 'write',
             args: [node.data.odoo_id, vals],
             context: session.user_context,
-		}).done(function() {
+		}).then(function() {
 			self.do_notify(node.text + _t(" has been moved!"));
 			self.refreshNode(ev.data.new_parent);
 			self.refreshNode(ev.data.old_parent);
-		}).fail(function() {
+		}, function() {
 			self.do_warn(node.text + _t(" couldn't be moved!"));
 			self.refreshNode(ev.data.new_parent);
 			self.refreshNode(ev.data.old_parent);
@@ -400,10 +400,10 @@ var DocumentsController = Widget.extend(FileUpload, {
             method: 'unlink',
             args: [node.data.odoo_id],
             context: session.user_context,
-		}).done(function() {
+		}).then(function() {
 			self.do_notify(node.text + _t(" has been deleted!"));
 			self.refreshNode(parent);
-		}).fail(function() {
+		}, function() {
 			self.refreshNode(parent);
 			self.do_warn(node.text + _t(" couldn't be deleted!"));
 		});
@@ -426,10 +426,10 @@ var DocumentsController = Widget.extend(FileUpload, {
 	            method: 'unlink',
 	            args: [data[key]],
 	            context: session.user_context,
-			}).done(function() {
+			}).then(function() {
 				self.do_notify(_t("The records have been deleted!"));
 				self.refresh();
-			}).fail(function() {
+			}, function() {
 				self.refresh();
 				self.do_warn(_t("The records couldn't be deleted!"));
 			});
@@ -451,12 +451,12 @@ var DocumentsController = Widget.extend(FileUpload, {
             method: 'copy',
             args: [original.data.odoo_id, vals],
             context: session.user_context,
-		}).done(function(copy_id) {
+		}).then(function(copy_id) {
 			node.data = original.data;
 			node.id = original.data.odoo_model.split(".") + "_" + copy_id;
 			self.do_notify(node.text + _t(" has been copied!"));
 			self.refreshNode(parent);
-		}).fail(function() {
+		}, function() {
 			self.refreshNode(parent);
 			self.do_warn(node.text + _t(" couldn't be copied!"));
 		});
@@ -469,9 +469,9 @@ var DocumentsController = Widget.extend(FileUpload, {
             method: 'write',
             args: [node.data.odoo_id, {'name': ev.data.text}],
             context: session.user_context,
-		}).done(function() {
+		}).then(function() {
 			self.do_notify(node.text + _t(" has been renamed!"));
-		}).fail(function() {
+		}, function() {
 			self.refresh();
 			self.do_warn(node.text + _t(" couldn't be renamed!"));
 		});
@@ -633,7 +633,8 @@ var DocumentsController = Widget.extend(FileUpload, {
 				        'filename': node.data.filename
 				    },
 				    'complete': framework.unblockUI,
-				    'error': crash_manager.rpc_error.bind(crash_manager)
+				    // 'error': crash_manager.rpc_error.bind(crash_manager)
+					'error': function (error) { self.call('crash_manager', 'rpc_error', error) }
 				});
 			}
     	};

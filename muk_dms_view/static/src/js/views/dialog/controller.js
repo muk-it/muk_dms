@@ -29,7 +29,7 @@ var config = require('web.config');
 var session = require('web.session');
 var web_client = require('web.web_client');
 var framework = require('web.framework');
-var crash_manager = require('web.crash_manager');
+var crash_manager = require('web.CrashManager').CrashManager;
 
 var DocumentsController = require('muk_dms_view.DocumentsController');
 

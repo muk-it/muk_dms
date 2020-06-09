@@ -199,7 +199,6 @@ class FileAction(models.Model):
     # Functions
     #----------------------------------------------------------
     
-    @api.multi
     def trigger_actions(self, file_ids):
         model = self.env['muk_dms.file']
         files = model.browse(file_ids)

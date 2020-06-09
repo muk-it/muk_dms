@@ -59,12 +59,12 @@ var DocumentDropDialog = Dialog.extend({
     	var self = this;
 		var load_max_upload_size = this._rpc({
             route: '/config/muk_web_utils.binary_max_size',
-        }).done(function(result) {
+        }).then(function(result) {
         	self.max_upload_size = result.max_upload_size;
         });
 		var load_forbidden_extensions = this._rpc({
             route: '/config/muk_dms.forbidden_extensions',
-        }).done(function(result) {
+        }).then(function(result) {
         	self.forbidden_extensions = result.forbidden_extensions;
         });
         return $.when(ajax.loadLibs(this), this._super.apply(this, arguments),

@@ -30,7 +30,6 @@ class Base(models.AbstractModel):
     
     _inherit = 'base'
 
-    @api.multi
     def unlink(self):
         file_ids = set()
         if 'muk_dms.file' in self.env:

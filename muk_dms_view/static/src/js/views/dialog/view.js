@@ -31,7 +31,7 @@ var web_client = require('web.web_client');
 
 var Widget = require('web.Widget');
 var Dialog = require('web.Dialog');
-var ControlPanelMixin = require('web.ControlPanelMixin');
+var ControlPanelMixin = require('web.ActionMixin');
 
 var DocumentsModel = require('muk_dms_view.DocumentsModel');
 var DocumentsRenderer = require('muk_dms_view.DocumentsRenderer');

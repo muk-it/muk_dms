@@ -188,7 +188,6 @@ class Directory(models.Model):
     # Functions
     #----------------------------------------------------------
     
-    @api.multi
     def toggle_starred(self):
         updates = defaultdict(set)
         for record in self:
@@ -203,7 +202,6 @@ class Directory(models.Model):
     # Actions
     #----------------------------------------------------------
 
-    @api.multi
     def action_save_onboarding_directory_step(self):
         self.env.user.company_id.set_onboarding_step_done(
             'documents_onboarding_directory_state'
@@ -307,7 +305,6 @@ class Directory(models.Model):
             elements += record.count_directories
             record.count_elements = elements
             
-    @api.multi
     def _compute_count_total_directories(self):
         for record in self:
             count = self.search_count([
@@ -316,7 +313,6 @@ class Directory(models.Model):
             count = count - 1 if count > 0 else 0
             record.count_total_directories = count
             
-    @api.multi
     def _compute_count_total_files(self):
         model = self.env['muk_dms.file']
         for record in self:
@@ -324,14 +320,12 @@ class Directory(models.Model):
                 ('directory', 'child_of', record.id)
             ])
     
-    @api.multi
     def _compute_count_total_elements(self):
         for record in self:
             total_elements = record.count_total_files 
             total_elements += record.count_total_directories
             record.count_total_elements = total_elements
     
-    @api.multi
     def _compute_size(self):
         sudo_model = self.env['muk_dms.file'].sudo()
         for record in self:
@@ -402,7 +396,6 @@ class Directory(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
      
-    @api.multi
     def _inverse_starred(self):
         starred_records = self.env['muk_dms.directory'].sudo()
         not_starred_records = self.env['muk_dms.directory'].sudo()
@@ -414,7 +407,6 @@ class Directory(models.Model):
         not_starred_records.write({'user_stars': [(4, self.env.uid)]})
         starred_records.write({'user_stars': [(3, self.env.uid)]})
         
-    @api.multi
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
@@ -438,7 +430,6 @@ class Directory(models.Model):
             record.copy({'parent_directory': new.id})
         return new
 
-    @api.multi
     def write(self, vals):
         res = super(Directory, self).write(vals)
         if self and any(field in vals for field in ['root_storage', 'parent_directory']):
@@ -451,7 +442,6 @@ class Directory(models.Model):
                 records.write({'storage': self._convert_to_write(data).get('storage')})
         return res
 
-    @api.multi
     def unlink(self):
         if self and self.check_access('unlink', raise_exception=True):
             domain = [

@@ -97,6 +97,13 @@ class File(models.Model):
                 'actions_multi': [(6, 0, list(vals[1]))]
             }
             updatesdict[frozendict(actions_values)].add(id)
+
+        updated_ids = []
         for values, ids in updatesdict.items():
+            updated_ids.extend(ids)
             self.browse(ids).update(dict(values))
-            
+
+        (self - self.browse(updated_ids)).update({
+            'actions': False,
+            'actions_multi': False,
+        })

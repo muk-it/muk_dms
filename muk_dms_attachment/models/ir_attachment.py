@@ -132,7 +132,6 @@ class DocumentIrAttachment(models.Model):
             self.search(record_domain).migrate(batch_size=100)
             return True
     
-    @api.multi
     def migrate(self, batch_size=None):
         if self._storage() != 'document':
             self.with_context(migration=True).write({
@@ -176,7 +175,6 @@ class DocumentIrAttachment(models.Model):
     # Create, Write, Delete
     #----------------------------------------------------------
     
-    @api.multi
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
@@ -197,7 +195,7 @@ class DocumentIrAttachment(models.Model):
                         store_document = attach.store_document
                     else: 
                         store_document = self.env['muk_dms.file'].sudo().create({
-                            'name': "[A-%s] %s" % (attach.id, attach.datas_fname or attach.name),
+                            'name': "[A-%s] %s" % (attach.id, attach.name),
                             'directory': directory and directory.id,
                             'content': value
                         })
@@ -210,7 +208,6 @@ class DocumentIrAttachment(models.Model):
             else:
                 super(DocumentIrAttachment, attach)._inverse_datas()
     
-    @api.multi
     def copy(self, default=None):
         self.ensure_one()
         default = dict(default or [])
@@ -219,7 +216,7 @@ class DocumentIrAttachment(models.Model):
             file = self.store_document.sudo()
             copy = super(DocumentIrAttachment, self).copy(default)
             store_document = self.env['muk_dms.file'].sudo().create({
-                'name': "[A-%s] %s" % (copy.id, copy.datas_fname or copy.name),
+                'name': "[A-%s] %s" % (copy.id, copy.name),
                 'directory': file.directory.id,
                 'content': file.content})
             copy.write({'store_document': store_document.id})
@@ -227,18 +224,16 @@ class DocumentIrAttachment(models.Model):
         else:
             return super(DocumentIrAttachment, self).copy(default)
 
-    @api.multi
     def write(self, vals):
         result = super(DocumentIrAttachment, self).write(vals)
-        if 'datas_fname' in vals and vals['datas_fname']:
-            for attach in self:
-                if attach.store_document and not attach.is_store_document_link:
-                    attach.store_document.sudo().write({
-                        'name': "[A-%s] %s" % (attach.id, vals['datas_fname'])
-                    })
+        # if 'name' in vals and vals['name']:
+        #     for attach in self:
+        #         if attach.store_document and not attach.is_store_document_link:
+        #             attach.store_document.sudo().write({
+        #                 'name': "[A-%s] %s" % (attach.id, vals['name'])
+        #             })
         return result
 
-    @api.multi
     def unlink(self):
         files = self.env['muk_dms.file']
         for attach in self.sudo():

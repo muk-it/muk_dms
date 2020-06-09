@@ -27,7 +27,7 @@ var core = require('web.core');
 var session = require('web.session');
 var registry = require('web.field_registry');
 var fields = require('web.relational_fields');
-var crash_manager = require('web.crash_manager');
+var crash_manager = require('web.CrashManager').CrashManager;
 
 var AbstractFileActions = require('muk_dms_action.AbstractFileActions');
 

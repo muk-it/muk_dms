@@ -38,7 +38,6 @@ class ResConfigSettings(models.TransientModel):
     # Functions
     #----------------------------------------------------------
     
-    @api.multi
     def set_values(self):
         res = super(ResConfigSettings, self).set_values()
         self.env.ref('muk_dms_access.view_dms_directory_form').write({

@@ -29,7 +29,7 @@ var config = require('web.config');
 var session = require('web.session');
 var web_client = require('web.web_client');
 var framework = require('web.framework');
-var crash_manager = require('web.crash_manager');
+var crash_manager = require('web.CrashManager').CrashManager;
 
 var Widget = require('web.Widget');
 var Dialog = require('web.Dialog');
@@ -56,6 +56,7 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
 	init: function(parent, action) {
         this._super(parent, _.extend({}, {
         	key: "dms_documents",
+        	name: _t("Documents"),
 	    }), action);
         this.controller.params.action_open_dialog = this._get_storage('dms_documents_open_dialog');
     },
@@ -159,7 +160,7 @@ var DocumentTreeMainView = ActionDocumentTreeView.extend({
             }));
             this.$searchview.find('#mk_searchview_input').keyup(this._trigger_search.bind(this));
         }
-        this.update_control_panel({
+        this.updateControlPanel({
             cp_content: {
                 $buttons: this.$buttons,
                 $pager: this.$pager,

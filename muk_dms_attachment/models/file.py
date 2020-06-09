@@ -83,7 +83,7 @@ class File(models.Model):
         for record in self:
             values = {
                 'type': 'binary',
-                'datas_fname': record.name,
+                'name': record.name,
                 'public': public
             }
             if model:
@@ -112,7 +112,6 @@ class File(models.Model):
     # Read
     #----------------------------------------------------------
     
-    @api.multi
     def _compute_attachment(self):
         attachments = self.env['ir.attachment'].sudo().search([
             '&', ['store_document', 'in', self.ids],
@@ -132,7 +131,6 @@ class File(models.Model):
                     'is_attachment': False,
                 })
     
-    @api.multi
     def read(self, fields=None, load='_classic_read'):
         self.check_attachment_access('read', True)
         return super(File, self).read(fields, load=load)
@@ -176,7 +174,6 @@ class File(models.Model):
         file_ids -= set(attachments.sudo().mapped('store_document').ids)
         return len(file_ids) if count else list(file_ids)
      
-    @api.multi
     def _filter_access(self, operation):
         records = super(File, self)._filter_access(operation)
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
@@ -184,7 +181,6 @@ class File(models.Model):
         attachments = self._get_attachments_with_no_access(operation, records.ids)
         return records - attachments.sudo().mapped('store_document')
 
-    @api.multi
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
@@ -196,7 +192,6 @@ class File(models.Model):
                 raise
             return False
         
-    @api.multi
     def check_attachment_access(self, operation, raise_exception=False):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
@@ -214,13 +209,11 @@ class File(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
     
-    @api.multi
     def write(self, vals):
         if 'content' in vals:
             self.check_attachment_access('write', True)
         return super(File, self).write(vals)
     
-    @api.multi
     def unlink(self):
         self.check_attachment_access('unlink', True)
         attachments = self.sudo().mapped('attachment')

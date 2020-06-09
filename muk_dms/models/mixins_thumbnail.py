@@ -26,9 +26,14 @@ import base64
 import operator
 import functools
 import collections
+import logging
 
 from odoo import models, fields, api, tools
 from odoo.modules.module import get_resource_path
+
+from odoo.addons.muk_utils.tools import image
+
+_logger = logging.getLogger(__name__)
 
 class Thumbnail(models.AbstractModel):
     
@@ -95,7 +100,6 @@ class Thumbnail(models.AbstractModel):
             path = get_resource_path('muk_dms', *folders, "file_unkown.svg")
         return path
     
-    @api.multi
     def _get_thumbnail_placeholder_name(self):
         return "folder.svg"
     
@@ -140,16 +144,15 @@ class Thumbnail(models.AbstractModel):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            tools.image_resize_images(vals, 
+            image.image_resize_images(vals, 
                 big_name='custom_thumbnail',
                 medium_name='custom_thumbnail_medium', 
                 small_name='custom_thumbnail_small'
             )
         return super(Thumbnail, self).create(vals_list)
         
-    @api.multi
     def write(self, vals):
-        tools.image_resize_images(vals, 
+        image.image_resize_images(vals, 
             big_name='custom_thumbnail',
             medium_name='custom_thumbnail_medium', 
             small_name='custom_thumbnail_small'

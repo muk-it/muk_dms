@@ -212,7 +212,6 @@ class File(models.Model):
         extensions = get_param('muk_dms.forbidden_extensions', default="")
         return [extension.strip() for extension in extensions.split(',')]
 
-    @api.multi
     def _get_thumbnail_placeholder_name(self):
         return self.extension and "file_%s.svg" % self.extension or ""
     
@@ -220,7 +219,6 @@ class File(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    @api.multi
     def action_migrate(self, logging=True):
         record_count = len(self)
         for index, file in enumerate(self):
@@ -231,7 +229,6 @@ class File(models.Model):
                 'content': file.with_context({}).content
             })
     
-    @api.multi
     def action_save_onboarding_file_step(self):
         self.env.user.company_id.set_onboarding_step_done(
             'documents_onboarding_file_state'
@@ -317,6 +314,7 @@ class File(models.Model):
     @api.depends('name', 'directory', 'directory.parent_path')
     def _compute_path(self):
         records_with_directory = self - self.filtered(lambda rec: not rec.directory)
+        updated = self.env['muk_dms.file']
         if records_with_directory:
             paths = [list(map(int, rec.directory.parent_path.split('/')[:-1])) for rec in records_with_directory]
             model = self.env['muk_dms.directory'].with_context(dms_directory_show_path=False)
@@ -343,10 +341,16 @@ class File(models.Model):
                     'name': name[0][1],
                     'id': isinstance(record.id, int) and record.id or 0,
                 })
+                updated |= record
                 record.update({
                     'path_names': '/'.join(path_names),
                     'path_json': json.dumps(path_json),
                 })
+
+        (self - updated).update({
+            'path_names': False,
+            'path_json': False,
+        })
             
     @api.depends('name')
     def _compute_extension(self):
@@ -387,7 +391,6 @@ class File(models.Model):
             else:
                 record.migration = selection.get(storage_type)
 
-    @api.multi
     def read(self, fields=None, load='_classic_read'):
         self.check_directory_access('read', {}, True)
         return super(File, self).read(fields, load=load)
@@ -463,7 +466,6 @@ class File(models.Model):
             file_ids -= set(directory.sudo().mapped('files').ids)
         return len(file_ids) if count else list(file_ids)
     
-    @api.multi
     def _filter_access(self, operation):
         records = super(File, self)._filter_access(operation)
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
@@ -473,7 +475,6 @@ class File(models.Model):
             records -= self.browse(directory.sudo().mapped('files').ids)
         return records
 
-    @api.multi
     def check_access(self, operation, raise_exception=False):
         res = super(File, self).check_access(operation, raise_exception)
         try:
@@ -483,7 +484,6 @@ class File(models.Model):
                 raise
             return False
         
-    @api.multi
     def check_directory_access(self, operation, vals={}, raise_exception=False):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
@@ -528,7 +528,6 @@ class File(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
     
-    @api.multi
     def _inverse_content(self):
         updates = defaultdict(set)
         for record in self:
@@ -544,7 +543,6 @@ class File(models.Model):
                 self.browse(ids).write(dict(vals))
         self.recompute()
 
-    @api.multi
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
         self.ensure_one()
@@ -562,12 +560,10 @@ class File(models.Model):
         self.check_directory_access('create', default, True)
         return super(File, self).copy(default)
     
-    @api.multi
     def write(self, vals):
         self.check_directory_access('write', vals, True)
         return super(File, self).write(vals)
     
-    @api.multi
     def unlink(self):
         self.check_directory_access('unlink', {}, True)
         return super(File, self).unlink()

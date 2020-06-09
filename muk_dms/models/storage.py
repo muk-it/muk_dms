@@ -96,7 +96,6 @@ class Storage(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    @api.multi
     def action_storage_migrate(self):
         if not self.env.user.has_group('muk_dms.group_dms_manager'):
             raise AccessError(_('Only managers can execute this action.'))
@@ -106,7 +105,6 @@ class Storage(models.Model):
             files |= files.search(domain)
         files.action_migrate()
 
-    @api.multi
     def action_save_onboarding_storage_step(self):
         self.env.user.company_id.set_onboarding_step_done(
             'documents_onboarding_storage_state'

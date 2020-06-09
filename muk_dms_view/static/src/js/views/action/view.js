@@ -29,7 +29,7 @@ var config = require('web.config');
 var session = require('web.session');
 var web_client = require('web.web_client');
 
-var ControlPanelMixin = require('web.ControlPanelMixin');
+var ControlPanelMixin = require('web.ActionMixin');
 
 var DocumentsModel = require('muk_dms_view.DocumentsModel');
 var DocumentsRenderer = require('muk_dms_view.DocumentsRenderer');
@@ -43,11 +43,11 @@ var ActionDocumentTreeView = DocumentTreeView.extend(ControlPanelMixin, {
 	custom_events: _.extend({}, DocumentTreeView.prototype.custom_events, {
 		reverse_breadcrumb: '_on_reverse_breadcrumb',
     }),
-	config: {
-		DocumentsModel: DocumentsModel,
-		DocumentsRenderer: DocumentsRenderer,
-		DocumentsController: DocumentsViewController,
-	},
+    // config: {
+    // 	DocumentsModel: DocumentsModel,
+    // 	DocumentsRenderer: DocumentsRenderer,
+    // 	DocumentsController: DocumentsViewController,
+    // },
     _update_cp: function() {
     	var self = this;
     	if (!this.$searchview) {
@@ -56,7 +56,7 @@ var ActionDocumentTreeView = DocumentTreeView.extend(ControlPanelMixin, {
             }));
             this.$searchview.find('#mk_searchview_input').keyup(this._trigger_search.bind(this));
         }
-        this.update_control_panel({
+        this.updateControlPanel({
             cp_content: {
                 $searchview: this.$searchview,
             },

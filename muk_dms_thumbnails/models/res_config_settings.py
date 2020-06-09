@@ -30,7 +30,6 @@ class ResConfigSettings(models.TransientModel):
     # Functions
     #----------------------------------------------------------
     
-    @api.multi
     def documents_open_thumbnail_cron(self):
         return {
             'type': 'ir.actions.act_window',

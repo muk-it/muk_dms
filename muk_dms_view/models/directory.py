@@ -48,7 +48,6 @@ class Directory(models.Model):
             "children": directory.count_elements > 0,
         }
         
-    @api.multi
     def _build_documents_view_initial(self):
         if len(self) == 1:
             return [self._build_documents_view_directory(self)]
@@ -69,7 +68,6 @@ class Directory(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    @api.multi
     def action_open_documents_view(self):
         return {
             "type": "ir.actions.client",

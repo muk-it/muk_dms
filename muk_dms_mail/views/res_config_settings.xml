@@ -27,7 +27,7 @@
 	<record id="res_config_settings_view_form" model="ir.ui.view">
 	    <field name="name">res.config.settings.view.form</field>
 	    <field name="model">res.config.settings</field>
-	    <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+	    <field name="inherit_id" ref="muk_dms.res_config_settings_view_form"/>
 	    <field name="arch" type="xml">
 	        <div id="msg_module_muk_dms_mail" position="replace">
 	            <div class="content-group" attrs="{'invisible': [('module_muk_dms_mail','=',False)]}">

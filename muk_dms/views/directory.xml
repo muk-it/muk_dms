@@ -26,7 +26,7 @@
 
 <record id="action_dms_directories_directory" model="ir.actions.act_window">
     <field name="name">Subdirectories</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.directory</field>
 	<field name="view_mode">kanban,tree,form</field>
 	<field name="domain">
@@ -53,7 +53,7 @@
 
 <record id="action_dms_files_directory" model="ir.actions.act_window">
     <field name="name">Files</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,graph,pivot,form</field>
 	<field name="domain">
@@ -79,7 +79,7 @@
 
 <record id="action_dms_directories_all_directory" model="ir.actions.act_window">
     <field name="name">Subdirectories</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.directory</field>
 	<field name="view_mode">kanban,tree,form</field>
 	<field name="domain">
@@ -107,7 +107,7 @@
 
 <record id="action_dms_files_all_directory" model="ir.actions.act_window">
     <field name="name">Files</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">kanban,tree,graph,pivot,form</field>
 	<field name="domain">
@@ -150,6 +150,12 @@
 				<separator/>
 				<filter name="group_storage" string="Storage" domain="[]" context="{'group_by':'storage'}" />
 			</group>
+            <searchpanel>
+                <!-- <field name="parent_directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="category" select="multi" icon="fa-users"/>
+                <field name="tags" select="multi" icon="fa-tag" groupby="category" /> -->
+				<field name="category" icon="fa-folder"/>
+            </searchpanel>
 		</search>
 	</field>
 </record>
@@ -254,11 +260,6 @@
 					</div>
 				</t>
 			</templates>
-            <searchpanel>
-                <field name="parent_directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
-                <field name="category" select="multi" icon="fa-users"/>
-                <field name="tags" select="multi" icon="fa-tag" groupby="category" />
-            </searchpanel>
 		</kanban>
 	</field>
 </record>
@@ -296,7 +297,7 @@
 		                <field string="Files" name="count_total_files" widget="statinfo"/>
 	 				</button>    
 	 				<button name="toggle_starred" type="object" class="oe_stat_button" icon="fa-star">
-                    	<field name="starred" widget="boolean_button" 
+                    	<field name="starred" 
                     		options='{"terminology": {"string_true": "Starred", "string_false": "Not Starred", "hover_true": "Unstar", "hover_false": "Star"}}'/>
                     </button> 
                 </div>
@@ -416,7 +417,7 @@
 <record id="action_dms_directory" model="ir.actions.act_window">
 	<field name="name">Directories</field>
 	<field name="res_model">muk_dms.directory</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="view_mode">kanban,tree,form</field>
 	<field name="domain">[("is_hidden", "=",  False)]</field>
 	<field name="help" type="html">
@@ -470,7 +471,7 @@
 	<field name="name">New Root Directory</field>
 	<field name="res_model">muk_dms.directory</field>
 	<field name="view_mode">form</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="target">new</field>
     <field name="view_id" ref="view_dms_directory_new_form" />
 </record>

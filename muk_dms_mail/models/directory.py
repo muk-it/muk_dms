@@ -69,7 +69,6 @@ class Directory(models.Model):
     def get_alias_model_name(self, vals):
         return vals.get('alias_model', 'muk_dms.directory') 
     
-    @api.multi
     def get_alias_values(self):
         values = super(Directory, self).get_alias_values()
         values['alias_defaults'] = {'parent_directory': self.id}
@@ -92,12 +91,10 @@ class Directory(models.Model):
         directory._process_message(msg_dict)
         return directory
     
-    @api.multi
     def message_update(self, msg_dict, update_vals=None):
         self._process_message(msg_dict, extra_values=update_vals)
         return super(Directory, self).message_update(msg_dict, update_vals=update_vals)
         
-    @api.multi
     def _process_message(self, msg_dict, extra_values={}):
         names = self.sudo().files.mapped('name')
         for attachment in msg_dict['attachments']:

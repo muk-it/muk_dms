@@ -31,8 +31,9 @@ import collections
 from collections import defaultdict
 
 from odoo import models, api, fields, tools
-from odoo.tools import crop_image, image_resize_image
 from werkzeug._internal import _log
+
+from odoo.addons.muk_utils.tools import image
 
 _logger = logging.getLogger(__name__)
 
@@ -67,9 +68,9 @@ class File(models.Model):
     #----------------------------------------------------------
     
     @api.model
-    def _resize_thumbnail(self, image, crop=True):
-        data = crop_image(image, type='center', size=(256, 256), ratio=(1, 1)) if crop else image
-        return image_resize_image(base64_source=data, size=(256, 256), encoding='base64')
+    def _resize_thumbnail(self, a_image, crop=True):
+        data = image.crop_image(a_image, type='center', size=(256, 256), ratio=(1, 1)) if crop else a_image
+        return image.image_resize_image(base64_source=data, size=(256, 256), encoding='base64')
     
     @api.model
     def _make_thumbnail(self, file):
@@ -77,7 +78,6 @@ class File(models.Model):
             return self._resize_thumbnail(file.content, crop=True)
         return None
 
-    @api.multi
     def _update_automatic_thumbnail(self):
         updates = defaultdict(set)
         for record in self:
@@ -91,7 +91,7 @@ class File(models.Model):
                 values = {
                     'automatic_thumbnail': thumbnail
                 }
-                tools.image_resize_images(values, 
+                image.image_resize_images(values, 
                     big_name='automatic_thumbnail',
                     medium_name='automatic_thumbnail_medium', 
                     small_name='automatic_thumbnail_small'
@@ -148,7 +148,6 @@ class File(models.Model):
         records_automatic_thumbnail._update_automatic_thumbnail()
         return res
         
-    @api.multi
     def write(self, vals):
         if vals.get('content'):
             vals.update({

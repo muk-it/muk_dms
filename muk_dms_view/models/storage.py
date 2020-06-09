@@ -57,7 +57,6 @@ class Storage(models.Model):
             "children": storage_directories,
         }
     
-    @api.multi
     def _build_documents_view_initial(self):
             initial_data = []
             for record in self:
@@ -70,7 +69,6 @@ class Storage(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    @api.multi
     def action_open_documents_view(self):
         return {
             "type": "ir.actions.client",

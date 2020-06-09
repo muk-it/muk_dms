@@ -80,7 +80,6 @@ class File(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
     
-    @api.multi
     def _inverse_content(self):
         records = self.filtered(
             lambda rec: rec.storage.save_type == 'lobject'

@@ -83,7 +83,6 @@ class Directory(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
     
-    @api.multi
     def write(self, vals):
         if any(key in vals for key in ['groups', 'inherit_groups']):
             with self.env.norecompute():

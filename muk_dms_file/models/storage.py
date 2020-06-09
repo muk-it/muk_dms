@@ -42,7 +42,6 @@ class Storage(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    @api.multi
     def action_storage_migrate(self):
         if not self.env.user.has_group('muk_dms.group_dms_manager'):
             raise AccessError(_('Only managers can execute this action.'))

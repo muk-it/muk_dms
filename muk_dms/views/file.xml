@@ -44,6 +44,12 @@
 				<filter name="group_storage" string="Storage" domain="[]" context="{'group_by':'storage'}" />
 				<filter name="group_directory" string="Directories" domain="[]" context="{'group_by':'directory'}" />
 			</group>
+            <searchpanel>
+                <!-- <field name="directory" domain="[['is_hidden', '=', False]]" icon="fa-folder"/>
+                <field name="directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="tags" select="multi" icon="fa-tag" groupby="category" /> -->
+				<field name="directory" icon="fa-folder"/>
+            </searchpanel>
 		</search>
 	</field>
 </record>
@@ -148,11 +154,6 @@
 					</div>
 				</t>
 			</templates>
-            <searchpanel>
-                <field name="directory" domain="[['is_hidden', '=', False]]" icon="fa-folder"/>
-                <field name="directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
-                <field name="tags" select="multi" icon="fa-tag" groupby="category" />
-            </searchpanel>
 		</kanban>
 	</field>
 </record>
@@ -215,7 +216,7 @@
 			<sheet>
 				<div class="oe_button_box" name="button_box">
 					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                    	<field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                    	<field name="active" options='{"terminology": "archive"}'/>
                     </button>
                 </div>
 				<field name="thumbnail" widget="image" class="oe_avatar oe_read_only" 
@@ -398,7 +399,7 @@
 	<field name="name">New Root Directory</field>
 	<field name="res_model">muk_dms.file</field>
 	<field name="view_mode">form</field>
-    <field name="view_type">form</field>
+    <!-- <field name="view_type">form</field> -->
 	<field name="target">new</field>
     <field name="view_id" ref="view_dms_file_new_form" />
 </record>

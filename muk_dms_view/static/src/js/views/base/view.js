@@ -31,7 +31,7 @@ var web_client = require('web.web_client');
 
 var Dialog = require('web.Dialog');
 var AbstractAction = require('web.AbstractAction');
-var ControlPanelMixin = require('web.ControlPanelMixin');
+var ControlPanelMixin = require('web.ActionMixin');
 
 var DocumentsModel = require('muk_dms_view.DocumentsModel');
 var DocumentsRenderer = require('muk_dms_view.DocumentsRenderer');
@@ -41,11 +41,17 @@ var _t = core._t;
 var QWeb = core.qweb;
 
 var DocumentTreeView = AbstractAction.extend({
-	config: {
-		DocumentsModel: DocumentsModel,
-		DocumentsRenderer: DocumentsRenderer,
-		DocumentsController: DocumentsController,
-	},
+    hasControlPanel: true,
+    // config: {
+    // 	DocumentsModel: DocumentsModel,
+    // 	DocumentsRenderer: DocumentsRenderer,
+    // 	DocumentsController: DocumentsController,
+    // },
+    config: _.extend({}, AbstractAction.prototype.config, {
+        DocumentsModel: DocumentsModel,
+        DocumentsRenderer: DocumentsRenderer,
+        DocumentsController: DocumentsController,
+    }),
 	init: function(parent, params, action) {
 		this._super.apply(this, arguments);
 		var settings = $.extend(true, {}, {
