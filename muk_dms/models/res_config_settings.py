@@ -50,7 +50,7 @@ class ResConfigSettings(models.TransientModel):
         string="Binary Widget Support",
         help="Allows the user to use documents as input for any binary field.")
     
-    module_muk_archive = fields.Boolean(
+    module_muk_dms_archive = fields.Boolean(
         string="Download Directories",
         help="Allows to download directories as a archive file.")
     
