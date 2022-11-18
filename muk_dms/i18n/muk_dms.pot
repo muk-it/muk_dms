@@ -234,7 +234,7 @@ msgid "Allows the user to use DMS documents as input for any binary field."
 msgstr ""
 
 #. module: muk_dms
-#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_archive
+#: model:ir.model.fields,help:muk_dms.field_res_config_settings__module_muk_dms_archive
 msgid "Allows to download directories as a archive file."
 msgstr ""
 
@@ -658,7 +658,7 @@ msgid "Done"
 msgstr ""
 
 #. module: muk_dms
-#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_archive
+#: model:ir.model.fields,field_description:muk_dms.field_res_config_settings__module_muk_dms_archive
 msgid "Download Directories"
 msgstr ""
 
